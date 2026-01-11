@@ -3,14 +3,14 @@
 ========================================================= */
 
 const BOOK_SOURCES = {
-  BeginningReader: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/BeginningReaderData.json",
-  ChapterBook:     "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/ChapterBookData.json",
-  PictureBook:     "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/PictureBookData.json",
-  Novel:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/NovelData.json",
-  Islamic:         "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/islamicdata.json",
-  Melayu:          "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/MelayuData.json",
-  Jawi:            "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/jawidata.json",
-  Comic:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/comicdata.json"
+  BeginningReader: "https://raw.githubusercontent.com/bukandbook-lab/books-site/refs/heads/main/data/BeginningReaderData.json",
+  ChapterBook:     "https://raw.githubusercontent.com/bukandbook-lab/books-site/refs/heads/main/data/ChapterBookData.json",
+  PictureBook:     "https://raw.githubusercontent.com/bukandbook-lab/books-site/refs/heads/main/data/PictureBookData.json",
+  Novel:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/refs/heads/main/data/NovelData.json",
+  Islamic:         "https://raw.githubusercontent.com/bukandbook-lab/books-site/refs/heads/main/data/islamicdata.json",
+  Melayu:          "https://raw.githubusercontent.com/bukandbook-lab/books-site/refs/heads/main/data/MelayuData.json",
+  Jawi:            "https://raw.githubusercontent.com/bukandbook-lab/books-site/refs/heads/main/data/jawidata.json",
+  Comic:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/refs/heads/main/data/comicdata.json"
 };
 
 /* =========================================================
