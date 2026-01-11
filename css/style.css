@@ -248,3 +248,31 @@ button {
     height: 220px;
   }
 }
+/* ================================
+   CART ICON SIZE
+================================ */
+.cart-icon {
+  width: 25px;
+  height: auto;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* ================================
+   IMAGE-ONLY GRID (Islamic, Melayu, Jawi, Comic)
+================================ */
+.image-grid {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.image-grid td {
+  padding: 4px;
+  text-align: center;
+}
+
+.comic-thumb {
+  width: 100%;
+  max-width: 120px;
+  cursor: pointer;
+}
