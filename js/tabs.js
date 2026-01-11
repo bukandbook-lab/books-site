@@ -18,19 +18,29 @@ document.addEventListener("DOMContentLoaded", () => {
       hideAll();
       deactivateTabs();
 
-      document.getElementById(target).style.display = "block";
+      const panel = document.getElementById(target);
+      if (panel) panel.style.display = "block";
+
       btn.classList.add("active");
-      
-  loadBooks(target); // 🔥 THIS IS THE KEY
+
+      // 🔑 LOAD DATA
+      loadBooks(target);
 
       // close videos & popups when switching tabs
-      stopAllVideos();
-      closeComicPopup();
+      if (typeof stopAllVideos === "function") stopAllVideos();
+      if (typeof closeComicPopup === "function") closeComicPopup();
     });
   });
 
   // ✅ DEFAULT TAB (HOME)
   hideAll();
-  document.getElementById("BeginningReader").style.display = "block";
-  document.querySelector('.tab-btn[data-tab="BeginningReader"]').classList.add("active");
+  const home = document.getElementById("BeginningReader");
+  if (home) home.style.display = "block";
+
+  const homeBtn = document.querySelector('.tab-btn[data-tab="BeginningReader"]');
+  if (homeBtn) homeBtn.classList.add("active");
+
+  // 🔥 THIS WAS MISSING
+  loadBooks("BeginningReader");
+
 });
