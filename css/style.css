@@ -1,0 +1,242 @@
+/* =========================
+   GLOBAL
+========================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* =========================
+   HEADER + TABS
+========================= */
+#HeaderWithTab {
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 1000;
+  padding: 6px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.tab-btn {
+  border: none;
+  background: #eee;
+  padding: 8px 12px;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 18px;
+  font-size: 13px;
+}
+
+.tab-btn.active {
+  background: #ff69ad;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* =========================
+   TAB CONTENT
+========================= */
+.tabcontent {
+  display: none;
+  padding: 12px;
+}
+
+/* =========================
+   BOOK LAYOUT
+========================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 10px;
+  vertical-align: top;
+}
+
+.book-title {
+  font-weight: bold;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* =========================
+   PRICE + CART ICON
+========================= */
+.Price {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fc1380;
+  color: #fff;
+  border-radius: 18px;
+  padding: 4px 10px;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.Price img.cart-icon {
+  width: 22px;
+  cursor: pointer;
+}
+
+/* =========================
+   WATCH VIDEO BUTTON
+========================= */
+.watch-video-btn {
+  margin-top: 6px;
+  padding: 6px 12px;
+  background: #ff69ad;
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* remove black outline on click */
+.watch-video-btn:focus {
+  outline: none;
+}
+
+/* =========================
+   VIDEO BOX
+========================= */
+.video-box {
+  margin-top: 8px;
+  display: none;
+}
+
+/* =========================
+   COMIC GRID
+========================= */
+.comic-thumb {
+  width: 100%;
+  cursor: pointer;
+}
+
+/* =========================
+   POPUP (COMIC + CART)
+========================= */
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: #fff;
+  width: 92%;
+  max-width: 420px;
+  padding: 14px;
+  border-radius: 12px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* close X */
+.close-popup {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 22px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* =========================
+   CART POPUP
+========================= */
+#Cart.open {
+  display: flex;
+}
+
+#Cart .popup-content {
+  max-width: 520px;
+}
+
+#cartTitles {
+  max-height: 120px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+  padding: 6px;
+  margin-bottom: 8px;
+}
+
+/* =========================
+   CART TABLE
+========================= */
+#Cart table {
+  width: 100%;
+}
+
+#Cart th,
+#Cart td {
+  padding: 6px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.qty {
+  width: 50px;
+  text-align: center;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+button {
+  cursor: pointer;
+}
+
+#payBtn {
+  background: #ff69ad;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 22px;
+  font-size: 14px;
+}
+
+#continueShopping {
+  background: #eee;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 22px;
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+/* =========================
+   MOBILE TUNING
+========================= */
+@media (max-width: 768px) {
+
+  td {
+    width: 50%;
+  }
+
+  .popup-content {
+    width: 95%;
+  }
+
+  iframe {
+    height: 220px;
+  }
+}
