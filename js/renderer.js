@@ -15,41 +15,35 @@ Object.keys(DATA_MAP).forEach(tab => {
     .then(data => renderBooks(tab, data));
 });
 
-function renderBooks(tabId, books) {
-  const container = document.getElementById(tabId);
-  const table = document.createElement("table");
-  const cols = ["Islamic","Melayu","Jawi","Comic"].includes(tabId) ? 5 : 2;
+function renderBooks(containerId, jsonUrl) {
+  fetch(jsonUrl)
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById(containerId);
+      container.innerHTML = "";
 
-  let row;
-  books.forEach((b, i) => {
-    if (i % cols === 0) {
-      row = document.createElement("tr");
-      table.appendChild(row);
-    }
+      data.forEach((book, i) => {
+        const title = book["Book Title"] || "Untitled";
+        const img   = book["Link"] || "";
+        const price = book.price || 4;
 
-    const td = document.createElement("td");
-    const bookId = `${tabId}-${i}`;
+        const div = document.createElement("div");
+        div.className = "book-card";
 
-    td.innerHTML = `
-      <img src="${b.image}" width="145">
-      <div class="book-title">${b.title}</div>
-      ${b.booksNo ? `[${b.booksNo} books]` : ""}
-      <div class="Price">
-        <b>RM${b.price || DEFAULT_PRICE}/set</b>
-        <img class="cart-icon"
-             data-id="${bookId}"
-             data-title="${b.title}"
-             data-price="${b.price || DEFAULT_PRICE}"
-             src="${CART_ICON}" width="25">
-      </div>
-      ${b.youtube ? `
-        <button class="watch-video-btn" data-id="${bookId}">Watch Video</button>
-        <div class="video-box" data-id="${bookId}" data-youtube="${b.youtube}"></div>
-      ` : ""}
-    `;
+        div.innerHTML = `
+          <img src="${img}" class="book-img">
+          <div class="book-title">${title}</div>
+          <div class="price">
+            RM${price}/set
+            <img class="cart-icon"
+              data-title="${title}"
+              data-price="${price}"
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTsrBEOnV55lpyn2qOEcjDpsePZokQmZ-tQzYH5EHuXOOwNYJbrif6cohUTPCb6OMfol1HNUhHee19v70YOhqOBRUhzaKxZ_yycwoPReWbASOxS_y7m1vuJIHizFzHzgqUWf9C8LCnTq3NrW35-C_dYi8e_zZA-VrZ2vYRtaLgagu2aGsFIakxfWJLjo0_/s3500/pink%20cart.png">
+          </div>
+        `;
 
-    row.appendChild(td);
-  });
-
-  container.appendChild(table);
+        container.appendChild(div);
+      });
+    })
+    .catch(err => console.error("JSON load error:", err));
 }
