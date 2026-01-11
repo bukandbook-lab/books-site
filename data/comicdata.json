@@ -1,0 +1,690 @@
+[
+  {
+    "ID": "C001",
+    "Book Title": "Doraemon",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi5f2J5MTTgLsG4_IA4QMtMbnZlWGEJm2HhpILukpKpmSfMccTv6hWqEP-j47UgQOdsI_cGiBhu_he_8ID7__2hlLzoomTt9WFj0cdKHkGMDVY7NITZPKMzaAuLK830W5aNKAFiz2lRUMipNkZOlxXEatKjMMqbEipPk814_Ge0xmvkPDBinC47a3RDYwMq/s320/DORAEMON-1-Cover-FA-scaled.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C002",
+    "Book Title": "Cardcaptor Sakura",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUf4L3uHLO0EBtO0JmwhvmXCN1QvPoY2TVTJsh1vodTyh8bf1ogZEMaFfCsft9v6Tns9ok32V1IseggzTgi1gqoDas3B2rQyBHArQPEgUjgunXFRumkyOhVfN8-eBJXQSckwY_ukA_KtF62ldVr8beez5pgJ4ZPJ9Av-R7MZTkyUCULODTWkmBECAulGZb/s320/716brThAaAL._AC_UF1000,1000_QL80_.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C003",
+    "Book Title": "Sailor Moon",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRDA9RINFaYif33oG_LKh-Tu3YwlqYFuswXBNe7Y8CHBlHFmbql5c9YyaYpfwjV0nokJRxFQEtEFWI6FOaxs00furo8rMHvVq5qSNXW3s_hSlswJBS-7d6RSKRrMhQfHH6o1wGHbyN-iGlvnntooGwRtF5WwyZ79Tb-25PUh0OOLdDnGHjDlowabZ_q-YR/s320/images.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C004",
+    "Book Title": "Dr Slump",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTIGKjYzS_tLKRYoRbOYiEKidvriC4GaEvIQT8hIGtO8ZI_dyw9FJovxp4gvujG-zd_dQ0ExY_EJT1s4uR_-3TYG0giPwsvvQBpzb1QzkmRFXK5AwKpUaoOMZMKAQVF_McJCXevZED36A_EW0uEJF9fwAAvUFjTjiwafPCxIUUtixyAIqLz_OTfkhdBmCE/s320/US_v1_front.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C005",
+    "Book Title": "Little Lizzie",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhSQo9fNu2eVvECXuooHlsLXfRjf_e1gwnB7zxEHQ3VPXhqND5Fj4ZrKtnrb9CiW_J57UjSJghRdaeG7yv2YLL4YB8UAqZDiUtsK-YRNaLir5saCt3NhZydtZQLVGyWvvRktetBG0ac4i5lgc5C-Phu2UETKsHus17NRXHHkXu4efH4x_fJdlKrDecQ-Gv3/s320/Little-Lizzie-1-5-1953-1955.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C006",
+    "Book Title": "Tiny Tina's Wonderlands Land of the Giants",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiABmGQhVgfw-KqmymL6j-Ur9gz2WkXhcRbQsTQkDEcZO0f8rRWXeEKWgaJbVzJdX5jir4zr6ab1aIYmJtqDOFujrSK7fFItb0K28q8srEpkwySAr9Bk-5GSibta8VwAMnS_2Frmdinhg_NZ1EV-PTE3M0be0fU-wY15Os7ej0pV6rxZlLPpcdVWvq6p2QK/s320/Tiny-Tinas-Wonderlands-Land-of-the-Giants-3-2024.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C007",
+    "Book Title": "Wonder Pony",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh3qKVa1z5dgvmXZeBJ57W3t4GVO6JNv82d785k98znwBMsimJ1PdCCCAqLjzdoBNo8EQGy3PKWEAAiqs1Bka-O3acs5qLFnixWsz2DrKBeaXjqnax7CClSqcy5waP-neAAS65f-JqEojl5dPanAVeHRGhiAIIXXH-pWWAER7wICOqE9C9ZnvR562wOtru1/s320/Wonder-Pony-2020.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C008",
+    "Book Title": "Captain Action Cat",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhKQT2MC3LXMGu5E4lyMlFW8mPMdf7BMHtl7T1LpH_qMv3Rii6KRGj1J_F4LwkYIvI5MI4bGu1HbId0M9bd8fitzrHa-2zz59k1In0_LSbLH8IUHO0ytBdE0rkYN9bNS7nn-ovssHD8b3tybjjqI0-jsR-z2uFKgPDbOMZ_ngjDcFx5Y9zJw74YcLzV0WRN/s320/Captain-Action-Cat-The-Timestream-Catastrophe-1-4-2014.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C009",
+    "Book Title": "Miraculous Adventures of Ladybug and Cat Noir",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipHhlKA1fZukaNfWhZ5qzy3iTiS5WT_mqWxNfL_qNnNiGotuNkrCOuLsWIfVe-806-MREv0WIcoji01k-teQ-tnHNA447EP7cm7kkIG9L4nrDNnC_aLn16fKEJIAYgRYOGCk-TBxU7WBGsT5GjrYqH1iikae4czP1YttrLXxXGCsIMEk8kgCr538bZXGPf/s320/Miraculous-Adventures-of-Ladybug-and-Cat-Noir-2-2017.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C010",
+    "Book Title": "Detective Conan",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNbhXATcABNxUP9zI4yRXr9DtENt7SoIadZLTea_B1GuyfIvlK-_ZIuvfpNzSFTYSHJMrYcbCD4qoi0UWUBNRjCbWNhALdVm1XB2Mpcp72DBUTVoCr1f2tHeoB90fIojSjUx8v5dsrVKVLzhoDiEspQZpJSY4jjPjznxVNwLSVREDeTjeIBTdGk_duonDo/s320/images%20%281%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C011",
+    "Book Title": "The Powerpuff Girls",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhybd44DwGCMVkwZGju9VzflJ8Qd0emOFF7U4Z0ELbKc35R_ugeX1LE6cs1l2ZFiA3ip_d9Tp0uCBE0qIDPvx6zsCJXRiZZlfhxNz5Ep5yDTlc6TgUg_aA9cMKgNGYVb8gvhwNq37lC5khb6k2OIR_JohYRYAbADi-TgM7bRj70xPSb9wxprBfCYK00xVMU/s320/The-Powerpuff-Girls-3-2024.png",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C012",
+    "Book Title": "Dr Robot",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhqlU07B0eQLOdaiLMrUfCP9mykr5Wo9FuUsnLQ7wLvJPyA7GuFp-CTxatHsJv6-_PwatoISayozNpXd_gWUyGh8k7Iwx3NmLrx5ID5P5qtuYaibrPvHbKgm89m0uVSBaXWn1VCgBpXRgbC2dgXCPRlPvBIn5gMTmwpUirHJM90Bl5Zqzq0ol5PyuvFvt4d/s320/Dr.-Robot-Special.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C013",
+    "Book Title": "Cats! Girlfriends and Catfriends",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKk4901pWEXI0Xdk8CLmzeY32OydMgIsAhuSJ0XjHNZQ083PqwjeeHvHCnBd3A-TeIVPnQyEFmLwM-_bC0agYx_h4U1R5YrPFoTgAKBu3aHZgLnJgRYfkkOFwWXCFFbP3g5C9tRr3HtYVClbbxUDsy5O5PeETPK428zsEM7mDwnPYdPN01m_esTFw36q8-/s320/Cats-Girlfriends-and-Catfriends-2022.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C014",
+    "Book Title": "Elle(s)",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-FAxul6q4rbbic2XnIS9xY_6g3ZoqnekesVJZuGTUMVhj0pLWtI0WLxVUx0DJn-EtRcKGBeONhS0D6jIxxlKV5iJc2rat2eF6Ir-n9Hvxkr3xpJWQbUGutLgNmi4sdz1Ce8V39AsKez1YHuxQL3__pnHlkDacFcInztO7o7HOtlDz88dkOec58BThUkEp/s320/Elles-Vol.-1-The-New-Girl-TPB-2022.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C015",
+    "Book Title": "Moon Girl and Devil Dinosaur",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjL4H-5sJY-hKbESOcWySHtoMssnpXvsOkvSkcgvVY1SKuyoxnuxG5qzWWEl2DLf5VGAfUjjpVNq3jPcdqVviKEmxAjh-JUDS2jK02ZRxFo3FzziYe_U61Jx_cbQ1B8qDvyp3jCY1Cjg6kK3KbKpYPMDRrbCpg8OKKe0BXuEWZ1muTFJwvt9YInmSv73xiO/s320/Moon-Girl-and-Devil-Dinosaur-4-2023.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C016",
+    "Book Title": "Magic Girls ",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSl9ai46q-QLF0h-OTAKF2p9Hafhum-x079M8B5lBgxJ0tBgIw04PMZIAiV8h44_JbY5ghT-PBczsqFvurOusQOPOVEzrkQ14ceyiLRolOSopxQ3o9itpV-0jxeyyHdcaMs5tqBZBgKM5Fpp8VT0UAX_2whGNXZ5p40pfoibO9X7HCY0fax6JL7aHQTric/s320/Kira-and-the-Maybe-Space-Princess-Magic-Girls-2024.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C017",
+    "Book Title": "Gangster Hamsters",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh627MmBPk2BW88yZ8Nc6V3o25ex0wTPpqPejcL7NFCD2CjOTUgEZiZcnyx3KUHl73QrSe0ti6-dUaGkuCcAtaVdWzzW1nBvml9DrzGf0br7lis8at5TU8RorCW7wL3lsh4DxXP0FiVxGpbl4PJDuAgUuhzLaIRMPOIDICKv-47dgziAsMeYk84IwJ6qDDR/s320/Gangster-Hamsters-2016.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C018",
+    "Book Title": "Vamplets The Undead Pet Society",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjn9dP176TRt92apuCyQu7zh2al1i9K9Vor8PtNJwN6Igbj4qsjJ8C3kZcWY-pZ2zzGmj1qFHdLW7wyw27buAuwrcmXHm2rCuaiKMc3QUQ2mOuFRF6jGgRBCwYPbJ1RIhy3U0U_VBoEWJBLbdXnMFNyfg5EJehFSbhHNkDlt33iMuh0S9L6S7EMT_FGTmQU/s320/Vamplets-The-Undead-Pet-Society-1-2-2014.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C019",
+    "Book Title": "Tiny Titans/Little Archie and his pals",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj8iSva1Z6D8rE6ckT5GGSQAv4tYN2o70Huz2TzqtH2ql3POWPEZFXLWWiM92-WyD5Y2wkFsEza61mu7ymsFrCkkFWvZyymY9Ix5u_4TKOoJz-0FG9MvbSAXsLqGAlvNqRc72LMNPxV8O1nVKaxcokOMy2Yurgowb2NEdZ4X_QCGKPU6f98STTN93cuvndK/s320/Tiny-Titans-Little-Archie-1-3-2010-2011.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C020",
+    "Book Title": "Pink Panther",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjgyRKMfS7mX7ff9XlIAFLbuXIDhejhO-vNp-l-EYjnLjxiEr95oMqWQeCgJR4h1iyQwABJ1Ps6onifE9AxhyvNxa9h7A6yjTkOF3e-Zh8E7tou_N94xbNQ1OoPOYdfogjosQMQH7z4KpP6x3UekV201uc6jr9uF8clTn74tPmTOITun3WoNYLG73_CtjNq/s320/Pink-Panther-Classics-3.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C021",
+    "Book Title": "Mouse Guard",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgosZFpQdHph_2OmIhVdEKV0ebWNVcHFNaxLUGpBj6-ZqzSv0P2PuBep0iRBkKJe14EVlOp-qUMdpEcNDBoZlzd6YpP7hj-T31sQ3JThFOqG3eUqdefjFFDkx0nvEo75jdrsuRnw86Yet1m2aP-iaFb_VQkx5gU58Z01msT7Q9m5qn8L-HXTH8wuEnkQH7L/s320/Mouse-Guard-Collection-2009-2017.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C022",
+    "Book Title": "Family Pets",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhth3L3jJIEjtjb_HRjkqFiRBFrDUWiMqsRrSkDgyB1LuUGUxUbWNvI9qfjeY4UquiAlRLz6B1p9PDx5-gVVNqG07RdoyYRVv78BAOEBvF2_ssHqeZLE5xvMhyFMdgflaqIvSRtJKMKBP-yVS6rfoQckjU9Zm2IWZxM-tfZZ9tdMVi9zmvW0hUJlg1ZYu6N/s320/Family-Pets-1-6-2013.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C023",
+    "Book Title": "Atomic Robo",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEidmogZW75MzgZAO6rd0UMQojf3NifmnF0E2CM0vxX1PtP5y6K2Zb9hzAWAh4tqeKkOFZHTUV8nsu-Vvvqf2IgUCUKH4fOLgnyNfCw8R3BNIKfyXuhDQ82I1qTKj_DkeMz2689d-g4HeBaO3AesECM92RGSnr-LJ680_AwOfoMJ75INQuY76weCnnzcPllW/s320/Atomic-Robo-And-The-Dawn-Of-A-New-Era-1-2019%20%281%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C024",
+    "Book Title": "Camp Epic!",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8nOLgWHiO_3EVuv8xvetAnfe5ZjqoFYv03sy53mhjw1STPJNdkpEE0t8HD7K5KW6pr9o2gHJmF7du32AcqlyEBw_irOVapGiLvjajIcCTve34Wv2wXgkQaQf_keIV1zZ2gyeiwEZCLGZPeaueza3UHn_o2hsRUVoM0Qv8QbalwR-OvJPgLRNx1gCWa-0i/s320/cover_large.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C025",
+    "Book Title": "Tao The Little Samurai",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpC96TEomTVypxU-n4YlLBfSMCDqH0JZFiUwgNngOiH1LQH3eT6YOlWm5sfosTR6MfVKSwVGIm1YFfhI_sivtGykExKOHdK9DcKc0To0HW1jR7aQuoUa_1zezZHAvTuJHtefZ7s0N0cDOjw2wcXAPIbwGxDUmwXheT3u9Wdq4xFm8OHu31m3fw5kNmtz6O/s320/cover_large%20%282%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C026",
+    "Book Title": "Binky The Space Cat",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrArpNDlYAO_JQEHPFRSXgLmUNW-MPzkfmaX8PdD2ZUHby38Ik2FUAz81phkgswSsOXhVqA5aYohAeE81ql8YImLJYlIxdivyk782fjzfEIhFlnRGv9Ff2DWOe54N7xd-YAFDUlQxPQNbzp29uAN8DGelGU0jlIh4g-EYlVc4XSZnUv3UcWHoeteZqEI3W/s320/cover_large%20%285%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C027",
+    "Book Title": "Time Buddies",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjvtTj2c19EhPonfDwPm8oPFpLBZPemT1Sq09NNfLgEKb3YWOsDiIgnWkP4Tfpz_kq8D0bfevNUUTf99R4945lmbLjkXLI9-RSJ-qv8sXWATOErdp2m0xCngHSl5jN3ABJ3ZoGzleoi4j19dxNOHh0amHv6pzVFRCQJXVa1PHPf2gNd9Ktb5ImW539G5rH-/s320/cover_large%20%2810%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C028",
+    "Book Title": "The Adventures of Kungfu Robot",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjDQLZnt9yvovrc325030mzPRcQFpOe_tXLjPZN64OXIwHvbVJB1pFgrotpQtRz23H2qsVjRSGNrR0P7Yl-fN05DWz7w3xjGxrY-X3W3r1gmocHFurFqCVX-68CBwQtnNNA-8yqjnbh8sIWvEDZF1rJJa2TyATBazIfv5URh-UXPVWauBylqrAHdt5ecEfu/s320/cover_large%20%289%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C029",
+    "Book Title": "Cosmo",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6JaXfQV9t1KIPD-0078XxLbcXuI0fruumx8Wa3Pnf0A51ei2Y7PWVkiRpOTnyuiO3zwtiWneHxdsae_95sLcn963gSb4KBBeiA1y7huf-Lkk3kXp_IgQp8sDXq-MkX-CmOqEv7a56qJJLI5voeyq5H0MeseyF_OJGLejAQ7ufHdYzKuL8QFCzvNf0N_7I/s320/cover_large%20%2812%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C030",
+    "Book Title": "CatNinja Tales",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhaRATeJlBHl6MQ5mpWNtamOmcmNFWKc3IN3IVMVW69hxoeXVo8g6O_qSuDrUDc1jgzyhsEdsIu_B-3r7rG3ZAdcx-R4nesWk49stUlJr__OBcSitN-rzAgQmgGppWFwGXzG3SsOr8Nsk3vhHn_o7BRSFoRduT06ktftqyFXe_pbJmpRchsspXTx9nS_z8d/s320/resize.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C031",
+    "Book Title": "The Misadventures of Salem Hyde",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgjaJ5wMmexJQrmAY06yv9FSQO2UhWVKqPjJ5esoc9QNriztLXgwZFgWamTKfyrcWhqcjti02sBqmDLGr0KRXu0yvpwjdUn-sIySjaKwfPPaVbdJqql_j6HYbhW81xd_0VQO2vpXUk3axEBqSFkWyY6fX4tPCfIBJFLrad5NxWeIqSA2VfDTeuE33QDioc_/s320/cover_large%20%2814%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C032",
+    "Book Title": "CatNinja ",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjJG2PY0x10kdn6Gb7453vTxNXgbqz8MKqMYnXKUE-IuK9c063K4RQgO6pQLksNFhGZvKAni8_cOlZ1VhjfspAfboEMXqEFtgMAUOxNpABnwK0xAYvGTov3DB05BzZ7r7_I5-ndvVK1FnWbFlA2xFmRG2Cx7le6JHgbcxu0GXEgh0tRPd3TzQopBLSdEUsk/s320/cover_large%20%288%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C033",
+    "Book Title": "Mech Cadet Yu",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhxZAsaiftrHrB3eKWyXepVSOV4buL-RR5joZfSUg6Wp_E1JKuZdwnXbffQeWxRJ_X-kjHarg3DQR55zemSYQa54o9xY50XPgXQeSh1nC78jxecteOP8X8xCcjINWQZobr-EwML3kmyWLLN97p5rJoz_gRO-5D7x2O2__kH9y80g-a1NWA1r29-28bKl6p/s320/Mech-Cadet-Yu-Vol.-1-TPB-2018.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C034",
+    "Book Title": "The Manga Guide to",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbSqXHwOWiudTJ7X1dM4utHRpMGzM1iYNrb6AesDXRtwAial7DdN3LRuc-CmejuNW5GFaeVLIfRzMhvOVMGft6QBquZOKdN6VDyS5PxtRGtMzgu0yvIL6zt3HWeW6QZWh1slwi3tT-HHCh-bzz0w6w9SC4sWxKI4j_up3BO9FrAEffnkKDryrgHZqBE4BJ/s320/cover_large%20%2816%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C035",
+    "Book Title": "Wrapped Up",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjyr_RChvZBOHj7fh34ZAryG8TRnolJt2ZPhr8UkJqRkM6S1Z9udQA0LsXJ1d0mo97p9OMIrd7LvClFucQvHDUbdgjol4WX9V_l-wQpkIMsuqQyMIH5-BaVdMikutoLFri40e_v-ZLcHpGRIrk7UfeyODwPke8ZL_waKefo0MxzoqlAY7YH3dYSzk_IncJ1/s320/cover_large%20%2815%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C036",
+    "Book Title": "Gon",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhAtpuoVAROctTgBY6cY6yjDajyD7PJVxG2GCQdSyORR46ehZdlGX_AT5J66xAOj5JlQnJCNmbNMgKRZkTqHuAw-F0l1wmlJ29FyNtSI3-rrkj7AEoaYETJr6Fjyuz0Xd6acGjRFP8cHMTrqok4T7tz1o1752GCdYN5RPXFvUVcbJzls1vR5KY25jsibRuI/s320/71Hg0fFO+ZL._AC_UF1000,1000_QL80_.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C037",
+    "Book Title": "Ernest & Rebecca",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi0Q626dhQIUx0F85GPNnIqFnn8oY-Ux0VuHzTlTerow73S2g7zzVGtwMGTQ7NDiYFZ1w0ojKd3eWUCPA0QGKTEj3Vz1XTI5nAWG7sL8wh1IHZI2l0kNyHaJk6NrPbuxkzVZ1Q4N5kH1GUPZlWqo3d8F9u7GXG8Ddz0ZBiEuzemLf_mu9sPxEP-GzXYIKyo/s320/Ernest-and-Rebecca-5-The-School-of-Nonsense-2020.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C038",
+    "Book Title": "Dragon Ball",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi48efqzLenbIwgBCBP4EsgsKa4tgezxXA5QvJ7oL9fLvVNXimNPvx7uwv0bn5Ib6SX-j6VqEZZTyc8lM3UZJubOKI_ZWe0aLUa7in4JKHoZhhjFLqJOSf3KV6PM5GwBnVrDucJVrnJINVv91yrPZWk4wdoGhpCYlgT-hK1ysa52fz_nY4g0vcpUsP5QZTI/s320/images%20%282%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C039",
+    "Book Title": "Manga Math Mysteries",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjw-v2kvLR5g2ti6WlA2MiY_Q2Vwi9XZX4Izq0xhbXckgHiWd4YOMwn_bCT9N2D8E1s53OcIYmv6hsKpdffL5ypiH8nkxOp18f2JPQxhtXcmPNy6a8KaZ0_Xl80Rt-ryxcKFAOtG4vWX79wp2A8GPeyIwY_JC6n6Mtiflw-GB4IKDIdH8aeM4OZnVboVwtz/s320/cover_large%20%2817%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C040",
+    "Book Title": "The Castoffs",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg88ZVqVWgtxKRPpwxj5FUPjUhV5GlVejBbGmjq5Z1_vk-k8byUOwDdyGsd2bmq6b_JLLD8R7OdgHAL3K5_K0ob2kJFwyciq317Vulp2OZ4v8FSizTEgvq_OUg8r_7ORubwsPv9HPuHAwEY8mmpL35vpzcp4zhV1Afmr5-jRTh3Pru-n6VLYrnK-3jZ1GfJ/s320/cover_large%20%2818%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C041",
+    "Book Title": "Magic Tree House",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRvu6NPgMiixasQ_z7gRWIsEQh0xLRYQ2P8_5A-21RUEUNPPUWHKa_-n8XIDd99BWsNasK0nUmqUVmdrn47TGXCG7A1mwsM4WCevMHyi3G3AkkhP-izJZgFUtb3oEejjMeeSl9IBLz5-cS5SHH7G5IemG8T-qKMDGv3taNZtbqc3eE1dmBJF6aAhLsSUpp/s320/500.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C042",
+    "Book Title": "Red's Planet",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhha-hgiHwwDPqF-cDU5QgInZcr8vv7VjSXR7FKdMxsdTEAE1aFYsIiZXWuWFkmINR2JdD29BMqVU11AzbEgO4NRBs7SiVkUlRqbF9IOUpkccerS0NFOnEGjuzwtzFNzTbgvSYQa___MB2EuokKrIGSkjC-G2IeXYvHGSeUUa4xlPL10Llyf1XYgc8IBuCP/s320/cover_large%20%281%29.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C043",
+    "Book Title": "Secrets of Camp Whatever",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7RLZuFIOejeWfktPWF7QsuPJJed01YTpBqRhZmNDmXdaiJNs0nXqYP7dJmeMi5Q_UR85TPfnolMZhJRaXYYeXDYFf_MQQhnWEV11ij5iwZWwTl39nFz4n65orGxQ34qauffUcZ_brEO4eA2HynvJ_o0TMiotjdyvy9xPrjrLuzsJAMcv0lzdQNSnicclx/s320/Secrets-of-Camp-Whatever-Vol.-1-2-2021-2022.jpg",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C044",
+    "Book Title": "Chibi Maruko Chan",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhtXM6c3-BYvdsicCRbADVUnLVgPp05QEj20PKuS0hi0WVoJ75wEgDYfScMtLlBC3UCTJI5oFmgYCjmtnrEMrsbhw64QfcRgQpRmHow1jggAFlURXrYfEhcwOFtnsnQoMid7bttRFL2W4XOlqzYGS5iKNWTsaAk_LEmx5qiyzbe4fe5Qr2uV99qi4P4t9uc/s320/c46ea405e6deb312040d3e7ba2afcfe9.jpe",
+    "Price": "4",
+    "Tag": ""
+  },
+  {
+    "ID": "C045",
+    "Book Title": "Adik Muslim 1",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4Bn5UFGl7Ip8lQ3L8WLSanzGWO9w1KbGAu-3wZDHSCtcuSC9FywT8_LKEQ8k9NoqZT-sJyJt1gl7tTyooAK-g_SyVEty4aft-pP3mPdrUqqrTh01HhNZz_4bEManUTcSaEdm9IKlYoEB-DQKnzXJY44zbiSwyvdJ0eGq9OWLtxso-yHZt1BZA0Dd0ZQD3/s946/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C046",
+    "Book Title": "Adik Muslim 2",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEil9IAxOu69Mfh31CL8BAG98naX5ymjd1oCRsiYdEIPj3fupWgsEvzbnpwmVKHkbZIpmiOtCdaXNHn6uczFI8NV0kwHf5gt-_QYSYAeL-VY-RCsBOJUGP1gEIThdP_JrSSXitCtFAnwq39XUMhAL9PqriGGgUl-hgMbG8KJzMY7xWO6uVaPGf3fYun_BZ1Y/s946/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C047",
+    "Book Title": "Adik Muslim 3",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEij0BYrZ6uIFj7-RYngnFMB1yqwUwmDKC-b0uJWU1CMM1rC_p5NNVuXWKMs8rAqIFoLFkfkhBdqfG2BZYWYqlX_s5vmgslhOdxWpqPwmQj4dyWDMmaVcSYWTvfB8DIevzFX0Yt4G4YlDLS2dIhSRi6tJVb_FyvPiKQ8UQxiWPvfv44Qb0QQC5aGJh62ie94/s946/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C048",
+    "Book Title": "Adik Muslim 4",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieZaZE0-GYV3TUbD-Gp3iOMelf7bXkHag_wgreJZkr6ZUFIANctSFxHT_2-nVyC8VnMcmecPeZQcRHmljG3J8oFl5VvZHV9mfg8I_qPxB4BmDkSZOufCAReaJ5RJJ4RgIDhD8bJY9hW-QPqyddsdj_0TjW04MCUkqsNTntMHmY4-OUEehH3N4nRCxIfA2Z/s946/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C049",
+    "Book Title": "Adik Muslim 5",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgGrMuclOgPdTYIWhmNPxEUEDt4ZLrmKel1nOnujlekO51D7tJ92zeKMU0uor-ei5xSWrHc6qMhmNjpNfSgYyTYD9aIqBhwKKbfx-OQseAmyjeEcMKnWkCpCoCk52K0hfyLkadUgxhyphenhyphenUv15s_UEjf1RvNC4GmN5WLCfaf6mnjzTJPBZo54lzm7pCBnLJVd9/s851/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C050",
+    "Book Title": "Sayang Muslim - E Magazine Episod 1",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj14NXcAIkKh6LIUOkuEKmIr3VEBTuvDG7BdAVglYVLuMNYKpBPfoM_fIKd_VlXnC8NicLKui8w_1Wt1Z0qV30v4oPl_2U9qDCi0Uqt7IkwXC-ckOyvRRbhUwZBPj22Zo1I8pOhpVzvY02DpluuI8wRppOLIfvbIcNOw9E9vVdEQvgzi8e9aWP2-aZGsHFK/s946/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C051",
+    "Book Title": "Sayang Muslim - E Magazine Episod 2",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsx1Achxte2sHVBlpxebKaTKOXiuj16cL0TFiNtXcHiiVL5bwXxANFp5ItGvdG3KBFAZs2vO5nrEhLihyphenhyphen-so_iIqJMHPUA_Kc51bhnzewy5XeNPoyF7W3-DcsCBASa79ukDDFKqsenIoohDnPEUuTSd5ZGX29HsEt7nQrXwiZSl6yqQr7QRjv1r7Y91duk/s851/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C052",
+    "Book Title": "Sayang Muslim - E Magazine Episod 3",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-Q6k6bbWgHdQan8lmQTwJiN57tb55wD25Wru11_WDGYma50mbpRpOMLTYkOXtkxzH5_S5ClpIUeLUZxOFSi6DUweYqYpC1IuxKv_zyK9Calfs6EP6wMDzkXrEle43wORbc5iTADbLx-rWdmAZxWTQYJofFavTuG2CGTyDB5q-bs2OOpbyhX9giHl-eClL/s851/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C053",
+    "Book Title": "Sayang Muslim - E Magazine Episod 4",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIrrdO2ds9pnnHYlVTYsZjJHUr-PtTaGKcQ5-ERJ7LeKRbjH_Ceui3LttgiwGyWs4qy6Zaxx-xtui1t80wNK5sHKsMNkUYPWz6Nyy8VZnUvIpSE0BR7ux6RxQz5BQOhHkkBJxxSy7zjj_J9ICYJ-Km-vThsjpBpuHbw-UCRo64WMLEPesjL98EwyFy3qgz/s851/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C054",
+    "Book Title": "Sayang Muslim - E Magazine Episod 5",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmMLAB6B9NzUrhSUcQfgjejL91-QP5JstrUXtwCihuwELi5c_rQ0zAfxMnaBiO8eiC1Z-u2K6nviviqPqKMRsuOngvRXs1h0SHDaOwnfokOSuTw4IHjJenvII4XLZZPAXpEZAcrAA5outXDESRfMMSiBYiNorKjx9Y2Axjiuy86Ow9P7rlBOr7_K5O9K3D/s851/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C055",
+    "Book Title": "Ana Muslim - E Magazine Episod 1",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSUYbevCoCLHTvUe0TykrKZanAkE_CM5jurcwW0APF1Q5Wylhnz7ZDjJjzmzPU1nCYw_r7hYiojeTTRB07V9i_TlKy1-tAm4TbJiJxiQv7vwlfREDMl38eg-xwBquUygWdQo4H3wM89VYj8tBKH07lmeQtYIXq6n3BQD4F4MOO2AQdjslH0H2vW4XEuhzv/s946/cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C056",
+    "Book Title": "Ana Muslim - E Magazine Episod 2",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUI1AJeK0DVncDzbYFyZYi0d2iiQuD_dOmm_pIdxVq13LfM-GMXB8JYdaMIBMYHCgtz5AuYCOV6jcyY4UlJEAEp0ssCfrQ0qr3YW9iV2AEo17bjlTDNZXQK4RaV0p5eabpc6-XJ-SkS8j5QlRDzk5Q7K_O-8cncbAL48tUAMzCGykJIwsJszWtHEV7Ysl_/s946/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C057",
+    "Book Title": "Ana Muslim - E Magazine Episod 3",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2na05gbEaoBUJ6zqTpquCh5mNYN9KaWSyvwozHXKbKAyjvPSJjc-NyUTti4nMisCfhf2BxbeJ7GfSnNknsyHFpOeEdiw5VUf3XzhtbrsSJbZjYsCjCfRcT5fD45iaxkxoISWuJq4AmhdKswukT8woAAjcXU9gGYkJunebnvL9sN_kJ-jQEm-YAm1Jiitq/s320/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C058",
+    "Book Title": "Ana Muslim - E Magazine Episod 4",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEju3Q-NAeiZnQay1cq2kQT5iR4tQ3RFQNCE8PASAhtnYydymRQKshqqsX9XTGg2FGKg6jS-m-Kt105IDKicmFe7QWIoJ3Gw6HQHmNnhsZBPEGxsOpSxGjSHTpXBGOflV2iZcdsnlCnktoPRicX9dZlqqtlduIeIB3wNti_grpXcRaU-5YsSNgCE5Qy3mjyt/s320/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C059",
+    "Book Title": "Ana Muslim - E Magazine Episod 5",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj69Z3i61ZwXkU8S-n3QjpVBQb70X8JQg2RH81g_3S1n7CmGwws3_suHhjsp3GOx3ZPCUyC62RuSBPDmGXCTTcwzvdIGBipBbCXvtx0cWvxjwQQLz5a7pAMgJb1hnU6p-pa3jl5jf22VVS1u8MaIne3OjxnEhIiP2kibwH6cBZ6Dbzj8fh3de14qg_92Vkh/s320/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C060",
+    "Book Title": "Komix 1",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbomB2qX-Ay5EazxSuplGAQ6Y3D2RaMKF_Hfk5N_NAIUTs6iRQ8brYtWEKf1t9CJoarbBNTeF-2D-KHU0LeEnEmplrMKD9GvRSGdbTNiSAnQMh1NyN_PXCnYs-n3TVqiV6gpL4LXx9uSUrv8hXsM3pELcw5vyrhZayACyK42ZN1qWP_Z6321ASUwGvhb2b/s851/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C061",
+    "Book Title": "Komix 2",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEispvSTM02Y-hPOHPZsEklfPbG93JUjhMju53H3N9GxP_4Egc3pXJlj_eV_oTC8kQN_0xcQs6iuohBj9pqMKqTRGuFp9tGYpHLrkNqqOv9i5kRLOLhYYCAT6QH60jXaJFnpXx52cDh7tm5fVIiFE8uHCm40w7lIEbg8hp_h8z7-3FWyNQZqdhyphenhyphenAGWSoHbIG/s851/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C062",
+    "Book Title": "Komix 3",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjFJukYIEJVRfn6GGFXtT8KbwQvkbu6T8UKRHJoKFJukFLTZEyDEPrxMVFgT9ogaqI32-w7E8l6Be1nhEmP8SKCqg5cBd_E749-cVZKSP6BQMlNr5uIMEI5ogSPBEUlVPJWIArBIJ7HFx4U2RgvWyvlpOAJhXlQiA3EGIlAmI1qr8scUcjaCH9K0vkL8QgN/s851/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C063",
+    "Book Title": "Komix 4",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhseN3ObGEWw8_BBxZoeUqhC-lAH5v3lagpXP91bJBIlsG2EMe7eWsBVJXAXiaDWkzBcDU-03c8M7jwbguX4glu4mMizue8Ugi7QALd-3WmRFpulELsPFejx1f7NE4bSPZSEp8sCsMaV8FTiM_b_c-edKM-Gk0mGiIuxSkAoHlMHZ0BDNC2QKbzBCmE1IgL/s851/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C064",
+    "Book Title": "Komix 5",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirWEOLQsPAI73ZeIaUwohnXPF85l-U6a7aBSzyis2tGUOB_tbdvrGmohTWsiae4GqSBZeP93SZBJ_e1-feE0Jeg5nGvgeBFk3-RcdaFTNC9TKPex2t1PsVbKRm5JZ2xn6dDoxcpXzbIFTmL_rOS055aNznHid1vAoa-U9sXXCdb5pcTKDJTL8weMlZNBB7/s851/Cover.png",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C065",
+    "Book Title": "KGS SIRI 1 : JERAT TAK MENGENA",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg42mMEM1NuHGs5Nmltgvq6fzhx99WOwG4LdOX2EoviL2VNXYwZKDoq9xHSgD5F0Ab3KM8ziSXzMVi8PaJVPseSOH3-0z7ME_-FlQtD1_BFIFgLsNti8bNPv3vzFmOmruWl9JLKnwPEnLHeyYLpVw6nqW83bj-lvRg0OC28itnXOhZPiAOLL69X_mqMXrKp/s3216/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C066",
+    "Book Title": "KGS SIRI 2 : SERANGAN BERANI MATI",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6zfnz9bbROeDlFOteuKD0N71oRU-hI0op9L4EjyrodpfZPa0eQvH_6uPJ5_oaHJ_ORl9CihlVCGVPUufH7dSZfSYggsQB3qo9dWMFPRLiyN1RO5FFMcQG6EjH1O2DXfoF-Zk_1XmWd7mlQDM_pyc4Ka4qsOZnAUU9XuHrCTXleosrWta7nmi_KHt9ckeX/s3236/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C067",
+    "Book Title": "KGS SIRI 3 : SYAITAN MELEPAS GERAM",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhA9h9x30MWlsic_05fnVA7t6Jzq93wMVQ0zlMEF9rMVBUHvnzYh3_3Ul8XAmMmHXeVY__jsDjd9Jqqzr6NsW__6EthtWEcBdKHbI0pgbO1UGT5QbazOGIQuGanXkAcI1-1ftNSZlTLtTucUdKfvtb0qdjgr_tR5xZauLTprLEtVi2oBSYbFZZMZZPXilBB/s3280/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C068",
+    "Book Title": "KGS SIRI 4 : HANTU KARTUN",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg3ksZaQEtW5H6Vnv_F6xyVtBQPpYzLlQofgm74l4ow5WSI50bKYa7q_h71GstHK68Pl6LhVU2hBDQ8pKxL8hMWzE4PgqIn5wcB5w1C-hhcmwagp8w3RzoYD7QtA2QbIQQz3oHn5jpmxe0kEyggm7017C-iWvH0D8TewH2vMkn-FY0k9UF0ljUkpX00Oju_/s3180/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C069",
+    "Book Title": "KGS SIRI 5 : HOT SANGAT KE?",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZZJFVZoPxueACpS5t4OQ2oRrXTgKMylYVMB50hDj85yGnfhkNhVQwD2rBZIZRJur1d7cnBzzxLJMXSVHKfTXn-fgA8lhtFMRwrDeHWEEf6G8n-AhhAN4NL0MWSSkP7UnQHEBAOFMBzFj_qDCEazBzZR81cHyZr3f2C-0rqYWm8s1erVrdRap4WDByzl4H/s3220/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C070",
+    "Book Title": "KGS SIRI 6 : GINCU AJAIB",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvbz5JKxyj0_Q-J5Mnd3tCeNRoDl9vlAKV2Z_b3GOBbTYPp7_hsSqLcth7HwqIPHYrFX61ffC53fL8lXN8e7fK_7q2yS9sqyrZ62egPPSIdTp-SJBO1RhXNjLsH4nlYd6UgsmabYJBG5hc0jXseOTsa8HvpDE7wwxeVcqDun1M7Y_VjyMSbOG6u0EZmTPo/s3228/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C071",
+    "Book Title": "KGS SIRI 7 : RAHSIA SYAITAN",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgOvWVWpsE4pCAChuKY20n8T4oedvgeyAG3S_d70jGCpSPBnFABJD0r0Wyg9fkxb0-F0qDAai4CUnve6nOuL1V7ACSS9ydhP2cH0bSxwqym9DUoZonKBcQ1SQEiNO9BqsRM4OSkRVB_nJebYHX7chaPLiNzpi8lD_4SaOz0pq3_HhpZ3QkfTcZ7kyGYO3uY/s3260/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C072",
+    "Book Title": "KGS SIRI 8 : BOLA AJAIB",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj2ijJfYP_qB7rIyOZL_wwfahyphenhyphenJFXXiCrAN9_mmPJuPM-m4BbYbWPrVwYSUw7TifPQLyyvnQCvx8iD6wgmUt0c18Ym25fpo1jPD6-Ej4_lkxJ-ddEzm5naa8mUqv88prjA7de5D0k_xnea8TAZQ7BPMm86VVH-1MEKMZTkH5lX0pOh91XmABVfhGd0Dw7bd/s3296/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C073",
+    "Book Title": "KGS SIRI 9 : SENJATA SYAITAN",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgoM6aiB_nB5uUsdOilvgpn9bHL9S8mxINaRCmZYWKpNk8qrO2S-zv6ONWOXqaun6QbT2k4oJOu6wSlybwXf_TtH-uY_u7UlZw7YDb6Srd3a8ei6gJCBpRr8-xFB0rfhYtDjSIh8X-YI4P9XbiGgTcTTUnmR2QXrUFhduty30ZsgfpyU2xpoFLTbp57F2jQ/s3244/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C074",
+    "Book Title": "KGS SIRI 10 : POYONYA SYAITAN",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbydGBTqF0eUzjPj238Mc_Bg7lt4zzitG0QtY7xig9AOcKBAJbkNpa0j0dlFlaxoF5x90MuvjXv_Bh5Slc4v0svbxQk5nUrgC6pf47JvObVLmbZ133-_qK4qJRKV_omUHPENIUpp-pEbVs8BUES2I2sd0zmJWkxYnMc5gEKUBkwI48I262Imyk1g71S4n9/s3172/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C075",
+    "Book Title": "KGS SIRI 11 : PENGHASUT NOMBOR 1",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcpTh8MzXBCaKTYweRcBKBACV5TPQ6jHwYt5-VDdGg6zh_aDpM8SwsySn7kLrpof5pJiEDwwo3hyphenhyphenGovTNlDyvtl7Emc9xJ8BIIS3PLJfobzNsJNjyDt6dc5c2VWDpQc1a9-jckOhzNuVJ8kBo4Ix7BPmQOaQexj8rD4e63T-Jk_FsFq-NRPUqoROOGBJHu/s3061/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C076",
+    "Book Title": "KGS SIRI 12 : HANTU INTERNET",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi_uAznOh5weaJ1hqo5t2112QxWFLGminlyTQGtDHs8H2bSAk_xIkPMs9GOdacno0extnXSBG189H-zDYucsXJan6MVRgEgEw0Q3MeW-I0saeuyGxh3eHMLUDnxLTnGD-2T8i0-EA-OojgNSL0RtLM8nZbpzKrz6nfNRzVONgVmLfa5XAo92faW6RA0qvYK/s3292/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C077",
+    "Book Title": "KGS SIRI 14 : SYAITAN PENING",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7WCeMNE0-zgHcfrV5ZaLK5oHfwpaxCPCECmdZnwvDrTdDCp6qECasx_tAyBxkI1zng7yFLGw-eSnTvclqgAlIch2Elon_8TOidAe1XYk0RPQcoHvvAmgjO7Jvsje0rHIfyKe-e_FQlNMzmkW6o3Qw61yYsR3B_34YIbdfvtIZIPfVTTSCTGUiqpLOc4FX/s3232/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C078",
+    "Book Title": "KGS SIRI 15 : MALAIKAT VS SYAITAN",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgoUJwvmOxNRaez7H2lkCriecs5TiG-EPJQZnvb0_Vf8sT1QOXSvV2zvD594pvMy5k7ZIc9CkjXCe1R945Aj38TaleeeV1iOVWDgewPoyV6hUJVDzKR-2bQxP_Jx7PpXhPc8s9jCmmu-NVSn0bb6z7-pSkl6G0hUpd2RiBW_7LT2ZJtSY5n6SDEKhe9Csf7/s3272/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C079",
+    "Book Title": "KGS SIRI 17 : HANTU FLYING KICK",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjh4JnZYbwzeSruZKm0hUucXES_appobB4XC4L_W72ZMw2S7pcofuuqdRhLbHwIFXmQx-W-QyELFh9c-aKjbLJnqXL_w3CSHUA6eZBGeHEUwlbH9fPAvqTuzo1ptt3xgyZlyN6eLwwGPEc3meuch-km0G2zVg5KTBxEA0hWsAclOJQRUtHNX1AaUznYBm6o/s3260/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C080",
+    "Book Title": "KGS SIRI 19 : HANTU WHATSAPP",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTf_qJQG4qKoObsCpg3jBUAhaWvFHibbTRGuCn5vvSDW0TNv0Gi2tiXAGfVW2J1rDqToJMmpF1IWKkF-3QLqqd-nrhgdDwXWjkpW2S9KooRzFaJJaYffqx75IiURJIZ1QGmUhMTauwCi6B95QAbDT8-awUsqFztQVZyYF9-QjLClPJfsEWsxEYBueUI2-_/s3540/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C081",
+    "Book Title": "KGS SIRI 20 : HANTU K-POP",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhIHFVdod-b_kbT0zpx2Cv0Eqr_LtODqnWxHm0k8-opc1cajR7ORmsjuFX5mbEMrxHEdJb7Z5-VM4EuvU9KQHeLfhiyC8JwD9RrhhWnHUUT9YeGUbcN8WdM1yngf3k1MHHkFXqO4__nDdq5sXur4xEPRlMXg5JqSoVem7bnhnKJa2d1NARV8OOBK3LIO9X6/s3102/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C082",
+    "Book Title": "Komik Asuh 263 Jun 2019",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrUvD0CNVMDElWDr8XJzFlFxxf7lwvqrKeTAlM7A_r2EQzcxmbrC_QDLvnCgIy_e_adhyphenhyphen80fNsaofHzw1AfHvmVGxP8SR45i6Yq6FH1R9F6xd5DjxC57dJNrQmFvQhYSovvae5uxi1qpsnvrac6JIdAZPYlYEo1uy3xNnWz3gb6pvjgCgMktpNrgHiCtET/s2544/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C083",
+    "Book Title": "Komik Asuh 264 Julai 2019",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHt7Etur22pRUZ2gROjU1tjEqUk812zfwcTmJnLsCRVeKjwyyUb4mPSzPJGtKtZMgIJb3Vf9h4hUIEjArzzjy1T_6H2mLlLJvhL0KYCZr7_zvezN0rsbT7W9rd0fejxbu5xrRUiBriWEIshVNO2t818KrUcbRUDJiAlS_zELFIWWkPO34lWWOqqneqbnlv/s3036/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C084",
+    "Book Title": "Komik Jangan Tinggal Solat",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1MB2bzOylITu9Vd_kSOL9u2q15ZgVik9tSby44tzbz7IGIBPXBSm04x6Kpr0cwtdzVHiZKeoaQk0jho6MvaOlc7uSxm3NopNA4EtuuZ-hRioEJoo61v6TeEaxm_Svc0YSw3KXn-lTsGUVYb7QC1YhPynzEbhjlx8IVudnJn405YG5fielsGhZlUUa3-zj/s764/Cover.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C085",
+    "Book Title": "Komik Keluarga Baru Aichan - Misi Mengenal Islam Haji",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiU9nRIMuqrNiPcsveV0n2hUIyoi9jkowC7OBE_HOJqfcmYLG8TgfGHyk3Mlz36bOYBMplLerRysZ9VwjL01IjIYzAm1-Fv3Q4W50rvNpBM98lyz65uip6CxdPhsXSE7HHKmh9kILdAFSGNkunxO6QYZSxERI6IE5n70SJSsZWnSsfbE0hVEbpBOc5f6pTB/s800/Cover.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  },
+  {
+    "ID": "C086",
+    "Book Title": "Komik Ramadan Tiba InkRamadan",
+    "No. of Books": "",
+    "Link": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGWLl72iYau3lOzsMXqEosugJ0BO12d5WXmBXoTqaZSDrLHmmtTE8hDVu20ZWB3QlGOsg81t2fGrleGCd9ELvEWgFsO_Zcy0-C9mYfRqnrBbi9napzRAh5T7xJwzhMSY3tPUABwJmMjgh4j8QmYqtCO4o8YaGAqzSR25E89w4teniFbFT38QNOEgBGGmQO/s2848/c%20%281%29.jpg",
+    "Price": "1",
+    "Tag": "Islamic"
+  }
+]
