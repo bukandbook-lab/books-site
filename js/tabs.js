@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       document.getElementById(target).style.display = "block";
       btn.classList.add("active");
+      
+  loadBooks(target); // 🔥 THIS IS THE KEY
 
       // close videos & popups when switching tabs
       stopAllVideos();
