@@ -90,6 +90,14 @@ td {
   width: 22px;
   cursor: pointer;
 }
+.cart-icon {
+  width: 25px;
+  height: auto;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+
 
 /* =========================
    WATCH VIDEO BUTTON
