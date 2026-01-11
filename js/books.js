@@ -33,18 +33,24 @@ function loadBooks(tabId) {
 
   fetch(url)
     .then(res => res.json())
-    .then(data => renderBooks(tabId, data))
+    .then(data => {
+      if (IMAGE_ONLY_TABS.includes(tabId)) {
+        renderImageGrid(tabId, data);
+      } else {
+        renderBookCards(tabId, data);
+      }
+    })
     .catch(err => {
-      console.error("JSON load error:", err);
+      console.error(err);
       container.innerHTML = "<p>Failed to load data.</p>";
     });
 }
 
 /* =========================================================
-   RENDER BOOKS (DEFAULT 2-COLUMN LAYOUT)
+   Normal tabs (BeginningReader etc.)
 ========================================================= */
 
-function renderBooks(tabId, books) {
+function renderBookCards(tabId, books) {
   const container = document.getElementById(tabId);
   container.innerHTML = "";
 
@@ -61,7 +67,7 @@ function renderBooks(tabId, books) {
 
     const title = book["Book Title"] || "Untitled";
     const img   = book.Link || "";
-    const price = book.price || 4;
+    const price = book.price || DEFAULT_PRICE;
 
     const td = document.createElement("td");
     td.innerHTML = `
@@ -76,9 +82,42 @@ function renderBooks(tabId, books) {
              data-price="${price}"
              src="${CART_ICON}">
       </div>
+    `;
 
-      <button class="watch-video-btn">Watch Video</button>
-      <div class="video-box" data-youtube="${book.video || ""}" style="display:none;"></div>
+    row.appendChild(td);
+  });
+
+  container.appendChild(table);
+}
+/* =========================================================
+   Image-only tabs (Islamic, Melayu, Jawi, Comic)
+========================================================= */
+function renderImageGrid(tabId, books) {
+  const container = document.getElementById(tabId);
+  container.innerHTML = "";
+
+  const table = document.createElement("table");
+  table.className = "image-grid";
+
+  let row;
+
+  books.forEach((book, i) => {
+    if (i % 5 === 0) {
+      row = document.createElement("tr");
+      table.appendChild(row);
+    }
+
+    const img   = book.Link || "";
+    const title = book["Book Title"] || "Untitled";
+    const price = book.price || DEFAULT_PRICE;
+
+    const td = document.createElement("td");
+    td.innerHTML = `
+      <img class="comic-thumb"
+           src="${img}"
+           data-title="${title}"
+           data-img="${img}"
+           data-price="${price}">
     `;
 
     row.appendChild(td);
