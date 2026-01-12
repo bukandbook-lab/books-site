@@ -1,7 +1,11 @@
 /* =========================================================
-   BOOK DATA SOURCES (RAW GitHub URLs ONLY)
+   GLOBAL REGISTRY (REQUIRED)
 ========================================================= */
+window.BOOK_REGISTRY = {};
 
+/* =========================================================
+   BOOK DATA SOURCES
+========================================================= */
 const BOOK_SOURCES = {
   BeginningReader: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/BeginningReaderData.json",
   ChapterBook:     "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/ChapterBookData.json",
@@ -13,11 +17,9 @@ const BOOK_SOURCES = {
   Comic:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/comicdata.json"
 };
 
-
 /* =========================================================
-   LOAD BOOKS FOR A TAB
+   LOAD BOOKS
 ========================================================= */
-
 function loadBooks(tabId) {
   const container = document.getElementById(tabId);
   if (!container) return;
@@ -32,21 +34,15 @@ function loadBooks(tabId) {
 
   fetch(url)
     .then(res => res.json())
-    .then(data => {
-      if (IMAGE_ONLY_TABS.includes(tabId)) {
-        renderImageGrid(tabId, data);
-      } else {
-        renderBookCards(tabId, data);
-      }
-    })
+    .then(data => renderBooks(tabId, data))
     .catch(err => {
-      console.error(err);
+      console.error("LOAD ERROR:", err);
       container.innerHTML = "<p>Failed to load data.</p>";
     });
 }
 
 /* =========================================================
-   ALL tabs 
+   RENDER IMAGE GRID (5 COLUMNS)
 ========================================================= */
 function renderBooks(tabId, books) {
   const container = document.getElementById(tabId);
@@ -56,10 +52,10 @@ function renderBooks(tabId, books) {
   table.className = "image-grid";
 
   let row;
+  let colCount = 0;
 
   books.forEach(book => {
 
-    // ❗ HARD REQUIREMENT
     if (!book.id) {
       console.error("Missing book.id", book);
       return;
@@ -69,15 +65,14 @@ function renderBooks(tabId, books) {
       id: book.id,
       title: book.title || book["Book Title"] || "Untitled",
       img: book.image || book.Link || "",
-      price: book.price,
+      price: book.price || 4,
       video: book.video || null,
       category: tabId
     };
 
-    // 🔐 REGISTER BOOK
     BOOK_REGISTRY[normalized.id] = normalized;
 
-    if (Object.keys(BOOK_REGISTRY).length % 5 === 1) {
+    if (colCount % 5 === 0) {
       row = document.createElement("tr");
       table.appendChild(row);
     }
@@ -92,15 +87,15 @@ function renderBooks(tabId, books) {
     `;
 
     row.appendChild(td);
+    colCount++;
   });
 
   container.appendChild(table);
 }
 
 /* =========================================================
-   AUTO LOAD FIRST TAB
+   AUTO LOAD DEFAULT TAB
 ========================================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   loadBooks("BeginningReader");
 });
