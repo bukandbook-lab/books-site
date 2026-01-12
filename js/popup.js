@@ -12,33 +12,30 @@ document.addEventListener("click", e => {
   }
 
   document.getElementById("comicPopupContent").innerHTML = `
-  <div class="popup-box">
-    <span id="closePopup">✕</span>
+    <div class="popup-inner">
+      <span class="close-popup">✕</span>
 
-    <img src="${book.img}" class="popup-img">
+      <img src="${book.img}" class="popup-large-img">
 
-    <div class="book-title">${book.title}</div>
+      <h2>${book.title}</h2>
 
-    <div class="price-box">
-      <b>RM${book.price}</b>
-      <img
-        class="cart-icon"
-        src="${CART_ICON}"
-        data-book-id="${book.id}"
-        data-title="${book.title}"
-        data-price="${book.price}"
-        width="25"
-      >
-    </div>
+      <div class="popup-price">
+        <b>RM${book.price}/set</b>
+        <img
+          class="cart-icon"
+          data-book-id="${book.id}"
+          src="${CART_ICON}">
+      </div>
 
-    ${
-      book.youtube
+      ${
+        book.video
         ? `<button class="watch-video-btn">Watch Video</button>
-           <div class="video-box" data-youtube="${book.youtube}" style="display:none;"></div>`
-        : `<div class="no-video">No video available</div>`
-    }
-  </div>
+           <div class="video-box" data-youtube="${book.video}" style="display:none;"></div>`
+        : `<p class="no-video">No video available</p>`
+      }
+    </div>
   `;
+
 
   document.getElementById("comicPopup").dataset.bookId = bookId;
   document.getElementById("comicPopup").style.display = "flex";
