@@ -1,10 +1,11 @@
 /* =========================================================
-   GLOBAL REGISTRY (REQUIRED)
+   GLOBAL REGISTRY (SINGLE SOURCE OF TRUTH)
+   Used by popup.js & cart.js
 ========================================================= */
 window.BOOK_REGISTRY = {};
 
 /* =========================================================
-   BOOK DATA SOURCES
+   BOOK DATA SOURCES (RAW GITHUB URLs)
 ========================================================= */
 const BOOK_SOURCES = {
   BeginningReader: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/BeginningReaderData.json",
@@ -18,7 +19,7 @@ const BOOK_SOURCES = {
 };
 
 /* =========================================================
-   LOAD BOOKS
+   LOAD BOOKS FOR A TAB
 ========================================================= */
 function loadBooks(tabId) {
   const container = document.getElementById(tabId);
@@ -52,34 +53,36 @@ function renderBooks(tabId, books) {
   table.className = "image-grid";
 
   let row;
-  let colCount = 0;
+  let col = 0;
 
-books.forEach(book => {
+  books.forEach(book => {
 
-  const bookId = book.id || book.ID || book["Book ID"];
+    /* ---------- REQUIRE BOOK ID ---------- */
+    const bookId = book.id || book.ID || book["Book ID"];
+    if (!bookId) {
+      console.error("❌ Missing Book ID:", book);
+      return;
+    }
 
-  if (!bookId) {
-    console.error("Missing book ID", book);
-    return;
-  }
+    /* ---------- NORMALIZE DATA ---------- */
+    const normalized = {
+      id: bookId,
+      title: book.title || book["Book Title"] || "Untitled",
+      img: book.image || book.Link || "",
+      price: Number(book.price || book["Price"] || 4),
+      youtube:
+        book["Youtube ID"] ||
+        book.youtube ||
+        book.video ||
+        null,
+      category: tabId
+    };
 
- const normalized = {
-  id: bookId,
-  title: book.title || book["Book Title"] || "Untitled",
-  img: book.image || book.Link || "",
-  price: book.price || book["Price"],
-  video:
-    book["Youtube ID"] ||
-    book.youtube ||
-    book.video ||
-    null,
-  category: tabId
-};
+    /* ---------- REGISTER BOOK ---------- */
+    BOOK_REGISTRY[normalized.id] = normalized;
 
-BOOK_REGISTRY[bookId] = normalized;
-
-
-    if (colCount % 5 === 0) {
+    /* ---------- GRID (5 COLUMNS) ---------- */
+    if (col % 5 === 0) {
       row = document.createElement("tr");
       table.appendChild(row);
     }
@@ -90,11 +93,12 @@ BOOK_REGISTRY[bookId] = normalized;
         src="${normalized.img}"
         class="grid-book-img popup-trigger"
         data-book-id="${normalized.id}"
+        loading="lazy"
       >
     `;
 
     row.appendChild(td);
-    colCount++;
+    col++;
   });
 
   container.appendChild(table);
