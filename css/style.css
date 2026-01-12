@@ -340,3 +340,20 @@ button {
   color: #000000;
   font-weight: bold;
 }
+
+.image-grid {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.image-grid td {
+  padding: 6px;
+  text-align: center;
+}
+
+.grid-book-img {
+  width: 200px;
+  height: auto;
+  cursor: pointer;
+}
+
