@@ -56,7 +56,9 @@ function renderBooks(tabId, books) {
 
   books.forEach(book => {
 
-    if (!book.id) {
+const bookId = book.id || book.ID || book["Book ID"];
+
+if (!bookId) {
       console.error("Missing book.id", book);
       return;
     }
