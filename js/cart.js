@@ -1,3 +1,5 @@
+console.log("✅ cart.js loaded");
+
 /* =========================
    CART STATE (SINGLE SOURCE)
 ========================= */
