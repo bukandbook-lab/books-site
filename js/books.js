@@ -13,7 +13,6 @@ const BOOK_SOURCES = {
   Comic:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/comicdata.json"
 };
 
-const IMAGE_ONLY_TABS = ["Islamic", "Melayu", "Jawi", "Comic"];
 
 /* =========================================================
    LOAD BOOKS FOR A TAB
@@ -47,61 +46,9 @@ function loadBooks(tabId) {
 }
 
 /* =========================================================
-   Normal tabs (BeginningReader etc.)
+   ALL tabs 
 ========================================================= */
-
-function renderBookCards(tabId, books) {
-  const container = document.getElementById(tabId);
-  container.innerHTML = "";
-
-  const table = document.createElement("table");
-  table.className = "book-table";
-
-  let row;
-
-  books.forEach((book, i) => {
-    if (i % 2 === 0) {
-      row = document.createElement("tr");
-      table.appendChild(row);
-    }
-
-    const title = book["Book Title"] || "Untitled";
-    const img   = book.Link || "";
-    const price = book.price || DEFAULT_PRICE;
-
-    const td = document.createElement("td");
-    td.innerHTML = `
-      <img src="${img}" class="book-img">
-
-      <div class="book-title">${title}</div>
-      
-      <div class="Price">
-        <b>RM${price}/set</b>
-        <img class="cart-icon"
-             data-title="${title}"
-             data-price="${price}"
-             src="${CART_ICON}"
-             width="25">
-      </div>
-
-<button class="watch-video-btn">Watch Video</button>
-
-<div class="video-box"
-     data-youtube="${book.video || ""}"
-     style="display:none;">
-</div>
-
-    `;
-
-    row.appendChild(td);
-  });
-
-  container.appendChild(table);
-}
-/* =========================================================
-   Image-only tabs (Islamic, Melayu, Jawi, Comic)
-========================================================= */
-function renderImageGrid(tabId, books) {
+function renderBooks(tabId, books) {
   const container = document.getElementById(tabId);
   container.innerHTML = "";
 
@@ -110,23 +57,38 @@ function renderImageGrid(tabId, books) {
 
   let row;
 
-  books.forEach((book, i) => {
-    if (i % 5 === 0) {
+  books.forEach(book => {
+
+    // ❗ HARD REQUIREMENT
+    if (!book.id) {
+      console.error("Missing book.id", book);
+      return;
+    }
+
+    const normalized = {
+      id: book.id,
+      title: book.title || book["Book Title"] || "Untitled",
+      img: book.image || book.Link || "",
+      price: book.price,
+      video: book.video || null,
+      category: tabId
+    };
+
+    // 🔐 REGISTER BOOK
+    BOOK_REGISTRY[normalized.id] = normalized;
+
+    if (Object.keys(BOOK_REGISTRY).length % 5 === 1) {
       row = document.createElement("tr");
       table.appendChild(row);
     }
 
-    const img   = book.Link || "";
-    const title = book["Book Title"] || "Untitled";
-    const price = book.price || DEFAULT_PRICE;
-
     const td = document.createElement("td");
     td.innerHTML = `
-      <img class="comic-thumb"
-           src="${img}"
-           data-title="${title}"
-           data-img="${img}"
-           data-price="${price}">
+      <img
+        src="${normalized.img}"
+        class="grid-book-img popup-trigger"
+        data-book-id="${normalized.id}"
+      >
     `;
 
     row.appendChild(td);
