@@ -17,7 +17,7 @@ document.addEventListener("click", e => {
     document.getElementById("comicPopupContent").innerHTML = `
       <span class="close-popup">✕</span>
 
-      <img src="${img}" style="width:450px;display:block;margin:auto">
+      <img src="${img}" style="width:380px;display:block;margin:auto">
 
       <div class="book-title">${title}</div>
       <div>No. of books: ${books}</div>
