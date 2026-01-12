@@ -231,23 +231,6 @@ button {
   margin-right: 8px;
 }
 
-/* =========================
-   MOBILE TUNING
-========================= */
-@media (max-width: 768px) {
-
-  td {
-    width: 50%;
-  }
-
-  .popup-content {
-    width: 95%;
-  }
-
-  iframe {
-    height: 220px;
-  }
-}
 /* ================================
    CART ICON SIZE
 ================================ */
