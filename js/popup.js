@@ -11,7 +11,7 @@ document.addEventListener("click", e => {
     return;
   }
 
-  document.getElementById("books").innerHTML = `
+  document.getElementById("comicPopupContent").innerHTML = `
     <div class="popup-inner">
       <span class="close-popup">✕</span>
 
