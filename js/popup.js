@@ -15,9 +15,7 @@ document.addEventListener("click", e => {
     const id = thumb.dataset.id;
 
     document.getElementById("comicPopupContent").innerHTML = `
-      <span class="close-popup"
-            style="position:absolute;top:8px;right:12px;
-                   font-size:22px;cursor:pointer;">✕</span>
+      <span>✕</span>
 
       <img src="${img}" style="width:260px;display:block;margin:auto">
 
