@@ -3,48 +3,30 @@ function closeComicPopup() {
   if (popup) popup.style.display = "none";
 }
 
-document.addEventListener("click", e => {
+document.addEventListener("click", function (e) {
 
-  // OPEN POPUP FROM COMIC THUMB
-  const thumb = e.target.closest(".comic-thumb");
-  if (thumb) {
-    const title = thumb.dataset.title;
-    const img = thumb.dataset.img;
-    const books = thumb.dataset.books || "—";
-    const price = thumb.dataset.price || DEFAULT_PRICE;
-    const id = thumb.dataset.id;
+  const img = e.target.closest(".comic-thumb");
+  if (!img) return;
 
-    document.getElementById("comicPopupContent").innerHTML = `
-            <span class="close-popup">✕</span>
+  const src   = img.dataset.img || img.src;
+  const title = img.dataset.title || "";
+  const price = img.dataset.price || DEFAULT_PRICE;
 
+  const popup = document.getElementById("comicPopup");
+  const content = document.getElementById("comicPopupContent");
 
-      <img src="${img}" style="width:450px;display:block;margin:auto">
+  content.innerHTML = `
+    <span class="close-popup">✕</span>
+    <img src="${src}">
+  `;
 
-      <div class="book-title">${title}</div>
-      <div>No. of books: ${books}</div>
+  popup.style.display = "flex";
+});
 
-      <div class="Price">
-        <b>RM${price}/set</b>
-        <img class="cart-icon"
-             data-id="${id}"
-             data-title="${title}"
-             data-price="${price}"
-             src="${CART_ICON}"
-             width="25">
-      </div>
-    `;
-
-    document.getElementById("comicPopup").style.display = "flex";
-    return;
-  }
-
-  // CLOSE POPUP (X)
-  if (e.target.classList.contains("close-popup")) {
-    closeComicPopup();
-  }
-
-  // CLOSE POPUP AFTER ADD TO CART
-  if (e.target.closest("#comicPopup .cart-icon")) {
-    closeComicPopup();
+/* CLOSE POPUP */
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("close-popup") ||
+      e.target.id === "comicPopup") {
+    document.getElementById("comicPopup").style.display = "none";
   }
 });
