@@ -54,25 +54,25 @@ function renderBooks(tabId, books) {
   let row;
   let colCount = 0;
 
-  books.forEach(book => {
+books.forEach(book => {
 
-const bookId = book.id || book.ID || book["Book ID"];
+  const bookId = book.id || book.ID || book["Book ID"];
 
-if (!bookId) {
-      console.error("Missing book.id", book);
-      return;
-    }
+  if (!bookId) {
+    console.error("Missing book ID", book);
+    return;
+  }
 
-    const normalized = {
-      id: book.id,
-      title: book.title || book["Book Title"] || "Untitled",
-      img: book.image || book.Link || "",
-      price: book.price || 4,
-      video: book.video || null,
-      category: tabId
-    };
+  const normalized = {
+    id: bookId,
+    title: book.title || book["Book Title"] || "Untitled",
+    img: book.image || book.Link || "",
+    price: book.price || 4,
+    video: book.video || null,
+    category: tabId
+  };
 
-    BOOK_REGISTRY[normalized.id] = normalized;
+  BOOK_REGISTRY[bookId] = normalized;
 
     if (colCount % 5 === 0) {
       row = document.createElement("tr");
