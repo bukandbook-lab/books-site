@@ -280,7 +280,7 @@ button {
    STANDARD BOOK IMAGE SIZE
 ================================ */
 .book-img {
-  width: 200px;
+  max-width: 150px;
   height: auto;
   object-fit: contain;
   display: block;
