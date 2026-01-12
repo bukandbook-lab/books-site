@@ -304,5 +304,32 @@ button {
   color: #d1004c;
   font-size: 14px;
 }
+/* ================================
+   FULLSCREEN IMAGE POPUP
+================================ */
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup img {
+  max-width: 95vw;
+  max-height: 95vh;
+}
+
+.popup .close-popup {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
 
 
