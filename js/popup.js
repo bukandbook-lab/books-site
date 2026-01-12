@@ -5,33 +5,42 @@ function closeComicPopup() {
 
 document.addEventListener("click", e => {
 
-  // OPEN POPUP FROM COMIC THUMB
-  const thumb = e.target.closest(".comic-thumb");
-  if (thumb) {
-    const title = thumb.dataset.title;
-    const img = thumb.dataset.img;
-    const books = thumb.dataset.books || "—";
-    const price = thumb.dataset.price || DEFAULT_PRICE;
-    const id = thumb.dataset.id;
+  const trigger = e.target.closest(".popup-trigger");
+  if (!trigger) return;
 
-    document.getElementById("comicPopupContent").innerHTML = `
+  const bookId = trigger.dataset.bookId;
+  const book = BOOK_REGISTRY[bookId];
+
+  if (!book) {
+    alert("Book not found");
+    return;
+  }
+
+  document.getElementById("comicPopupContent").innerHTML = `
+    <div class="popup-inner">
       <span class="close-popup">✕</span>
 
-      <img src="${img}" style="width:350px;display:block;margin:auto">
+      <img src="${book.img}" class="popup-large-img">
 
-      <div class="book-title">${title}</div>
-      <div>No. of books: ${books}</div>
+      <h2>${book.title}</h2>
 
-      <div class="price">
-        <b>RM${price}/set</b>
-        <img class="cart-icon"
-             data-id="${id}"
-             data-title="${title}"
-             data-price="${price}"
-             src="${CART_ICON}"
-             width="25">
+      <div class="popup-price">
+        <b>RM${book.price}/set</b>
+        <img
+          class="cart-icon"
+          data-book-id="${book.id}"
+          src="${CART_ICON}">
       </div>
-    `;
+
+      ${
+        book.video
+        ? `<button class="watch-video-btn">Watch Video</button>
+           <div class="video-box" data-youtube="${book.video}" style="display:none;"></div>`
+        : `<p class="no-video">No video available</p>`
+      }
+    </div>
+  `;
+
 
     document.getElementById("comicPopup").style.display = "flex";
     return;
