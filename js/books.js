@@ -74,13 +74,15 @@ function renderBookCards(tabId, books) {
       <img src="${img}" class="book-img">
 
       <div class="book-title">${title}</div>
-
-      <div class="price">
-      <b>RM${price}/set</b>
-      <img class="cart-icon"
-       data-title="${title}"
-       data-price="${price}"
-       src="${CART_ICON}">
+      
+      <div class="Price">
+        <b>RM${price}/set</b>
+        <img class="cart-icon"
+             data-id="${id}"
+             data-title="${title}"
+             data-price="${price}"
+             src="${CART_ICON}"
+             width="25">
       </div>
 
 <button class="watch-video-btn">Watch Video</button>
