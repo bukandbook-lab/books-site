@@ -276,3 +276,13 @@ button {
   max-width: 120px;
   cursor: pointer;
 }
+/* ================================
+   STANDARD BOOK IMAGE SIZE
+================================ */
+.book-img {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
