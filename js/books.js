@@ -76,12 +76,20 @@ function renderBookCards(tabId, books) {
       <div class="book-title">${title}</div>
 
       <div class="price">
-        <b>RM${price}/set</b>
-        <img class="cart-icon"
-             data-title="${title}"
-             data-price="${price}"
-             src="${CART_ICON}">
+      <b>RM${price}/set</b>
+      <img class="cart-icon"
+       data-title="${title}"
+       data-price="${price}"
+       src="${CART_ICON}">
       </div>
+
+<button class="watch-video-btn">Watch Video</button>
+
+<div class="video-box"
+     data-youtube="${book.video || ""}"
+     style="display:none;">
+</div>
+
     `;
 
     row.appendChild(td);
