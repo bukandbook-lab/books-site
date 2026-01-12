@@ -357,3 +357,23 @@ button {
   cursor: pointer;
 }
 
+.popup-large-img {
+  max-width: 100%;
+  max-height: 75vh;
+  display: block;
+  margin: 10px auto;
+}
+
+.popup-price {
+  background: #ffd6e7;
+  padding: 10px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.popup-price .cart-icon {
+  width: 25px;
+  cursor: pointer;
+}
