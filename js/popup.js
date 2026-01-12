@@ -1,8 +1,3 @@
-function closeComicPopup() {
-  const popup = document.getElementById("comicPopup");
-  if (popup) popup.style.display = "none";
-}
-
 document.addEventListener("click", e => {
 
   const trigger = e.target.closest(".popup-trigger");
@@ -41,18 +36,5 @@ document.addEventListener("click", e => {
     </div>
   `;
 
-
-    document.getElementById("comicPopup").style.display = "flex";
-    return;
-  }
-
-  // CLOSE POPUP (X)
-  if (e.target.classList.contains("close-popup")) {
-    closeComicPopup();
-  }
-
-  // CLOSE POPUP AFTER ADD TO CART
-  if (e.target.closest("#comicPopup .cart-icon")) {
-    closeComicPopup();
-  }
+  document.getElementById("comicPopup").style.display = "flex";
 });
