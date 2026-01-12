@@ -72,9 +72,7 @@ function renderCart() {
       </div>
     `;
     index++;
-
-     updatePayButton();
-  });
+ });
 
   /* DELIVERY FEES */
   let deliveryFeeHTML = "";
@@ -128,6 +126,7 @@ box.innerHTML = `
     </button>
   </div>
 `;
+    updatePayButton();
 
 }
 
@@ -215,7 +214,9 @@ document.addEventListener("click", e => {
    
 });
 
-document.getElementById("closePayment").onclick = () => {
-  document.getElementById("paymentPopup").style.display = "none";
-};
+document.addEventListener("click", e => {
+  if (e.target.id === "closePayment") {
+    document.getElementById("paymentPopup").style.display = "none";
+  }
+});
 
