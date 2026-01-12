@@ -300,10 +300,6 @@ button {
   z-index: 9999;
 }
 
-.popup img {
-  max-width: 95vw;
-  max-height: 95vh;
-}
 
 .popup .close-popup {
   position: relative;
@@ -328,4 +324,10 @@ button {
   overflow: auto;
 }
 
+.popup-box img {
+  max-width: 100%;
+  max-height: 80vh;
+  display: block;
+  margin: auto;
+}
 
