@@ -36,5 +36,62 @@ document.addEventListener("click", e => {
     </div>
   `;
 
+  document.getElementById("comicPopup").dataset.bookId = bookId;
   document.getElementById("comicPopup").style.display = "flex";
 });
+document.addEventListener("click", function (e) {
+
+  /* ===============================
+     CLOSE POPUP (X)
+  =============================== */
+  if (e.target.classList.contains("close-popup")) {
+    const popup = e.target.closest(".popup");
+    if (popup) popup.style.display = "none";
+
+    // stop video if playing
+    const iframe = popup?.querySelector("iframe");
+    if (iframe) iframe.remove();
+    return;
+  }
+
+  /* ===============================
+     WATCH / HIDE VIDEO
+  =============================== */
+  if (e.target.classList.contains("watch-video-btn")) {
+
+    const popup = e.target.closest(".popup");
+    if (!popup) return;
+
+    const videoBox = popup.querySelector(".video-box");
+    if (!videoBox) return;
+
+    const bookId = popup.dataset.bookId;
+    const book = BOOK_REGISTRY[bookId];
+
+    if (!book || !book.video) {
+      alert("No video available");
+      return;
+    }
+
+    // TOGGLE
+    if (videoBox.innerHTML) {
+      videoBox.innerHTML = "";
+      videoBox.style.display = "none";
+      e.target.innerText = "Watch Video";
+    } else {
+      videoBox.innerHTML = `
+        <iframe
+          width="100%"
+          height="260"
+          src="https://www.youtube.com/embed/${book.video}"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      `;
+      videoBox.style.display = "block";
+      e.target.innerText = "Hide Video";
+    }
+  }
+
+});
+
