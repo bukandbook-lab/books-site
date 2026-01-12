@@ -78,7 +78,6 @@ function renderBookCards(tabId, books) {
       <div class="Price">
         <b>RM${price}/set</b>
         <img class="cart-icon"
-             data-id="${id}"
              data-title="${title}"
              data-price="${price}"
              src="${CART_ICON}"
