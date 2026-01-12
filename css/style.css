@@ -160,7 +160,7 @@ td {
 
 /* close X */
 .close-popup {
-  position: absolute;
+  position: relative;
   top: 8px;
   right: 12px;
   font-size: 22px;
