@@ -63,16 +63,21 @@ books.forEach(book => {
     return;
   }
 
-  const normalized = {
-    id: bookId,
-    title: book.title || book["Book Title"] || "Untitled",
-    img: book.image || book.Link || "",
-    price: book.price || 4,
-    video: book.video || null,
-    category: tabId
-  };
+ const normalized = {
+  id: bookId,
+  title: book.title || book["Book Title"] || "Untitled",
+  img: book.image || book.Link || "",
+  price: book.price || book["Price"],
+  video:
+    book["Youtube ID"] ||
+    book.youtube ||
+    book.video ||
+    null,
+  category: tabId
+};
 
-  BOOK_REGISTRY[bookId] = normalized;
+BOOK_REGISTRY[bookId] = normalized;
+
 
     if (colCount % 5 === 0) {
       row = document.createElement("tr");
