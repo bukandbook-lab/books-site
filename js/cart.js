@@ -231,3 +231,24 @@ document.addEventListener("click", e => {
   }
 });
 
+/* =====================================
+   CLOSE CART WHEN CLICKING OUTSIDE
+===================================== */
+document.addEventListener("click", e => {
+  const cartEl = document.getElementById("Cart");
+  if (!cartEl) return;
+
+  // If cart is not open, ignore
+  if (!cartEl.classList.contains("open")) return;
+
+  // If click is inside cart, ignore
+  if (cartEl.contains(e.target)) return;
+
+  // If click is on any cart-icon, ignore (so add-to-cart still works)
+  if (e.target.closest(".cart-icon")) return;
+
+  // Otherwise close cart
+  cartEl.classList.remove("open");
+});
+
+
