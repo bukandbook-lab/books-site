@@ -61,8 +61,8 @@ table {
 }
 
 td {
-  padding: 10px;
-  vertical-align: top;
+  padding: 0px;
+  vertical-align: bottom;
 }
 
 .book-title {
