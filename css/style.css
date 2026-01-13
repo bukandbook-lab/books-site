@@ -274,20 +274,19 @@ button {
   margin: auto;
 }
 
+/* ===============================
+   BOOK GRID (COMPACT)
+================================ */
 .image-grid {
-  width: 100%;
-  border-collapse: collapse;
+  display: grid;
+  grid-template-columns: repeat(6, 120px); /* 6 per row */
+  gap: 0; /* NO spacing */
+  justify-content: start;
 }
 
 .image-grid td {
   padding: 0;
-   margin: 0;
-  text-align: center;
-}
-.image-grid tr {
-  padding: 0;
-   margin: 0;
-  text-align: center;
+  margin: 0;
 }
 
 .grid-book-img {
