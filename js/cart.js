@@ -38,15 +38,20 @@ document.addEventListener("click", e => {
 });
 
 /* =====================================
-   REMOVE ITEM
+   REMOVE ITEM (KEEP CART OPEN)
 ===================================== */
 document.addEventListener("click", e => {
   const removeBtn = e.target.closest(".remove-item");
   if (!removeBtn) return;
 
+  e.stopPropagation(); // 🔥 IMPORTANT: prevents outside-click close
+
   cart.items.delete(removeBtn.dataset.bookId);
   renderCart();
+
+  // ⛔ DO NOT close cart here
 });
+
 
 /* =====================================
    DELIVERY CHANGE
