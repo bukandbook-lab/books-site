@@ -13,7 +13,12 @@ document.addEventListener("click", e => {
 
   document.getElementById("comicPopupContent").innerHTML = `
   <div class="popup-box">
-    <span class="close-popup">✕</span>
+    <img
+  src="${CLOSE_ICON}"
+  class="close-popup"
+  alt="Close"
+>
+
 
     <img src="${book.img}" class="popup-img">
 
