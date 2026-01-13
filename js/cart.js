@@ -11,8 +11,9 @@ const cart = {
    ADD TO CART (FROM CART ICON)
 ===================================== */
 document.addEventListener("click", e => {
-const icon = e.target.closest(".cart-icon[data-book-id]");
-if (!icon) return;
+  const icon = e.target.closest(".cart-icon");
+  if (!icon) return;
+
 
 
   const bookId = icon.dataset.bookId;
