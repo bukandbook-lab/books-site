@@ -160,12 +160,12 @@ td {
 
 /* close X */
 .close-popup {
-  position: relative;
-  top: 8px;
-  right: 12px;
-  font-size: 22px;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 22px;
+  height: 22px;
   cursor: pointer;
-  font-weight: bold;
 }
 
 /* =========================
