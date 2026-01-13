@@ -67,16 +67,13 @@ img {
 /* =========================
    PRICE + CART ICON
 ========================= */
-.Price {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #fc1380;
-  color: #fff;
-  border-radius: 18px;
+
+.price-box{
+     background: #FC1380;
+  color: white;
+  border-radius: 20px;
   padding: 4px 10px;
-  font-size: 12px;
-  margin-top: 6px;
+  display: inline-block;
 }
 
 /* Cart icon hidden by default */
