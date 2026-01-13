@@ -78,7 +78,13 @@ function renderCart() {
         <span>${index}. ${item.title}</span>
         <span>
           RM${item.price}
-          <span class="remove-item" data-book-id="${id}">✕</span>
+                    <img
+  src="${CLOSE_ICON}"
+  class="remove-item"
+  data-book-id="${id}"
+  alt="Remove"
+>
+
         </span>
       </div>
     `;
