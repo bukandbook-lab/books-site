@@ -249,13 +249,15 @@ document.addEventListener("click", e => {
   const cartEl = document.getElementById("Cart");
   if (!cartEl || !cartEl.classList.contains("open")) return;
 
-  // Click INSIDE cart → ignore
+  // ❌ Ignore clicks inside cart
   if (e.target.closest("#Cart")) return;
 
-  // Click cart icon → ignore
+  // ❌ Ignore cart icons
   if (e.target.closest(".cart-icon")) return;
+
+  // ❌ Ignore remove icons
+  if (e.target.closest(".remove-item")) return;
 
   cartEl.classList.remove("open");
 });
-
 
