@@ -305,12 +305,13 @@ button {
 }
 
 .image-grid td {
-  padding: 6px;
+  padding: 0;
+   margin: 0;
   text-align: center;
 }
 
 .grid-book-img {
-  width: 200px;
+  max-width: 120px;
   height: auto;
   cursor: pointer;
 }
