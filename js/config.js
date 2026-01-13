@@ -3,3 +3,6 @@ const CART_ICON =
 "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTsrBEOnV55lpyn2qOEcjDpsePZokQmZ-tQzYH5EHuXOOwNYJbrif6cohUTPCb6OMfol1HNUhHee19v70YOhqOBRUhzaKxZ_yycwoPReWbASOxS_y7m1vuJIHizFzHzgqUWf9C8LCnTq3NrW35-C_dYi8e_zZA-VrZ2vYRtaLgagu2aGsFIakxfWJLjo0_/s3500/pink%20cart.png";
 
 const DEFAULT_PRICE = 4;
+
+const CLOSE_ICON =
+"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhOugfd_uN6o5SctZFNuRIj_BzoQL5wV-kJwedlMszlIJtG8f3kIsmjpUzzEGITOJCaxuHZ_s4NHzKJBGVhQZz6o6YtwyO63V8W7iZINYEg9LljwmRpL3DQLFIOWHFwUFsBLn9dIqdf-4AXa69Heo9EoZN1OnivF9o4NywvTmQ84hfd4Vz-aiRe-uqgqePe/s320/cross.png";
