@@ -91,6 +91,10 @@ td {
   height: auto;
   cursor: pointer;
 }
+.cart-icon:hover {
+  transform: scale(1.1);
+}
+
 .Price img.cart-icon {
   width: 22px;
   cursor: pointer;
