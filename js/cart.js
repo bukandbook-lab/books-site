@@ -213,15 +213,21 @@ document.addEventListener("click", e => {
     </a>
   `;
 
-  document.getElementById("Cart")?.classList.remove("open");
-  document.getElementById("paymentPopup")?.style.display = "flex";
+const cartEl = document.getElementById("Cart");
+if (cartEl) cartEl.classList.remove("open");
+
+const paymentPopup = document.getElementById("paymentPopup");
+if (paymentPopup) paymentPopup.style.display = "flex";
+
 });
 
 /* =====================================
    OPEN / CLOSE CART
 ===================================== */
 function openCart() {
-  document.getElementById("Cart")?.classList.add("open");
+  const cartEl = document.getElementById("Cart");
+  if (cartEl) cartEl.classList.add("open");
+
 }
 
 document.addEventListener("click", e => {
