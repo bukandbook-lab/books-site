@@ -75,19 +75,14 @@ img {
   padding: 4px 10px;
   display: inline-block;
 }
-#comicPopupContent .cart-icon {
-  width: 28px;
-  cursor: pointer;
-  display: block;
-  margin: 10px auto;
-}
+
 #comicPopupContent {
   position: relative;   /* 🔑 anchor for the X */
 }
 
 
 /* Cart icon hidden by default */
-.cart-icon {
+.book-thumb img.cart-icon {
   position: absolute;
   right: 4px;
   bottom: 4px;
@@ -108,11 +103,11 @@ img {
   transform: scale(1.1);
 }
 
-.Price img.cart-icon {
+.price-box img.cart-icon {
   width: 22px;
   cursor: pointer;
 }
-.Price img.cart-icon:hover {
+.price-box img.cart-icon:hover {
   transform: scale(1.1);
 }
 
