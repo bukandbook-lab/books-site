@@ -99,6 +99,9 @@ td {
   width: 22px;
   cursor: pointer;
 }
+.Price img.cart-icon:hover {
+  transform: scale(1.1);
+}
 
 /* =========================
    WATCH VIDEO BUTTON
