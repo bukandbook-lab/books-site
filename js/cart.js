@@ -3,12 +3,11 @@
 ===================================== */
 const cart = {
   items: new Map(), // bookId => { title, price }
-  delivery: "email",
-  agreed: false
+  delivery: "email"
 };
 
 /* =====================================
-   ADD TO CART (GRID + POPUP)
+   ADD TO CART (FROM CART ICON)
 ===================================== */
 document.addEventListener("click", e => {
   const icon = e.target.closest(".cart-icon[data-book-id]");
@@ -20,31 +19,37 @@ document.addEventListener("click", e => {
 
   if (!bookId || !title || !price) return;
 
+  /* ADD / UPDATE CART */
   cart.items.set(bookId, { title, price });
 
   renderCart();
   openCart();
 
-  /* auto-close popup if clicked inside one */
+  /* ✅ AUTO-CLOSE POPUP IF INSIDE ONE */
   const popup = icon.closest(".popup");
   if (popup) {
     popup.style.display = "none";
-    popup.querySelector("iframe")?.remove();
+
+    /* stop video if any */
+    const iframe = popup.querySelector("iframe");
+    if (iframe) iframe.remove();
   }
 });
 
 /* =====================================
-   REMOVE ITEM (KEEP CART OPEN)
+   REMOVE ITEM (DO NOT CLOSE CART)
 ===================================== */
 document.addEventListener("click", e => {
   const removeBtn = e.target.closest(".remove-item");
   if (!removeBtn) return;
 
   e.preventDefault();
-  e.stopPropagation();
+  e.stopPropagation(); // 🔥 THIS IS CRITICAL
 
-  cart.items.delete(removeBtn.dataset.bookId);
-  renderCart();
+  const bookId = removeBtn.dataset.bookId;
+  cart.items.delete(bookId);
+
+  renderCart(); // re-render, cart stays open
 });
 
 /* =====================================
@@ -58,16 +63,6 @@ document.addEventListener("change", e => {
 });
 
 /* =====================================
-   TERMS CHECKBOX
-===================================== */
-document.addEventListener("change", e => {
-  if (e.target.id === "agreeTerms") {
-    cart.agreed = e.target.checked;
-    updatePayButton();
-  }
-});
-
-/* =====================================
    RENDER CART
 ===================================== */
 function renderCart() {
@@ -76,6 +71,7 @@ function renderCart() {
 
   let total = 0;
   let index = 1;
+
   let itemsHTML = "";
 
   cart.items.forEach((item, id) => {
@@ -86,18 +82,20 @@ function renderCart() {
         <span>${index}. ${item.title}</span>
         <span>
           RM${item.price}
-          <img
-            src="${CLOSE_ICON}"
-            class="remove-item"
-            data-book-id="${id}"
-            alt="Remove"
-          >
+                    <img
+  src="${CLOSE_ICON}"
+  class="remove-item"
+  data-book-id="${id}"
+  alt="Remove"
+>
+
         </span>
       </div>
     `;
     index++;
-  });
+ });
 
+  /* DELIVERY FEES */
   let deliveryFeeHTML = "";
   if (cart.delivery === "courier") {
     total += 17;
@@ -107,96 +105,107 @@ function renderCart() {
     `;
   }
 
-  box.innerHTML = `
-    <h3>CART</h3>
+  const isCartEmpty = cart.items.size === 0;
 
-    ${itemsHTML || "<p>No items selected</p>"}
+box.innerHTML = `
+  <h3>CART</h3>
 
-    <hr>
+  ${itemsHTML || "<p>No items selected</p>"}
 
-    <div class="delivery">
-      <b>Delivery Method</b><br>
-      <label>
-        <input type="radio" name="delivery" value="email"
-          ${cart.delivery === "email" ? "checked" : ""}>
-        Email
-      </label><br>
+  <hr>
 
-      <label>
-        <input type="radio" name="delivery" value="courier"
-          ${cart.delivery === "courier" ? "checked" : ""}>
-        Courier
-      </label>
-    </div>
+  <div class="delivery">
+    <b>Delivery Method</b><br>
+    <label>
+      <input type="radio" name="delivery" value="email"
+        ${cart.delivery === "email" ? "checked" : ""}>
+      Email
+    </label><br>
 
-    ${deliveryFeeHTML}
-
-    <hr>
-
-    <div class="total"><b>TOTAL: RM${total}</b></div>
-
-    <label class="terms">
-      <input type="checkbox" id="agreeTerms" ${cart.agreed ? "checked" : ""}>
-      Please read Terms and Conditions under READ ME FIRST before payment.
+    <label>
+      <input type="radio" name="delivery" value="courier"
+        ${cart.delivery === "courier" ? "checked" : ""}>
+      Courier
     </label>
+  </div>
 
-    <div class="cart-actions">
-      <button id="continueShopping">CONTINUE SHOPPING</button>
-      <button id="clickToPay" ${cart.items.size === 0 ? "disabled" : ""}>
-        CLICK TO PAY
-      </button>
-    </div>
-  `;
+  ${deliveryFeeHTML}
 
-  updatePayButton();
+  <hr>
+
+  <div class="total"><b>TOTAL: RM${total}</b></div>
+
+  <label class="terms">
+    <input type="checkbox" id="agreeTerms">
+    Please read Terms and Conditions under READ ME FIRST before payment.
+  </label>
+
+  <div class="cart-actions">
+    <button id="continueShopping">CONTINUE SHOPPING</button>
+    <button id="clickToPay" ${isCartEmpty ? "disabled" : ""}>
+      CLICK TO PAY
+    </button>
+  </div>
+`;
+    updatePayButton();
+
 }
 
-/* =====================================
-   PAY BUTTON ENABLE / DISABLE
-===================================== */
+document.addEventListener("change", e => {
+  if (e.target.id === "agreeTerms") updatePayButton();
+});
+
 function updatePayButton() {
   const payBtn = document.getElementById("clickToPay");
-  if (!payBtn) return;
-  payBtn.disabled = cart.items.size === 0 || !cart.agreed;
-}
+  const terms  = document.getElementById("agreeTerms");
 
+  if (!payBtn) return;
+
+  payBtn.disabled = cart.items.size === 0 || !terms?.checked;
+}
 /* =====================================
    CLICK TO PAY
 ===================================== */
 document.addEventListener("click", e => {
   if (e.target.id !== "clickToPay") return;
-  if (cart.items.size === 0 || !cart.agreed) return;
 
+  if (cart.items.size === 0) return;
+
+  const terms = document.getElementById("agreeTerms");
+  if (!terms?.checked) {
+    alert("Please agree to Terms before payment.");
+    return;
+  }
+
+  /* BUILD BOOK LIST */
   const emailBox = document.getElementById("emailBookTitles");
   const hidden   = document.getElementById("emailBookTitlesInput");
 
-  if (emailBox) emailBox.innerHTML = "";
-
-  let total = 0;
-  let index = 1;
+  emailBox.innerHTML = "";
   const titles = [];
 
+  let index = 1;
   cart.items.forEach(item => {
-    total += item.price;
-    const line = `${index}. ${item.title}`;
-    titles.push(line);
-
-    if (emailBox) {
-      const div = document.createElement("div");
-      div.textContent = line;
-      emailBox.appendChild(div);
-    }
+    const div = document.createElement("div");
+    div.textContent = `${index}. ${item.title}`;
+    emailBox.appendChild(div);
+    titles.push(`${index}. ${item.title}`);
     index++;
   });
 
+  hidden.value = titles.join(" | ");
+
+  /* TOTAL */
+  let total = 0;
+  cart.items.forEach(i => total += i.price);
   if (cart.delivery === "courier") total += 17;
-  if (hidden) hidden.value = titles.join(" | ");
 
   document.getElementById("payText").innerHTML = `
     Please bank in <b>RM${total}</b> to Account Number:
     <b>1234567890 (Maybank)</b>.<br><br>
 
-    Once payment is made, please <b>CLICK ONE BELOW</b>:<br><br>
+    Once payment is made, please <b>CLICK THIS</b>:
+    <br><br>
 
     <a href="http://www.wasap.my/601113127911/paymentdone" target="_blank">
       <img width="30" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUhNlQdGbG0-uvrDrJmMrforsQT7WwfxNOotS02BNczodK1gvVQB86wafY3OPLsOn4wCQJ2kQGNNGzQ_HSgwtaT8Y6W3uRSOEnO7Kwi970G-tZz5ZwOGYchAfmP9LUueDq5EPWYtQZRHT8xUPk1vinzuuGP11DHbxt-tWnrG_aF63Dw2HkXAZU7N5qO1Ql/s320/WhatsApp.jpg">
@@ -207,20 +216,28 @@ document.addEventListener("click", e => {
     </a>
   `;
 
-  document.getElementById("Cart")?.classList.remove("open");
-  document.getElementById("paymentPopup")?.style.display = "flex";
+  document.getElementById("Cart").classList.remove("open");
+  document.getElementById("paymentPopup").style.display = "flex";
 });
 
 /* =====================================
    OPEN / CLOSE CART
 ===================================== */
 function openCart() {
-  document.getElementById("Cart")?.classList.add("open");
+  document.getElementById("Cart").classList.add("open");
 }
 
 document.addEventListener("click", e => {
   if (e.target.id === "continueShopping") {
-    document.getElementById("Cart")?.classList.remove("open");
+    document.getElementById("Cart").classList.remove("open");
+     
+  }
+   
+});
+
+document.addEventListener("click", e => {
+  if (e.target.id === "closePayment") {
+    document.getElementById("paymentPopup").style.display = "none";
   }
 });
 
@@ -231,8 +248,13 @@ document.addEventListener("click", e => {
   const cartEl = document.getElementById("Cart");
   if (!cartEl || !cartEl.classList.contains("open")) return;
 
+  // ❌ Ignore clicks inside cart
   if (e.target.closest("#Cart")) return;
+
+  // ❌ Ignore cart icons
   if (e.target.closest(".cart-icon")) return;
+
+  // ❌ Ignore remove icons
   if (e.target.closest(".remove-item")) return;
 
   cartEl.classList.remove("open");
