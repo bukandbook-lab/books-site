@@ -12,29 +12,34 @@ document.addEventListener("click", e => {
   }
 
   document.getElementById("comicPopupContent").innerHTML = `
-    <div class="popup-inner">
-      <span class="close-popup">✕</span>
+  <div class="popup-box">
+    <span id="closePopup">✕</span>
 
-      <img src="${book.img}" class="popup-large-img">
+    <img src="${book.img}" class="popup-img">
 
-      <h2>${book.title}</h2>
+    <div class="book-title">${book.title}</div>
 
-      <div class="popup-price">
-        <b>RM${book.price}/set</b>
-        <img
-          class="cart-icon"
-          data-book-id="${book.id}"
-          src="${CART_ICON}">
-      </div>
-
-      ${
-        book.video
-        ? `<button class="watch-video-btn">Watch Video</button>
-           <div class="video-box" data-youtube="${book.video}" style="display:none;"></div>`
-        : `<p class="no-video">No video available</p>`
-      }
+    <div class="price-box">
+      <b>RM${book.price}</b>
+      <img
+        class="cart-icon"
+        src="${CART_ICON}"
+        data-book-id="${book.id}"
+        data-title="${book.title}"
+        data-price="${book.price}"
+        width="25"
+      >
     </div>
-  `;
+
+    ${
+      book.youtube
+        ? `<button class="watch-video-btn">Watch Video</button>
+           <div class="video-box" data-youtube="${book.youtube}" style="display:none;"></div>`
+        : `<div class="no-video">No video available</div>`
+    }
+  </div>
+`;
+
 
 
   document.getElementById("comicPopup").dataset.bookId = bookId;
