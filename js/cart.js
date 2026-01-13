@@ -275,8 +275,6 @@ document.addEventListener("click", e => {
   const cartEl = document.getElementById("Cart");
   if (!cartEl || !cartEl.classList.contains("open")) return;
   
-  e.stopPropagation();
-   
   // ❌ Ignore clicks inside cart
   if (e.target.closest("#Cart")) return;
 
@@ -287,5 +285,7 @@ document.addEventListener("click", e => {
   if (e.target.closest(".remove-item")) return;
 
   cartEl.classList.remove("open");
+
+    e.stopPropagation();
 });
 
