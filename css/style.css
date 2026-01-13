@@ -71,9 +71,9 @@ img {
 .price-box{
      background: #FC1380;
   color: white;
-  border-radius: 8px;
+  border-radius: 15px;
   padding: 2px 2px;
-   width: 100px;
+   width: 50px;
   display: inline-block;
 }
 
@@ -107,6 +107,7 @@ img {
 .price-box img.cart-icon {
   width: 22px;
   cursor: pointer;
+  text-align:right;
 }
 .price-box img.cart-icon:hover {
   transform: scale(1.1);
