@@ -48,8 +48,9 @@ function renderBooks(tabId, books) {
   const container = document.getElementById(tabId);
   container.innerHTML = "";
 
-  const table = document.createElement("table");
-  table.className = "image-grid";
+   const grid = document.createElement("div");
+   grid.className = "image-grid";
+
 
   let row;
   let colCount = 0;
@@ -78,23 +79,24 @@ books.forEach(book => {
 
 BOOK_REGISTRY[bookId] = normalized;
 
+const item = document.createElement("div");
+item.className = "book-thumb";
+item.innerHTML = `
+  <img
+    src="${normalized.img}"
+    class="grid-book-img popup-trigger"
+    data-book-id="${normalized.id}"
+  >
+  <img
+    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXY9v_P8iRSYsYvMxOLOABTK4pixnG9knKgqEalOO2mA41MJh8/s320/cart.png"
+    class="cart-icon"
+    data-book-id="${normalized.id}"
+    data-title="${normalized.title}"
+    data-price="${normalized.price}"
+  >
+`;
+grid.appendChild(item);
 
-    if (colCount % 5 === 0) {
-      row = document.createElement("tr");
-      table.appendChild(row);
-    }
-
-    const td = document.createElement("td");
-    td.innerHTML = `
-      <img
-        src="${normalized.img}"
-        class="grid-book-img popup-trigger"
-        data-book-id="${normalized.id}"
-      >
-    `;
-
-    row.appendChild(td);
-    colCount++;
   });
 
   container.appendChild(table);
