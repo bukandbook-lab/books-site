@@ -38,20 +38,20 @@ document.addEventListener("click", e => {
 });
 
 /* =====================================
-   REMOVE ITEM (KEEP CART OPEN)
+   REMOVE ITEM (DO NOT CLOSE CART)
 ===================================== */
 document.addEventListener("click", e => {
   const removeBtn = e.target.closest(".remove-item");
   if (!removeBtn) return;
 
-  e.stopPropagation(); // 🔥 IMPORTANT: prevents outside-click close
+  e.preventDefault();
+  e.stopPropagation(); // 🔥 THIS IS CRITICAL
 
-  cart.items.delete(removeBtn.dataset.bookId);
-  renderCart();
+  const bookId = removeBtn.dataset.bookId;
+  cart.items.delete(bookId);
 
-  // ⛔ DO NOT close cart here
+  renderCart(); // re-render, cart stays open
 });
-
 
 /* =====================================
    DELIVERY CHANGE
