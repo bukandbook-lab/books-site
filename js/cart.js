@@ -247,18 +247,14 @@ document.addEventListener("click", e => {
 ===================================== */
 document.addEventListener("click", e => {
   const cartEl = document.getElementById("Cart");
-  if (!cartEl) return;
+  if (!cartEl || !cartEl.classList.contains("open")) return;
 
-  // If cart is not open, ignore
-  if (!cartEl.classList.contains("open")) return;
+  // Click INSIDE cart → ignore
+  if (e.target.closest("#Cart")) return;
 
-  // If click is inside cart, ignore
-  if (cartEl.contains(e.target)) return;
-
-  // If click is on any cart-icon, ignore (so add-to-cart still works)
+  // Click cart icon → ignore
   if (e.target.closest(".cart-icon")) return;
 
-  // Otherwise close cart
   cartEl.classList.remove("open");
 });
 
