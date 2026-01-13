@@ -3,8 +3,9 @@
    CART STATE (SINGLE SOURCE OF TRUTH)
 ===================================== */
 const cart = {
-  items: new Map(), // bookId => { title, price }
-  delivery: "email"
+  items: new Map(),
+  delivery: "email",
+  agreed: false
 };
 
 /* =====================================
@@ -153,72 +154,97 @@ box.innerHTML = `
 }
 
 document.addEventListener("change", e => {
-  if (e.target.id === "agreeTerms") updatePayButton();
+  if (e.target.id === "agreeTerms") {
+    cart.agreed = e.target.checked;
+    updatePayButton();
+  }
 });
 
 function updatePayButton() {
   const payBtn = document.getElementById("clickToPay");
-  const terms  = document.getElementById("agreeTerms");
-
   if (!payBtn) return;
 
-  payBtn.disabled = cart.items.size === 0 || !terms?.checked;
+  payBtn.disabled = cart.items.size === 0 || !cart.agreed;
 }
+
 /* =====================================
    CLICK TO PAY
 ===================================== */
 document.addEventListener("click", e => {
   if (e.target.id !== "clickToPay") return;
 
+  // Safety: cart empty
   if (cart.items.size === 0) return;
 
-  const terms = document.getElementById("agreeTerms");
-  if (!terms?.checked) {
+  // Safety: terms must be agreed
+  if (!cart.agreed) {
     alert("Please agree to Terms before payment.");
     return;
   }
 
-  /* BUILD BOOK LIST */
+  /* ===============================
+     BUILD BOOK LIST (NUMBERED)
+  =============================== */
   const emailBox = document.getElementById("emailBookTitles");
   const hidden   = document.getElementById("emailBookTitlesInput");
 
-  emailBox.innerHTML = "";
-  const titles = [];
+  if (emailBox) emailBox.innerHTML = "";
 
+  const titles = [];
   let index = 1;
+
   cart.items.forEach(item => {
-    const div = document.createElement("div");
-    div.textContent = `${index}. ${item.title}`;
-    emailBox.appendChild(div);
-    titles.push(`${index}. ${item.title}`);
+    const line = `${index}. ${item.title}`;
+    titles.push(line);
+
+    if (emailBox) {
+      const div = document.createElement("div");
+      div.textContent = line;
+      emailBox.appendChild(div);
+    }
     index++;
   });
 
-  hidden.value = titles.join(" | ");
+  if (hidden) hidden.value = titles.join(" | ");
 
-  /* TOTAL */
+  /* ===============================
+     CALCULATE TOTAL
+  =============================== */
   let total = 0;
   cart.items.forEach(i => total += i.price);
-  if (cart.delivery === "courier") total += 17;
 
-  document.getElementById("payText").innerHTML = `
-    Please bank in <b>RM${total}</b> to Account Number:
-    <b>1234567890 (Maybank)</b>.<br><br>
+  if (cart.delivery === "courier") {
+    total += 17; // RM10 shipping + RM7 thumb drive
+  }
 
-    Once payment is made, please <b>CLICK THIS</b>:
-    <br><br>
+  /* ===============================
+     PAYMENT MESSAGE
+  =============================== */
+  const payText = document.getElementById("payText");
+  if (payText) {
+    payText.innerHTML = `
+      Please bank in <b>RM${total}</b> to Account Number:
+      <b>1234567890 (Maybank)</b>.<br><br>
 
-    <a href="http://www.wasap.my/601113127911/paymentdone" target="_blank">
-      <img width="30" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUhNlQdGbG0-uvrDrJmMrforsQT7WwfxNOotS02BNczodK1gvVQB86wafY3OPLsOn4wCQJ2kQGNNGzQ_HSgwtaT8Y6W3uRSOEnO7Kwi970G-tZz5ZwOGYchAfmP9LUueDq5EPWYtQZRHT8xUPk1vinzuuGP11DHbxt-tWnrG_aF63Dw2HkXAZU7N5qO1Ql/s320/WhatsApp.jpg">
-    </a>
+      Once payment is made, please <b>CLICK ONE BELOW</b>:<br><br>
 
-    <a href="https://t.me/KidsBooksCatalogue" target="_blank">
-      <img width="25" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhs3FdHPhgW48faXfJVVfX_pnB-XlOH8LR8F2f-oIedscEl8R3t9TScaafGCnDI1Y5SoRwxSvsQnDIhhgNfSq9QVBKrEqbGFl2IhwLbtpjLUqJqi0W7Y8rldmlNGqZeF4P9ZctlhWtMG5E6FcSd9JP_dJkYroz9bQDvNyXowuRd8MZezpItBs_fHSu1Dpf3/s320/Telegram_logo.jpg">
-    </a>
-  `;
+      <a href="http://www.wasap.my/601113127911/paymentdone" target="_blank">
+        <img width="30"
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUhNlQdGbG0-uvrDrJmMrforsQT7WwfxNOotS02BNczodK1gvVQB86wafY3OPLsOn4wCQJ2kQGNNGzQ_HSgwtaT8Y6W3uRSOEnO7Kwi970G-tZz5ZwOGYchAfmP9LUueDq5EPWYtQZRHT8xUPk1vinzuuGP11DHbxt-tWnrG_aF63Dw2HkXAZU7N5qO1Ql/s320/WhatsApp.jpg">
+      </a>
 
-  document.getElementById("Cart").classList.remove("open");
-  document.getElementById("paymentPopup").style.display = "flex";
+      <a href="https://t.me/KidsBooksCatalogue" target="_blank">
+        <img width="25"
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhs3FdHPhgW48faXfJVVfX_pnB-XlOH8LR8F2f-oIedscEl8R3t9TScaafGCnDI1Y5SoRwxSvsQnDIhhgNfSq9QVBKrEqbGFl2IhwLbtpjLUqJqi0W7Y8rldmlNGqZeF4P9ZctlhWtMG5E6FcSd9JP_dJkYroz9bQDvNyXowuRd8MZezpItBs_fHSu1Dpf3/s320/Telegram_logo.jpg">
+      </a>
+    `;
+  }
+
+  /* ===============================
+     CLOSE CART → OPEN PAYMENT
+  =============================== */
+  document.getElementById("Cart")?.classList.remove("open");
+  document.getElementById("paymentPopup")?.style.display = "flex";
 });
 
 /* =====================================
