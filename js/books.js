@@ -85,7 +85,7 @@ function renderBooks(tabId, books) {
       >
 
       <img
-        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXY9v_P8iRSYsYvMxOLOABTK4pixnG9knKgqEalOO2mA41MJh8/s320/cart.png"
+        src="${CART_ICON}"
         class="cart-icon"
         data-book-id="${normalized.id}"
         data-title="${normalized.title}"
