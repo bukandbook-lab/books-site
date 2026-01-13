@@ -75,6 +75,16 @@ img {
   padding: 4px 10px;
   display: inline-block;
 }
+#comicPopupContent .cart-icon {
+  width: 28px;
+  cursor: pointer;
+  display: block;
+  margin: 10px auto;
+}
+#comicPopupContent {
+  position: relative;   /* 🔑 anchor for the X */
+}
+
 
 /* Cart icon hidden by default */
 .cart-icon {
