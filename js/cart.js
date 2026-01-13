@@ -11,11 +11,8 @@ const cart = {
    ADD TO CART (FROM CART ICON)
 ===================================== */
 document.addEventListener("click", e => {
-const icon = e.target.closest(".cart-icon[data-book-id]");
-if (!icon) return;
-
-
-
+  const icon = e.target.closest(".cart-icon[data-book-id]");
+  if (!icon) return;
 
   const bookId = icon.dataset.bookId;
   const title  = icon.dataset.title;
@@ -23,10 +20,21 @@ if (!icon) return;
 
   if (!bookId || !title || !price) return;
 
+  /* ADD / UPDATE CART */
   cart.items.set(bookId, { title, price });
 
-  openCart();
   renderCart();
+  openCart();
+
+  /* ✅ AUTO-CLOSE POPUP IF INSIDE ONE */
+  const popup = icon.closest(".popup");
+  if (popup) {
+    popup.style.display = "none";
+
+    /* stop video if any */
+    const iframe = popup.querySelector("iframe");
+    if (iframe) iframe.remove();
+  }
 });
 
 /* =====================================
