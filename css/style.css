@@ -78,12 +78,25 @@ img {
   font-size: 12px;
   margin-top: 6px;
 }
-/* CART ICON (GLOBAL) */
+
+/* Cart icon hidden by default */
 .cart-icon {
-  width: 25px;
-  height: auto;
-  cursor: pointer;
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 22px;
+  height: 22px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
 }
+
+/* Show on hover */
+.book-thumb:hover .cart-icon {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .cart-icon:hover {
   transform: scale(1.1);
 }
@@ -279,15 +292,15 @@ button {
 ================================ */
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(6, 120px); /* 6 per row */
-  gap: 0; /* NO spacing */
-  justify-content: start;
+  grid-template-columns: repeat(6, 120px);
+  gap: 0;
 }
 
-.image-grid td {
-  padding: 0;
-  margin: 0;
+.book-thumb {
+  position: relative;
+  width: 120px;
 }
+
 
 .grid-book-img {
   max-width: 120px;
