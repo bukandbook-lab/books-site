@@ -61,7 +61,8 @@ table {
 }
 
 td {
-  padding: 0px;
+  padding: 0;
+  margin: 0;
   vertical-align: bottom;
 }
 
@@ -109,8 +110,8 @@ td {
 .watch-video-btn {
   margin-top: 6px;
   padding: 6px 12px;
-  background: #ff69ad;
-  color: #fff;
+  background-color: #ff69ad;
+  color: white;
   border: none;
   border-radius: 18px;
   font-size: 12px;
@@ -128,15 +129,6 @@ td {
 .video-box {
   margin-top: 8px;
   display: none;
-}
-
-/* =========================
-   COMIC GRID
-========================= */
-.comic-thumb {
-  width: 100%;
-  max-width: 120px;
-  cursor: pointer;
 }
 
 /* =========================
@@ -238,16 +230,6 @@ button {
   margin-right: 8px;
 }
 
-/* ================================
-   STANDARD BOOK IMAGE SIZE
-================================ */
-.book-img {
-  max-width: 150px;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-}
 
 /* ================================
    PRICE BOX WITH CART ICON
@@ -278,7 +260,8 @@ button {
   height: 20px;
   cursor: pointer;
   z-index: 10;
-}/* ================================
+}
+/* ================================
    POPUP WHITE CONTAINER
 ================================ */
 .popup-box {
@@ -314,6 +297,11 @@ button {
   max-width: 120px;
   height: auto;
   cursor: pointer;
+  object-fit: contain;
+  display: block;
+  padding: 0;
+  margin: 0;
+  
 }
 
 .popup-large-img {
@@ -344,7 +332,8 @@ button {
   width: 22px;
   height: auto;
   cursor: pointer;
-}/* =========================
+}
+/* =========================
    CART ROW + REMOVE ICON
 ========================= */
 .cart-row {
