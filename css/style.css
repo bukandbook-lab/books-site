@@ -389,3 +389,24 @@ button {
   width: 25px;
   cursor: pointer;
 }
+/* =========================
+   CART ROW + REMOVE ICON
+========================= */
+.cart-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  gap: 8px;
+}
+
+.cart-row span:first-child {
+  text-align: left;
+  flex: 1;
+}
+
+.remove-item {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
