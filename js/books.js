@@ -33,7 +33,10 @@ function loadBooks(tabId) {
   }
 
   fetch(url)
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error("HTTP error");
+      return res.json();
+    })
     .then(data => renderBooks(tabId, data))
     .catch(err => {
       console.error("LOAD ERROR:", err);
@@ -42,64 +45,58 @@ function loadBooks(tabId) {
 }
 
 /* =========================================================
-   RENDER IMAGE GRID (5 COLUMNS)
+   RENDER IMAGE GRID (6 COLUMNS, COMPACT)
 ========================================================= */
 function renderBooks(tabId, books) {
   const container = document.getElementById(tabId);
   container.innerHTML = "";
 
-   const grid = document.createElement("div");
-   grid.className = "image-grid";
+  const grid = document.createElement("div");
+  grid.className = "image-grid";
 
+  books.forEach(book => {
 
-  let row;
-  let colCount = 0;
+    const bookId = book.id || book.ID || book["Book ID"];
+    if (!bookId) return;
 
-books.forEach(book => {
+    const normalized = {
+      id: bookId,
+      title: book.title || book["Book Title"] || "Untitled",
+      img: book.image || book.Link || "",
+      price: Number(book.price || book["Price"] || 0),
+      video:
+        book["Youtube ID"] ||
+        book.youtube ||
+        book.video ||
+        null,
+      category: tabId
+    };
 
-  const bookId = book.id || book.ID || book["Book ID"];
+    BOOK_REGISTRY[bookId] = normalized;
 
-  if (!bookId) {
-    console.error("Missing book ID", book);
-    return;
-  }
+    const item = document.createElement("div");
+    item.className = "book-thumb";
 
- const normalized = {
-  id: bookId,
-  title: book.title || book["Book Title"] || "Untitled",
-  img: book.image || book.Link || "",
-  price: book.price || book["Price"],
-  video:
-    book["Youtube ID"] ||
-    book.youtube ||
-    book.video ||
-    null,
-  category: tabId
-};
+    item.innerHTML = `
+      <img
+        src="${normalized.img}"
+        class="grid-book-img popup-trigger"
+        data-book-id="${normalized.id}"
+      >
 
-BOOK_REGISTRY[bookId] = normalized;
+      <img
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXY9v_P8iRSYsYvMxOLOABTK4pixnG9knKgqEalOO2mA41MJh8/s320/cart.png"
+        class="cart-icon"
+        data-book-id="${normalized.id}"
+        data-title="${normalized.title}"
+        data-price="${normalized.price}"
+      >
+    `;
 
-const item = document.createElement("div");
-item.className = "book-thumb";
-item.innerHTML = `
-  <img
-    src="${normalized.img}"
-    class="grid-book-img popup-trigger"
-    data-book-id="${normalized.id}"
-  >
-  <img
-    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXY9v_P8iRSYsYvMxOLOABTK4pixnG9knKgqEalOO2mA41MJh8/s320/cart.png"
-    class="cart-icon"
-    data-book-id="${normalized.id}"
-    data-title="${normalized.title}"
-    data-price="${normalized.price}"
-  >
-`;
-grid.appendChild(item);
-
+    grid.appendChild(item);
   });
 
-  container.appendChild(table);
+  container.appendChild(grid);
 }
 
 /* =========================================================
