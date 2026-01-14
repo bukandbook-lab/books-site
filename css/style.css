@@ -298,7 +298,7 @@ button {
   display: grid;
   grid-template-columns: repeat(6, 150px);
   gap: 0;
-  vertical-align: bottom;
+
 }
 
 .book-thumb {
@@ -332,7 +332,6 @@ button {
 ========================= */
 .popup-price {
   display: inline-flex;
-  align-items: center;
   gap: 10px;
   background: #ffd6e7;
   padding: 8px 12px;
