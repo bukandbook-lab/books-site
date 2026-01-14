@@ -7,10 +7,6 @@ document.addEventListener("click", e => {
     return;
   }
 
-document.addEventListener("click", e => {
-
-  const trigger = e.target.closest(".popup-trigger");
-  if (!trigger) return;
 
   const bookId = trigger.dataset.bookId;
   const book = BOOK_REGISTRY[bookId];
