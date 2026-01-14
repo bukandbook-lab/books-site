@@ -233,6 +233,41 @@ function openCart() {
   if (cartEl) cartEl.classList.add("open");
 
 }
+/* =====================================
+  SUBMIT FORM
+===================================== */
+document.getElementById("orderForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const form = e.target;
+  const data = new FormData(form);
+
+  fetch("https://formsubmit.co/f7d2abf13d655ceba057d05d96ceb8a2", {
+    method: "POST",
+    body: data,
+    headers: { "Accept": "application/json" }
+  })
+  .then(() => {
+
+    /* DELIVERY MESSAGE */
+    const delivery = document.querySelector("input[name='delivery']:checked")?.value;
+    const msg =
+      "Thank you for your order. Your order will be delivered within " +
+      (delivery === "email" ? "18 hours." : "3 days.");
+
+    document.getElementById("thankYouMsg").innerText = msg;
+
+    /* CLOSE PAYMENT POPUP, OPEN THANK YOU */
+    document.getElementById("paymentPopup").style.display = "none";
+    document.getElementById("thankYou").style.display = "block";
+
+    form.reset();
+  })
+  .catch(() => {
+    alert("Network error. Please try again.");
+  });
+});
+
 
 document.addEventListener("click", e => {
   if (e.target.id === "continueShopping") {
