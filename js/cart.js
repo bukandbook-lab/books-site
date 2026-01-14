@@ -192,7 +192,13 @@ document.addEventListener("click", e => {
   if (cart.delivery === "courier") total += 17;
   if (hidden) hidden.value = titles.join(" | ");
 
-  document.getElementById("payText").innerHTML = `
+  const payText = document.getElementById("payText");
+if (!payText) {
+  console.error("payText element not found");
+  return;
+}
+
+payText.innerHTML = `
     Please bank in <b>RM${total}</b> to Account Number:
     <b>1234567890 (Maybank)</b>.<br><br>
 
