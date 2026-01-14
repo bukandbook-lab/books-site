@@ -298,8 +298,9 @@ button {
 ================================ */
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(6, 120px);
+  grid-template-columns: repeat(6, 150px);
   gap: 0;
+  vertical-align: bottom;
 }
 
 .book-thumb {
@@ -318,7 +319,7 @@ button {
   margin: 0;
   pointer-events: auto;
   z-index: 1;
-  vertical-align: bottom;
+ 
 }
 
 .popup-large-img {
