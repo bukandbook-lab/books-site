@@ -1,4 +1,13 @@
 document.addEventListener("click", e => {
+  const trigger = e.target.closest(".popup-trigger");
+  if (!trigger) return;
+
+  if (!window.BOOK_REGISTRY) {
+    console.error("BOOK_REGISTRY missing");
+    return;
+  }
+
+document.addEventListener("click", e => {
 
   const trigger = e.target.closest(".popup-trigger");
   if (!trigger) return;
