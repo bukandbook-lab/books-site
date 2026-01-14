@@ -70,8 +70,87 @@ If the file is in .epub, please download EPUB reader apps to be able to open the
 </div>
 
 
-<!-- CART -->
-<div id="Cart" class="cart"></div>
+<div id="Cart"></div>
+
+<!-- PAYMENT POPUP -->
+<div id="paymentPopup" class="popup">
+  <div class="popup-content">
+<span class="close-popup">✖</span>
+    <p id="payText"></p>
+
+    <form id="orderForm"
+      action="https://formsubmit.co/f7d2abf13d655ceba057d05d96ceb8a2"
+      method="POST"
+      target="hiddenFrame">
+      <input type="hidden" name="Total Amount(RM)" id="formTotal">
+
+<table width="100%" cellpadding="6">
+  <tr>
+    <td width="50%">
+      <label>Reference No.:</label><br/>
+      <input type="text" style="width:92%;"
+placeholder="Enter bank ref. no" name="Reference No" required >
+    </td>
+    <td width="50%">
+      <label>Date of Payment:</label><br/>
+      <input type="date" style="width:100%;"
+name="Date of Payment" required>
+    </td>
+  </tr>
+
+  <tr>
+    <td width="50%"><br/>
+      <label>Book / Set Title:</label>
+
+      <!-- AUTO TITLES (SMALL FONT) -->
+      <div
+        id="emailBookTitles">
+      </div>
+
+      <!-- HIDDEN FIELD SENT TO EMAIL -->
+      <input
+        type="hidden"
+        name="Book / Set Title"
+        id="emailBookTitlesInput"
+      >
+
+      <!-- CUSTOMER INPUT -->
+      <textarea
+        type="text"
+        name="Specific Book Title"
+        rows="2"
+        placeholder="Enter specific book title"
+        style="margin-top:4px; width:92%;"
+      ></textarea>
+
+    <td valign="top" width="50%"><br/>
+      <label>Delivery Details:</label><br/>
+      <textarea
+      style=" width:100%;"
+        name="Delivery Details"
+        rows="3"
+        required
+        placeholder="Enter email address or full address with name and phone no."></textarea>
+
+    </td> 
+
+    </td>
+  </tr>
+</table><br><br>
+<div class="submit-center">
+      <button type="submit">SUBMIT ORDER</button>
+</div>
+    </form>
+  </div>
+</div>
+
+<!-- THANK YOU POPUP -->
+<div id="thankYou" class="popup">
+  <div class="popup-content">
+<span class="close-popup">✖</span>
+    <p id="thankYouMsg"></p>
+  </div>
+
 
 
 <!-- POPUP (Comic) -->
