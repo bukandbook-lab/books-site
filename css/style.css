@@ -9,11 +9,10 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: #fff;
-  justify-content: center;
 }
 
 img {
-  max-width: 80%;
+  max-width: 100%;
   display: block;
 }
 
@@ -77,10 +76,6 @@ img {
   padding: 6px 12px;
    width: 100px;
   display: inline-block;
-}
-
-#popup-Content {
-  position: relative;   /* 🔑 anchor for the X */
 }
 
 /* =========================
