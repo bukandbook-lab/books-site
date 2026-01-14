@@ -269,6 +269,7 @@ button {
   height: 20px;
   cursor: pointer;
   z-index: 10;
+  float: right;
 }
 /* ================================
    POPUP WHITE CONTAINER
