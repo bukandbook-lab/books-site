@@ -82,6 +82,9 @@ img {
   position: relative;   /* 🔑 anchor for the X */
 }
 
+.cart-icon {
+  z-index: 2;
+}
 
 /* Cart icon hidden by default */
 .book-thumb img.cart-icon {
