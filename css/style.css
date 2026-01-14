@@ -315,7 +315,8 @@ button {
   display: block;
   padding: 0;
   margin: 0;
-  
+  pointer-events: auto;
+  z-index: 1;
 }
 
 .popup-large-img {
