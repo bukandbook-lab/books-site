@@ -9,7 +9,6 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: #fff;
-  display: flex;
   justify-content: center;
 }
 
@@ -67,7 +66,7 @@ img {
 }
 
 /* =========================
-   PRICE + CART ICON
+   PRICE 
 ========================= */
 
 .price-box{
@@ -83,6 +82,10 @@ img {
 #popup-Content {
   position: relative;   /* 🔑 anchor for the X */
 }
+
+/* =========================
+   CART-ICON
+========================= */
 
 .cart-icon {
   z-index: 2;
