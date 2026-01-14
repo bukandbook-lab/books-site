@@ -214,7 +214,7 @@ payText.innerHTML =
   "</a>" +
 "<b>  LOGO</b> to send payment screenshot or please fill in below";
   document.getElementById("paymentPopup").style.display="block";
-};
+
 
 
 const cartEl = document.getElementById("Cart");
