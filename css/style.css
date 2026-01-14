@@ -252,10 +252,8 @@ button {
   border-radius: 10px;
   padding: 6px 10px;
   display: inline-flex;
-  align-items: center;
   gap: 8px;
-  justify-content: center;
-}
+ }
 
 .price b {
   color: #d1004c;
@@ -306,7 +304,7 @@ button {
 
 .book-thumb {
   position: relative;
-  width: 120px;
+  width: 150px;
 }
 
 
