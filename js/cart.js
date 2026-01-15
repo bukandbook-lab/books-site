@@ -294,7 +294,7 @@ document.addEventListener("click", e => {
 ===================================== */
 function buildWhatsAppMessage() {
   let msg = "🧒 *Kids Books Catalogue – New Order*\n\n";
-  msg += "*Books:*\n";
+  msg += "*List of Books:*\n";
 
   let index = 1;
   let total = 0;
@@ -313,7 +313,7 @@ function buildWhatsAppMessage() {
   }
 
   msg += `\n\n*Total:* RM${total}\n`;
-  msg += "\nPayment made. Screenshot attached.";
+  msg += "\nPayment done as per screenshot attached. Please proceed with delivery";
 
   return encodeURIComponent(msg);
 }
