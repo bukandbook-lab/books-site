@@ -356,3 +356,25 @@ function updateDeliveryField() {
   }
 }
 
+/* =====================================
+   WHATSAPP AND TELEGRAM CALL BUTTON
+===================================== */
+function openWhatsAppOrder() {
+  const url = "https://wa.me/601113127911?text=" + buildWhatsAppMessage();
+  window.open(url, "_blank");
+}
+
+function openTelegramOrder() {
+  const msg = buildWhatsAppMessage();
+  const url = "https://t.me/share/url?url=&text=" + msg;
+  window.open(url, "_blank");
+}
+
+/* =====================================
+   GOOGLE FORM
+===================================== */
+document.addEventListener("click", e => {
+  if (e.target.id === "submitFormBtn") {
+    document.getElementById("orderForm")?.requestSubmit();
+  }
+});
