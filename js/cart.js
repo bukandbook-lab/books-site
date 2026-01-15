@@ -2,10 +2,13 @@
    CART STATE (SINGLE SOURCE OF TRUTH)
 ===================================== */
 const cart = {
-  items: new Map(), // bookId => { title, price }
+  items: new Map(),
   delivery: "email",
-  agreed: false
+  deliveryDetails: "",   // ✅ ADD THIS
+  agreed: false,
+  orderId: ""            // ✅ for Order ID
 };
+
 
 /* =====================================
    ADD TO CART (GRID + POPUP)
