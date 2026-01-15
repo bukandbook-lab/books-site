@@ -12,13 +12,12 @@ const cart = {
    DEFINE FOR GOOGLE FORM INPUT
 ===================================== */
 const FORM = {
-  orderId: "entry.whsOnd.zHQkBf.c19rb",
-  books:   "entry.whsOnd.zHQkBf.bclce",
-  total:   "entry.whsOnd.zHQkBf.xlt6rh",
-  method:  "entry.whsOnd.zHQkBf.7uscpf",
-  delivery:"entry.whsOnd.zHQkBf.6xxsnc"
+  orderId: "entry.2127120340",
+  books:   "entry.1876655214",
+  total:   "entry.621883004",
+  method:  "entry.189390956",
+  delivery:"entry.553879654",
 };
-
 
 /* =====================================
    ADD TO CART (GRID + POPUP)
