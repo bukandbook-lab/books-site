@@ -203,7 +203,18 @@ payText.innerHTML =
   " to Account Number: 1234567890 (Maybank)." +
     " Once payment is made, please <b>CLICK THIS</b>&nbsp;" +
 
-  "<a href='http://www.wasap.my/601113127911/paymentdone' target='_blank'>" +
+  "<img
+  src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUhNlQdGbG0-uvrDrJmMrforsQT7WwfxNOotS02BNczodK1gvVQB86wafY3OPLsOn4wCQJ2kQGNNGzQ_HSgwtaT8Y6W3uRSOEnO7Kwi970G-tZz5ZwOGYchAfmP9LUueDq5EPWYtQZRHT8xUPk1vinzuuGP11DHbxt-tWnrG_aF63Dw2HkXAZU7N5qO1Ql/s320/WhatsApp.jpg"
+  width="30"
+  style="cursor:pointer; vertical-align:middle;"
+  onclick="
+    window.open(
+      'https://wa.me/601113127911?text=' + buildWhatsAppMessage(),
+      '_blank'
+    );
+  "
+>
+" +
   "<img width='30' style='vertical-align:middle;' " +
   "src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUhNlQdGbG0-uvrDrJmMrforsQT7WwfxNOotS02BNczodK1gvVQB86wafY3OPLsOn4wCQJ2kQGNNGzQ_HSgwtaT8Y6W3uRSOEnO7Kwi970G-tZz5ZwOGYchAfmP9LUueDq5EPWYtQZRHT8xUPk1vinzuuGP11DHbxt-tWnrG_aF63Dw2HkXAZU7N5qO1Ql/s320/WhatsApp.jpg'>" +
   "</a>&nbsp;" +
