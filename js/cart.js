@@ -358,6 +358,14 @@ function updateDeliveryField() {
     field.removeAttribute("type");
   }
 }
+/* =====================================
+   CAPTURE TEXTAREA INPUT
+===================================== */
+document.addEventListener("input", e => {
+  if (e.target.id === "deliveryDetails") {
+    cart.deliveryDetails = e.target.value.trim();
+  }
+});
 
 /* =====================================
    WHATSAPP AND TELEGRAM CALL BUTTON
