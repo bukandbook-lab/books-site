@@ -390,7 +390,7 @@ function buildGoogleFormURL() {
 
   if (cart.delivery === "courier") total += 17;
 
-  const base = "https://docs.google.com/forms/d/e/1FAIpQLSd6LUWZbLaj4qtmSLT1tKeKL5kqFeVuuvf6lk3uq2sy6aChmA/viewform?";
+  const base = "https://docs.google.com/forms/d/e/1FAIpQLSd6LUWZbLaj4qtmSLT1tKeKL5kqFeVuuvf6lk3uq2sy6aChmA/viewform?usp=pp_url&";
 
   const params = new URLSearchParams({
     [FORM.orderId]: cart.orderId,
