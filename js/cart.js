@@ -7,7 +7,12 @@ const cart = {
   deliveryDetails: "",   // ✅ ADD THIS
   agreed: false,
   orderId: ""            // ✅ for Order ID
+   
 };
+
+const SHIPPING_FEE = 10;
+const THUMB_DRIVE_FEE = 7;
+
 /* =====================================
    DEFINE FOR GOOGLE FORM INPUT
 ===================================== */
@@ -313,9 +318,16 @@ function buildWhatsAppMessage() {
     i++;
   });
 
-  let total = 0;
-  cart.items.forEach(i => total += i.price);
-  if (cart.delivery === "courier") total += 17;
+let total = 0;
+cart.items.forEach(i => total += i.price);
+
+if (cart.delivery === "courier") {
+  msg += `\n🚚 *Courier Charges:*\n`;
+  msg += `• Shipping Fee: RM${SHIPPING_FEE}\n`;
+  msg += `• Thumb Drive: RM${THUMB_DRIVE_FEE}\n`;
+  total += SHIPPING_FEE + THUMB_DRIVE_FEE;
+}
+
 
   msg += `\n💰 *Total:* RM${total}\n`;
   msg += `🚚 *Delivery Method:* ${cart.delivery.toUpperCase()}\n`;
@@ -326,6 +338,7 @@ function buildWhatsAppMessage() {
 
   return encodeURIComponent(msg);
 }
+
 
 /* =====================================
    INPUT DELIVERY CHANGED ACCORDINGLY
@@ -389,13 +402,23 @@ function buildGoogleFormURL() {
   i++;
 });
 
-  if (cart.delivery === "courier") total += 17;
+  let feeLines = "";
+
+if (cart.delivery === "courier") {
+  feeLines =
+    `Shipping Fee: RM${SHIPPING_FEE}\n` +
+    `Thumb Drive: RM${THUMB_DRIVE_FEE}`;
+  total += SHIPPING_FEE + THUMB_DRIVE_FEE;
+}
+
 
   const base = "https://docs.google.com/forms/d/e/1FAIpQLSd6LUWZbLaj4qtmSLT1tKeKL5kqFeVuuvf6lk3uq2sy6aChmA/viewform?usp=pp_url&";
 
   const params = new URLSearchParams({
     [FORM.orderId]: cart.orderId,
-    [FORM.books]: books.join("\n"),
+    [FORM.books]:
+  books.join("\n") +
+  (feeLines ? "\n\n" + feeLines : ""),
     [FORM.total]: `RM${total}`,
     [FORM.method]: cart.delivery,
     [FORM.delivery]: cart.deliveryDetails
@@ -417,4 +440,19 @@ function generateOrderId() {
   const rand = Math.floor(1000 + Math.random() * 9000);
 
   return `ORD-${y}${m}${d}-${rand}`;
+   
 }
+/* =====================================
+   TOTAL CALCULATION
+===================================== */
+function calculateTotal() {
+  let total = 0;
+  cart.items.forEach(i => total += i.price);
+
+  if (cart.delivery === "courier") {
+    total += SHIPPING_FEE + THUMB_DRIVE_FEE;
+  }
+
+  return total;
+}
+
