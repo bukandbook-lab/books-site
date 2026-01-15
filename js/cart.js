@@ -288,3 +288,31 @@ document.addEventListener("click", e => {
 
   cartEl.classList.remove("open");
 });
+/* =====================================
+   WHATSAPP MESSAGE
+===================================== */
+function buildWhatsAppMessage() {
+  let msg = "🧒 *Kids Books Catalogue – New Order*\n\n";
+  msg += "*Books:*\n";
+
+  let index = 1;
+  let total = 0;
+
+  cart.items.forEach(item => {
+    msg += `${index}. ${item.title}\n`;
+    total += item.price;
+    index++;
+  });
+
+  if (cart.delivery === "courier") {
+    msg += "\nDelivery: Courier";
+    total += 17;
+  } else {
+    msg += "\nDelivery: Email";
+  }
+
+  msg += `\n\n*Total:* RM${total}\n`;
+  msg += "\nPayment made. Screenshot attached.";
+
+  return encodeURIComponent(msg);
+}
