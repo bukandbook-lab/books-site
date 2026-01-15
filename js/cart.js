@@ -381,11 +381,13 @@ document.addEventListener("click", e => {
 function buildGoogleFormURL() {
   let books = [];
   let total = 0;
+  let i = 1;
 
   cart.items.forEach(item => {
-    books.push(`${item.title} (RM${item.price})`);
-    total += item.price;
-  });
+  books.push(`${i}. ${item.title} (RM${item.price})`);
+  total += item.price;
+  i++;
+});
 
   if (cart.delivery === "courier") total += 17;
 
