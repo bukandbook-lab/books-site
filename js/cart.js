@@ -228,7 +228,7 @@ if (!payText) {
 }
 
 payText.innerHTML = `
-  <b>Please bank in RM${total}</b><br><br>
+  Please bank in <b>RM${total}</b> to:<br><br>
   <b>Account Number:</b><br>
   1234567890 (Maybank)<br><br>
 
