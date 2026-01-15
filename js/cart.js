@@ -12,11 +12,11 @@ const cart = {
    DEFINE FOR GOOGLE FORM INPUT
 ===================================== */
 const FORM = {
-  orderId: "entry.c19rb",
-  books:   "entry.bclce",
-  total:   "entry.xlt6rh",
-  method:  "entry.7uscpf",
-  delivery:"entry.6xxsnc"
+  orderId: "input.whsOnd.zHQkBf.c19rb",
+  books:   "input.whsOnd.zHQkBf.bclce",
+  total:   "input.whsOnd.zHQkBf.xlt6rh",
+  method:  "input.whsOnd.zHQkBf.7uscpf",
+  delivery:"input.whsOnd.zHQkBf.6xxsnc"
 };
 
 
