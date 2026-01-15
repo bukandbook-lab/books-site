@@ -134,12 +134,23 @@ function renderCart() {
 
     <hr>
 
-    <div class="total"><b>TOTAL: RM${total}</b></div>
+    <div class="total"><b>TOTAL: RM${total}</b></div><br>
+   
+    <div class="delivery-details">
+     <b>Delivery Details</b><br>
+        <textarea
+          id="deliveryDetails"
+          rows="3"
+          required
+          placeholder="Enter email address"
+          style="width:100%; margin-top:6px;"
+        ></textarea>
+   </div>
 
     <label class="terms">
       <input type="checkbox" id="agreeTerms" ${cart.agreed ? "checked" : ""}>
       Please read Terms and Conditions under READ ME FIRST before payment.
-    </label>
+    </label><br>
 
     <div class="cart-actions">
       <button id="continueShopping">CONTINUE SHOPPING</button>
