@@ -317,3 +317,23 @@ function buildWhatsAppMessage() {
 
   return encodeURIComponent(msg);
 }
+/* =====================================
+   INPUT DELIVERY CHANGED ACCORDINGLY
+===================================== */
+
+function updateDeliveryField() {
+  const delivery = cart.delivery;
+  const field = document.getElementById("deliveryDetails");
+  if (!field) return;
+
+  if (delivery === "email") {
+    field.placeholder = "Enter email address";
+    field.value = "";
+    field.setAttribute("type", "email");
+  } else {
+    field.placeholder = "Enter full address, name & phone number";
+    field.value = "";
+    field.removeAttribute("type");
+  }
+}
+
