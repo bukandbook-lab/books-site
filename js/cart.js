@@ -315,30 +315,31 @@ document.addEventListener("click", e => {
    WHATSAPP MESSAGE
 ===================================== */
 function buildWhatsAppMessage() {
-  let msg = "🧒 *Kids Books Catalogue – New Order*\n\n";
-  msg += "*List of Books:*\n";
+  let msg = `🛒 *NEW ORDER*\n\n`;
 
-  let index = 1;
-  let total = 0;
+  msg += `📦 *Order ID:* ${cart.orderId}\n\n`;
 
+  msg += `📚 *Books Ordered:*\n`;
+  let i = 1;
   cart.items.forEach(item => {
-    msg += `${index}. ${item.title}\n`;
-    total += item.price;
-    index++;
+    msg += `${i}. ${item.title} (RM${item.price})\n`;
+    i++;
   });
 
-  if (cart.delivery === "courier") {
-    msg += "\nDelivery: Courier";
-    total += 17;
-  } else {
-    msg += "\nDelivery: Email";
-  }
+  let total = 0;
+  cart.items.forEach(i => total += i.price);
+  if (cart.delivery === "courier") total += 17;
 
-  msg += `\n\n*Total:* RM${total}\n`;
-  msg += "\nPayment done as per screenshot attached. Please proceed with delivery";
+  msg += `\n💰 *Total:* RM${total}\n`;
+  msg += `🚚 *Delivery Method:* ${cart.delivery.toUpperCase()}\n`;
+
+  msg += `📝 *Delivery Details:*\n${cart.deliveryDetails}\n\n`;
+
+  msg += `📸 *Payment Screenshot:* (attached below)\n`;
 
   return encodeURIComponent(msg);
 }
+
 /* =====================================
    INPUT DELIVERY CHANGED ACCORDINGLY
 ===================================== */
