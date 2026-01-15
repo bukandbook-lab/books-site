@@ -235,6 +235,20 @@ payText.innerHTML =
 const cartEl = document.getElementById("Cart");
 if (cartEl) cartEl.classList.remove("open");
 
+const deliveryField = document.getElementById("deliveryDetails");
+if (!deliveryField || !deliveryField.value.trim()) {
+  alert("Please enter delivery details.");
+  return;
+}
+
+if (cart.delivery === "email") {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(deliveryField.value.trim())) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+}
+
 const paymentPopup = document.getElementById("paymentPopup");
 if (paymentPopup) paymentPopup.style.display = "flex";
 
