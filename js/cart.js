@@ -53,6 +53,7 @@ document.addEventListener("click", e => {
 document.addEventListener("change", e => {
   if (e.target.name === "delivery") {
     cart.delivery = e.target.value;
+    updateDeliveryField();
     renderCart();
   }
 });
