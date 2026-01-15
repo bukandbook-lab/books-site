@@ -363,12 +363,37 @@ function openTelegramOrder() {
 /* =====================================
    GOOGLE FORM
 ===================================== */
-
 document.addEventListener("click", e => {
   if (e.target.id === "submitGoogleForm") {
     window.open(buildGoogleFormURL(), "_blank");
   }
 });
+
+function buildGoogleFormURL() {
+  let books = [];
+  let total = 0;
+
+  cart.items.forEach(item => {
+    books.push(`${item.title} (RM${item.price})`);
+    total += item.price;
+  });
+
+  if (cart.delivery === "courier") total += 17;
+
+  const base = "https://docs.google.com/forms/d/e/1FAIpQLSd6LUWZbLaj4qtmSLT1tKeKL5kqFeVuuvf6lk3uq2sy6aChmA/viewform?";
+
+  const params = new URLSearchParams({
+    [FORM.orderId]: cart.orderId,
+    [FORM.books]: books.join(" | "),
+    [FORM.total]: `RM${total}`,
+    [FORM.method]: cart.delivery,
+    [FORM.delivery]: cart.deliveryDetails
+  });
+
+  return base + params.toString();
+}
+
+
 
 /* =====================================
    AUTO-GENERATE ORDER ID
