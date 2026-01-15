@@ -183,6 +183,13 @@ function updatePayButton() {
 document.addEventListener("click", e => {
   if (e.target.id !== "clickToPay") return;
   if (cart.items.size === 0 || !cart.agreed) return;
+
+   // 🔥 FORCE-CAPTURE delivery details (fixes disappearing textarea)
+const deliveryInput = document.getElementById("deliveryDetails");
+if (deliveryInput) {
+  cart.deliveryDetails = deliveryInput.value.trim();
+}
+
    
   if (!cart.orderId) {
   cart.orderId = generateOrderId();
@@ -324,7 +331,7 @@ function buildWhatsAppMessage() {
 
   msg += `📦 *Order ID:* ${cart.orderId}\n\n`;
 
-  msg += `📚 *Books Ordered:*\n`;
+  msg += `📚 *List of Books Ordered:*\n`;
   let i = 1;
   cart.items.forEach(item => {
     msg += `${i}. ${item.title} (RM${item.price})\n`;
@@ -338,7 +345,7 @@ function buildWhatsAppMessage() {
   msg += `\n💰 *Total:* RM${total}\n`;
   msg += `🚚 *Delivery Method:* ${cart.delivery.toUpperCase()}\n`;
 
-  msg += `📝 *Delivery Details:*\n${cart.deliveryDetails}\n\n`;
+  msg += `📝 *Delivery Details:*\n${cart.deliveryDetails || "Not provided"}\n\n`;
 
   msg += `📸 *Payment Screenshot:* (attached below)\n`;
 
