@@ -395,7 +395,7 @@ function buildGoogleFormURL() {
 
   const params = new URLSearchParams({
     [FORM.orderId]: cart.orderId,
-    [FORM.books]: books.join(" | "),
+    [FORM.books]: books.join("\n"),
     [FORM.total]: `RM${total}`,
     [FORM.method]: cart.delivery,
     [FORM.delivery]: cart.deliveryDetails
