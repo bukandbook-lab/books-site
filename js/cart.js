@@ -183,6 +183,11 @@ function updatePayButton() {
 document.addEventListener("click", e => {
   if (e.target.id !== "clickToPay") return;
   if (cart.items.size === 0 || !cart.agreed) return;
+   
+  if (!cart.orderId) {
+  cart.orderId = generateOrderId();
+   }
+
 
   const emailBox = document.getElementById("emailBookTitles");
   const hidden   = document.getElementById("emailBookTitlesInput");
