@@ -212,22 +212,13 @@ if (!payText) {
   return;
 }
 
-payText.innerHTML =
-  "Please bank in <b>RM" + total + "</b> to Account Number: <b>1234567890 (Maybank)</b>.<br><br>" +
-  "Once payment is made, please <b>CLICK THIS</b>&nbsp;" +
+payText.innerHTML = `
+  <b>Please bank in RM${total}</b><br><br>
+  <b>Account Number:</b><br>
+  1234567890 (Maybank)<br><br>
 
-  "<img " +
-    "src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUhNlQdGbG0-uvrDrJmMrforsQT7WwfxNOotS02BNczodK1gvVQB86wafY3OPLsOn4wCQJ2kQGNNGzQ_HSgwtaT8Y6W3uRSOEnO7Kwi970G-tZz5ZwOGYchAfmP9LUueDq5EPWYtQZRHT8xUPk1vinzuuGP11DHbxt-tWnrG_aF63Dw2HkXAZU7N5qO1Ql/s320/WhatsApp.jpg' " +
-    "width='30' " +
-    "style='cursor:pointer; vertical-align:middle;' " +
-    "onclick=\"window.open('https://wa.me/601113127911?text=' + buildWhatsAppMessage(), '_blank')\" " +
-  ">&nbsp;" +
-
-  "<a href='https://t.me/KidsBooksCatalogue' target='_blank'>" +
-    "<img width='25' style='vertical-align:middle;' " +
-    "src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhs3FdHPhgW48faXfJVVfX_pnB-XlOH8LR8F2f-oIedscEl8R3t9TScaafGCnDI1Y5SoRwxSvsQnDIhhgNfSq9QVBKrEqbGFl2IhwLbtpjLUqJqi0W7Y8rldmlNGqZeF4P9ZctlhWtMG5E6FcSd9JP_dJkYroz9bQDvNyXowuRd8MZezpItBs_fHSu1Dpf3/s320/Telegram_logo.jpg'>" +
-  "</a>" +
-  "<br><br><b>LOGO</b> to send payment screenshot or please fill in below.";
+  Once payment is made, choose how you want to submit your order below 👇
+`;
   document.getElementById("paymentPopup").style.display="block";
 
 
