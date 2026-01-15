@@ -369,16 +369,10 @@ document.addEventListener("input", e => {
 });
 
 /* =====================================
-   WHATSAPP AND TELEGRAM CALL BUTTON
+   WHATSAPP CALL BUTTON
 ===================================== */
 function openWhatsAppOrder() {
   const url = "https://wa.me/601113127911?text=" + buildWhatsAppMessage();
-  window.open(url, "_blank");
-}
-
-function openTelegramOrder() {
-  const msg = buildWhatsAppMessage();
-  const url = "https://t.me/share/url?url=&text=" + msg;
   window.open(url, "_blank");
 }
 
@@ -454,5 +448,55 @@ function calculateTotal() {
   }
 
   return total;
+}
+/* =====================================
+  SEND TELEGRAM MESSAGE
+===================================== */
+
+function sendTelegramOrder() {
+
+  const books = [];
+  let total = 0;
+
+  cart.items.forEach(item => {
+    books.push({
+      title: item.title,
+      price: item.price
+    });
+    total += item.price;
+  });
+
+  if (cart.delivery === "courier") {
+    total += SHIPPING_FEE + THUMB_DRIVE_FEE;
+  }
+
+  const payload = {
+    orderId: cart.orderId,
+    books,
+    delivery: cart.delivery,
+    deliveryDetails: cart.deliveryDetails,
+    shippingFee: SHIPPING_FEE,
+    thumbDriveFee: THUMB_DRIVE_FEE,
+    total
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbxdEeZxIdjWrxar6_x-bQCAw06kYOfR64nukiunHQPYwS5DIH6uOuP9zmpRlnzShazG/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(res => {
+    if (res.success) {
+      alert("Order sent to Telegram successfully ✅");
+    } else {
+      alert("Telegram failed ❌");
+      console.error(res.error);
+    }
+  })
+  .catch(err => {
+    alert("Network error");
+    console.error(err);
+  });
 }
 
