@@ -8,6 +8,16 @@ const cart = {
   agreed: false,
   orderId: ""            // ✅ for Order ID
 };
+/* =====================================
+   DEFINE FOR GOOGLE FORM INPUT
+===================================== */
+const FORM = {
+  orderId: "input.c19rb",
+  books:   "input.bclce",
+  total:   "input.xlt6rh",
+  method:  "input.7uscpf",
+  delivery:"input.6xxsnc"
+};
 
 
 /* =====================================
