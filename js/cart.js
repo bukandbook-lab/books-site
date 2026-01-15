@@ -161,6 +161,8 @@ function renderCart() {
   `;
 
   updatePayButton();
+  updateDeliveryField();
+
 }
 
 /* =====================================
