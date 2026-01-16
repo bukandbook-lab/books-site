@@ -198,17 +198,18 @@ document.addEventListener("click", e => {
   if (e.target.id !== "clickToPay") return;
   if (cart.items.size === 0 || !cart.agreed) return;
 
-   // 🔥 FORCE-CAPTURE delivery details (fixes disappearing textarea)
-const deliveryInput = document.getElementById("deliveryDetails");
-if (deliveryInput) {
+// 🔥 FORCE-CAPTURE delivery details (fixes disappearing textarea)
+  const deliveryInput = document.getElementById("deliveryDetails");
+  if (deliveryInput) {
   cart.deliveryDetails = deliveryInput.value.trim();
-}
-
+   }
    
   if (!cart.orderId) {
   cart.orderId = generateOrderId();
    }
-
+   
+  // 🔥 SEND TO TELEGRAM
+  sendOrderToTelegram();
 
   const emailBox = document.getElementById("emailBookTitles");
   const hidden   = document.getElementById("emailBookTitlesInput");
