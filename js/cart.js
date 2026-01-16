@@ -403,10 +403,20 @@ document.addEventListener("input", e => {
    WHATSAPP CALL BUTTON
 ===================================== */
 function openWhatsAppOrder() {
-  const url = "https://wa.me/601113127911?text=" + buildWhatsAppMessage();
+  if (!cart.orderId) {
+    cart.orderId = generateOrderId();
+  }
+
+  // 1️⃣ Send Telegram automatically
+  sendOrderToTelegram();
+
+  // 2️⃣ Open WhatsApp
+  const url =
+    "https://wa.me/601113127911?text=" +
+    buildWhatsAppMessage();
+
   window.open(url, "_blank");
 }
-
 /* =====================================
    GOOGLE FORM
 ===================================== */
@@ -416,8 +426,6 @@ document.addEventListener("click", e => {
   }
 });
 
-  // 🔥 SEND TO TELEGRAM
-  sendOrderToTelegram();
 
 function buildGoogleFormURL() {
   let books = [];
