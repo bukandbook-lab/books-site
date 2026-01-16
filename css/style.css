@@ -28,21 +28,19 @@ img {
   padding: 6px;
   border-bottom: 2px solid #f0f0f0;
   width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+  flex-direction: column;
+}
+
+.tabs {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
-#HeaderWithTab table {
-  width: 100%;
-  max-width: 100%;
-  border-collapse: collapse;
+.tabs::-webkit-scrollbar {
+  display: none;
 }
-
 
 .tab-btn {
   background: #eee;
@@ -53,8 +51,9 @@ img {
   margin: 2px;
   cursor: pointer;
   border-radius: 18px;
-  font-size: 13px;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  font-size: 12px;
   white-space: nowrap;
 }
 
@@ -62,6 +61,37 @@ img {
   background: #ff69ad;
   color: #fff;
   font-weight: bold;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.social-icons img {
+  width: 22px;
+  height: auto;
+}
+/* =========================
+   DESKTOP ENHANCEMENT
+========================= */
+
+@media (min-width: 1024px) {
+  #HeaderWithTab {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .tabs {
+    flex: 1;
+    overflow-x: visible;
+    flex-wrap: wrap;
+  }
+
+  .social-icons {
+    flex-shrink: 0;
+  }
 }
 
 /* =========================
