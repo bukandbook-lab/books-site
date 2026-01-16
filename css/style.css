@@ -344,44 +344,22 @@ button {
    BOOK GRID (COMPACT)
 ================================ */
 
-/* Mobile default */
 .image-grid {
-  grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0;
+  justify-content: center;
 }
-
-/* Small tablets */
-@media (min-width: 480px) {
-  .image-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* Tablets */
-@media (min-width: 768px) {
-  .image-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-/* Desktop */
-@media (min-width: 1200px) {
-  .image-grid {
-    grid-template-columns: repeat(8, 1fr);
-  }
-}
-
-
 
 .book-thumb {
-  width: 100%;
-  max-width: 160px;
+  width: 160px;                 /* fixed book width */
   display: flex;
-  align-items: flex-end;   /* bottom aligned ✔ */
+  align-items: flex-end;        /* bottom aligned */
   justify-content: center;
+  position: relative;
   padding: 0;
   margin: 0;
   cursor: pointer;
-
 }
 .book-thumb img {
   max-height: 100%;
