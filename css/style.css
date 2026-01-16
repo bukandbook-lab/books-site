@@ -295,11 +295,6 @@ button {
 /* ===============================
    BOOK GRID (COMPACT)
 ================================ */
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 160px);
-    gap: 0;
-  }
 
 /* Small tablets */
 @media (min-width: 480px) {
