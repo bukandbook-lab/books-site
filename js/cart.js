@@ -208,8 +208,6 @@ document.addEventListener("click", e => {
   cart.orderId = generateOrderId();
    }
    
-  // 🔥 SEND TO TELEGRAM
-  sendOrderToTelegram();
 
   const emailBox = document.getElementById("emailBookTitles");
   const hidden   = document.getElementById("emailBookTitlesInput");
@@ -416,6 +414,9 @@ document.addEventListener("click", e => {
     window.open(buildGoogleFormURL(), "_blank");
   }
 });
+
+  // 🔥 SEND TO TELEGRAM
+  sendOrderToTelegram();
 
 function buildGoogleFormURL() {
   let books = [];
