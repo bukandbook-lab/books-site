@@ -379,16 +379,17 @@ function updateDeliveryField() {
   const field = document.getElementById("deliveryDetails");
   if (!field) return;
 
+  field.value = cart.deliveryDetails || ""; // ✅ keep value
+
   if (delivery === "email") {
     field.placeholder = "Enter email address";
-    field.value = "";
     field.setAttribute("type", "email");
   } else {
     field.placeholder = "Enter full address, name & phone number";
-    field.value = "";
     field.removeAttribute("type");
   }
 }
+
 /* =====================================
    CAPTURE TEXTAREA INPUT
 ===================================== */
@@ -487,18 +488,34 @@ function calculateTotal() {
 ===================================== */
 
 function sendOrderToTelegram() {
-  const GAS_URL = "https://script.google.com/macros/s/AKfycbzgoBsTH0p0KYHaw9T6IgFn_Aepp_n1UoEe-zPW6A41xnZXnpzh4k1WykOi_A3SXzuK/exec";
+  if (cart.items.size === 0) {
+    alert("Cart is empty. Cannot send order.");
+    return;
+  }
+
+  if (!cart.orderId) {
+    cart.orderId = generateOrderId();
+  }
+
+  if (!cart.deliveryDetails) {
+    alert("Delivery details missing.");
+    return;
+  }
+
+  const GAS_URL =
+    "https://script.google.com/macros/s/AKfycbzgoBsTH0p0KYHaw9T6IgFn_Aepp_n1UoEe-zPW6A41xnZXnpzh4k1WykOi_A3SXzuK/exec";
 
   fetch(GAS_URL, {
     method: "POST",
-    mode: "no-cors",   // 🔑 IMPORTANT
-    headers: {
-      "Content-Type": "application/json"
-    },
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       text: buildTelegramMessage()
     })
   });
+
+  alert("Order sent to Telegram ✅");
 }
+
 
 
