@@ -298,7 +298,7 @@ button {
 /* Small tablets */
 @media (min-width: 480px) {
   .image-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 150px);
     gap: 0;
   }
 }
@@ -306,7 +306,7 @@ button {
 /* Tablets */
 @media (min-width: 768px) {
   .image-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 150px);
     gap: 0;
   }
 }
@@ -314,7 +314,7 @@ button {
 /* Desktop */
 @media (min-width: 1200px) {
   .image-grid {
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(8, 150px);
     gap: 0;
   }
 }
