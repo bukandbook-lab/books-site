@@ -343,47 +343,42 @@ button {
 /* ===============================
    BOOK GRID (COMPACT)
 ================================ */
-/* Default */
+
+/* Mobile default */
 .image-grid {
-   display: grid;
-   grid-template-columns: repeat(3, 160px);
-   gap: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 /* Small tablets */
 @media (min-width: 480px) {
   .image-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 160px);
-    gap: 0;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
 /* Tablets */
 @media (min-width: 768px) {
   .image-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 160px);
-    gap: 0;
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
 /* Desktop */
 @media (min-width: 1200px) {
   .image-grid {
-    display: grid;
-    grid-template-columns: repeat(8, 160px);
-    gap: 0;
+    grid-template-columns: repeat(8, 1fr);
   }
 }
 
 
+
 .book-thumb {
+   .book-thumb {
+  width: 100%;
+  max-width: 160px;
   display: flex;
-  align-items: flex-end;   /* 🔥 bottom alignment */
+  align-items: flex-end;   /* bottom aligned ✔ */
   justify-content: center;
-  width: 160px;           /* fixed cell width */
-  position: relative;
   padding: 0;
   margin: 0;
   cursor: pointer;
