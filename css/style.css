@@ -295,6 +295,12 @@ button {
 /* ===============================
    BOOK GRID (COMPACT)
 ================================ */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 150px);
+    gap: 0;
+  }
+
 /* Small tablets */
 @media (min-width: 480px) {
   .image-grid {
@@ -327,7 +333,7 @@ button {
   display: flex;
   align-items: flex-end;   /* 🔥 bottom alignment */
   justify-content: center;
-  height: 180px;           /* fixed cell height */
+  width: 160px;           /* fixed cell width */
   position: relative;
   padding: 0;
   margin: 0;
