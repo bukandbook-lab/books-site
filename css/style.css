@@ -295,12 +295,18 @@ button {
 /* ===============================
    BOOK GRID (COMPACT)
 ================================ */
+/* Default */
+.image-grid {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 0;
+}
 
 /* Small tablets */
 @media (min-width: 480px) {
   .image-grid {
     display: grid;
-    grid-template-columns: repeat(3, 160px);
+    grid-template-columns: repeat(4, 1fr);
     gap: 0;
   }
 }
@@ -309,7 +315,7 @@ button {
 @media (min-width: 768px) {
   .image-grid {
     display: grid;
-    grid-template-columns: repeat(5, 160px);
+    grid-template-columns: repeat(5, 1fr);
     gap: 0;
   }
 }
@@ -318,7 +324,7 @@ button {
 @media (min-width: 1200px) {
   .image-grid {
     display: grid;
-    grid-template-columns: repeat(8, 160px);
+    grid-template-columns: repeat(8, 1fr);
     gap: 0;
   }
 }
