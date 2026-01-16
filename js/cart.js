@@ -338,6 +338,37 @@ if (cart.delivery === "courier") {
 
   return encodeURIComponent(msg);
 }
+/* =====================================
+   TELEGRAM MESSAGE
+===================================== */
+function buildTelegramMessage() {
+  let msg = `🛒 *NEW ORDER*\n\n`;
+
+  msg += `🆔 *Order ID:* ${cart.orderId}\n\n`;
+
+  msg += `📚 *Books Ordered:*\n`;
+  let i = 1;
+  let total = 0;
+
+  cart.items.forEach(item => {
+    msg += `${i}. ${item.title} (RM${item.price})\n`;
+    total += item.price;
+    i++;
+  });
+
+  if (cart.delivery === "courier") {
+    msg += `\n🚚 Shipping Fee: RM10`;
+    msg += `\n💾 Thumb Drive: RM7`;
+    total += 17;
+  }
+
+  msg += `\n\n💰 *TOTAL:* RM${total}\n`;
+  msg += `📦 *Delivery Method:* ${cart.delivery.toUpperCase()}\n`;
+  msg += `📝 *Delivery Details:*\n${cart.deliveryDetails}\n`;
+
+  return msg;
+}
+
 
 
 /* =====================================
@@ -453,50 +484,19 @@ function calculateTotal() {
   SEND TELEGRAM MESSAGE
 ===================================== */
 
-function sendTelegramOrder() {
+function sendOrderToTelegram() {
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbzgoBsTH0p0KYHaw9T6IgFn_Aepp_n1UoEe-zPW6A41xnZXnpzh4k1WykOi_A3SXzuK/exec";
 
-  const books = [];
-  let total = 0;
-
-  cart.items.forEach(item => {
-    books.push({
-      title: item.title,
-      price: item.price
-    });
-    total += item.price;
-  });
-
-  if (cart.delivery === "courier") {
-    total += SHIPPING_FEE + THUMB_DRIVE_FEE;
-  }
-
-  const payload = {
-    orderId: cart.orderId,
-    books,
-    delivery: cart.delivery,
-    deliveryDetails: cart.deliveryDetails,
-    shippingFee: SHIPPING_FEE,
-    thumbDriveFee: THUMB_DRIVE_FEE,
-    total
-  };
-
-  fetch("https://script.google.com/macros/s/AKfycbxdEeZxIdjWrxar6_x-bQCAw06kYOfR64nukiunHQPYwS5DIH6uOuP9zmpRlnzShazG/exec", {
+  fetch(GAS_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  })
-  .then(res => res.json())
-  .then(res => {
-    if (res.success) {
-      alert("Order sent to Telegram successfully ✅");
-    } else {
-      alert("Telegram failed ❌");
-      console.error(res.error);
-    }
-  })
-  .catch(err => {
-    alert("Network error");
-    console.error(err);
+    mode: "no-cors",   // 🔑 IMPORTANT
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      text: buildTelegramMessage()
+    })
   });
 }
+
 
