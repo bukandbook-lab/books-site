@@ -522,7 +522,7 @@ function sendOrderToTelegram() {
     })
   });
 
-  alert("Order sent to Telegram ✅");
+  
 }
 
 
