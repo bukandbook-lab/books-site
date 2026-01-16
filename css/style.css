@@ -27,7 +27,22 @@ img {
   z-index: 1000;
   padding: 6px;
   border-bottom: 2px solid #f0f0f0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
+
+#HeaderWithTab table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+}
+
 
 .tab-btn {
   background: #eee;
@@ -39,6 +54,8 @@ img {
   cursor: pointer;
   border-radius: 18px;
   font-size: 13px;
+  flex: 1 1 auto;
+  white-space: nowrap;
 }
 
 .tab-btn.active {
