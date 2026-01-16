@@ -297,7 +297,7 @@ button {
 ================================ */
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(2, 150px);
+    grid-template-columns: repeat(2, 160px);
     gap: 0;
   }
 
@@ -305,7 +305,7 @@ button {
 @media (min-width: 480px) {
   .image-grid {
     display: grid;
-    grid-template-columns: repeat(3, 150px);
+    grid-template-columns: repeat(3, 160px);
     gap: 0;
   }
 }
@@ -314,7 +314,7 @@ button {
 @media (min-width: 768px) {
   .image-grid {
     display: grid;
-    grid-template-columns: repeat(5, 150px);
+    grid-template-columns: repeat(5, 160px);
     gap: 0;
   }
 }
@@ -323,7 +323,7 @@ button {
 @media (min-width: 1200px) {
   .image-grid {
     display: grid;
-    grid-template-columns: repeat(8, 150px);
+    grid-template-columns: repeat(8, 160px);
     gap: 0;
   }
 }
@@ -352,7 +352,7 @@ button {
 
 .grid-book-img {
   max-width: 100%;
-  max-height: 300px;
+  max-height: 400px;
   display: block;
   margin: 10px auto;
 }
