@@ -68,6 +68,15 @@ document.addEventListener("click", e => {
   cart.items.delete(removeBtn.dataset.bookId);
   renderCart();
 });
+/* =====================================
+   CLOSE CART WHEN X MARK IS CLICKED
+===================================== */
+document.addEventListener("click", e => {
+  if (e.target.closest("#Cart .close-popup")) {
+    document.getElementById("Cart")?.classList.remove("open");
+  }
+});
+
 
 /* =====================================
    DELIVERY CHANGE
