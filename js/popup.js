@@ -39,6 +39,7 @@ document.addEventListener("click", e => {
         src="${CART_ICON}"
         data-book-id="${book.id}"
         data-title="${book.title}"
+        data-SetQtty="${book.SetQtty}"
         data-price="${book.price}"
         width="25"
       >
