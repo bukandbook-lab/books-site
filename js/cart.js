@@ -339,7 +339,11 @@ function buildWhatsAppMessage() {
   msg += `📚 *List of Books Ordered:*\n`;
   let i = 1;
   cart.items.forEach(item => {
-    msg += `${i}. ${item.title} (RM${item.price})\n`;
+    msg += `${i}. ${item.title}`;
+      if (item.setQtty > 0 && item.price !== 1) {
+        msg += ` (${item.setQtty} books)`;
+        }
+        msg += ` (RM${item.price})\n`;
     i++;
   });
 
@@ -376,7 +380,11 @@ function buildTelegramMessage() {
   let total = 0;
 
   cart.items.forEach(item => {
-    msg += `${i}. ${item.title} (RM${item.price})\n`;
+    msg += `${i}. ${item.title}`;
+      if (item.setQtty > 0 && item.price !== 1) {
+      msg += ` (${item.setQtty} books)`;
+    }
+    msg += ` (RM${item.price})\n`;
     total += item.price;
     i++;
   });
@@ -459,7 +467,12 @@ function buildGoogleFormURL() {
   let i = 1;
 
   cart.items.forEach(item => {
-  books.push(`${i}. ${item.title} (RM${item.price})`);
+  let line = `${i}. ${item.title}`;
+      if (item.setQtty > 0 && item.price !== 1) {
+        line += ` (${item.setQtty} books)`;
+        }
+      line += ` (RM${item.price})`;
+  books.push(line);
   total += item.price;
   i++;
 });
