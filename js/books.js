@@ -91,6 +91,7 @@ function renderBooks(tabId, books) {
         data-book-id="${normalized.id}"
         data-title="${normalized.title}"
         data-price="${normalized.price}"
+        data-setqtty="${normalized.SetQtty}"
       >
     `;
 
