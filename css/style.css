@@ -346,13 +346,13 @@ button {
 
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 0;
   justify-content: center;
 }
 
 .book-thumb {
-  width: 160px;                 /* fixed book width */
+  width: 120px;                 /* fixed book width */
   display: flex;
   align-items: flex-end;        /* bottom aligned */
   justify-content: center;
