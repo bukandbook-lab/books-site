@@ -28,7 +28,7 @@ document.addEventListener("click", e => {
     <img src="${book.img}" class="popup-img">
 
     <div class="book-title">${book.title}</div>
-    <div>${book.SetQtty}</div>
+    <div>${book.SetQtty} books/set</div>
      
 
 
