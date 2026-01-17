@@ -453,6 +453,22 @@ button {
 /* =========================
    CART ROW + REMOVE ICON
 ========================= */
+.price-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 90px;
+  text-align: right;
+}
+
+.cart-fee,
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
+}
+
 .cart-row {
   display: flex;
   align-items: center;
