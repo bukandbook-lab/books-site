@@ -165,14 +165,16 @@ img {
    PRICE 
 ========================= */
 
-.price-box{
+.price-box {
   background: #FC1380;
   color: white;
   border-radius: 15px;
   margin-top: 6px;
   padding: 6px 12px;
-  width: 100px;
-  display: inline-block;
+  display: inline-flex;     /* 🔥 KEY */
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;          /* clickable */
 }
 
 /* =========================
