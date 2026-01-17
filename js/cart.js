@@ -170,7 +170,7 @@ function renderCart() {
 
     <label class="terms">
       <input type="checkbox" id="agreeTerms" ${cart.agreed ? "checked" : ""}>
-      Please read Terms and Conditions under READ ME FIRST before payment.
+      By clicking to pay, I agree to the Terms and Conditions described in 'READ ME FIRST' section.
     </label><br>
 
     <div class="cart-actions">
