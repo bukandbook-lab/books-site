@@ -181,6 +181,8 @@ img {
 
 .cart-icon {
   z-index: 2;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 /* Cart icon hidden by default */
@@ -296,6 +298,21 @@ img {
   margin-bottom: 8px;
 }
 
+#Cart .close-popup {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+#Cart .close-popup:hover {
+  opacity: 1;
+}
+
+
 /* =========================
    CART TABLE
 ========================= */
@@ -380,6 +397,7 @@ button {
   position: relative;
   box-shadow: 0 20px 50px rgba(0,0,0,0.3);
   overflow: auto;
+  position: relative;
 }
 
 .popup-box img {
