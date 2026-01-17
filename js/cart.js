@@ -30,14 +30,19 @@ const FORM = {
 document.addEventListener("click", e => {
   const icon = e.target.closest(".cart-icon[data-book-id]");
   if (!icon) return;
-
+   
   const bookId = icon.dataset.bookId;
   const title  = icon.dataset.title;
   const price  = Number(icon.dataset.price);
+  const setQtty  = Number(icon.dataset.setqtty || 0);
 
-  if (!bookId || !title || !price) return;
+  if (!bookId || !title || !price || !setqtty) return;
 
-  cart.items.set(bookId, { title, price });
+  cart.items.set(bookId, {
+  title,
+  price,
+  setQtty
+});
 
   renderCart();
   openCart();
@@ -101,16 +106,23 @@ function renderCart() {
 
     itemsHTML += `
       <div class="cart-row">
-        <span>${index}. ${item.title}</span>
         <span>
-          RM${item.price}
-          <img
-            src="${CLOSE_ICON}"
-            class="remove-item"
-            data-book-id="${id}"
-            alt="Remove"
-          >
+           ${index}. ${item.title}
+           ${item.setQtty > 0 && item.price !== 1
+           ? ` (${item.setQtty} books)`
+           : ``}
         </span>
+
+        <span class="price-right">
+          <span>RM${item.price}</span>
+            <img
+             src="${CLOSE_ICON}"
+             class="remove-item"
+             data-book-id="${id}"
+             alt="Remove"
+            >
+         </span>
+
       </div>
     `;
     index++;
@@ -120,8 +132,15 @@ function renderCart() {
   if (cart.delivery === "courier") {
     total += 17;
     deliveryFeeHTML = `
-      <div class="cart-fee">Shipping Fee: RM10</div>
-      <div class="cart-fee">Thumb Drive: RM7</div>
+      <div class="cart-fee">
+        <span>Shipping Fee</span>
+        <span>RM10</span>
+      </div>
+
+      <div class="cart-fee">
+        <span>Thumb Drive</span>
+        <span>RM7</span>
+      </div>
     `;
   }
 
@@ -155,7 +174,10 @@ function renderCart() {
 
     <hr>
 
-    <div class="total"><b>TOTAL: RM${total}</b></div><br>
+    <div class="total-row">
+        <span><b>TOTAL</b></span>
+        <span><b>RM${total}</b></span>
+    </div>
    
     <div class="delivery-details">
      <b>Delivery Details</b><br>
