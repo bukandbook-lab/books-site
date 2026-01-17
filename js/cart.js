@@ -28,35 +28,38 @@ const FORM = {
    ADD TO CART (GRID + POPUP)
 ===================================== */
 document.addEventListener("click", e => {
-  const icon =
-  e.target.closest(".cart-icon[data-book-id]") ||
-  e.target.closest(".price-box[data-book-id]");
+  const trigger =
+    e.target.closest(".cart-icon[data-book-id]") ||
+    e.target.closest(".price-box[data-book-id]");
 
-  if (!icon) return;
-   
-  const bookId = icon.dataset.bookId;
-  const title  = icon.dataset.title;
-  const price  = Number(icon.dataset.price);
-  const setQtty  = Number(icon.dataset.setqtty || 0);
+  if (!trigger) return;
 
-  if (!bookId || !title || !price) return;
+  const bookId = trigger.dataset.bookId;
+  if (!bookId) return;
+
+  const book = window.BOOK_REGISTRY[bookId];
+  if (!book) {
+    console.warn("Book not found in registry:", bookId);
+    return;
+  }
 
   cart.items.set(bookId, {
-  title,
-  price,
-  setQtty
-});
+    title: book.title,
+    price: book.price,
+    setQtty: Number(book.SetQtty || 0)
+  });
 
   renderCart();
   openCart();
 
-  /* auto-close popup if clicked inside one */
-  const popup = icon.closest(".popup");
+  // close popup if click came from inside popup
+  const popup = trigger.closest(".popup");
   if (popup) {
     popup.style.display = "none";
     popup.querySelector("iframe")?.remove();
   }
 });
+
 
 /* =====================================
    REMOVE ITEM (KEEP CART OPEN)
