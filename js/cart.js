@@ -28,7 +28,10 @@ const FORM = {
    ADD TO CART (GRID + POPUP)
 ===================================== */
 document.addEventListener("click", e => {
-  const icon = e.target.closest(".cart-icon[data-book-id]");
+  const icon =
+  e.target.closest(".cart-icon[data-book-id]") ||
+  e.target.closest(".price-box[data-book-id]");
+
   if (!icon) return;
    
   const bookId = icon.dataset.bookId;
