@@ -62,7 +62,7 @@ function renderBooks(tabId, books) {
     const normalized = {
       id: bookId,
       title: book.title || book["Book Title"] || "Untitled",
-      SetQtty: book.qtty || book.NoofBooks || book["No. of Books"];
+      SetQtty: book.qtty || book.NoofBooks || book["No. of Books"],
       img: book.image || book.Link || "",
       price: Number(book.price || book["Price"] || 0),
       video:
