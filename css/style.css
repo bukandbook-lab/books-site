@@ -476,7 +476,7 @@ button {
 .price-right {
   display: inline-flex;
   align-items: center;
-  gap: 4px;  /* 🔥 controls distance */
+  gap: 2px;  /* 🔥 controls distance */
   white-space: nowrap;
 }
 
