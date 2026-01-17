@@ -31,11 +31,14 @@ img {
   flex-direction: column;
 }
 
+
+/* Tabs stay scrollable */
 .tabs {
+  flex: 1;
+  overflow-x: auto;
   display: flex;
   gap: 4px;
-  overflow-x: auto;
-  scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 
 .tabs::-webkit-scrollbar {
@@ -110,13 +113,13 @@ img {
   margin-left: 6px;
 }
 
-/* Tabs stay scrollable */
-.tabs {
-  flex: 1;
-  overflow-x: auto;
-  display: flex;
-  gap: 4px;
-  scroll-behavior: smooth;
+.tab-arrow {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
 
 /* =========================
