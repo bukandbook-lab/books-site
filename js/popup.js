@@ -7,7 +7,6 @@ document.addEventListener("click", e => {
     return;
   }
 
-
   const bookId = trigger.dataset.bookId;
   const book = BOOK_REGISTRY[bookId];
 
@@ -16,70 +15,75 @@ document.addEventListener("click", e => {
     return;
   }
 
-  document.getElementById("comicPopupContent").innerHTML = `
-  <div class="popup-box">
-    <img
-  src="${CLOSE_ICON}"
-  class="close-popup"
-  alt="Close"
->
+  /* ===============================
+     PRICE & LABEL LOGIC
+  =============================== */
+  const isSetBook = book.price === 2 || book.price === 4;
+  const priceLabel = isSetBook ? "/set" : "/book";
 
-
-    <img src="${book.img}" class="popup-img">
-
-    <div class="book-title">${book.title}</div>
-    <div>${book.SetQtty} books/set</div>
-     
-
-
-    <div class="price-box">
-      <b>RM${book.price}</b>
-      <img
-        class="cart-icon"
-        src="${CART_ICON}"
-        data-book-id="${book.id}"
-        data-title="${book.title}"
-        data-SetQtty="${book.SetQtty}"
-        data-price="${book.price}"
-        width="25"
-      >
-    </div>
-
-    ${
- book.video
-        ? `<button class="watch-video-btn">Watch Video</button>
-           <div class="video-box" data-youtube="${book.video}" style="display:none;"></div>`
-        : `<div class="no-video">No video available</div>`
-
-    }
-  </div>
-`;
-
-
-
-  document.getElementById("comicPopup").dataset.bookId = bookId;
-  document.getElementById("comicPopup").style.display = "flex";
-});
-document.addEventListener("click", function (e) {
+  const setQtyHTML = isSetBook
+    ? `<div class="set-qty"><b>No. of books:</b> ${book.SetQtty} books / set</div>`
+    : "";
 
   /* ===============================
-     CLOSE POPUP (X)
+     POPUP HTML
   =============================== */
+  document.getElementById("comicPopupContent").innerHTML = `
+    <div class="popup-box">
+
+      <img src="${CLOSE_ICON}" class="close-popup" alt="Close">
+
+      <img src="${book.img}" class="popup-img">
+
+      <div class="book-title">${book.title}</div>
+
+      ${setQtyHTML}
+
+      <div class="price-box">
+        <b>RM${book.price}${priceLabel}</b>
+        <img
+          class="cart-icon"
+          src="${CART_ICON}"
+          data-book-id="${book.id}"
+          data-title="${book.title}"
+          data-price="${book.price}"
+          data-setqtty="${book.SetQtty || ""}"
+          width="25"
+        >
+      </div>
+
+      ${
+        book.video
+          ? `<button class="watch-video-btn">Watch Video</button>
+             <div class="video-box" data-youtube="${book.video}" style="display:none;"></div>`
+          : `<div class="no-video">No video available</div>`
+      }
+
+    </div>
+  `;
+
+  const popup = document.getElementById("comicPopup");
+  popup.dataset.bookId = bookId;
+  popup.style.display = "flex";
+});
+
+/* =====================================
+   POPUP INTERACTIONS
+===================================== */
+document.addEventListener("click", e => {
+
+  /* CLOSE POPUP */
   if (e.target.classList.contains("close-popup")) {
     const popup = e.target.closest(".popup");
     if (popup) popup.style.display = "none";
 
-    // stop video if playing
     const iframe = popup?.querySelector("iframe");
     if (iframe) iframe.remove();
     return;
   }
 
-  /* ===============================
-     WATCH / HIDE VIDEO
-  =============================== */
+  /* WATCH / HIDE VIDEO */
   if (e.target.classList.contains("watch-video-btn")) {
-
     const popup = e.target.closest(".popup");
     if (!popup) return;
 
@@ -88,13 +92,8 @@ document.addEventListener("click", function (e) {
 
     const bookId = popup.dataset.bookId;
     const book = BOOK_REGISTRY[bookId];
+    if (!book || !book.video) return;
 
-    if (!book || !book.video) {
-      alert("No video available");
-      return;
-    }
-
-    // TOGGLE
     if (videoBox.innerHTML) {
       videoBox.innerHTML = "";
       videoBox.style.display = "none";
@@ -113,6 +112,4 @@ document.addEventListener("click", function (e) {
       e.target.innerText = "Hide Video";
     }
   }
-
 });
-
