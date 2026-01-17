@@ -158,11 +158,7 @@ function renderCart() {
   }
 
   box.innerHTML = `
-   <img
-       src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhOugfd_uN6o5SctZFNuRIj_BzoQL5wV-kJwedlMszlIJtG8f3kIsmjpUzzEGITOJCaxuHZ_s4NHzKJBGVhQZz6o6YtwyO63V8W7iZINYEg9LljwmRpL3DQLFIOWHFwUFsBLn9dIqdf-4AXa69Heo9EoZN1OnivF9o4NywvTmQ84hfd4Vz-aiRe-uqgqePe/s320/cross.png"
-       class="close-popup"
-       alt="Close"
-    >
+   <span class="close-popup" alt="Close">X</span>
    <h3>CART</h3>
     ${itemsHTML || "<p>No item selected</p>"}
 
