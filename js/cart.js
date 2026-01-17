@@ -36,7 +36,7 @@ document.addEventListener("click", e => {
   const price  = Number(icon.dataset.price);
   const setQtty  = Number(icon.dataset.setqtty || 0);
 
-  if (!bookId || !title || !price || !setqtty) return;
+  if (!bookId || !title || !price || !setQtty) return;
 
   cart.items.set(bookId, {
   title,
