@@ -28,6 +28,12 @@ document.addEventListener("click", e => {
     <img src="${book.img}" class="popup-img">
 
     <div class="book-title">${book.title}</div>
+    <div
+        id="SetQtty"
+        style="margin-top:6px; font-size:13px; display:none;"
+    >
+  
+
 
     <div class="price-box">
       <b>RM${book.price}</b>
