@@ -35,9 +35,8 @@ document.addEventListener("click", e => {
   if (!trigger) return;
 
   const bookId = trigger.dataset.bookId;
-  if (!bookId) return;
+  const book = window.BOOK_REGISTRY?.[bookId];
 
-  const book = window.BOOK_REGISTRY[bookId];
   if (!book) {
     console.warn("Book not found in registry:", bookId);
     return;
@@ -45,14 +44,14 @@ document.addEventListener("click", e => {
 
   cart.items.set(bookId, {
     title: book.title,
-    price: book.price,
+    price: Number(book.price),
     setQtty: Number(book.SetQtty || 0)
   });
 
   renderCart();
   openCart();
 
-  // close popup if click came from inside popup
+  // auto-close popup if click came from popup
   const popup = trigger.closest(".popup");
   if (popup) {
     popup.style.display = "none";
