@@ -52,12 +52,13 @@ document.addEventListener("click", e => {
         >
       </div>
 
-      ${
+    ${
         book.video
           ? `<button class="watch-video-btn">Watch Video</button>
              <div class="video-box" data-youtube="${book.video}" style="display:none;"></div>`
-          : `<div class="no-video">No video available</div>`
-      }
+          : ``
+    }
+
 
     </div>
   `;
