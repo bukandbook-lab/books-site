@@ -215,6 +215,16 @@ img {
   align-items: center;
 
 }
+<!—Popup Close Icon -->
+.popup .close-popup {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 10;
+  float: right;
+}
+
 /* =========================
   BOOK POPUP CONTENT
 ========================= */
@@ -283,15 +293,7 @@ img {
   margin-top: 8px;
   display: none;
 }
-<!—Popup Close Icon -->
-.popup .close-popup {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  z-index: 10;
-  float: right;
-}
+
 
 /* =========================
    CART-ICON
