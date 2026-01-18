@@ -37,7 +37,7 @@ img {
   flex: 1;
   overflow-x: auto;
   display: flex;
-  gap: 4px;
+  gap: 2px;
   scroll-behavior: smooth;
 }
 
@@ -50,7 +50,7 @@ img {
   background-color: #FF1493;
   border-color: #ffdbe1;
   color: white;
-  margin: 0;
+  margin: 2px;
   cursor: pointer;
   border-radius: 18px;
   flex: 0 0 auto;
@@ -74,6 +74,7 @@ img {
 .social-icons img {
   width: 22px;
   height: auto;
+  margin: 2px;
 }
 
 /* =========================
@@ -405,7 +406,7 @@ button {
 .price-right {
   display: inline-flex;
   align-items: center;
-  gap: 2px;  /* 🔥 controls distance */
+  gap: 0;  /* 🔥 controls distance */
   white-space: nowrap;
 }
 
