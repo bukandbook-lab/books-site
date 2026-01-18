@@ -39,18 +39,20 @@ document.addEventListener("click", e => {
 
       ${setQtyHTML}
 
-    <div
+<div
   class="price-box"
   data-book-id="${book.id}"
+  data-title="${book.title}"
+  data-price="${book.price}"
+  data-setqtty="${book.SetQtty || 0}"
 >
   <b>RM${book.price}</b>
   <img
     class="cart-icon"
     src="${CART_ICON}"
-    width="25"
+    width="22"
   >
 </div>
-
 
 
     ${
