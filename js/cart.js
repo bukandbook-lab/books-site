@@ -189,7 +189,7 @@ function renderCart() {
     <div class="total-row">
         <span><b>TOTAL</b></span>
         <span><b>RM${total}</b></span>
-    </div><br><br>
+    </div><br>
    
     <div class="delivery-details">
      <b>Delivery Details</b><br>
