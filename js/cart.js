@@ -246,16 +246,15 @@ document.addEventListener("click", e => {
   cart.orderId = generateOrderId();
    }
    
-fetch("https://script.google.com/macros/s/AKfycbxHdScX5gZffiBnXViqG3pqk4nAYCmqFaWUbQ4WU4EHZ0VZXw4Js6LDhU4PQceE556M/exec", {
-  method: "POST",
-  headers: {
-    "Content-Type": "text/plain"
-  },
-  body: JSON.stringify({
+ const params = new URLSearchParams({
     action: "button_click",
-    page: window.location.href
-  })
-});
+    page: location.href,
+    t: Date.now()
+  });
+
+  new Image().src =
+    "https://script.google.com/macros/s/AKfycbzCeixZsT7k-QfJWh85KCqwvw6lmMsmPH9PCAL9SgNOiyM9a9tSVsLBgxYHMJeIF27R/exec?" +
+    params.toString();
 
   const emailBox = document.getElementById("emailBookTitles");
   const hidden   = document.getElementById("emailBookTitlesInput");
