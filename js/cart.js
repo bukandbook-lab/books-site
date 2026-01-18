@@ -246,7 +246,16 @@ document.addEventListener("click", e => {
   cart.orderId = generateOrderId();
    }
    
-
+fetch("https://script.google.com/macros/s/AKfycbxHdScX5gZffiBnXViqG3pqk4nAYCmqFaWUbQ4WU4EHZ0VZXw4Js6LDhU4PQceE556M/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      action: "button_click",
+      page: window.location.href
+    })
+  });
   const emailBox = document.getElementById("emailBookTitles");
   const hidden   = document.getElementById("emailBookTitlesInput");
 
