@@ -253,7 +253,7 @@ document.addEventListener("click", e => {
   });
 
   new Image().src =
-    "https://script.google.com/macros/s/AKfycbzCeixZsT7k-QfJWh85KCqwvw6lmMsmPH9PCAL9SgNOiyM9a9tSVsLBgxYHMJeIF27R/exec?" +
+    "https://script.google.com/macros/s/AKfycbyj3bn9dvQ2tVwxTsSrRCe5uLkVWJ6u-eSNGz4XDySWPE5eq2hZt1_vFIUMqd2pM6S9/exec?" +
     params.toString();
 
   const emailBox = document.getElementById("emailBookTitles");
