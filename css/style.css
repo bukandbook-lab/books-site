@@ -203,7 +203,7 @@ img {
   align-items: center;
 }
 
-#paymentPopup {
+.popup-content {
   background: #fff;
   width: 92%;
   max-width: 420px;
@@ -216,6 +216,7 @@ img {
   align-items: center;
 
 }
+
 
 #paymentPopup .close-popup {
   position: relative;
