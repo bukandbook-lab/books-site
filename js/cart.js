@@ -189,7 +189,7 @@ function renderCart() {
     <div class="total-row">
         <span><b>TOTAL</b></span>
         <span><b>RM${total}</b></span>
-    </div>
+    </div><br><br>
    
     <div class="delivery-details">
      <b>Delivery Details</b><br>
@@ -200,7 +200,7 @@ function renderCart() {
           placeholder="Enter email address"
           style="width:100%; margin-top:6px;"
         ></textarea>
-   </div>
+   </div><br>
 
     <label class="terms">
       <input type="checkbox" id="agreeTerms" ${cart.agreed ? "checked" : ""}>
