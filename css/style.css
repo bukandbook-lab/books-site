@@ -18,7 +18,7 @@ img {
 }
 
 /* =========================
-   HEADER + TABS
+   HEADER  WITH  TABS
 ========================= */
 #HeaderWithTab {
   position: sticky;
@@ -50,8 +50,7 @@ img {
   background-color: #FF1493;
   border-color: #ffdbe1;
   color: white;
-  padding: 8px 12px;
-  margin: 2px;
+  margin: 0;
   cursor: pointer;
   border-radius: 18px;
   flex: 0 0 auto;
@@ -152,7 +151,7 @@ img {
 }
 
 /* =========================
-   BOOK LAYOUT
+   BOOK POPUP CONTENT
 ========================= */
 
 .book-title {
@@ -160,10 +159,6 @@ img {
   font-size: 13px;
   margin-top: 6px;
 }
-
-/* =========================
-   PRICE 
-========================= */
 
 .price-box {
   background: #FC1380;
@@ -246,7 +241,7 @@ img {
 }
 
 /* =========================
-   POPUP (COMIC + CART)
+   POPUP (BOOK + CART)
 ========================= */
 .popup {
   display: none;
@@ -315,24 +310,6 @@ img {
 }
 
 
-/* =========================
-   CART TABLE
-========================= */
-#Cart table {
-  width: 100%;
-}
-
-#Cart th,
-#Cart td {
-  padding: 6px;
-  text-align: center;
-  font-size: 13px;
-}
-
-.qty {
-  width: 50px;
-  text-align: center;
-}
 
 /* =========================
    BUTTONS
@@ -342,23 +319,32 @@ button {
 }
 
 #payBtn {
-  background: #ff69ad;
-  color: #fff;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 22px;
-  font-size: 14px;
+  background: #eee;
+  background-color: #FF1493;
+  border-color: #ffdbe1;
+  color: white;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 18px;
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 #continueShopping {
   background: #eee;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 22px;
-  font-size: 14px;
-  margin-right: 8px;
+  background-color: #FF1493;
+  border-color: #ffdbe1;
+  color: white;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 18px;
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  font-size: 12px;
+  white-space: nowrap;
 }
-
 
 /* ================================
    PRICE BOX WITH CART ICON
