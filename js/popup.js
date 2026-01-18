@@ -28,7 +28,7 @@ document.addEventListener("click", e => {
   /* ===============================
      POPUP HTML
   =============================== */
-  document.getElementById("comicPopupContent").innerHTML = `
+  document.getElementById("BookPopupContent").innerHTML = `
     <div class="popup-box">
 
       <img src="${CLOSE_ICON}" class="close-popup" alt="Close">
@@ -64,7 +64,7 @@ document.addEventListener("click", e => {
     </div>
   `;
 
-  const popup = document.getElementById("comicPopup");
+  const popup = document.getElementById("BookPopup");
   popup.dataset.bookId = bookId;
   popup.style.display = "flex";
 });
