@@ -202,28 +202,6 @@ img {
   align-items: center;
 }
 
-.popup-content {
-  background: #fff;
-  width: 92%;
-  max-width: 420px;
-  padding: 14px;
-  border-radius: 12px;
-  position: relative;
-  max-height: 90vh;
-  overflow-y: auto;
-  justify-content: center;
-  align-items: center;
-
-}
-<!—Popup Close Icon -->
-.popup .close-popup {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  z-index: 10;
-  float: right;
-}
 
 /* =========================
   BOOK POPUP CONTENT
@@ -294,6 +272,15 @@ img {
   display: none;
 }
 
+<!—Popup Close Icon -->
+.popup-box .close-popup {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 10;
+  float: right;
+}
 
 /* =========================
    CART-ICON
