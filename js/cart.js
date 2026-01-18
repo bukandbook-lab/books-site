@@ -53,8 +53,12 @@ document.addEventListener("click", e => {
   openCart();
 
   // auto-close popup if click came from popup
- const popup = icon.closest(".popup");
-if (popup) popup.style.display = "none";
+  const popup = icon.closest(".popup");
+  if (popup) {
+    popup.style.display = "none";
+    popup.querySelector("iframe")?.remove();
+  }
+});
 
 
 /* =====================================
