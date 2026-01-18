@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // close videos & popups when switching tabs
       if (typeof stopAllVideos === "function") stopAllVideos();
-      if (typeof closeComicPopup === "function") closeComicPopup();
+      if (typeof closeBookPopup === "function") closeBookPopup();
     });
   });
 
