@@ -28,17 +28,18 @@ const FORM = {
    ADD TO CART (GRID + POPUP)
 ===================================== */
 document.addEventListener("click", e => {
-  const trigger =
+  const icon =
     e.target.closest(".cart-icon[data-book-id]") ||
     e.target.closest(".price-box[data-book-id]");
 
-  if (!trigger) return;
+  if (!icon) return;
 
-  const bookId = trigger.dataset.bookId;
-  const book = window.BOOK_REGISTRY?.[bookId];
+  const bookId = icon.dataset.bookId;
+  if (!bookId) return;
 
+  const book = BOOK_REGISTRY[bookId];
   if (!book) {
-    console.warn("Book not found in registry:", bookId);
+    console.error("Book not found in registry:", bookId);
     return;
   }
 
@@ -52,13 +53,12 @@ document.addEventListener("click", e => {
   openCart();
 
   // auto-close popup if click came from popup
-  const popup = trigger.closest(".popup");
+  const popup = icon.closest(".popup");
   if (popup) {
     popup.style.display = "none";
     popup.querySelector("iframe")?.remove();
   }
 });
-
 
 /* =====================================
    REMOVE ITEM (KEEP CART OPEN)
