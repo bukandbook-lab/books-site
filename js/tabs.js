@@ -11,39 +11,52 @@ document.addEventListener("DOMContentLoaded", () => {
     tabs.forEach(t => t.classList.remove("active"));
   }
 
+  function openTab(target, btn) {
+    hideAll();
+    deactivateTabs();
+
+    const panel = document.getElementById(target);
+    if (!panel) {
+      console.error("Tab not found:", target);
+      return;
+    }
+
+    panel.style.display = "block";
+    if (btn) btn.classList.add("active");
+
+    // 🔑 LOAD BOOKS FOR THIS TAB
+    if (typeof loadBooks === "function") {
+      loadBooks(target);
+    }
+
+    // 🔍 RESET SEARCH
+    const search = document.getElementById("bookSearch");
+    if (search) search.value = "";
+
+    // 🎥 CLOSE MEDIA / POPUPS
+    if (typeof stopAllVideos === "function") stopAllVideos();
+    if (typeof closeBookPopup === "function") closeBookPopup();
+  }
+
+  /* =========================
+     TAB CLICK HANDLER
+  ========================= */
   tabs.forEach(btn => {
     btn.addEventListener("click", () => {
       const target = btn.dataset.tab;
-
-      hideAll();
-      deactivateTabs();
-
-      const panel = document.getElementById(target);
-      if (panel) panel.style.display = "block";
-
-      btn.classList.add("active");
-
-      // 🔑 LOAD DATA
-      loadBooks(target);
-      
-      document.getElementById("bookSearch")?.value = "";
-
-
-      // close videos & popups when switching tabs
-      if (typeof stopAllVideos === "function") stopAllVideos();
-      if (typeof closeBookPopup === "function") closeBookPopup();
+      openTab(target, btn);
     });
   });
 
-  // ✅ DEFAULT TAB (HOME)
-  hideAll();
-  const home = document.getElementById("BeginningReader");
-  if (home) home.style.display = "block";
+  /* =========================
+     DEFAULT TAB ON LOAD
+  ========================= */
+  const defaultBtn =
+    document.querySelector('.tab-btn[data-tab="BeginningReader"]') ||
+    tabs[0];
 
-  const homeBtn = document.querySelector('.tab-btn[data-tab="BeginningReader"]');
-  if (homeBtn) homeBtn.classList.add("active");
-
-  // 🔥 THIS WAS MISSING
-  loadBooks("BeginningReader");
+  if (defaultBtn) {
+    openTab(defaultBtn.dataset.tab, defaultBtn);
+  }
 
 });
