@@ -47,11 +47,13 @@ document.addEventListener("click", e => {
   data-setqtty="${book.SetQtty || 0}"
 >
   <b>RM${book.price}</b>
-  <img
-    class="cart-icon"
-    src="${CART_ICON}"
-    width="22"
-  >
+<img
+  class="cart-icon"
+  src="${CART_ICON}"
+  width="22"
+  data-book-id="${book.id}"
+>
+
 </div>
 
 
