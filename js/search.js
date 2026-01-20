@@ -4,9 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!searchInput) return;
 
   const tabButtons = document.querySelectorAll(".tab-btn");
-  const tabIds = [...tabButtons].map(b => b.dataset.tab);
+  const tabIds = [...tabButtons].map(btn => btn.dataset.tab);
 
-  // Track loaded tabs
   const loadedTabs = {};
 
   function ensureTabLoaded(tabId) {
@@ -26,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 🔍 GLOBAL SEARCH
+  /* 🔍 GLOBAL SEARCH */
   searchInput.addEventListener("input", () => {
     const keyword = searchInput.value.toLowerCase().trim();
     let firstTabWithMatch = null;
@@ -39,12 +38,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let hasMatch = false;
 
-      tab.querySelectorAll(".book-thumb").forEach(book => {
-        const titleEl = book.querySelector(".title");
-        const title = titleEl ? titleEl.textContent.toLowerCase() : "";
+      tab.querySelectorAll(".book-thumb").forEach(bookEl => {
+        const bookId =
+          bookEl.querySelector("[data-book-id]")?.dataset.bookId;
+
+        const book = BOOK_REGISTRY[bookId];
+        const title = book?.title?.toLowerCase() || "";
 
         const match = title.includes(keyword);
-        book.style.display = match ? "" : "none";
+        bookEl.style.display = match ? "" : "none";
 
         if (match) hasMatch = true;
       });
@@ -59,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ❌ CLEAR SEARCH
+  /* ❌ CLEAR SEARCH */
   document.getElementById("clearSearch")?.addEventListener("click", () => {
     searchInput.value = "";
 
@@ -67,13 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       book.style.display = "";
     });
 
-    const defaultBtn =
-      document.querySelector('.tab-btn[data-tab="BeginningReader"]') ||
-      tabButtons[0];
-
-    if (defaultBtn) {
-      showTab(defaultBtn.dataset.tab);
-    }
+    showTab("BeginningReader");
   });
 
 });
