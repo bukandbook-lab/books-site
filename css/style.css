@@ -429,11 +429,12 @@ img {
   color: white;
   border: none;
   border-radius: 50%;
-  width: 18px;
-  height: 18px;
+  width: 26px;
+  height: 26px;
   cursor: pointer;
   font-size: 14px;
   line-height: 1;
+  padding: 2px 2px;
   float: right;
   z-index: 10;
   position: relative;
