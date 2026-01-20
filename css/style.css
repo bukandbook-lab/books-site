@@ -316,7 +316,7 @@ img {
   background-color: #FF1493;
   color: white;
   border-radius: 18px;
-  padding: 1px 10px;
+  padding: 2px 10px;
   font-size: 12px;
   display: inline-flex;
   align-items: center;
@@ -434,10 +434,8 @@ img {
   cursor: pointer;
   font-size: 14px;
   line-height: 1;
-  padding: 2px 2px;
+  padding: 2px 2px 2px 2px;
   float: right;
-  z-index: 10;
-  position: relative;
 }
 
 
