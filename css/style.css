@@ -142,6 +142,41 @@ img {
     flex-shrink: 0;
   }
 }
+/* =========================
+   SEARCH BAR
+========================= */
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0;
+}
+
+#bookSearch {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 18px;
+  border: 1px solid #ffdbe1;
+  outline: none;
+}
+
+#bookSearch:focus {
+  border-color: #FF1493;
+}
+
+#clearSearch {
+  background: #FF1493;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
 
 /* =========================
    TAB CONTENT
