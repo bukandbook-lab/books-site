@@ -40,7 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       tab.querySelectorAll(".book-thumb").forEach(bookEl => {
         const bookId =
-          bookEl.querySelector("[data-book-id]")?.dataset.bookId;
+        bookEl.querySelector(".popup-trigger")?.dataset.bookId;
+
 
         const book = BOOK_REGISTRY[bookId];
         const title = book?.title?.toLowerCase() || "";
