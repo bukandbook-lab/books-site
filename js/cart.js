@@ -33,7 +33,9 @@ document.addEventListener("click", e => {
     e.target.closest(".price-box[data-book-id]");
 
   if (!icon) return;
-
+   
+  e.stopPropagation();   // 👈 add this
+   
   const bookId = icon.dataset.bookId;
   if (!bookId) return;
 
@@ -344,7 +346,10 @@ document.addEventListener("click", e => {
   if (!cartEl || !cartEl.classList.contains("open")) return;
 
   if (e.target.closest("#Cart")) return;
-  if (e.target.closest(".cart-icon")) return;
+ if (
+  e.target.closest(".cart-icon") ||
+  e.target.closest(".price-box")
+) return;
   if (e.target.closest(".remove-item")) return;
 
   cartEl.classList.remove("open");
