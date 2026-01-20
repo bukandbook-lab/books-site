@@ -457,10 +457,9 @@ button {
 }
 
 #clickToPay {
-  background: #eee;
-  background-color: #FF1493;
-  border-color: #ffdbe1;
-  color: white;
+  background: #ff69ad;
+  color: #fff;
+  border: none;
   margin: 2px;
   cursor: pointer;
   border-radius: 18px;
