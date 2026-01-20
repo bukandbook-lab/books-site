@@ -1,5 +1,5 @@
 /* =====================================
-   BOOK SEARCH (CURRENT TAB ONLY)
+   GLOBAL BOOK SEARCH (ALL TABS)
 ===================================== */
 
 document.addEventListener("input", e => {
@@ -7,35 +7,47 @@ document.addEventListener("input", e => {
 
   const keyword = e.target.value.toLowerCase().trim();
 
-  // find visible tab
-  const activeTab = document.querySelector(".tabcontent[style*='block']");
-  if (!activeTab) return;
+  document.querySelectorAll(".tabcontent").forEach(tab => {
+    let hasMatch = false;
 
-  const books = activeTab.querySelectorAll(".book-thumb");
+    tab.querySelectorAll(".book-thumb").forEach(book => {
+      const bookId =
+        book.querySelector("[data-book-id]")?.dataset.bookId;
 
-  books.forEach(book => {
-    const bookId =
-      book.querySelector("[data-book-id]")?.dataset.bookId;
+      const data = BOOK_REGISTRY[bookId];
+      if (!data) return;
 
-    const data = BOOK_REGISTRY[bookId];
-    if (!data) return;
+      const match = data.title.toLowerCase().includes(keyword);
 
-    const match = data.title.toLowerCase().includes(keyword);
-    book.style.display = match ? "" : "none";
+      book.style.display = match ? "" : "none";
+      if (match) hasMatch = true;
+    });
+
+    // Show only tabs that have results
+    tab.style.display = hasMatch || keyword === "" ? "block" : "none";
   });
+
+  // deactivate active tab highlight
+  document.querySelectorAll(".tablinks")
+    .forEach(btn => btn.classList.remove("active"));
 });
 
-/* CLEAR SEARCH */
+/* =====================================
+   CLEAR SEARCH
+===================================== */
+
 document.getElementById("clearSearch")?.addEventListener("click", () => {
   const input = document.getElementById("bookSearch");
   if (!input) return;
 
   input.value = "";
 
-  const activeTab = document.querySelector(".tabcontent[style*='block']");
-  if (!activeTab) return;
+  document.querySelectorAll(".tabcontent").forEach(tab => {
+    tab.style.display = "none";
+    tab.querySelectorAll(".book-thumb")
+      .forEach(book => (book.style.display = ""));
+  });
 
-  activeTab
-    .querySelectorAll(".book-thumb")
-    .forEach(b => (b.style.display = ""));
+  // restore default tab
+  document.querySelector(".tablinks")?.click();
 });
