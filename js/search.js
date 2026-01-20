@@ -32,26 +32,36 @@ document.addEventListener("DOMContentLoaded", () => {
   // ------------------------
   // 3️⃣ Helper to render books into a tab
   // ------------------------
-  function renderBooks(tab, books) {
-    const container = document.getElementById(tab);
-    if (!container) return;
+function renderBooks(tab, books) {
+  const container = document.getElementById(tab);
+  if (!container) return;
 
-    // Clear current content
-    container.innerHTML = "";
+  container.innerHTML = "";
 
-    books.forEach(book => {
-      const div = document.createElement("div");
-      div.className = "book-thumb";
-      div.innerHTML = `
-        <div class="price-box" data-book-id="${book.id}">
-          <img src="${book.img}" width="120" />
-          <div class="title">${book.title}</div>
-          <div class="price">RM${book.price}</div>
-        </div>
-      `;
-      container.appendChild(div);
-    });
-  }
+  books.forEach(book => {
+    const title =
+      book.title ||
+      book.name ||
+      book.bookTitle ||
+      book.title_en ||
+      "Untitled";
+
+    const price = book.price || book.cost || "";
+    const img   = book.img || book.image || "";
+
+    const div = document.createElement("div");
+    div.className = "book-thumb";
+    div.innerHTML = `
+      <div class="price-box" data-book-id="${book.id}">
+        <img src="${img}" width="120">
+        <div class="title">${title}</div>
+        ${price ? `<div class="price">RM${price}</div>` : ""}
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
 
   // ------------------------
   // 4️⃣ Tab switch helper
@@ -69,21 +79,35 @@ document.addEventListener("DOMContentLoaded", () => {
   // ------------------------
   // 5️⃣ Global search function
   // ------------------------
-  function searchBooks(keyword) {
-    let firstTabWithResults = null;
+function searchBooks(keyword) {
+  let firstTabWithResults = null;
+  const kw = keyword.toLowerCase();
 
-    Object.keys(ALL_BOOKS).forEach(tab => {
-      const books = ALL_BOOKS[tab].filter(book =>
-        book.title.toLowerCase().includes(keyword.toLowerCase())
-      );
+  Object.keys(ALL_BOOKS).forEach(tab => {
 
-      renderBooks(tab, books);
+    const books = ALL_BOOKS[tab].filter(book => {
 
-      if (books.length && !firstTabWithResults) firstTabWithResults = tab;
+      // ✅ SUPPORT MULTIPLE TITLE KEYS SAFELY
+      const title =
+        book.title ||
+        book.name ||
+        book.bookTitle ||
+        book.title_en ||
+        "";
+
+      return title.toLowerCase().includes(kw);
     });
 
-    if (firstTabWithResults) openTab(firstTabWithResults);
-  }
+    renderBooks(tab, books);
+
+    if (books.length && !firstTabWithResults) {
+      firstTabWithResults = tab;
+    }
+  });
+
+  if (firstTabWithResults) openTab(firstTabWithResults);
+}
+
 
   // ------------------------
   // 6️⃣ Run after all JSONs loaded
