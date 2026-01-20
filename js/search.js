@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ❌ CLEAR SEARCH */
-  document.getElementById("clearSearch")?.addEventListener("click", () => {
+   document.getElementById("clearSearch")?.addEventListener("click", () => {
     searchInput.value = "";
 
     document.querySelectorAll(".book-thumb").forEach(book => {
@@ -72,6 +72,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showTab("BeginningReader");
   });
+
+    const searchInput = document.getElementById("bookSearch");
+    const clearBtn = document.getElementById("clearSearch");
+
+  if (searchInput && clearBtn) {
+    searchInput.addEventListener("input", () => {
+      clearBtn.style.display = searchInput.value ? "block" : "none";
+    });
+  }
 
  
 
