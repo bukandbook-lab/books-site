@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // 🔑 LOAD DATA
       loadBooks(target);
+      
+      document.getElementById("bookSearch")?.value = "";
+
 
       // close videos & popups when switching tabs
       if (typeof stopAllVideos === "function") stopAllVideos();
