@@ -72,4 +72,13 @@ document.addEventListener("DOMContentLoaded", () => {
     showTab("BeginningReader");
   });
 
+  const searchInput = document.getElementById("bookSearch");
+  const clearBtn = document.getElementById("clearSearch");
+
+  searchInput.addEventListener("input", () => {
+  clearBtn.style.display = searchInput.value ? "block" : "none";
+    
+  });
+
+
 });
