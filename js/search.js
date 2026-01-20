@@ -1,34 +1,30 @@
-/* =====================================
-   GLOBAL SEARCH (TAB-SAFE)
-===================================== */
+document.addEventListener("DOMContentLoaded", () => {
 
-document.addEventListener("input", e => {
-  if (e.target.id !== "bookSearch") return;
+  const searchInput = document.getElementById("bookSearch");
+  if (!searchInput) return;
 
-  const keyword = e.target.value.toLowerCase().trim();
+  searchInput.addEventListener("input", () => {
+    const keyword = searchInput.value.toLowerCase().trim();
 
-  document.querySelectorAll(".book-thumb").forEach(book => {
-    const bookId =
-      book.querySelector("[data-book-id]")?.dataset.bookId;
+    // Filter ONLY books that exist in DOM (dynamic-safe)
+    document.querySelectorAll(".book-thumb").forEach(book => {
+      const idHolder = book.querySelector("[data-book-id]");
+      if (!idHolder) return;
 
-    const data = BOOK_REGISTRY[bookId];
-    if (!data) return;
+      const bookId = idHolder.dataset.bookId;
+      const data = window.BOOK_REGISTRY?.[bookId];
+      if (!data) return;
 
-    const match = data.title.toLowerCase().includes(keyword);
-    book.style.display = match ? "" : "none";
+      const match = data.title.toLowerCase().includes(keyword);
+      book.style.display = match ? "" : "none";
+    });
   });
-});
 
-/* =====================================
-   CLEAR SEARCH
-===================================== */
+  // CLEAR SEARCH
+  document.getElementById("clearSearch")?.addEventListener("click", () => {
+    searchInput.value = "";
+    document.querySelectorAll(".book-thumb")
+      .forEach(book => (book.style.display = ""));
+  });
 
-document.getElementById("clearSearch")?.addEventListener("click", () => {
-  const input = document.getElementById("bookSearch");
-  if (!input) return;
-
-  input.value = "";
-
-  document.querySelectorAll(".book-thumb")
-    .forEach(book => (book.style.display = ""));
 });
