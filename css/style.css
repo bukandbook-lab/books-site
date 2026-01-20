@@ -188,6 +188,15 @@ img {
 #clearSearch:hover {
   color: #000;
 }
+@media (max-width: 480px) {
+  .top-bar {
+    flex-wrap: wrap;
+  }
+
+  .search-bar {
+    max-width: 100%;
+  }
+}
 
 /* =========================
    TAB CONTENT
