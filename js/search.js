@@ -3,144 +3,77 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("bookSearch");
   if (!searchInput) return;
 
-  // ------------------------
-  // 1️⃣ Define all tab JSON URLs
-  // ------------------------
-  const BOOK_JSON_URLS = {
-    BeginningReader: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/BeginningReaderData.json",
-    ChapterBook:     "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/ChapterBookData.json",
-    PictureBook:     "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/PictureBookData.json",
-    Novel:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/NovelData.json",
-    Islamic:         "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/islamicdata.json",
-    Melayu:          "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/MelayuData.json",
-    Jawi:            "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/jawidata.json",
-    Comic:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/comicdata.json"
-  };
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const tabIds = [...tabButtons].map(b => b.dataset.tab);
 
-  const ALL_BOOKS = {};  // { tabName: [book objects] }
+  // Track loaded tabs
+  const loadedTabs = {};
 
-  // ------------------------
-  // 2️⃣ Fetch all JSONs
-  // ------------------------
-  const fetchPromises = Object.entries(BOOK_JSON_URLS).map(([tab, url]) => {
-    return fetch(url)
-      .then(res => res.json())
-      .then(data => { ALL_BOOKS[tab] = data; })
-      .catch(err => { console.error("Failed to load", tab, err); ALL_BOOKS[tab] = []; });
-  });
+  function ensureTabLoaded(tabId) {
+    if (!loadedTabs[tabId]) {
+      loadBooks(tabId);
+      loadedTabs[tabId] = true;
+    }
+  }
 
-  // ------------------------
-  // 3️⃣ Helper to render books into a tab
-  // ------------------------
-function renderBooks(tab, books) {
-  const container = document.getElementById(tab);
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  books.forEach(book => {
-    const title =
-      book.title ||
-      book.name ||
-      book.bookTitle ||
-      book.title_en ||
-      "Untitled";
-
-    const price = book.price || book.cost || "";
-    const img   = book.img || book.image || "";
-
-    const div = document.createElement("div");
-    div.className = "book-thumb";
-    div.innerHTML = `
-      <div class="price-box" data-book-id="${book.id}">
-        <img src="${img}" width="120">
-        <div class="title">${title}</div>
-        ${price ? `<div class="price">RM${price}</div>` : ""}
-      </div>
-    `;
-    container.appendChild(div);
-  });
-}
-
-
-  // ------------------------
-  // 4️⃣ Tab switch helper
-  // ------------------------
-  function openTab(tabId) {
+  function showTab(tabId) {
     document.querySelectorAll(".tabcontent").forEach(tab => {
       tab.style.display = tab.id === tabId ? "block" : "none";
     });
 
-    document.querySelectorAll(".tab-btn").forEach(btn => {
+    tabButtons.forEach(btn => {
       btn.classList.toggle("active", btn.dataset.tab === tabId);
     });
   }
 
-  // ------------------------
-  // 5️⃣ Global search function
-  // ------------------------
-function searchBooks(keyword) {
-  let firstTabWithResults = null;
-  const kw = keyword.toLowerCase();
+  // 🔍 GLOBAL SEARCH
+  searchInput.addEventListener("input", () => {
+    const keyword = searchInput.value.toLowerCase().trim();
+    let firstTabWithMatch = null;
 
-  Object.keys(ALL_BOOKS).forEach(tab => {
+    tabIds.forEach(tabId => {
+      ensureTabLoaded(tabId);
 
-    const books = ALL_BOOKS[tab].filter(book => {
+      const tab = document.getElementById(tabId);
+      if (!tab) return;
 
-      // ✅ SUPPORT MULTIPLE TITLE KEYS SAFELY
-      const title =
-        book.title ||
-        book.name ||
-        book.bookTitle ||
-        book.title_en ||
-        "";
+      let hasMatch = false;
 
-      return title.toLowerCase().includes(kw);
-    });
+      tab.querySelectorAll(".book-thumb").forEach(book => {
+        const titleEl = book.querySelector(".title");
+        const title = titleEl ? titleEl.textContent.toLowerCase() : "";
 
-    renderBooks(tab, books);
+        const match = title.includes(keyword);
+        book.style.display = match ? "" : "none";
 
-    if (books.length && !firstTabWithResults) {
-      firstTabWithResults = tab;
-    }
-  });
+        if (match) hasMatch = true;
+      });
 
-  if (firstTabWithResults) openTab(firstTabWithResults);
-}
-
-
-  // ------------------------
-  // 6️⃣ Run after all JSONs loaded
-  // ------------------------
-  Promise.all(fetchPromises).then(() => {
-
-    // Handle typing in search box
-    searchInput.addEventListener("input", () => {
-      const keyword = searchInput.value.trim();
-      if (keyword === "") {
-        // Restore default tab
-        const defaultBtn = document.querySelector('.tab-btn[data-tab="BeginningReader"]') || document.querySelector(".tab-btn");
-        if (defaultBtn) openTab(defaultBtn.dataset.tab);
-
-        // Render all books in all tabs
-        Object.keys(ALL_BOOKS).forEach(tab => renderBooks(tab, ALL_BOOKS[tab]));
-      } else {
-        searchBooks(keyword);
+      if (hasMatch && !firstTabWithMatch) {
+        firstTabWithMatch = tabId;
       }
     });
 
-    // Handle clear button
-    document.getElementById("clearSearch")?.addEventListener("click", () => {
-      searchInput.value = "";
+    if (firstTabWithMatch) {
+      showTab(firstTabWithMatch);
+    }
+  });
 
-      // Restore all books
-      Object.keys(ALL_BOOKS).forEach(tab => renderBooks(tab, ALL_BOOKS[tab]));
+  // ❌ CLEAR SEARCH
+  document.getElementById("clearSearch")?.addEventListener("click", () => {
+    searchInput.value = "";
 
-      // Restore default tab
-      const defaultBtn = document.querySelector('.tab-btn[data-tab="BeginningReader"]') || document.querySelector(".tab-btn");
-      if (defaultBtn) openTab(defaultBtn.dataset.tab);
+    document.querySelectorAll(".book-thumb").forEach(book => {
+      book.style.display = "";
     });
 
+    const defaultBtn =
+      document.querySelector('.tab-btn[data-tab="BeginningReader"]') ||
+      tabButtons[0];
+
+    if (defaultBtn) {
+      showTab(defaultBtn.dataset.tab);
+    }
   });
 
 });
