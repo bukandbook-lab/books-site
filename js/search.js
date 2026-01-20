@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!searchInput) return;
 
   // ------------------------
-  // 1️⃣ Preload all tab JSON data
+  // 1️⃣ Define all tab JSON URLs
   // ------------------------
   const BOOK_JSON_URLS = {
     BeginningReader: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/BeginningReaderData.json",
@@ -17,9 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
     Comic:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/comicdata.json"
   };
 
-  const ALL_BOOKS = {};  // will store { tabName: [book objects] }
+  const ALL_BOOKS = {};  // { tabName: [book objects] }
 
-  // Fetch all JSONs in parallel
+  // ------------------------
+  // 2️⃣ Fetch all JSONs
+  // ------------------------
   const fetchPromises = Object.entries(BOOK_JSON_URLS).map(([tab, url]) => {
     return fetch(url)
       .then(res => res.json())
@@ -28,17 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ------------------------
-  // 2️⃣ Render books into tab
+  // 3️⃣ Helper to render books into a tab
   // ------------------------
   function renderBooks(tab, books) {
     const container = document.getElementById(tab);
     if (!container) return;
 
-    // Clear current books
+    // Clear current content
     container.innerHTML = "";
 
     books.forEach(book => {
-      // Use your existing renderBookHTML logic or build dynamically
       const div = document.createElement("div");
       div.className = "book-thumb";
       div.innerHTML = `
@@ -53,7 +54,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ------------------------
-  // 3️⃣ Search function
+  // 4️⃣ Tab switch helper
+  // ------------------------
+  function openTab(tabId) {
+    document.querySelectorAll(".tabcontent").forEach(tab => {
+      tab.style.display = tab.id === tabId ? "block" : "none";
+    });
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.tab === tabId);
+    });
+  }
+
+  // ------------------------
+  // 5️⃣ Global search function
   // ------------------------
   function searchBooks(keyword) {
     let firstTabWithResults = null;
@@ -68,27 +82,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (books.length && !firstTabWithResults) firstTabWithResults = tab;
     });
 
-    // Show the first tab with results
     if (firstTabWithResults) openTab(firstTabWithResults);
   }
 
   // ------------------------
-  // 4️⃣ Open tab helper
+  // 6️⃣ Run after all JSONs loaded
   // ------------------------
-  function openTab(tabId) {
-    document.querySelectorAll(".tabcontent").forEach(tab => {
-      tab.style.display = tab.id === tabId ? "block" : "none";
-    });
+  Promise.all(fetchPromises).then(() => {
 
-    document.querySelectorAll(".tab-btn").forEach(btn => {
-      btn.classList.toggle("active", btn.dataset.tab === tabId);
-    });
-  }
-
-  // ------------------------
-  // 5️⃣ Handle search input
-  // ------------------------
-  fetchPromises.then(() => {
+    // Handle typing in search box
     searchInput.addEventListener("input", () => {
       const keyword = searchInput.value.trim();
       if (keyword === "") {
@@ -96,14 +98,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const defaultBtn = document.querySelector('.tab-btn[data-tab="BeginningReader"]') || document.querySelector(".tab-btn");
         if (defaultBtn) openTab(defaultBtn.dataset.tab);
 
-        // Render all books normally
+        // Render all books in all tabs
         Object.keys(ALL_BOOKS).forEach(tab => renderBooks(tab, ALL_BOOKS[tab]));
       } else {
         searchBooks(keyword);
       }
     });
 
-    // Clear button (if exists)
+    // Handle clear button
     document.getElementById("clearSearch")?.addEventListener("click", () => {
       searchInput.value = "";
 
@@ -114,6 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const defaultBtn = document.querySelector('.tab-btn[data-tab="BeginningReader"]') || document.querySelector(".tab-btn");
       if (defaultBtn) openTab(defaultBtn.dataset.tab);
     });
+
   });
 
 });
