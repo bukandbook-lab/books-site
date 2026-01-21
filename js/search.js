@@ -108,4 +108,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+
+    const searchContainer = document.getElementById("searchResults");
+    if (searchContainer) {
+      searchContainer.style.display = "none";
+    }
+
+    if (searchInput) {
+      searchInput.value = "";
+    }
+
+    // Reset all book thumbs (important)
+    document.querySelectorAll(".book-thumb").forEach(book => {
+      book.style.display = "";
+    });
+  });
+});
+
+
 });
