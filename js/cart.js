@@ -107,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!agreeCheckbox || !payBtn) return;
 
-  // initialize cart agreement state
   cart.agreed = agreeCheckbox.checked;
 
   agreeCheckbox.addEventListener("change", () => {
@@ -119,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =====================================
-   PAY BUTTON ENABLE / DISABLE + STYLE
+   PAY BUTTON VISUAL STATE ONLY
 ===================================== */
 function updatePayButton() {
   const payBtn = document.getElementById("clickToPay");
@@ -127,14 +126,13 @@ function updatePayButton() {
 
   const canPay = cart.items.size > 0 && cart.agreed;
 
-  payBtn.disabled = !canPay;
-
   if (canPay) {
     payBtn.classList.add("active");
   } else {
     payBtn.classList.remove("active");
   }
 }
+
 
 /* =====================================
    RENDER CART
