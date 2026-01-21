@@ -96,11 +96,10 @@ document.addEventListener("DOMContentLoaded", () => {
           data-book-id="${bookId}"
         >
 
-        <div class="book-id">${bookId}</div>
-
+        
         <img
           class="cart-icon"
-          src=${CART_ICON}"
+          src="${CART_ICON}"
           data-book-id="${bookId}"
         >
       `;
