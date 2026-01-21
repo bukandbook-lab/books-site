@@ -225,7 +225,7 @@ function handleSwipe() {
 ===================================== */
 document.addEventListener("click", e => {
   const popup = document.getElementById("BookPopup");
-  const box = popup?.querySelector(".BookPopupContent");
+  const box = popup?.querySelector(".popup-box");
 
   if (!popup || popup.style.display !== "flex") return;
 
