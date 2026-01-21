@@ -145,6 +145,22 @@ If the file is in .epub, please download EPUB reader apps to be able to open the
 <script src="js/cart.js"></script>
 <script src="js/popup.js"></script>
 <script src="js/search.js"></script>
+<script>
+  const searchInput = document.getElementById("bookSearch");
+  const clearBtn = document.getElementById("clearSearch");
+
+  if (searchInput && clearBtn) {
+    searchInput.addEventListener("input", () => {
+      clearBtn.style.display = searchInput.value ? "block" : "none";
+    });
+
+    clearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      clearBtn.style.display = "none";
+      searchInput.dispatchEvent(new Event("input"));
+    });
+  }
+</script>
 
 
 
