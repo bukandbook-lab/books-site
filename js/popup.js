@@ -46,7 +46,7 @@ document.addEventListener("click", e => {
   data-price="${book.price}"
   data-setqtty="${book.SetQtty || 0}"
 >
-  <b>RM${book.price}</b>
+  <b>  RM${book.price}</b>
 <img
   class="cart-icon"
   src="${CART_ICON}"
