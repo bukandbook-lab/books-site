@@ -101,21 +101,13 @@ document.addEventListener("change", e => {
 /* =====================================
    TERMS CHECKBOX + PAY BUTTON STATE
 ===================================== */
-document.addEventListener("DOMContentLoaded", () => {
-  const agreeCheckbox = document.getElementById("agreeTerms");
-  const payBtn = document.getElementById("clickToPay");
-
-  if (!agreeCheckbox || !payBtn) return;
-
-  cart.agreed = agreeCheckbox.checked;
-
-  agreeCheckbox.addEventListener("change", () => {
-    cart.agreed = agreeCheckbox.checked;
+document.addEventListener("change", e => {
+  if (e.target.id === "agreeTerms") {
+    cart.agreed = e.target.checked;
     updatePayButton();
-  });
-
-  updatePayButton();
+  }
 });
+
 
 /* =====================================
    PAY BUTTON VISUAL STATE ONLY
@@ -323,10 +315,7 @@ payText.innerHTML = `
 
   Once payment is made, choose how you want to submit your order below 👇
 `;
-  document.getElementById("paymentPopup").style.display="block";
-
-
-
+  
 const cartEl = document.getElementById("Cart");
 if (cartEl) cartEl.classList.remove("open");
 
@@ -359,10 +348,12 @@ document.addEventListener("click", e => {
   if (!cartEl || !cartEl.classList.contains("open")) return;
 
   if (e.target.closest("#Cart")) return;
- if (
+if (
   e.target.closest(".cart-icon") ||
-  e.target.closest(".price-box")
+  e.target.closest(".price-box") ||
+  e.target.id === "clickToPay"
 ) return;
+
   if (e.target.closest(".remove-item")) return;
 
   cartEl.classList.remove("open");
