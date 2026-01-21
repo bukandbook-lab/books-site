@@ -174,3 +174,38 @@ document.addEventListener("click", e => {
     }
   }
 });
+/* =====================================
+   MOBILE SWIPE SUPPORT
+===================================== */
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener("touchstart", e => {
+  const popupImg = e.target.closest(".popup-img");
+  if (!popupImg) return;
+
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener("touchend", e => {
+  const popupImg = e.target.closest(".popup-img");
+  if (!popupImg) return;
+
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const diff = touchStartX - touchEndX;
+
+  // swipe threshold
+  if (Math.abs(diff) < 50) return;
+
+  if (diff > 0) {
+    // swipe left → next
+    document.getElementById("popupNext")?.click();
+  } else {
+    // swipe right → prev
+    document.getElementById("popupPrev")?.click();
+  }
+}
