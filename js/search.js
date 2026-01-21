@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("bookSearch");
   if (!searchInput) return;
 
+  let lastActiveTabId = null;
+
   /* ------------------------------
      HELPERS
   ------------------------------ */
@@ -20,43 +22,90 @@ document.addEventListener("DOMContentLoaded", () => {
     return activeBtn ? activeBtn.dataset.tab : null;
   }
 
+  function hideAllTabs() {
+    document.querySelectorAll(".tabcontent").forEach(tab => {
+      tab.style.display = "none";
+    });
+  }
+
+  function showTab(tabId) {
+    document.querySelectorAll(".tabcontent").forEach(tab => {
+      tab.style.display = tab.id === tabId ? "block" : "none";
+    });
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.tab === tabId);
+    });
+  }
+
+  function getSearchContainer() {
+    let container = document.getElementById("searchResults");
+    if (!container) {
+      container = document.createElement("div");
+      container.id = "searchResults";
+      container.className = "search-grid";
+      document.body.appendChild(container);
+    }
+    return container;
+  }
+
   /* ------------------------------
-     SEARCH (GLOBAL DATA, LOCAL VIEW)
+     SEARCH LOGIC
   ------------------------------ */
 
   searchInput.addEventListener("input", () => {
     const keyword = normalize(searchInput.value);
-    const activeTabId = getActiveTabId();
 
-    if (!activeTabId) return;
+    // Save last active tab ONCE
+    if (!lastActiveTabId) {
+      lastActiveTabId = getActiveTabId();
+    }
 
-    const activeTab = document.getElementById(activeTabId);
-    if (!activeTab) return;
+    // If search cleared → restore tabs
+    if (!keyword) {
+      const container = document.getElementById("searchResults");
+      if (container) container.style.display = "none";
 
-    activeTab.querySelectorAll(".book-thumb").forEach(bookEl => {
-
-      // 🔑 Always get ID from popup-trigger
-      const bookId =
-        bookEl.querySelector(".popup-trigger")?.dataset.bookId;
-
-      const book = BOOK_REGISTRY[bookId];
-
-      // If book data missing, hide
-      if (!book || !book.title) {
-        bookEl.style.display = "none";
-        return;
+      if (lastActiveTabId) {
+        showTab(lastActiveTabId);
       }
+      return;
+    }
 
-      // Empty search → show all in active tab
-      if (!keyword) {
-        bookEl.style.display = "";
-        return;
-      }
+    // Hide tabs and show search container
+    hideAllTabs();
+
+    const container = getSearchContainer();
+    container.style.display = "grid";
+    container.innerHTML = "";
+
+    Object.entries(BOOK_REGISTRY).forEach(([bookId, book]) => {
+
+      if (!book || !book.title) return;
 
       const title = normalize(book.title);
-      const match = title.includes(keyword);
+      if (!title.includes(keyword)) return;
 
-      bookEl.style.display = match ? "" : "none";
+      const div = document.createElement("div");
+      div.className = "book-thumb";
+
+      div.innerHTML = `
+        <img
+          class="grid-book-img popup-trigger"
+          src="${book.img || ""}"
+          data-book-id="${bookId}"
+        >
+
+        <div class="book-id">${bookId}</div>
+
+        <img
+          class="cart-icon"
+          src="YOUR_CART_ICON_URL_HERE"
+          data-book-id="${bookId}"
+        >
+      `;
+
+      container.appendChild(div);
     });
   });
 
