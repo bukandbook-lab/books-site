@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <img
           class="cart-icon"
-          src="YOUR_CART_ICON_URL_HERE"
+          src=${CART_ICON}"
           data-book-id="${bookId}"
         >
       `;
