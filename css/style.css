@@ -455,15 +455,15 @@ button {
 }
 
 #clickToPay {
-  background: #ff69ad;
-  color: #fff;
+  background: #A9A9A9;
+  color: 5A5A5A;
   border: none;
   margin: 2px;
-  cursor: pointer;
   border-radius: 18px;
   flex: 0 0 auto;
   padding: 6px 10px;
   font-size: 12px;
+  cursor: not-allowed;
   white-space: nowrap;
 }
 
