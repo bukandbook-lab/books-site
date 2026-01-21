@@ -15,6 +15,17 @@ document.addEventListener("click", e => {
    OPEN BOOK POPUP (REUSABLE)
 ===================================== */
 function openBookPopup(bookId) {
+  const content = document.getElementById("BookPopupContent");
+  const existingBox = content.querySelector(".popup-box");
+
+  if (existingBox) {
+    existingBox.classList.add("fade-out");
+    setTimeout(() => renderPopup(bookId), 200);
+  } else {
+    renderPopup(bookId);
+  }
+}
+function renderPopup(bookId) {
   if (!window.BOOK_REGISTRY) {
     console.error("BOOK_REGISTRY missing");
     return;
