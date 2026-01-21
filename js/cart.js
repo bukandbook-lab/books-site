@@ -118,6 +118,23 @@ document.addEventListener("DOMContentLoaded", () => {
   updatePayButton();
 });
 
+/* =====================================
+   PAY BUTTON ENABLE / DISABLE + STYLE
+===================================== */
+function updatePayButton() {
+  const payBtn = document.getElementById("clickToPay");
+  if (!payBtn) return;
+
+  const canPay = cart.items.size > 0 && cart.agreed;
+
+  payBtn.disabled = !canPay;
+
+  if (canPay) {
+    payBtn.classList.add("active");
+  } else {
+    payBtn.classList.remove("active");
+  }
+}
 
 /* =====================================
    RENDER CART
@@ -233,23 +250,7 @@ function renderCart() {
 
 }
 
-/* =====================================
-   PAY BUTTON ENABLE / DISABLE + STYLE
-===================================== */
-function updatePayButton() {
-  const payBtn = document.getElementById("clickToPay");
-  if (!payBtn) return;
 
-  const canPay = cart.items.size > 0 && cart.agreed;
-
-  payBtn.disabled = !canPay;
-
-  if (canPay) {
-    payBtn.classList.add("active");
-  } else {
-    payBtn.classList.remove("active");
-  }
-}
 /* =====================================
    CLICK TO PAY
 ===================================== */
