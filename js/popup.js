@@ -220,3 +220,21 @@ function handleSwipe() {
     document.getElementById("popupPrev")?.click();
   }
 }
+/* =====================================
+   WHEN OUTSIDE POPUP IS CLICKED
+===================================== */
+document.addEventListener("click", e => {
+  const popup = document.getElementById("BookPopup");
+  const box = popup?.querySelector(".BookPopupContent");
+
+  if (!popup || popup.style.display !== "flex") return;
+
+  if (!box.contains(e.target) && e.target === popup) {
+    popup.style.display = "none";
+
+    // stop video if any
+    const iframe = popup.querySelector("iframe");
+    if (iframe) iframe.remove();
+  }
+});
+
