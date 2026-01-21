@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!container) {
       container = document.createElement("div");
       container.id = "searchResults";
-      container.className = "search-grid";
+      container.className = "image-grid";
       document.body.appendChild(container);
     }
     return container;
