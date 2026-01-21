@@ -99,14 +99,39 @@ document.addEventListener("change", e => {
 });
 
 /* =====================================
-   TERMS CHECKBOX
+   TERMS CHECKBOX + PAY BUTTON STATE
 ===================================== */
-document.addEventListener("change", e => {
-  if (e.target.id === "agreeTerms") {
-    cart.agreed = e.target.checked;
+document.addEventListener("DOMContentLoaded", () => {
+  const agreeCheckbox = document.getElementById("agreeTerms");
+  const payBtn = document.getElementById("clickToPay");
+
+  if (!agreeCheckbox || !payBtn) return;
+
+  cart.agreed = agreeCheckbox.checked;
+
+  agreeCheckbox.addEventListener("change", () => {
+    cart.agreed = agreeCheckbox.checked;
     updatePayButton();
-  }
+  });
+
+  updatePayButton();
 });
+
+/* =====================================
+   PAY BUTTON VISUAL STATE ONLY
+===================================== */
+function updatePayButton() {
+  const payBtn = document.getElementById("clickToPay");
+  if (!payBtn) return;
+
+  const canPay = cart.items.size > 0 && cart.agreed;
+
+  if (canPay) {
+    payBtn.classList.add("active");
+  } else {
+    payBtn.classList.remove("active");
+  }
+}
 
 /* =====================================
    RENDER CART
@@ -222,14 +247,6 @@ function renderCart() {
 
 }
 
-/* =====================================
-   PAY BUTTON ENABLE / DISABLE
-===================================== */
-function updatePayButton() {
-  const payBtn = document.getElementById("clickToPay");
-  if (!payBtn) return;
-  payBtn.disabled = cart.items.size === 0 || !cart.agreed;
-}
 
 /* =====================================
    CLICK TO PAY
