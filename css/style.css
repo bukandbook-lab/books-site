@@ -347,6 +347,28 @@ img {
   float: right;
 }
 
+.popup-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 32px;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px;
+  color: #333;
+}
+
+.popup-nav.left {
+  left: 10px;
+}
+
+.popup-nav.right {
+  right: 10px;
+}
+
+.popup-nav.hidden {
+  display: none;
+}
 
 
 /* =========================
