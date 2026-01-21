@@ -99,14 +99,25 @@ document.addEventListener("change", e => {
 });
 
 /* =====================================
-   TERMS CHECKBOX
+   TERMS CHECKBOX + PAY BUTTON STATE
 ===================================== */
-document.addEventListener("change", e => {
-  if (e.target.id === "agreeTerms") {
-    cart.agreed = e.target.checked;
+document.addEventListener("DOMContentLoaded", () => {
+  const agreeCheckbox = document.getElementById("agreeTerms");
+  const payBtn = document.getElementById("clickToPay");
+
+  if (!agreeCheckbox || !payBtn) return;
+
+  // initialize cart agreement state
+  cart.agreed = agreeCheckbox.checked;
+
+  agreeCheckbox.addEventListener("change", () => {
+    cart.agreed = agreeCheckbox.checked;
     updatePayButton();
-  }
+  });
+
+  updatePayButton();
 });
+
 
 /* =====================================
    RENDER CART
@@ -223,14 +234,22 @@ function renderCart() {
 }
 
 /* =====================================
-   PAY BUTTON ENABLE / DISABLE
+   PAY BUTTON ENABLE / DISABLE + STYLE
 ===================================== */
 function updatePayButton() {
   const payBtn = document.getElementById("clickToPay");
   if (!payBtn) return;
-  payBtn.disabled = cart.items.size === 0 || !cart.agreed;
-}
 
+  const canPay = cart.items.size > 0 && cart.agreed;
+
+  payBtn.disabled = !canPay;
+
+  if (canPay) {
+    payBtn.classList.add("active");
+  } else {
+    payBtn.classList.remove("active");
+  }
+}
 /* =====================================
    CLICK TO PAY
 ===================================== */
