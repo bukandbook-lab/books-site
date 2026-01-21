@@ -501,9 +501,23 @@ button {
   padding: 6px 10px;
   font-size: 12px;
   cursor: not-allowed;
-  white-space: nowrap;
+  pointer-events: none;
+  transition: all 0.2s ease;
 }
 
+#clickToPay.active  {
+  background: #eee;
+  background-color: #FF1493;
+  border-color: #ffdbe1;
+  color: white;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 18px;
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  font-size: 12px;
+  pointer-events: auto;
+}
 #continueShopping {
   background: #eee;
   background-color: #FF1493;
