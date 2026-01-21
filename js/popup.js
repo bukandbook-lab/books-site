@@ -32,9 +32,9 @@ document.addEventListener("click", e => {
     <div class="popup-box">
 
       <img src="${CLOSE_ICON}" class="close-popup" alt="Close">
-
+      <div class="popup-nav left" id="popupPrev">‹</div>
       <img src="${book.img}" class="popup-img">
-
+      <div class="popup-nav right" id="popupNext">›</div>
       <div class="book-title">${book.title}</div>
 
       ${setQtyHTML}
