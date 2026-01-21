@@ -1,24 +1,37 @@
+let currentBookId = null;
+
+/* =====================================
+   OPEN POPUP (CLICK ON BOOK)
+===================================== */
 document.addEventListener("click", e => {
   const trigger = e.target.closest(".popup-trigger");
   if (!trigger) return;
 
+  const bookId = trigger.dataset.bookId;
+  openBookPopup(bookId);
+});
+
+/* =====================================
+   OPEN BOOK POPUP (REUSABLE)
+===================================== */
+function openBookPopup(bookId) {
   if (!window.BOOK_REGISTRY) {
     console.error("BOOK_REGISTRY missing");
     return;
   }
 
-  const bookId = trigger.dataset.bookId;
   const book = BOOK_REGISTRY[bookId];
-
   if (!book) {
     alert("Book not found");
     return;
   }
 
+  currentBookId = bookId;
+
   /* ===============================
-     PRICE & LABEL LOGIC
+     PRICE & LABEL LOGIC (FIXED)
   =============================== */
-  const isSetBook = book.price === 2 || book.price === 4;
+  const isSetBook = Number(book.SetQtty) > 1;
   const priceLabel = isSetBook ? "/set" : "/book";
 
   const setQtyHTML = isSetBook
@@ -32,38 +45,40 @@ document.addEventListener("click", e => {
     <div class="popup-box">
 
       <img src="${CLOSE_ICON}" class="close-popup" alt="Close">
-      <div class="popup-nav left" id="popupPrev">‹</div>
-      <img src="${book.img}" class="popup-img">
-      <div class="popup-nav right" id="popupNext">›</div>
+
+      <div class="popup-nav left hidden" id="popupPrev">‹</div>
+
+      <img src="${book.img}" class="popup-img popup-trigger" data-book-id="${bookId}">
+
+      <div class="popup-nav right hidden" id="popupNext">›</div>
+
       <div class="book-title">${book.title}</div>
 
       ${setQtyHTML}
 
-<div
-  class="price-box"
-  data-book-id="${book.id}"
-  data-title="${book.title}"
-  data-price="${book.price}"
-  data-setqtty="${book.SetQtty || 0}"
->
-  <b>  RM${book.price}</b>
-<img
-  class="cart-icon"
-  src="${CART_ICON}"
-  width="22"
-  data-book-id="${book.id}"
->
+      <div
+        class="price-box"
+        data-book-id="${bookId}"
+        data-title="${book.title}"
+        data-price="${book.price}"
+        data-setqtty="${book.SetQtty || 1}"
+      >
+        <b>RM${book.price} ${priceLabel}</b>
 
-</div>
+        <img
+          class="cart-icon"
+          src="${CART_ICON}"
+          width="22"
+          data-book-id="${bookId}"
+        >
+      </div>
 
-
-    ${
+      ${
         book.video
           ? `<button class="watch-video-btn">Watch Video</button>
              <div class="video-box" data-youtube="${book.video}" style="display:none;"></div>`
           : ``
-    }
-
+      }
 
     </div>
   `;
@@ -71,7 +86,47 @@ document.addEventListener("click", e => {
   const popup = document.getElementById("BookPopup");
   popup.dataset.bookId = bookId;
   popup.style.display = "flex";
-});
+
+  updatePopupNavigation();
+}
+
+/* =====================================
+   GALLERY NAVIGATION (BY BOOK ID)
+===================================== */
+function updatePopupNavigation() {
+  if (!currentBookId) return;
+
+  const prefix = currentBookId.charAt(0); // B, P, C, etc.
+
+  const categoryBookIds = Object.keys(BOOK_REGISTRY)
+    .filter(id => id.charAt(0) === prefix)
+    .sort((a, b) => {
+      const numA = parseInt(a.slice(1), 10);
+      const numB = parseInt(b.slice(1), 10);
+      return numA - numB;
+    });
+
+  const index = categoryBookIds.indexOf(currentBookId);
+
+  const prevBtn = document.getElementById("popupPrev");
+  const nextBtn = document.getElementById("popupNext");
+
+  /* LEFT */
+  if (index > 0) {
+    prevBtn.classList.remove("hidden");
+    prevBtn.onclick = () => openBookPopup(categoryBookIds[index - 1]);
+  } else {
+    prevBtn.classList.add("hidden");
+  }
+
+  /* RIGHT */
+  if (index < categoryBookIds.length - 1) {
+    nextBtn.classList.remove("hidden");
+    nextBtn.onclick = () => openBookPopup(categoryBookIds[index + 1]);
+  } else {
+    nextBtn.classList.add("hidden");
+  }
+}
 
 /* =====================================
    POPUP INTERACTIONS
