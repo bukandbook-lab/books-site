@@ -4,8 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!searchInput) return;
 
   /* ------------------------------
-     HELPER
+     HELPERS
   ------------------------------ */
+
   function normalize(text = "") {
     return text
       .toLowerCase()
@@ -14,27 +15,39 @@ document.addEventListener("DOMContentLoaded", () => {
       .trim();
   }
 
+  function getActiveTabId() {
+    const activeBtn = document.querySelector(".tab-btn.active");
+    return activeBtn ? activeBtn.dataset.tab : null;
+  }
+
   /* ------------------------------
-     GLOBAL SEARCH (NO TAB LOGIC)
+     SEARCH (GLOBAL DATA, LOCAL VIEW)
   ------------------------------ */
+
   searchInput.addEventListener("input", () => {
     const keyword = normalize(searchInput.value);
+    const activeTabId = getActiveTabId();
 
-    document.querySelectorAll(".book-thumb").forEach(bookEl => {
+    if (!activeTabId) return;
 
-      // 🔑 Always read ID from popup-trigger
+    const activeTab = document.getElementById(activeTabId);
+    if (!activeTab) return;
+
+    activeTab.querySelectorAll(".book-thumb").forEach(bookEl => {
+
+      // 🔑 Always get ID from popup-trigger
       const bookId =
         bookEl.querySelector(".popup-trigger")?.dataset.bookId;
 
       const book = BOOK_REGISTRY[bookId];
 
-      // Hide if book data missing
+      // If book data missing, hide
       if (!book || !book.title) {
         bookEl.style.display = "none";
         return;
       }
 
-      // If search empty → show everything
+      // Empty search → show all in active tab
       if (!keyword) {
         bookEl.style.display = "";
         return;
