@@ -211,7 +211,7 @@ function renderCart() {
 
     <div class="cart-actions">
       <button id="continueShopping">CONTINUE SHOPPING</button>
-      <button id="clickToPay" ${cart.items.size === 0 ? "disabled" : ""}>
+      <button id="clickToPay">
         CLICK TO PAY
       </button>
     </div>
@@ -236,28 +236,38 @@ function updatePayButton() {
 ===================================== */
 document.addEventListener("click", e => {
   if (e.target.id !== "clickToPay") return;
-  if (cart.items.size === 0 || !cart.agreed) return;
+  if (cart.items.size === 0) {
+    alert("Your cart is empty.");
+    return;
+  }
 
-// 🔥 FORCE-CAPTURE delivery details (fixes disappearing textarea)
-  const deliveryInput = document.getElementById("deliveryDetails");
-  if (deliveryInput) {
-  cart.deliveryDetails = deliveryInput.value.trim();
-   }
+  if (!cart.agreed) {
+    alert("Please agree to the terms and conditions.");
+    return;
+  }
+
+const deliveryField = document.getElementById("deliveryDetails");
+  if (!deliveryField || !deliveryField.value.trim()) {
+    alert("Please enter delivery details.");
+    return;
+  }
+
+  if (cart.delivery === "email") {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(deliveryField.value.trim())) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+  }
+
+  // ✅ NOW SAFE TO PROCEED
+
+  cart.deliveryDetails = deliveryField.value.trim();
    
   if (!cart.orderId) {
   cart.orderId = generateOrderId();
    }
    
- const params = new URLSearchParams({
-    action: "button_click",
-    page: location.href,
-    t: Date.now()
-  });
-
-  new Image().src =
-    "https://script.google.com/macros/s/AKfycbyj3bn9dvQ2tVwxTsSrRCe5uLkVWJ6u-eSNGz4XDySWPE5eq2hZt1_vFIUMqd2pM6S9/exec?" +
-    params.toString();
-
   const emailBox = document.getElementById("emailBookTitles");
   const hidden   = document.getElementById("emailBookTitlesInput");
 
@@ -302,20 +312,6 @@ payText.innerHTML = `
 
 const cartEl = document.getElementById("Cart");
 if (cartEl) cartEl.classList.remove("open");
-
-const deliveryField = document.getElementById("deliveryDetails");
-if (!deliveryField || !deliveryField.value.trim()) {
-  alert("Please enter delivery details.");
-  return;
-}
-
-if (cart.delivery === "email") {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(deliveryField.value.trim())) {
-    alert("Please enter a valid email address.");
-    return;
-  }
-}
 
 const paymentPopup = document.getElementById("paymentPopup");
 if (paymentPopup) paymentPopup.style.display = "flex";
