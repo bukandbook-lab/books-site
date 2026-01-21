@@ -370,6 +370,24 @@ img {
   display: none;
 }
 
+/* Popup fade animation */
+.popup-box {
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.popup-box.fade-out {
+  opacity: 0;
+}
+
+.popup-nav {
+  user-select: none;
+}
+
+/* Optional smoother image feel */
+.popup-img {
+  transition: transform 0.25s ease;
+}
 
 /* =========================
    CART-ICON
