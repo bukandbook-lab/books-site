@@ -38,19 +38,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let hasMatch = false;
 
-      tab.querySelectorAll(".book-thumb").forEach(bookEl => {
-        const bookId =
-        bookEl.querySelector(".popup-trigger")?.dataset.bookId;
+   tab.querySelectorAll(".book-thumb").forEach(bookEl => {
+  const bookId =
+    bookEl.querySelector(".popup-trigger")?.dataset.bookId;
 
+  const book = BOOK_REGISTRY[bookId];
+  if (!book) {
+    bookEl.style.display = "none";
+    return;
+  }
 
-        const book = BOOK_REGISTRY[bookId];
-        const title = book?.title?.toLowerCase() || "";
+  const title = normalize(book.title);
+  const searchTerm = normalize(keyword);
 
-        const match = title.includes(keyword);
-        bookEl.style.display = match ? "" : "none";
+  const match = title.includes(searchTerm);
+  bookEl.style.display = match ? "" : "none";
 
-        if (match) hasMatch = true;
-      });
+  if (match) hasMatch = true;
+});
+
 
       if (hasMatch && !firstTabWithMatch) {
         firstTabWithMatch = tabId;
