@@ -8,6 +8,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const loadedTabs = {};
 
+  /* ------------------------------
+     HELPERS
+  ------------------------------ */
+
+  function normalize(text = "") {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/gi, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
   function ensureTabLoaded(tabId) {
     if (!loadedTabs[tabId]) {
       loadBooks(tabId);
@@ -25,9 +37,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* 🔍 GLOBAL SEARCH */
+  function resetAllBooks() {
+    document.querySelectorAll(".book-thumb").forEach(book => {
+      book.style.display = "";
+    });
+  }
+
+  /* ------------------------------
+     GLOBAL SEARCH
+  ------------------------------ */
+
   searchInput.addEventListener("input", () => {
-    const keyword = searchInput.value.toLowerCase().trim();
+    const keyword = normalize(searchInput.value);
+
+    // If search cleared → reset and return to home tab
+    if (!keyword) {
+      resetAllBooks();
+      showTab("BeginningReader");
+      return;
+    }
+
     let firstTabWithMatch = null;
 
     tabIds.forEach(tabId => {
@@ -38,25 +67,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let hasMatch = false;
 
-   tab.querySelectorAll(".book-thumb").forEach(bookEl => {
-  const bookId =
-    bookEl.querySelector(".popup-trigger")?.dataset.bookId;
+      tab.querySelectorAll(".book-thumb").forEach(bookEl => {
 
-  const book = BOOK_REGISTRY[bookId];
-  if (!book) {
-    bookEl.style.display = "none";
-    return;
-  }
+        // 🔑 ALWAYS read book-id from popup-trigger (authoritative)
+        const bookId =
+          bookEl.querySelector(".popup-trigger")?.dataset.bookId;
 
-  const title = normalize(book.title);
-  const searchTerm = normalize(keyword);
+        const book = BOOK_REGISTRY[bookId];
+        if (!book || !book.title) {
+          bookEl.style.display = "none";
+          return;
+        }
 
-  const match = title.includes(searchTerm);
-  bookEl.style.display = match ? "" : "none";
+        const title = normalize(book.title);
+        const match = title.includes(keyword);
 
-  if (match) hasMatch = true;
-});
+        bookEl.style.display = match ? "" : "none";
 
+        if (match) hasMatch = true;
+      });
 
       if (hasMatch && !firstTabWithMatch) {
         firstTabWithMatch = tabId;
@@ -67,19 +96,5 @@ document.addEventListener("DOMContentLoaded", () => {
       showTab(firstTabWithMatch);
     }
   });
-
-  /* ❌ CLEAR SEARCH */
-   document.getElementById("clearSearch")?.addEventListener("click", () => {
-    searchInput.value = "";
-
-    document.querySelectorAll(".book-thumb").forEach(book => {
-      book.style.display = "";
-    });
-
-    showTab("BeginningReader");
-  });
-
-
-
 
 });
