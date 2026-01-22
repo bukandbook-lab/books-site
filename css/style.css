@@ -559,7 +559,6 @@ button {
 
 .submit-Whatsapp {
    display: inline-flex;
-   align-items: center;
    justify-content: center;
 
 }
@@ -615,3 +614,15 @@ button {
   height: 16px;
   cursor: pointer;
 }
+/* =========================
+   CLOSE ICON FOR THANK YOU POPUP 
+========================= */
+#thankYou .close-popup {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 10;
+  float: right;
+}
+
