@@ -4,9 +4,9 @@ function loadBooks(tabId) {
 
   const books = ALL_BOOKS[tabId];
 
+  // 🚫 Safety: do nothing if no books
   if (!Array.isArray(books) || books.length === 0) {
-    container.innerHTML = "<p>No books found.</p>";
-    console.warn("No books for tab:", tabId);
+    container.innerHTML = "<p>No books available.</p>";
     return;
   }
 
