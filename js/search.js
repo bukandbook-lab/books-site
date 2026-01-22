@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const div = document.createElement("div");
       div.className = "book-thumb";
 
-      syncCartIcons();
+      
       div.innerHTML = `
         <img
           class="grid-book-img popup-trigger"
@@ -107,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
 
       container.appendChild(div);
+      syncCartIcons();
     });
   });
 
