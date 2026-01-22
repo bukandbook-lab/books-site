@@ -189,8 +189,6 @@ function renderCart() {
       </label>
     </div>
 
-    ${deliveryFeeHTML}
-
     <hr>
 
 <div class="cart-fee">
