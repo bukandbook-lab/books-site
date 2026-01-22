@@ -1,3 +1,29 @@
+/* =========================================================
+   LOAD BOOKS
+========================================================= */
+function loadBooks(tabId) {
+  const container = document.getElementById(tabId);
+  if (!container) return;
+
+  container.innerHTML = "<p>Loading...</p>";
+
+  const url = BOOK_SOURCES[tabId];
+  if (!url) {
+    container.innerHTML = "<p>No data source.</p>";
+    return;
+  }
+
+  fetch(url)
+    .then(res => {
+      if (!res.ok) throw new Error("HTTP error");
+      return res.json();
+    })
+    .then(data => renderBooks(tabId, data))
+    .catch(err => {
+      console.error("LOAD ERROR:", err);
+      container.innerHTML = "<p>Failed to load data.</p>";
+    });
+}
 
 /* =========================================================
    RENDER IMAGE GRID (6 COLUMNS, COMPACT)
