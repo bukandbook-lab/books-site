@@ -498,8 +498,10 @@ document.addEventListener("click", e => {
 
 
 function buildGoogleFormURL() {
+  const totals = calculateTotals();
+
   let books = [];
-  let total = 0;
+  let totals = 0;
   let i = 1;
 
   cart.items.forEach(item => {
@@ -507,9 +509,9 @@ function buildGoogleFormURL() {
       if (item.setQtty > 0 && item.price !== 1) {
         line += ` (${item.setQtty} books)`;
         }
-      line += ` (RM${item.price})`;
+      line += ` [RM${item.price}]`;
   books.push(line);
-  total += item.price;
+  SUBTOTAL: RM${totals.booksSubtotal};
   i++;
 });
 
@@ -518,8 +520,8 @@ function buildGoogleFormURL() {
 if (cart.delivery === "courier") {
   feeLines =
     `Shipping Fee: RM${SHIPPING_FEE}\n` +
-    `Thumb Drive: RM${THUMB_DRIVE_FEE}`;
-  total += SHIPPING_FEE + THUMB_DRIVE_FEE;
+    `Thumb Drive Charge: RM${THUMB_DRIVE_FEE}`;
+  totals += SHIPPING_FEE + THUMB_DRIVE_FEE;
 }
 
 
@@ -530,7 +532,12 @@ if (cart.delivery === "courier") {
     [FORM.books]:
   books.join("\n") +
   (feeLines ? "\n\n" + feeLines : ""),
-    [FORM.total]: `RM${total}`,
+    [FORM.total]:
+`Books: RM${totals.booksSubtotal}
+Shipping: RM${totals.shippingFee}
+Thumb Drive Charge: RM${totals.thumbFee}
+-----------------
+TOTAL: RM${totals.grandTotal}`,
     [FORM.method]: cart.delivery,
     [FORM.delivery]: cart.deliveryDetails
   });
