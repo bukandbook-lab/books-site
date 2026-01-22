@@ -552,13 +552,12 @@ button {
   margin: 2px;
   cursor: pointer;
   border-radius: 18px;
-  
   padding: 6px 10px;
   font-size: 12px;
   white-space: nowrap;
 }
 
-.submit-buttons{
+.submit-Whatsapp {
    display: flex-inline;
 }
    
