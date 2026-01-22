@@ -1,27 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-window.ALL_BOOKS = {};
-window.BOOK_REGISTRY = {};
-
-Promise.all(
-  Object.entries(BOOK_SOURCES).map(([category, url]) =>
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        ALL_BOOKS[category] = data;
-
-        data.forEach(book => {
-          BOOK_REGISTRY[book.id] = {
-            ...book,
-            category
-          };
-        });
-      })
-  )
-).then(() => {
-  console.log("✅ All books loaded for global search");
-});
-
   const searchInput = document.getElementById("bookSearch");
   if (!searchInput) return;
 
