@@ -364,80 +364,74 @@ if (
 
   cartEl.classList.remove("open");
 });
+
+/* =====================================
+   STANDARDIZED ORDER DATA
+===================================== */
+function buildOrderData() {
+  const totals = calculateTotals();
+
+  let bookLines = [];
+  let i = 1;
+
+  cart.items.forEach(item => {
+    let line = `${i}. ${item.title}`;
+    if (item.setQtty > 0 && item.price !== 1) {
+      line += ` (${item.setQtty} books)`;
+    }
+    line += ` [RM${item.price}]`;
+    bookLines.push(line);
+    i++;
+  });
+
+  return {
+    orderId: cart.orderId,
+    booksText: bookLines.join("\n"),
+    delivery: cart.delivery.toUpperCase(),
+    deliveryDetails: cart.deliveryDetails || "Not provided",
+    totals
+  };
+}
+
 /* =====================================
    WHATSAPP MESSAGE
 ===================================== */
+function openWhatsAppOrder() {
+  if (!cart.orderId) cart.orderId = generateOrderId();
+
+  // Auto-send Telegram
+  sendOrderToTelegram();
+
+  const url =
+    "https://wa.me/601113127911?text=" +
+    encodeURIComponent(buildWhatsAppMessage());
+
+  window.open(url, "_blank");
+}
+
 function buildWhatsAppMessage() {
+  const data = buildOrderData();
+  const t = data.totals;
+
   let msg = `🛒 *NEW ORDER*\n\n`;
+  msg += `📦 *Order ID:* ${data.orderId}\n\n`;
+  msg += `📚 *Books Ordered:*\n${data.booksText}\n\n`;
 
-  msg += `📦 *Order ID:* ${cart.orderId}\n\n`;
-
-  msg += `📚 *List of Books Ordered:*\n`;
-  let i = 1;
-  cart.items.forEach(item => {
-    msg += `${i}. ${item.title}`;
-      if (item.setQtty > 0 && item.price !== 1) {
-        msg += ` (${item.setQtty} books)`;
-        }
-        msg += ` [RM${item.price}]\n`;
-    i++;
-  });
-
-let total = 0;
-cart.items.forEach(i => total += i.price);
-
-if (cart.delivery === "courier") {
-  msg += `\n🚚 *Courier Charges:*\n`;
-  msg += `• Shipping Fee: RM${SHIPPING_FEE}\n`;
-  msg += `• Thumb Drive: RM${THUMB_DRIVE_FEE}\n`;
-  total += SHIPPING_FEE + THUMB_DRIVE_FEE;
-}
-
-
-  msg += `\n💰 *Total:* RM${total}\n`;
-  msg += `🚚 *Delivery Method:* ${cart.delivery.toUpperCase()}\n`;
-
-  msg += `📝 *Delivery Details:*\n${cart.deliveryDetails || "Not provided"}\n\n`;
-
-  msg += `📸 *Payment Screenshot:* (attached below)\n`;
-
-  return encodeURIComponent(msg);
-}
-/* =====================================
-   TELEGRAM MESSAGE
-===================================== */
-function buildTelegramMessage() {
-  let msg = `🛒 *NEW ORDER*\n\n`;
-
-  msg += `🆔 *Order ID:* ${cart.orderId}\n\n`;
-
-  msg += `📚 *Books Ordered:*\n`;
-  let i = 1;
-  let total = 0;
-
-  cart.items.forEach(item => {
-    msg += `${i}. ${item.title}`;
-      if (item.setQtty > 0 && item.price !== 1) {
-      msg += ` (${item.setQtty} books)`;
-    }
-    msg += ` [RM${item.price}]\n`;
-    total += item.price;
-    i++;
-  });
+  msg += `💵 *Payment Breakdown*\n`;
+  msg += `📚 Books: RM${t.booksSubtotal}\n`;
 
   if (cart.delivery === "courier") {
-    msg += `\n🚚 Shipping Fee: RM10`;
-    msg += `\n💾 Thumb Drive: RM7`;
-    total += 17;
+    msg += `🚚 Shipping: RM${t.shippingFee}\n`;
+    msg += `💾 Thumb Drive: RM${t.thumbFee}\n`;
   }
 
-  msg += `\n\n💰 *TOTAL:* RM${total}\n`;
-  msg += `📦 *Delivery Method:* ${cart.delivery.toUpperCase()}\n`;
-  msg += `📝 *Delivery Details:*\n${cart.deliveryDetails}\n`;
+  msg += `\n💰 *TOTAL: RM${t.grandTotal}*\n\n`;
+  msg += `🚚 *Delivery Method:* ${data.delivery}\n`;
+  msg += `📝 *Delivery Details:*\n${data.deliveryDetails}\n\n`;
+  msg += `📸 *Payment Screenshot:* (attach below)`;
 
   return msg;
 }
-
 
 
 /* =====================================
@@ -455,7 +449,7 @@ function updateDeliveryField() {
     field.placeholder = "Enter email address";
     field.setAttribute("type", "email");
   } else {
-    field.placeholder = "Enter full address, name & phone number";
+    field.placeholder = "Enter name, full address & phone number";
     field.removeAttribute("type");
   }
 }
@@ -469,81 +463,43 @@ document.addEventListener("input", e => {
   }
 });
 
-/* =====================================
-   WHATSAPP CALL BUTTON
-===================================== */
-function openWhatsAppOrder() {
-  if (!cart.orderId) {
-    cart.orderId = generateOrderId();
-  }
 
-  // 1️⃣ Send Telegram automatically
-  sendOrderToTelegram();
-
-  // 2️⃣ Open WhatsApp
-  const url =
-    "https://wa.me/601113127911?text=" +
-    buildWhatsAppMessage();
-
-  window.open(url, "_blank");
-}
 /* =====================================
    GOOGLE FORM
 ===================================== */
 document.addEventListener("click", e => {
   if (e.target.id === "submitGoogleForm") {
+    if (!cart.orderId) cart.orderId = generateOrderId();
     window.open(buildGoogleFormURL(), "_blank");
   }
 });
 
-
 function buildGoogleFormURL() {
-  const totals = calculateTotals();
+  const data = buildOrderData();
+  const t = data.totals;
 
-  let books = [];
-  let i = 1;
-
-  cart.items.forEach(item => {
-  let line = `${i}. ${item.title}`;
-      if (item.setQtty > 0 && item.price !== 1) {
-        line += ` (${item.setQtty} books)`;
-        }
-      line += ` [RM${item.price}]`;
-  books.push(line);
-  totals += item.price;
-  i++;
-});
-
-  let feeLines = "";
-
-if (cart.delivery === "courier") {
-  feeLines =
-    `Shipping Fee: RM${SHIPPING_FEE}\n` +
-    `Thumb Drive Charge: RM${THUMB_DRIVE_FEE}`;
-  totals += SHIPPING_FEE + THUMB_DRIVE_FEE;
-}
-
-
-  const base = "https://docs.google.com/forms/d/e/1FAIpQLSd6LUWZbLaj4qtmSLT1tKeKL5kqFeVuuvf6lk3uq2sy6aChmA/viewform?usp=pp_url&";
+  const base =
+    "https://docs.google.com/forms/d/e/1FAIpQLSd6LUWZbLaj4qtmSLT1tKeKL5kqFeVuuvf6lk3uq2sy6aChmA/viewform?usp=pp_url&";
 
   const params = new URLSearchParams({
-    [FORM.orderId]: cart.orderId,
+    [FORM.orderId]: data.orderId,
     [FORM.books]:
-  books.join("\n") +
-  (feeLines ? "\n\n" + feeLines : ""),
+      data.booksText +
+      (cart.delivery === "courier"
+        ? `\n\nShipping Fee: RM${t.shippingFee}\nThumb Drive: RM${t.thumbFee}`
+        : ""),
     [FORM.total]:
-`Books: RM${totals.booksSubtotal}
-Shipping: RM${totals.shippingFee}
-Thumb Drive Charge: RM${totals.thumbFee}
+`Books Subtotal: RM${t.booksSubtotal}
+Shipping: RM${t.shippingFee}
+Thumb Drive: RM${t.thumbFee}
 -----------------
-TOTAL: RM${totals.grandTotal}`,
+TOTAL: RM${t.grandTotal}`,
     [FORM.method]: cart.delivery,
-    [FORM.delivery]: cart.deliveryDetails
+    [FORM.delivery]: data.deliveryDetails
   });
 
   return base + params.toString();
 }
-
 
 
 /* =====================================
@@ -577,34 +533,23 @@ function calculateTotals() {
     thumbFee = THUMB_DRIVE_FEE;
   }
 
-  const grandTotal = booksSubtotal + shippingFee + thumbFee;
-
   return {
     booksSubtotal,
     shippingFee,
     thumbFee,
-    grandTotal
+    grandTotal: booksSubtotal + shippingFee + thumbFee
   };
 }
+
 
 /* =====================================
   SEND TELEGRAM MESSAGE
 ===================================== */
 
 function sendOrderToTelegram() {
-  if (cart.items.size === 0) {
-    alert("Cart is empty. Cannot send order.");
-    return;
-  }
+  if (cart.items.size === 0) return;
 
-  if (!cart.orderId) {
-    cart.orderId = generateOrderId();
-  }
-
-  if (!cart.deliveryDetails) {
-    alert("Delivery details missing.");
-    return;
-  }
+  if (!cart.orderId) cart.orderId = generateOrderId();
 
   const GAS_URL =
     "https://script.google.com/macros/s/AKfycbzgoBsTH0p0KYHaw9T6IgFn_Aepp_n1UoEe-zPW6A41xnZXnpzh4k1WykOi_A3SXzuK/exec";
@@ -617,8 +562,29 @@ function sendOrderToTelegram() {
       text: buildTelegramMessage()
     })
   });
+}
 
-  
+function buildTelegramMessage() {
+  const data = buildOrderData();
+  const t = data.totals;
+
+  let msg = `🛒 *NEW ORDER*\n\n`;
+  msg += `🆔 *Order ID:* ${data.orderId}\n\n`;
+  msg += `📚 *Books Ordered:*\n${data.booksText}\n\n`;
+
+  msg += `💵 *Payment Breakdown*\n`;
+  msg += `📚 Books: RM${t.booksSubtotal}\n`;
+
+  if (cart.delivery === "courier") {
+    msg += `🚚 Shipping: RM${t.shippingFee}\n`;
+    msg += `💾 Thumb Drive: RM${t.thumbFee}\n`;
+  }
+
+  msg += `\n💰 *TOTAL: RM${t.grandTotal}*\n\n`;
+  msg += `📦 *Delivery Method:* ${data.delivery}\n`;
+  msg += `📝 *Delivery Details:*\n${data.deliveryDetails}`;
+
+  return msg;
 }
 
 
