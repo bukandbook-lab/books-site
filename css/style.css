@@ -558,7 +558,7 @@ button {
 }
 
 .submit-Whatsapp {
-   display: flex-inline;
+   display: inline-flex;
 }
    
 /* =========================
