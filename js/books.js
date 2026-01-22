@@ -1,28 +1,32 @@
-/* =========================================================
-   RENDER BOOKS INTO A TAB
-========================================================= */
-
-function renderBooks(tabId, books) {
+function loadBooks(tabId) {
   const container = document.getElementById(tabId);
   if (!container) return;
 
   container.innerHTML = "";
 
+  const books = ALL_BOOKS[tabId];
+  if (!Array.isArray(books)) {
+    console.warn("No books for tab:", tabId);
+    return;
+  }
+
   const grid = document.createElement("div");
   grid.className = "image-grid";
 
   books.forEach(book => {
-    if (!book || !book.id) return;
+    if (!book.id) return;
 
-    // 🔒 Normalize once (DO NOT overwrite global registry here)
     const normalized = {
       id: book.id,
       title: book.title || "Untitled",
-      img: book.img || "",
+      SetQtty: book.qtty || book.NoofBooks || 0,
+      img: book.image || book.Link || "",
       price: Number(book.price || 0),
-      SetQtty: book.SetQtty || 0,
+      video: book.youtube || book.video || null,
       category: tabId
     };
+
+    BOOK_REGISTRY[normalized.id] = normalized;
 
     const item = document.createElement("div");
     item.className = "book-thumb";
@@ -33,11 +37,13 @@ function renderBooks(tabId, books) {
         class="grid-book-img popup-trigger"
         data-book-id="${normalized.id}"
       >
-
       <img
         src="${CART_ICON}"
         class="cart-icon"
         data-book-id="${normalized.id}"
+        data-title="${normalized.title}"
+        data-price="${normalized.price}"
+        data-setqtty="${normalized.SetQtty}"
       >
     `;
 
@@ -45,22 +51,4 @@ function renderBooks(tabId, books) {
   });
 
   container.appendChild(grid);
-
-  // 🔄 Sync cart icon state
-  if (typeof syncCartIcons === "function") {
-    syncCartIcons();
-  }
-}
-
-/* =========================================================
-   LOAD BOOKS FOR TAB (FROM PRELOADED DATA)
-========================================================= */
-
-function loadBooks(tabId) {
-  const books = window.ALL_BOOKS?.[tabId];
-  if (!books) {
-    console.warn("No books for tab:", tabId);
-    return;
-  }
-  renderBooks(tabId, books);
 }
