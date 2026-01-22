@@ -510,7 +510,7 @@ function buildGoogleFormURL() {
         }
       line += ` [RM${item.price}]`;
   books.push(line);
-  SUBTOTAL: RM${totals.booksSubtotal};
+  totals += item.price;
   i++;
 });
 
