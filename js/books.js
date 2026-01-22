@@ -2,13 +2,15 @@ function loadBooks(tabId) {
   const container = document.getElementById(tabId);
   if (!container) return;
 
-  container.innerHTML = "";
-
   const books = ALL_BOOKS[tabId];
-  if (!Array.isArray(books)) {
+
+  if (!Array.isArray(books) || books.length === 0) {
+    container.innerHTML = "<p>No books found.</p>";
     console.warn("No books for tab:", tabId);
     return;
   }
+
+  container.innerHTML = "";
 
   const grid = document.createElement("div");
   grid.className = "image-grid";
