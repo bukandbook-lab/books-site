@@ -501,7 +501,6 @@ function buildGoogleFormURL() {
   const totals = calculateTotals();
 
   let books = [];
-  let totals = 0;
   let i = 1;
 
   cart.items.forEach(item => {
