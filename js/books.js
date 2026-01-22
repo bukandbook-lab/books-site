@@ -1,23 +1,4 @@
 /* =========================================================
-   GLOBAL REGISTRY (REQUIRED)
-========================================================= */
-window.BOOK_REGISTRY = {};
-
-/* =========================================================
-   BOOK DATA SOURCES
-========================================================= */
-const BOOK_SOURCES = {
-  BeginningReader: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/BeginningReaderData.json",
-  ChapterBook:     "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/ChapterBookData.json",
-  PictureBook:     "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/PictureBookData.json",
-  Novel:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/NovelData.json",
-  Islamic:         "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/islamicdata.json",
-  Melayu:          "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/MelayuData.json",
-  Jawi:            "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/jawidata.json",
-  Comic:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/comicdata.json"
-};
-
-/* =========================================================
    LOAD BOOKS
 ========================================================= */
 function loadBooks(tabId) {
