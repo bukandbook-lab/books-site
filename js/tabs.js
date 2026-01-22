@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   const tabs = document.querySelectorAll(".tab-btn");
   const contents = document.querySelectorAll(".tabcontent");
 
@@ -15,13 +16,19 @@ document.addEventListener("DOMContentLoaded", () => {
     deactivateTabs();
 
     const panel = document.getElementById(target);
-    if (!panel) return;
+    if (!panel) {
+      console.error("Tab not found:", target);
+      return;
+    }
 
+    // ✅ SHOW PANEL FIRST
     panel.style.display = "block";
     if (btn) btn.classList.add("active");
 
-    // 🔑 WAIT FOR DATA
-    BOOKS_READY.then(() => loadBooks(target));
+    // ✅ THEN LOAD BOOKS
+    BOOKS_READY.then(() => {
+      loadBooks(target);
+    });
 
     const search = document.getElementById("bookSearch");
     if (search) search.value = "";
@@ -41,8 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('.tab-btn[data-tab="BeginningReader"]') || tabs[0];
 
   if (defaultBtn) {
-    BOOKS_READY.then(() =>
-      openTab(defaultBtn.dataset.tab, defaultBtn)
-    );
+    BOOKS_READY.then(() => {
+      openTab(defaultBtn.dataset.tab, defaultBtn);
+    });
   }
 });
