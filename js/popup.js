@@ -99,6 +99,8 @@ function renderPopup(bookId) {
   popup.style.display = "flex";
 
   updatePopupNavigation();
+  syncCartIcons();
+
 }
 
 /* =====================================
