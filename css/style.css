@@ -516,6 +516,7 @@ button {
   font-size: 12px;
   pointer-events: auto;
 }
+
 #continueShopping {
   background: #eee;
   background-color: #FF1493;
@@ -538,7 +539,6 @@ button {
   margin: 2px;
   cursor: pointer;
   border-radius: 18px;
-  flex: 0 0 auto;
   padding: 6px 10px;
   font-size: 12px;
   white-space: nowrap;
@@ -552,11 +552,16 @@ button {
   margin: 2px;
   cursor: pointer;
   border-radius: 18px;
-  display: flex-inline;
+  
   padding: 6px 10px;
   font-size: 12px;
   white-space: nowrap;
 }
+
+.submit-buttons{
+   display: flex-inline;
+}
+   
 /* =========================
    CART ROW + REMOVE ICON IN CART
 ========================= */
