@@ -127,5 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+  syncCartIcons();
+
 
 });
