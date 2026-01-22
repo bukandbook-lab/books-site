@@ -7,4 +7,4 @@ const DEFAULT_PRICE = 4;
 const CLOSE_ICON =
 "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhOugfd_uN6o5SctZFNuRIj_BzoQL5wV-kJwedlMszlIJtG8f3kIsmjpUzzEGITOJCaxuHZ_s4NHzKJBGVhQZz6o6YtwyO63V8W7iZINYEg9LljwmRpL3DQLFIOWHFwUFsBLn9dIqdf-4AXa69Heo9EoZN1OnivF9o4NywvTmQ84hfd4Vz-aiRe-uqgqePe/s320/cross.png";
 
-const CHECK_ICON = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrRS_Vsb3-sF2gigTOCNhhQ7ng5QHZkizv2WIlYc5qCATLbTxhmvAKNUBeJHKV0k1_1hiGlg-wT91zsT11S9LO3EhxfGyqxCLvCmkizbTrnxgh3o5LpBeej8Ei7WzCrnRGAQlOBtbgdVU0YD3MigQ0JxL_0HoVUNksLIthzKWQO5TUhtmM4dexOkpE3GDs/s24/pinkcheck.png";
+const CHECK_ICON = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXgjIoFRs_TdWYiWAYZbBiYDBvF14CVYtMJ75AIAJEwu5DvvhemkcpexfJ5ilnQiY4LbCPVKWUqAt-f150qzdQnb8vOlBVCGl0xBhxLfHZmEk-x6YvhxZzjMTtB7CwhBNR21Y2H1LBeMR_qGWdeAgSrFnLDF5o4LVxvUiqQRE3H69dhp2CjbtvPltCv_Jg/s512/tick.png";
