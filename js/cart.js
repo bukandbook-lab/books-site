@@ -625,3 +625,19 @@ tabs.addEventListener("scroll", updateTabArrows);
 /* Initial check */
 window.addEventListener("load", updateTabArrows);
 window.addEventListener("resize", updateTabArrows);
+
+/* =====================================
+  CART ICON TO CHECK MARK
+===================================== */
+function syncCartIcons() {
+  document.querySelectorAll(".cart-icon[data-book-id]").forEach(icon => {
+    const bookId = icon.dataset.bookId;
+    if (cart.items.has(bookId)) {
+      icon.src = CHECK_ICON;
+      icon.classList.add("in-cart");
+    } else {
+      icon.src = CART_ICON;
+      icon.classList.remove("in-cart");
+    }
+  });
+}
