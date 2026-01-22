@@ -530,7 +530,7 @@ button {
   white-space: nowrap;
 }
 
-.submit-options{
+#submitGoogleForm {
   background: #eee;
   background-color: #FF1493;
   border-color: #ffdbe1;
@@ -539,6 +539,20 @@ button {
   cursor: pointer;
   border-radius: 18px;
   flex: 0 0 auto;
+  padding: 6px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+#submitWhatsapp {
+  background: #eee;
+  background-color: #FF1493;
+  border-color: #ffdbe1;
+  color: white;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 18px;
+  display: flex-inline;
   padding: 6px 10px;
   font-size: 12px;
   white-space: nowrap;
