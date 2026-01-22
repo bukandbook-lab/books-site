@@ -634,3 +634,23 @@ function syncCartIcons() {
     }
   });
 }
+
+/* =====================================
+   PAYMENT → THANK YOU FLOW
+===================================== */
+function showThankYou(message = "Thank you! Your order has been submitted successfully.") {
+  const paymentPopup = document.getElementById("paymentPopup");
+  const thankYou = document.getElementById("thankYou");
+  const thankYouMsg = document.getElementById("thankYouMsg");
+
+  if (paymentPopup) paymentPopup.style.display = "none";
+
+  if (thankYouMsg) {
+    thankYouMsg.innerHTML = message;
+  }
+
+  if (thankYou) {
+    thankYou.style.display = "flex";
+  }
+}
+
