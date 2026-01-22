@@ -172,7 +172,13 @@ function renderCart() {
    <h3>CART</h3>
     ${itemsHTML || "<p>No item selected</p>"}
 
+    
+    <div class="cart-fee">
+      <span>SUBTOTAL</span>
+      <span>RM${totals.booksSubtotal}</span>
+    </div>
     <hr>
+
 
     <div class="delivery">
       <b>Delivery Method</b><br>
@@ -189,32 +195,7 @@ function renderCart() {
       </label>
     </div>
 
-    <hr>
-
-<div class="cart-fee">
-  <span>Books Subtotal</span>
-  <span>RM${totals.booksSubtotal}</span>
-</div>
-
-${cart.delivery === "courier" ? `
-  <div class="cart-fee">
-    <span>Shipping Fee</span>
-    <span>RM${totals.shippingFee}</span>
-  </div>
-  <div class="cart-fee">
-    <span>Thumb Drive</span>
-    <span>RM${totals.thumbFee}</span>
-  </div>
-` : ""}
-
-<hr>
-
-     <div class="total-row">
-        <span><b>GRAND TOTAL</b></span>
-        <span><b>RM${totals.grandTotal}</b></span>
-     </div>
-
-     <div class="delivery-details">
+         <div class="delivery-details">
      <b>Delivery Details</b><br>
         <textarea
           id="deliveryDetails"
@@ -224,6 +205,24 @@ ${cart.delivery === "courier" ? `
           style="width:100%; margin-top:6px;"
         ></textarea>
    </div><br>
+   
+${cart.delivery === "courier" ? `
+  <div class="cart-fee">
+    <span>Shipping Fee</span>
+    <span>RM${totals.shippingFee}</span>
+  </div>
+  <div class="cart-fee">
+    <span>Thumb Drive Charge</span>
+    <span>RM${totals.thumbFee}</span>
+  </div>
+` : ""}
+
+<hr>
+
+     <div class="total-row">
+        <span><b>GRAND TOTAL</b></span>
+        <span><b>RM${totals.grandTotal}</b></span>
+     </div><br>
 
     <label class="terms">
       <input type="checkbox" id="agreeTerms" ${cart.agreed ? "checked" : ""}>
