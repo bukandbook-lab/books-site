@@ -204,10 +204,10 @@ function renderCart() {
           placeholder="Enter email address"
           style="width:100%; margin-top:6px;"
         ></textarea>
-   </div><br>
+   </div>
    
 ${cart.delivery === "courier" ? `
-  <div class="cart-fee">
+  <br><div class="cart-fee">
     <span>Shipping Fee</span>
     <span>RM${totals.shippingFee}</span>
   </div>
