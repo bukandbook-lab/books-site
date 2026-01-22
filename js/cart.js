@@ -52,6 +52,7 @@ document.addEventListener("click", e => {
   });
 
   renderCart();
+  syncCartIcons();   
   openCart();
 
   // auto-close popup if click came from popup
@@ -75,6 +76,7 @@ document.addEventListener("click", e => {
 
   cart.items.delete(removeBtn.dataset.bookId);
   renderCart();
+  syncCartIcons();
 });
 /* =====================================
    CLOSE CART WHEN X MARK IS CLICKED
