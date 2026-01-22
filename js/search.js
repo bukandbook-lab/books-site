@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
       container.id = "searchResults";
       container.className = "image-grid";
       document.body.appendChild(container);
-      
     }
     return container;
   }
@@ -57,12 +56,11 @@ document.addEventListener("DOMContentLoaded", () => {
   searchInput.addEventListener("input", () => {
     const keyword = normalize(searchInput.value);
 
-    // Save last active tab ONCE
     if (!lastActiveTabId) {
       lastActiveTabId = getActiveTabId();
     }
 
-    // If search cleared → restore tabs
+    // 🔁 Clear search
     if (!keyword) {
       const container = document.getElementById("searchResults");
       if (container) container.style.display = "none";
@@ -73,64 +71,56 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Hide tabs and show search container
     hideAllTabs();
 
     const container = getSearchContainer();
     container.style.display = "grid";
     container.innerHTML = "";
 
-    Object.entries(BOOK_REGISTRY).forEach(([bookId, book]) => {
-
+    Object.values(BOOK_REGISTRY).forEach(book => {
       if (!book || !book.title) return;
 
-      const title = normalize(book.title);
-      if (!title.includes(keyword)) return;
+      if (!normalize(book.title).includes(keyword)) return;
 
       const div = document.createElement("div");
       div.className = "book-thumb";
 
-      
       div.innerHTML = `
         <img
           class="grid-book-img popup-trigger"
           src="${book.img || ""}"
-          data-book-id="${bookId}"
+          data-book-id="${book.id}"
         >
 
-        
         <img
           class="cart-icon"
           src="${CART_ICON}"
-          data-book-id="${bookId}"
+          data-book-id="${book.id}"
         >
       `;
 
       container.appendChild(div);
-      syncCartIcons();
     });
+
+    // 🔄 Sync cart icons after render
+    if (typeof syncCartIcons === "function") {
+      syncCartIcons();
+    }
   });
+
+  /* ------------------------------
+     TAB CLICK → RESET SEARCH
+  ------------------------------ */
 
   document.querySelectorAll(".tab-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
+    btn.addEventListener("click", () => {
+      const searchResults = document.getElementById("searchResults");
+      if (searchResults) searchResults.style.display = "none";
 
-    const searchContainer = document.getElementById("searchResults");
-    if (searchContainer) {
-      searchContainer.style.display = "none";
-    }
+      if (searchInput) searchInput.value = "";
 
-    if (searchInput) {
-      searchInput.value = "";
-    }
-
-    // Reset all book thumbs (important)
-    document.querySelectorAll(".book-thumb").forEach(book => {
-      book.style.display = "";
+      lastActiveTabId = null;
     });
   });
-});
-
-  
-
 
 });
