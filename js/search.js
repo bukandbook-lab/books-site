@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function getSearchContainer() {
     let container = document.getElementById("searchResults");
     if (!container) {
+      syncCartIcons();
       container = document.createElement("div");
       container.id = "searchResults";
       container.className = "image-grid";
