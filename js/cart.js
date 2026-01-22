@@ -174,8 +174,8 @@ function renderCart() {
 
     
     <div class="cart-fee">
-      <span>SUBTOTAL</span>
-      <span>RM${totals.booksSubtotal}</span>
+      <span><b>SUBTOTAL</b></span>
+      <span><b>RM${totals.booksSubtotal}</b></span>
     </div>
     <hr>
 
@@ -193,13 +193,13 @@ function renderCart() {
           ${cart.delivery === "courier" ? "checked" : ""}>
         Courier
       </label>
-    </div>
+    </div><br>
 
          <div class="delivery-details">
      <b>Delivery Details</b><br>
         <textarea
           id="deliveryDetails"
-          rows="3"
+          rows="2"
           required
           placeholder="Enter email address"
           style="width:100%; margin-top:6px;"
