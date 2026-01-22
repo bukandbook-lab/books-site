@@ -402,6 +402,8 @@ function openWhatsAppOrder() {
   // Auto-send Telegram
   sendOrderToTelegram();
 
+  showThankYou("Thank you for your order! Please send your payment screenshot via WhatsApp.");
+
   const url =
     "https://wa.me/601113127911?text=" +
     encodeURIComponent(buildWhatsAppMessage());
@@ -469,6 +471,7 @@ document.addEventListener("input", e => {
 ===================================== */
 document.addEventListener("click", e => {
   if (e.target.id === "submitGoogleForm") {
+    showThankYou("Thank you! Your order has been submitted via Google Form.");
     if (!cart.orderId) cart.orderId = generateOrderId();
     window.open(buildGoogleFormURL(), "_blank");
   }
