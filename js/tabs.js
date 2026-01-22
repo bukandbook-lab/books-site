@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".tab-btn");
   const contents = document.querySelectorAll(".tabcontent");
 
-  function hideAll() {
+  function hideAllTabs() {
     contents.forEach(c => c.style.display = "none");
   }
 
@@ -11,52 +11,43 @@ document.addEventListener("DOMContentLoaded", () => {
     tabs.forEach(t => t.classList.remove("active"));
   }
 
-  function openTab(target, btn) {
-    hideAll();
+  function openTab(tabId, btn) {
+    hideAllTabs();
     deactivateTabs();
 
-    const panel = document.getElementById(target);
-    if (!panel) {
-      console.error("Tab not found:", target);
-      return;
-    }
+    const panel = document.getElementById(tabId);
+    if (!panel) return;
 
     panel.style.display = "block";
     if (btn) btn.classList.add("active");
 
-    // 🔑 LOAD BOOKS FOR THIS TAB
-    if (typeof loadBooks === "function") {
-      loadBooks(target);
-    }
+    // 📚 Load books (from global cache)
+    loadBooks(tabId);
 
-    // 🔍 RESET SEARCH
+    // 🔍 Reset search
     const search = document.getElementById("bookSearch");
     if (search) search.value = "";
 
-    // 🎥 CLOSE MEDIA / POPUPS
+    // 🔎 Hide search results
+    const searchResults = document.getElementById("searchResults");
+    if (searchResults) searchResults.style.display = "none";
+
+    // 🎥 Close popups/media
     if (typeof stopAllVideos === "function") stopAllVideos();
     if (typeof closeBookPopup === "function") closeBookPopup();
   }
 
-  /* =========================
-     TAB CLICK HANDLER
-  ========================= */
   tabs.forEach(btn => {
     btn.addEventListener("click", () => {
-      const target = btn.dataset.tab;
-      openTab(target, btn);
+      openTab(btn.dataset.tab, btn);
     });
   });
 
-  /* =========================
-     DEFAULT TAB ON LOAD
-  ========================= */
+  // 🔑 Default tab
   const defaultBtn =
-    document.querySelector('.tab-btn[data-tab="BeginningReader"]') ||
-    tabs[0];
+    document.querySelector('.tab-btn[data-tab="BeginningReader"]') || tabs[0];
 
   if (defaultBtn) {
     openTab(defaultBtn.dataset.tab, defaultBtn);
   }
-
 });
