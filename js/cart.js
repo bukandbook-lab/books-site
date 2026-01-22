@@ -304,6 +304,9 @@ const deliveryField = document.getElementById("deliveryDetails");
   if (cart.delivery === "courier") total += 17;
   if (hidden) hidden.value = titles.join(" | ");
 
+    // 1️⃣ Send Telegram automatically
+  sendOrderToTelegram();
+   
   const payText = document.getElementById("payText");
 if (!payText) {
   console.error("payText element not found");
@@ -375,7 +378,7 @@ function buildWhatsAppMessage() {
       if (item.setQtty > 0 && item.price !== 1) {
         msg += ` (${item.setQtty} books)`;
         }
-        msg += ` (RM${item.price})\n`;
+        msg += ` [RM${item.price}]\n`;
     i++;
   });
 
@@ -416,7 +419,7 @@ function buildTelegramMessage() {
       if (item.setQtty > 0 && item.price !== 1) {
       msg += ` (${item.setQtty} books)`;
     }
-    msg += ` (RM${item.price})\n`;
+    msg += ` [RM${item.price}]\n`;
     total += item.price;
     i++;
   });
@@ -550,18 +553,33 @@ function generateOrderId() {
    
 }
 /* =====================================
-   TOTAL CALCULATION
+   SUB AND TOTAL CALCULATION
 ===================================== */
-function calculateTotal() {
-  let total = 0;
-  cart.items.forEach(i => total += i.price);
+function calculateTotals() {
+  let booksSubtotal = 0;
+
+  cart.items.forEach(item => {
+    booksSubtotal += item.price;
+  });
+
+  let shippingFee = 0;
+  let thumbFee = 0;
 
   if (cart.delivery === "courier") {
-    total += SHIPPING_FEE + THUMB_DRIVE_FEE;
+    shippingFee = SHIPPING_FEE;
+    thumbFee = THUMB_DRIVE_FEE;
   }
 
-  return total;
+  const grandTotal = booksSubtotal + shippingFee + thumbFee;
+
+  return {
+    booksSubtotal,
+    shippingFee,
+    thumbFee,
+    grandTotal
+  };
 }
+
 /* =====================================
   SEND TELEGRAM MESSAGE
 ===================================== */
