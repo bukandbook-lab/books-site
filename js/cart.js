@@ -165,22 +165,8 @@ function renderCart() {
     index++;
   });
 
-  let deliveryFeeHTML = "";
-  if (cart.delivery === "courier") {
-    total += 17;
-    deliveryFeeHTML = `
-      <div class="cart-fee">
-        <span>Shipping Fee</span>
-        <span>RM10</span>
-      </div>
-
-      <div class="cart-fee">
-        <span>Thumb Drive</span>
-        <span>RM7</span>
-      </div>
-    `;
-  }
-
+  const totalS = calculateTotals();
+  
   box.innerHTML = `
    <span class="close-popup" alt="Close">X</span>
    <h3>CART</h3>
@@ -207,12 +193,30 @@ function renderCart() {
 
     <hr>
 
-    <div class="total-row">
-        <span><b>TOTAL</b></span>
-        <span><b>RM${total}</b></span>
-    </div><br>
-   
-    <div class="delivery-details">
+<div class="cart-fee">
+  <span>Books Subtotal</span>
+  <span>RM${totals.booksSubtotal}</span>
+</div>
+
+${cart.delivery === "courier" ? `
+  <div class="cart-fee">
+    <span>Shipping Fee</span>
+    <span>RM${totals.shippingFee}</span>
+  </div>
+  <div class="cart-fee">
+    <span>Thumb Drive</span>
+    <span>RM${totals.thumbFee}</span>
+  </div>
+` : ""}
+
+<hr>
+
+     <div class="total-row">
+        <span><b>GRAND TOTAL</b></span>
+        <span><b>RM${totals.grandTotal}</b></span>
+     </div>
+
+     <div class="delivery-details">
      <b>Delivery Details</b><br>
         <textarea
           id="deliveryDetails"
