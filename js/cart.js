@@ -347,6 +347,15 @@ document.addEventListener("click", e => {
 });
 
 /* =====================================
+   CLOSE THANK YOU POPUP
+===================================== */
+document.addEventListener("click", e => {
+  if (e.target.closest("#thankYou .close-popup")) {
+    document.getElementById("thankYou").style.display = "none";
+  }
+});
+
+/* =====================================
    CLOSE CART WHEN CLICKING OUTSIDE
 ===================================== */
 document.addEventListener("click", e => {
