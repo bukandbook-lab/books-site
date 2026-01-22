@@ -560,6 +560,8 @@ button {
 .submit-Whatsapp {
    display: inline-flex;
    align-items: center;
+   justify-content: center;
+
 }
    
 /* =========================
