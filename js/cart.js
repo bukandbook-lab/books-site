@@ -165,7 +165,7 @@ function renderCart() {
     index++;
   });
 
-  const totalS = calculateTotals();
+  const totals = calculateTotals();
   
   box.innerHTML = `
    <span class="close-popup" alt="Close">X</span>
