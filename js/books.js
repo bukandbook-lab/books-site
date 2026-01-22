@@ -1,60 +1,28 @@
 /* =========================================================
-   LOAD BOOKS
+   RENDER BOOKS INTO A TAB
 ========================================================= */
-function loadBooks(tabId) {
+
+function renderBooks(tabId, books) {
   const container = document.getElementById(tabId);
   if (!container) return;
 
-  container.innerHTML = "<p>Loading...</p>";
-
-  const url = BOOK_SOURCES[tabId];
-  if (!url) {
-    container.innerHTML = "<p>No data source.</p>";
-    return;
-  }
-
-  fetch(url)
-    .then(res => {
-      if (!res.ok) throw new Error("HTTP error");
-      return res.json();
-    })
-    .then(data => renderBooks(tabId, data))
-    .catch(err => {
-      console.error("LOAD ERROR:", err);
-      container.innerHTML = "<p>Failed to load data.</p>";
-    });
-}
-
-/* =========================================================
-   RENDER IMAGE GRID (6 COLUMNS, COMPACT)
-========================================================= */
-function renderBooks(tabId, books) {
-  const container = document.getElementById(tabId);
   container.innerHTML = "";
 
   const grid = document.createElement("div");
   grid.className = "image-grid";
 
   books.forEach(book => {
+    if (!book || !book.id) return;
 
-    const bookId = book.id || book.ID || book["Book ID"];
-    if (!bookId) return;
-
+    // 🔒 Normalize once (DO NOT overwrite global registry here)
     const normalized = {
-      id: bookId,
-      title: book.title || book["Book Title"] || "Untitled",
-      SetQtty: book.qtty || book.NoofBooks || book["No. of Books"],
-      img: book.image || book.Link || "",
-      price: Number(book.price || book["Price"] || 0),
-      video:
-        book["Youtube ID"] ||
-        book.youtube ||
-        book.video ||
-        null,
+      id: book.id,
+      title: book.title || "Untitled",
+      img: book.img || "",
+      price: Number(book.price || 0),
+      SetQtty: book.SetQtty || 0,
       category: tabId
     };
-
-    BOOK_REGISTRY[bookId] = normalized;
 
     const item = document.createElement("div");
     item.className = "book-thumb";
@@ -66,25 +34,33 @@ function renderBooks(tabId, books) {
         data-book-id="${normalized.id}"
       >
 
-     <img
-  src="${CART_ICON}"
-  class="cart-icon"
-  data-book-id="${normalized.id}"
-  data-title="${normalized.title}"
-  data-price="${normalized.price}"
-  data-setqtty="${normalized.SetQtty || 0}"
->
+      <img
+        src="${CART_ICON}"
+        class="cart-icon"
+        data-book-id="${normalized.id}"
+      >
     `;
 
     grid.appendChild(item);
   });
 
   container.appendChild(grid);
+
+  // 🔄 Sync cart icon state
+  if (typeof syncCartIcons === "function") {
+    syncCartIcons();
+  }
 }
 
 /* =========================================================
-   AUTO LOAD DEFAULT TAB
+   LOAD BOOKS FOR TAB (FROM PRELOADED DATA)
 ========================================================= */
-document.addEventListener("DOMContentLoaded", () => {
-  loadBooks("BeginningReader");
-});
+
+function loadBooks(tabId) {
+  const books = window.ALL_BOOKS?.[tabId];
+  if (!books) {
+    console.warn("No books for tab:", tabId);
+    return;
+  }
+  renderBooks(tabId, books);
+}
