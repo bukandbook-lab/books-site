@@ -11,28 +11,31 @@ document.addEventListener("DOMContentLoaded", () => {
     tabs.forEach(t => t.classList.remove("active"));
   }
 
-  function openTab(target, btn) {
+  function openTab(tabId, btn) {
     hideAll();
     deactivateTabs();
 
-    const panel = document.getElementById(target);
+    const panel = document.getElementById(tabId);
     if (!panel) {
-      console.error("Tab not found:", target);
+      console.error("Tab not found:", tabId);
       return;
     }
 
-    // ✅ SHOW PANEL FIRST
     panel.style.display = "block";
     if (btn) btn.classList.add("active");
 
-    // ✅ THEN LOAD BOOKS
-    BOOKS_READY.then(() => {
-      loadBooks(target);
-    });
+    // 🔑 ONLY load books if this tab has a data source
+    if (BOOK_SOURCES[tabId]) {
+      BOOKS_READY.then(() => {
+        loadBooks(tabId);
+      });
+    }
 
+    // 🔍 Reset search
     const search = document.getElementById("bookSearch");
     if (search) search.value = "";
 
+    // 🎥 Cleanup
     if (typeof stopAllVideos === "function") stopAllVideos();
     if (typeof closeBookPopup === "function") closeBookPopup();
   }
@@ -43,13 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // DEFAULT TAB
+  // DEFAULT TAB (ReadMeFirst first if exists)
   const defaultBtn =
-    document.querySelector('.tab-btn[data-tab="BeginningReader"]') || tabs[0];
+    document.querySelector('.tab-btn[data-tab="ReadMeFirst"]') ||
+    document.querySelector('.tab-btn[data-tab="BeginningReader"]') ||
+    tabs[0];
 
   if (defaultBtn) {
-    BOOKS_READY.then(() => {
-      openTab(defaultBtn.dataset.tab, defaultBtn);
-    });
+    openTab(defaultBtn.dataset.tab, defaultBtn);
   }
 });
