@@ -5,13 +5,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let lastTab = null;
 
+  // 🔤 normalize single string (keyword)
+  function normalize(text = "") {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, "");
+  }
+
+  // 🔤 normalize title into words
   function normalizeWords(text = "") {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, "")
-    .split(/\s+/)
-    .filter(Boolean);
-}
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, "")
+      .split(/\s+/)
+      .filter(Boolean);
+  }
 
   function getActiveTab() {
     return document.querySelector(".tab-btn.active")?.dataset.tab;
@@ -48,19 +56,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 🔍 GLOBAL SEARCH MODE → no active tab
-  document.querySelectorAll(".tab-btn")
-  .forEach(btn => btn.classList.remove("active"));
-
+    document.querySelectorAll(".tab-btn")
+      .forEach(btn => btn.classList.remove("active"));
 
     hideTabs();
     const grid = getSearchGrid();
     grid.innerHTML = "";
 
-    // ✅ GLOBAL SEARCH (ALL BOOKS, ALL TABS)
+    // 🌍 SEARCH ALL BOOKS
     Object.values(BOOK_REGISTRY).forEach(book => {
       const words = normalizeWords(book.title);
       if (!words.some(w => w.includes(keyword))) return;
-
 
       const div = document.createElement("div");
       div.className = "book-thumb";
@@ -84,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
       grid.appendChild(div);
     });
 
-    // keep cart icons in sync
+    // 🛒 sync cart icons
     if (typeof syncCartIcons === "function") {
       syncCartIcons();
     }
