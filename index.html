@@ -187,8 +187,15 @@ If the file is in .epub, .azw3, .mobi etc., please download EPUB reader apps to 
   }
 </script>
 
+<script>
+document.addEventListener("load", e => {
+  const img = e.target;
+  if (!img.classList.contains("grid-book-img")) return;
 
-
+  img.classList.add("loaded");
+  img.closest(".book-thumb")?.classList.add("loaded");
+}, true);
+</script>
 
 
 </body>
