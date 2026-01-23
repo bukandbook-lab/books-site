@@ -256,6 +256,55 @@ html, body {
   object-fit: contain;          /* or "cover" (see below) */
   display: block;
 }
+/* ===============================
+   Skeleton styles (GLOBAL CSS)
+================================ */
+/* Skeleton container */
+.book-thumb {
+  position: relative;
+}
+
+/* Skeleton box */
+.skeleton {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(
+    90deg,
+    #eee 25%,
+    #f5f5f5 37%,
+    #eee 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.2s infinite;
+  border-radius: 6px;
+}
+
+/* Shimmer animation */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* Hide image until loaded */
+.grid-book-img {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Show image when ready */
+.grid-book-img.loaded {
+  opacity: 1;
+}
+
+/* Remove skeleton when image loads */
+.book-thumb.loaded .skeleton {
+  display: none;
+}
+
 /* =========================
   EPUB READER ICON
 ========================= */
