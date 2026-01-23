@@ -411,7 +411,7 @@ function openWhatsAppOrder() {
   // Auto-send Telegram
   sendOrderToTelegram();
 
-  showThankYou("Thank you for your order! Please send your payment screenshot via WhatsApp.");
+  showThankYou();
 
   const url =
     "https://wa.me/601113127911?text=" +
@@ -426,10 +426,10 @@ function buildWhatsAppMessage() {
 
   let msg = `🛒 *NEW ORDER*\n\n`;
   msg += `📦 *Order ID:* ${data.orderId}\n\n`;
-  msg += `📚 *Books Ordered:*\n${data.booksText}\n\n`;
+  msg += `📚 *List of Books:*\n${data.booksText}\n\n`;
 
   msg += `💵 *Payment Breakdown*\n`;
-  msg += `📚 Books: RM${t.booksSubtotal}\n`;
+  msg += `📚 Subtotal: RM${t.booksSubtotal}\n`;
 
   if (cart.delivery === "courier") {
     msg += `🚚 Shipping: RM${t.shippingFee}\n`;
@@ -480,7 +480,7 @@ document.addEventListener("input", e => {
 ===================================== */
 document.addEventListener("click", e => {
   if (e.target.id === "submitGoogleForm") {
-    showThankYou("Thank you! Your order has been submitted via Google Form.");
+    showThankYou();
     if (!cart.orderId) cart.orderId = generateOrderId();
     window.open(buildGoogleFormURL(), "_blank");
   }
@@ -496,12 +496,9 @@ function buildGoogleFormURL() {
   const params = new URLSearchParams({
     [FORM.orderId]: data.orderId,
     [FORM.books]:
-      data.booksText +
-      (cart.delivery === "courier"
-        ? `\n\nShipping Fee: RM${t.shippingFee}\nThumb Drive: RM${t.thumbFee}`
-        : ""),
+      data.booksText,
     [FORM.total]:
-`Books Subtotal: RM${t.booksSubtotal}
+`Subtotal: RM${t.booksSubtotal}
 Shipping: RM${t.shippingFee}
 Thumb Drive: RM${t.thumbFee}
 -----------------
@@ -582,10 +579,10 @@ function buildTelegramMessage() {
 
   let msg = `🛒 *NEW ORDER*\n\n`;
   msg += `🆔 *Order ID:* ${data.orderId}\n\n`;
-  msg += `📚 *Books Ordered:*\n${data.booksText}\n\n`;
+  msg += `📚 *List of Books:*\n${data.booksText}\n\n`;
 
   msg += `💵 *Payment Breakdown*\n`;
-  msg += `📚 Books: RM${t.booksSubtotal}\n`;
+  msg += `📚 Subtotal: RM${t.booksSubtotal}\n`;
 
   if (cart.delivery === "courier") {
     msg += `🚚 Shipping: RM${t.shippingFee}\n`;
