@@ -3,83 +3,57 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("bookSearch");
   if (!searchInput) return;
 
-  let lastActiveTabId = null;
-
-  /* ------------------------------
-     HELPERS
-  ------------------------------ */
+  let lastActiveTab = null;
 
   function normalize(text = "") {
-    return text
-      .toLowerCase()
-      .replace(/[^a-z0-9\s]/gi, "")
-      .replace(/\s+/g, " ")
-      .trim();
+    return text.toLowerCase().replace(/[^a-z0-9]/g, "");
   }
 
-  function getActiveTabId() {
-    const activeBtn = document.querySelector(".tab-btn.active");
-    return activeBtn ? activeBtn.dataset.tab : null;
+  function getActiveTab() {
+    const btn = document.querySelector(".tab-btn.active");
+    return btn ? btn.dataset.tab : null;
   }
 
   function hideAllTabs() {
-    document.querySelectorAll(".tabcontent").forEach(tab => {
-      tab.style.display = "none";
+    document.querySelectorAll(".tabcontent").forEach(t => {
+      t.style.display = "none";
     });
   }
 
   function showTab(tabId) {
-    document.querySelectorAll(".tabcontent").forEach(tab => {
-      tab.style.display = tab.id === tabId ? "block" : "none";
-    });
-
-    document.querySelectorAll(".tab-btn").forEach(btn => {
-      btn.classList.toggle("active", btn.dataset.tab === tabId);
-    });
+    document.getElementById(tabId).style.display = "block";
   }
 
   function getSearchContainer() {
-    let container = document.getElementById("searchResults");
-    if (!container) {
-      container = document.createElement("div");
-      container.id = "searchResults";
-      container.className = "image-grid";
-      document.body.appendChild(container);
+    let c = document.getElementById("searchResults");
+    if (!c) {
+      c = document.createElement("div");
+      c.id = "searchResults";
+      c.className = "image-grid";
+      document.body.appendChild(c);
     }
-    return container;
+    return c;
   }
-
-  /* ------------------------------
-     SEARCH LOGIC
-  ------------------------------ */
 
   searchInput.addEventListener("input", () => {
     const keyword = normalize(searchInput.value);
 
-    if (!lastActiveTabId) {
-      lastActiveTabId = getActiveTabId();
-    }
+    if (!lastActiveTab) lastActiveTab = getActiveTab();
 
-    // 🔁 Clear search
     if (!keyword) {
-      const container = document.getElementById("searchResults");
-      if (container) container.style.display = "none";
-
-      if (lastActiveTabId) {
-        showTab(lastActiveTabId);
-      }
+      const sc = document.getElementById("searchResults");
+      if (sc) sc.style.display = "none";
+      if (lastActiveTab) showTab(lastActiveTab);
       return;
     }
 
     hideAllTabs();
 
     const container = getSearchContainer();
-    container.style.display = "grid";
     container.innerHTML = "";
+    container.style.display = "grid";
 
     Object.values(BOOK_REGISTRY).forEach(book => {
-      if (!book || !book.title) return;
-
       if (!normalize(book.title).includes(keyword)) return;
 
       const div = document.createElement("div");
@@ -87,14 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       div.innerHTML = `
         <img
+          src="${book.img}"
           class="grid-book-img popup-trigger"
-          src="${book.img || ""}"
           data-book-id="${book.id}"
         >
-
         <img
-          class="cart-icon"
           src="${CART_ICON}"
+          class="cart-icon"
           data-book-id="${book.id}"
         >
       `;
@@ -102,25 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       container.appendChild(div);
     });
 
-    // 🔄 Sync cart icons after render
-    if (typeof syncCartIcons === "function") {
-      syncCartIcons();
-    }
-  });
-
-  /* ------------------------------
-     TAB CLICK → RESET SEARCH
-  ------------------------------ */
-
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const searchResults = document.getElementById("searchResults");
-      if (searchResults) searchResults.style.display = "none";
-
-      if (searchInput) searchInput.value = "";
-
-      lastActiveTabId = null;
-    });
+    syncCartIcons();
   });
 
 });
