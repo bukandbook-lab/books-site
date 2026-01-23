@@ -224,8 +224,6 @@ html, body {
 /* ===============================
    BOOK GRID (STANDARDIZED)
 ================================ */
-
-@media (max-width: 400px) {
 .image-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -233,7 +231,7 @@ html, body {
   padding: 0;
   margin: 0;
 }
-}
+
 /* BOOK CARD */
 .book-thumb {
   width: 100%;
