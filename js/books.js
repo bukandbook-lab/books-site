@@ -29,7 +29,7 @@ function loadBooks(tabId) {
         book.youtube ||
         book.video ||
         null,
-      category: tabId
+      category
 
     };
 
