@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const grid = getSearchGrid();
     grid.innerHTML = "";
 
-    Object.values(BOOK_REGISTRY).forEach(book => {
+    
       if (!normalize(book.title).includes(keyword)) return;
 
       const div = document.createElement("div");
@@ -61,6 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
 
       grid.appendChild(div);
-    });
+
   });
 });
