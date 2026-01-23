@@ -34,9 +34,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!lastTab) lastTab = getActiveTab();
 
+    // 🔙 Restore tab view when search cleared
     if (!keyword) {
       document.getElementById("searchResults")?.remove();
-      lastTab && (document.getElementById(lastTab).style.display = "block");
+      if (lastTab) {
+        document.getElementById(lastTab).style.display = "block";
+      }
       return;
     }
 
@@ -44,23 +47,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const grid = getSearchGrid();
     grid.innerHTML = "";
 
-    
+    // ✅ GLOBAL SEARCH (ALL BOOKS, ALL TABS)
+    Object.values(BOOK_REGISTRY).forEach(book => {
       if (!normalize(book.title).includes(keyword)) return;
 
       const div = document.createElement("div");
       div.className = "book-thumb";
 
       div.innerHTML = `
-        <img src="${book.img}" class="grid-book-img popup-trigger"
-             data-book-id="${book.id}">
-        <img src="${CART_ICON}" class="cart-icon"
-             data-book-id="${book.id}"
-             data-title="${book.title}"
-             data-price="${book.price}"
-             data-setqtty="${book.SetQtty}">
+        <img
+          src="${book.img}"
+          class="grid-book-img popup-trigger"
+          data-book-id="${book.id}"
+        >
+        <img
+          src="${CART_ICON}"
+          class="cart-icon"
+          data-book-id="${book.id}"
+          data-title="${book.title}"
+          data-price="${book.price}"
+          data-setqtty="${book.SetQtty}"
+        >
       `;
 
       grid.appendChild(div);
+    });
 
+    // keep cart icons in sync
+    if (typeof syncCartIcons === "function") {
+      syncCartIcons();
+    }
   });
 });
