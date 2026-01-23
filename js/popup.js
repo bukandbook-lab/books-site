@@ -58,9 +58,12 @@ function renderPopup(bookId) {
       <img src="${CLOSE_ICON}" class="close-popup" alt="Close">
 
       <div class="popup-nav left hidden" id="popupPrev">‹</div>
-      
-      <img src="${book.img}" class="popup-img popup-trigger" loading="lazy" data-book-id="${bookId}">
 
+      <div class="popup-img-wrapper">
+         <div class="skeleton"></div>
+      
+         <img src="${book.img}" class="popup-img popup-trigger" loading="eager" data-book-id="${bookId}">
+      </div>
       <div class="popup-nav right hidden" id="popupNext">›</div>
 
       <div class="book-title">${book.title}</div>
@@ -79,7 +82,6 @@ function renderPopup(bookId) {
         <img
           class="cart-icon"
           src="${CART_ICON}"
-          loading="lazy" 
           width="22"
           data-book-id="${bookId}"
         >
