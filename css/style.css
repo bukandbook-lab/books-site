@@ -307,38 +307,32 @@ html, body {
 /* ===============================
    SKELETON STYLES FOR POPUP
 ================================ */
-/* Popup image wrapper */
 .popup-img-wrapper {
   position: relative;
-  width: 100%;
   max-width: 420px;
-  margin: 0 auto;
+  margin: auto;
 }
 
-/* Popup skeleton */
 .popup-img-wrapper .skeleton {
   width: 100%;
   aspect-ratio: 3 / 4;
   border-radius: 8px;
 }
 
-/* Popup image */
 .popup-img {
   width: 100%;
-  display: block;
   opacity: 0;
   transition: opacity 0.35s ease;
 }
 
-/* Image loaded */
 .popup-img.loaded {
   opacity: 1;
 }
 
-/* Remove skeleton when loaded */
 .popup-img-wrapper.loaded .skeleton {
   display: none;
 }
+
 
 /* =========================
   EPUB READER ICON
