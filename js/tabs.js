@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const contents = document.querySelectorAll(".tabcontent");
 
   function hideAll() {
-    contents.forEach(c => (c.style.display = "none"));
+    contents.forEach(c => c.style.display = "none");
   }
 
   function deactivateTabs() {
@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!panel) return;
 
     panel.style.display = "block";
-    if (btn) btn.classList.add("active");
+    btn?.classList.add("active");
 
-    // 🔑 Only book tabs
+    // Only render books if this tab has a data source
     if (BOOK_SOURCES[tabId]) {
       BOOKS_READY.then(() => loadBooks(tabId));
     }
@@ -37,7 +37,5 @@ document.addEventListener("DOMContentLoaded", () => {
   const defaultBtn =
     document.querySelector('.tab-btn[data-tab="BeginningReader"]');
 
-  if (defaultBtn) {
-    openTab(defaultBtn.dataset.tab, defaultBtn);
-  }
+  defaultBtn && openTab(defaultBtn.dataset.tab, defaultBtn);
 });
