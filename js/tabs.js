@@ -30,6 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
   tabs.forEach(btn => {
     btn.addEventListener("click", () => {
       openTab(btn.dataset.tab, btn);
+
+        // 🧹 Close global search view
+          const searchGrid = document.getElementById("searchResults");
+            if (searchGrid) {
+              searchGrid.remove();
+            }
+
+          const searchInput = document.getElementById("bookSearch");
+            if (searchInput) searchInput.value = "";
+
     });
   });
 
