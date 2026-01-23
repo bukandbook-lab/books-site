@@ -19,13 +19,18 @@ function loadBooks(tabId) {
     if (!book.id) return;
 
     const normalized = {
-      id: book.id,
-      title: book.title || "Untitled",
-      SetQtty: book.qtty || book.NoofBooks || 0,
+      id: book.id || book.ID || book["Book ID"],
+      title: book.title || book["Book Title"] || "Untitled",
+      SetQtty: book.qtty || book.NoofBooks || book["No. of Books"],
       img: book.image || book.Link || "",
-      price: Number(book.price || 0),
-      video: book.youtube || book.video || null,
+      price: Number(book.price || book["Price"] || 0),
+      video:
+        book["Youtube ID"] ||
+        book.youtube ||
+        book.video ||
+        null,
       category: tabId
+
     };
 
     BOOK_REGISTRY[normalized.id] = normalized;
