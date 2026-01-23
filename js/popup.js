@@ -142,6 +142,17 @@ function updatePopupNavigation() {
   } else {
     nextBtn.classList.add("hidden");
   }
+
+  const wrapper = document.querySelector(".popup-img-wrapper");
+  const img = wrapper.querySelector(".popup-img");
+
+  // reset skeleton
+  wrapper.classList.remove("loaded");
+  img.classList.remove("loaded");
+
+  // swap image
+  img.src = newBook.img;
+  img.dataset.bookId = newBook.id;
 }
 
 /* =====================================
