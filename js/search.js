@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
       div.className = "book-thumb";
 
       div.innerHTML = `
+      <div class="skeleton"></div>
         <img
           src="${book.img}"
           class="grid-book-img popup-trigger"
