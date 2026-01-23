@@ -3,47 +3,55 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("bookSearch");
   if (!searchInput) return;
 
-  let lastTab = null;
+  let lastActiveTab = null;
 
-  function normalize(t = "") {
-    return t.toLowerCase().replace(/[^a-z0-9]/g, "");
+  function normalize(text = "") {
+    return text.toLowerCase().replace(/[^a-z0-9]/g, "");
   }
 
   function getActiveTab() {
     const btn = document.querySelector(".tab-btn.active");
-    return btn?.dataset.tab;
+    return btn ? btn.dataset.tab : null;
   }
 
-  function hideTabs() {
-    document.querySelectorAll(".tabcontent").forEach(t => t.style.display = "none");
+  function hideAllTabs() {
+    document.querySelectorAll(".tabcontent").forEach(t => {
+      t.style.display = "none";
+    });
   }
 
-  function getSearchGrid() {
-    let g = document.getElementById("searchResults");
-    if (!g) {
-      g = document.createElement("div");
-      g.id = "searchResults";
-      g.className = "image-grid";
-      document.body.appendChild(g);
+  function showTab(tabId) {
+    document.getElementById(tabId).style.display = "block";
+  }
+
+  function getSearchContainer() {
+    let c = document.getElementById("searchResults");
+    if (!c) {
+      c = document.createElement("div");
+      c.id = "searchResults";
+      c.className = "image-grid";
+      document.body.appendChild(c);
     }
-    return g;
+    return c;
   }
 
   searchInput.addEventListener("input", () => {
     const keyword = normalize(searchInput.value);
 
-    if (!lastTab) lastTab = getActiveTab();
+    if (!lastActiveTab) lastActiveTab = getActiveTab();
 
     if (!keyword) {
-      document.getElementById("searchResults")?.remove();
-      document.getElementById(lastTab).style.display = "block";
+      const sc = document.getElementById("searchResults");
+      if (sc) sc.style.display = "none";
+      if (lastActiveTab) showTab(lastActiveTab);
       return;
     }
 
-    hideTabs();
+    hideAllTabs();
 
-    const grid = getSearchGrid();
-    grid.innerHTML = "";
+    const container = getSearchContainer();
+    container.innerHTML = "";
+    container.style.display = "grid";
 
     Object.values(BOOK_REGISTRY).forEach(book => {
       if (!normalize(book.title).includes(keyword)) return;
@@ -64,9 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
         >
       `;
 
-      grid.appendChild(div);
+      container.appendChild(div);
     });
 
     syncCartIcons();
   });
+
 });
