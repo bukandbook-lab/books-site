@@ -47,13 +47,30 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!lastTab) lastTab = getActiveTab();
 
     // 🔙 Restore tab view when search cleared
-    if (!keyword) {
-      document.getElementById("searchResults")?.remove();
-      if (lastTab) {
-        document.getElementById(lastTab).style.display = "block";
-      }
-      return;
-    }
+  if (!keyword) {
+  document.getElementById("searchResults")?.remove();
+
+  // Hide all tab contents
+  document.querySelectorAll(".tabcontent")
+    .forEach(t => t.style.display = "none");
+
+  // Show BeginningReader content
+  const defaultTab = "BeginningReader";
+  const panel = document.getElementById(defaultTab);
+  if (panel) panel.style.display = "block";
+
+  // Activate BeginningReader tab button
+  document.querySelectorAll(".tab-btn")
+    .forEach(btn => {
+      btn.classList.toggle(
+        "active",
+        btn.dataset.tab === defaultTab
+      );
+    });
+
+  return;
+}
+
     
     // 🔍 GLOBAL SEARCH MODE → no active tab
     document.querySelectorAll(".tab-btn")
