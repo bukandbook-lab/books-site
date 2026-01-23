@@ -38,7 +38,7 @@ window.BOOKS_READY = Promise.all(
                book.youtube ||
                book.video ||
                null,
-           category
+        
           };
         });
       })
