@@ -84,11 +84,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <img
           src="${book.img}"
           class="grid-book-img popup-trigger"
+          loading="lazy" 
           data-book-id="${book.id}"
         >
         <img
           src="${CART_ICON}"
           class="cart-icon"
+          loading="lazy" 
           data-book-id="${book.id}"
           data-title="${book.title}"
           data-price="${book.price}"
