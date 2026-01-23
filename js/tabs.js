@@ -16,15 +16,28 @@ document.addEventListener("DOMContentLoaded", () => {
     deactivateTabs();
 
     const panel = document.getElementById(tabId);
-    if (!panel) return;
+    if (!panel) {
+      console.error("Tab not found:", tabId);
+      return;
+    }
 
     panel.style.display = "block";
     if (btn) btn.classList.add("active");
 
-    // 🔑 Only book tabs
+    // 🔑 ONLY load books if this tab has a data source
     if (BOOK_SOURCES[tabId]) {
-      BOOKS_READY.then(() => loadBooks(tabId));
+      BOOKS_READY.then(() => {
+        loadBooks(tabId);
+      });
     }
+
+    // 🔍 Reset search
+    const search = document.getElementById("bookSearch");
+    if (search) search.value = "";
+
+    // 🎥 Cleanup
+    if (typeof stopAllVideos === "function") stopAllVideos();
+    if (typeof closeBookPopup === "function") closeBookPopup();
   }
 
   tabs.forEach(btn => {
@@ -33,10 +46,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Default tab
+  // DEFAULT TAB (ReadMeFirst first if exists)
   const defaultBtn =
     document.querySelector('.tab-btn[data-tab="ReadMeFirst"]') ||
-    document.querySelector('.tab-btn[data-tab="BeginningReader"]');
+    document.querySelector('.tab-btn[data-tab="BeginningReader"]') ||
+    tabs[0];
 
   if (defaultBtn) {
     openTab(defaultBtn.dataset.tab, defaultBtn);
