@@ -52,16 +52,19 @@ document.addEventListener("DOMContentLoaded", () => {
       div.className = "book-thumb";
 
       div.innerHTML = `
-        <img
-          src="${book.img}"
-          class="grid-book-img popup-trigger"
-          data-book-id="${book.id}"
-        >
-        <img
-          src="${CART_ICON}"
-          class="cart-icon"
-          data-book-id="${book.id}"
-        >
+       <img
+        src="${normalized.img}"
+        class="grid-book-img popup-trigger"
+        data-book-id="${normalized.id}"
+      >
+      <img
+        src="${CART_ICON}"
+        class="cart-icon"
+        data-book-id="${normalized.id}"
+        data-title="${normalized.title}"
+        data-price="${normalized.price}"
+        data-setqtty="${normalized.SetQtty}"
+      >
       `;
 
       grid.appendChild(div);
