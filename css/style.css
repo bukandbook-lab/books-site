@@ -156,9 +156,7 @@ html, body {
  .site-header img {
     max-height: 100px;
   }
-   .image-grid {
-   grid-template-columns: repeat(10, 1fr);
-  }
+ 
 }
 /* =========================
    SEARCH BAR
