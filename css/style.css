@@ -153,6 +153,9 @@ html, body {
   .social-icons {
     flex-shrink: 0;
   }
+ .site-header img {
+    max-height: 100px;
+  }
 }
 /* =========================
    SEARCH BAR
