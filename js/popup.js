@@ -58,7 +58,7 @@ function renderPopup(bookId) {
       <img src="${CLOSE_ICON}" class="close-popup" alt="Close">
 
       <div class="popup-nav left hidden" id="popupPrev">‹</div>
-
+      <div class="skeleton"></div>
       <img src="${book.img}" class="popup-img popup-trigger" loading="lazy" data-book-id="${bookId}">
 
       <div class="popup-nav right hidden" id="popupNext">›</div>
