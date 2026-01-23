@@ -4,35 +4,31 @@ function loadBooks(tabId) {
 
   const books = ALL_BOOKS[tabId];
 
-  // 🚫 Safety: do nothing if no books
+  // Clear only book containers
+  container.innerHTML = "";
+
   if (!Array.isArray(books) || books.length === 0) {
+    container.innerHTML = `<p style="padding:16px">No books found.</p>`;
     return;
   }
-
-  container.innerHTML = "";
 
   const grid = document.createElement("div");
   grid.className = "image-grid";
 
   books.forEach(book => {
-    if (!book.id) return;
+    const id = book.id || book.ID || book["Book ID"];
+    if (!id) return;
 
     const normalized = {
-      id: book.id || book.ID || book["Book ID"],
+      id,
       title: book.title || book["Book Title"] || "Untitled",
-      SetQtty: book.qtty || book.NoofBooks || book["No. of Books"],
       img: book.image || book.Link || "",
       price: Number(book.price || book["Price"] || 0),
-      video:
-        book["Youtube ID"] ||
-        book.youtube ||
-        book.video ||
-        null,
-   
-
+      SetQtty: book.qtty || book["No. of Books"] || 0,
+      video: book["Youtube ID"] || book.youtube || book.video || null
     };
 
-    BOOK_REGISTRY[normalized.id] = normalized;
+    BOOK_REGISTRY[id] = normalized;
 
     const item = document.createElement("div");
     item.className = "book-thumb";
