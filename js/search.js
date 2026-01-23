@@ -10,12 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getActiveTab() {
-    const btn = document.querySelector(".tab-btn.active");
-    return btn?.dataset.tab;
+    return document.querySelector(".tab-btn.active")?.dataset.tab;
   }
 
   function hideTabs() {
-    document.querySelectorAll(".tabcontent").forEach(t => t.style.display = "none");
+    document.querySelectorAll(".tabcontent")
+      .forEach(t => t.style.display = "none");
   }
 
   function getSearchGrid() {
@@ -36,12 +36,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!keyword) {
       document.getElementById("searchResults")?.remove();
-      document.getElementById(lastTab).style.display = "block";
+      lastTab && (document.getElementById(lastTab).style.display = "block");
       return;
     }
 
     hideTabs();
-
     const grid = getSearchGrid();
     grid.innerHTML = "";
 
@@ -52,24 +51,16 @@ document.addEventListener("DOMContentLoaded", () => {
       div.className = "book-thumb";
 
       div.innerHTML = `
-       <img
-        src="${normalized.img}"
-        class="grid-book-img popup-trigger"
-        data-book-id="${normalized.id}"
-      >
-      <img
-        src="${CART_ICON}"
-        class="cart-icon"
-        data-book-id="${normalized.id}"
-        data-title="${normalized.title}"
-        data-price="${normalized.price}"
-        data-setqtty="${normalized.SetQtty}"
-      >
+        <img src="${book.img}" class="grid-book-img popup-trigger"
+             data-book-id="${book.id}">
+        <img src="${CART_ICON}" class="cart-icon"
+             data-book-id="${book.id}"
+             data-title="${book.title}"
+             data-price="${book.price}"
+             data-setqtty="${book.SetQtty}">
       `;
 
       grid.appendChild(div);
     });
-
-    syncCartIcons();
   });
 });
