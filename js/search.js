@@ -43,6 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // 🔍 GLOBAL SEARCH MODE → no active tab
+  document.querySelectorAll(".tab-btn")
+  .forEach(btn => btn.classList.remove("active"));
+
+
     hideTabs();
     const grid = getSearchGrid();
     grid.innerHTML = "";
