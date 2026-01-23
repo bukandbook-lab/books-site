@@ -46,9 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // DEFAULT TAB (ReadMeFirst first if exists)
+  // DEFAULT TAB
   const defaultBtn =
-    document.querySelector('.tab-btn[data-tab="ReadMeFirst"]') ||
     document.querySelector('.tab-btn[data-tab="BeginningReader"]') ||
     tabs[0];
 
