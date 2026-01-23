@@ -33,6 +33,7 @@ function loadBooks(tabId) {
     item.className = "book-thumb";
 
     item.innerHTML = `
+    <div class="skeleton"></div>
       <img
         src="${normalized.img}"
         class="grid-book-img popup-trigger"
