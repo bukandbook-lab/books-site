@@ -28,8 +28,7 @@ function loadBooks(tabId) {
       video: book["Youtube ID"] || book.youtube || book.video || null
     };
 
-    BOOK_REGISTRY[id] = normalized;
-
+   
     const item = document.createElement("div");
     item.className = "book-thumb";
 
