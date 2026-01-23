@@ -36,11 +36,13 @@ function loadBooks(tabId) {
       <img
         src="${normalized.img}"
         class="grid-book-img popup-trigger"
+        loading="lazy" 
         data-book-id="${normalized.id}"
       >
       <img
         src="${CART_ICON}"
         class="cart-icon"
+        loading="lazy" 
         data-book-id="${normalized.id}"
         data-title="${normalized.title}"
         data-price="${normalized.price}"
