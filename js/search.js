@@ -3,16 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("bookSearch");
   if (!searchInput) return;
 
-  let lastTab = null;
+  let lastTab = "BeginningReader"; // 🧠 default fallback
 
-  // 🔤 normalize single string (keyword)
-  function normalize(text = "") {
-    return text
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, "");
-  }
-
-  // 🔤 normalize title into words
   function normalizeWords(text = "") {
     return text
       .toLowerCase()
@@ -42,46 +34,45 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   searchInput.addEventListener("input", () => {
-    const keyword = normalize(searchInput.value);
+    const keyword = searchInput.value.trim().toLowerCase();
 
-    if (!lastTab) lastTab = getActiveTab();
+    // 🧠 remember last active tab BEFORE search starts
+    const active = getActiveTab();
+    if (active) lastTab = active;
 
-    // 🔙 Restore tab view when search cleared
-  if (!keyword) {
-  document.getElementById("searchResults")?.remove();
+    /* ============================
+       🔙 SEARCH CLEARED
+    ============================ */
+    if (!keyword) {
+      document.getElementById("searchResults")?.remove();
 
-  // Hide all tab contents
-  document.querySelectorAll(".tabcontent")
-    .forEach(t => t.style.display = "none");
+      hideTabs();
 
-  // Show BeginningReader content
-  const defaultTab = "BeginningReader";
-  const panel = document.getElementById(defaultTab);
-  if (panel) panel.style.display = "block";
+      // restore last tab
+      const panel = document.getElementById(lastTab);
+      if (panel) panel.style.display = "block";
 
-  // Activate BeginningReader tab button
-  document.querySelectorAll(".tab-btn")
-    .forEach(btn => {
-      btn.classList.toggle(
-        "active",
-        btn.dataset.tab === defaultTab
-      );
-    });
+      document.querySelectorAll(".tab-btn")
+        .forEach(btn =>
+          btn.classList.toggle("active", btn.dataset.tab === lastTab)
+        );
 
-  return;
-}
+      return;
+    }
 
-    
-    // 🔍 GLOBAL SEARCH MODE → no active tab
+    /* ============================
+       🔍 GLOBAL SEARCH MODE
+    ============================ */
+
+    // remove all active tab styles
     document.querySelectorAll(".tab-btn")
       .forEach(btn => btn.classList.remove("active"));
 
-    
     hideTabs();
+
     const grid = getSearchGrid();
     grid.innerHTML = "";
 
-    // 🌍 SEARCH ALL BOOKS
     Object.values(BOOK_REGISTRY).forEach(book => {
       const words = normalizeWords(book.title);
       if (!words.some(w => w.includes(keyword))) return;
@@ -108,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
       grid.appendChild(div);
     });
 
-    // 🛒 sync cart icons
     if (typeof syncCartIcons === "function") {
       syncCartIcons();
     }
