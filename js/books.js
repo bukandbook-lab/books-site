@@ -6,7 +6,6 @@ function loadBooks(tabId) {
 
   // 🚫 Safety: do nothing if no books
   if (!Array.isArray(books) || books.length === 0) {
-    container.innerHTML = "<p>No books available.</p>";
     return;
   }
 
@@ -29,7 +28,7 @@ function loadBooks(tabId) {
         book.youtube ||
         book.video ||
         null,
-      category
+   
 
     };
 
