@@ -22,7 +22,7 @@ html, body {
 
 .site-header img {
   width: 100%;
-  max-height: 100px;   /* 🔥 control height */
+  max-height: 150px;   /* 🔥 control height */
   object-fit: contain;
   display: block;
   margin: 0;
