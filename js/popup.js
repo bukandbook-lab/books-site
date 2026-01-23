@@ -57,14 +57,14 @@ function renderPopup(bookId) {
 
       <img src="${CLOSE_ICON}" class="close-popup" alt="Close">
 
-      <div class="popup-nav left hidden" id="popupPrev">‹</div>
+      <div class="popup-nav left" id="popupPrev">‹</div>
 
       <div class="popup-img-wrapper">
          <div class="skeleton"></div>
       
          <img src="${book.img}" class="popup-img popup-trigger" loading="eager" data-book-id="${bookId}">
       </div>
-      <div class="popup-nav right hidden" id="popupNext">›</div>
+      <div class="popup-nav right" id="popupNext">›</div>
 
       <div class="book-title">${book.title}</div>
 
@@ -97,11 +97,13 @@ function renderPopup(bookId) {
     </div>
   `;
 
+  
+
   const popup = document.getElementById("BookPopup");
   popup.dataset.bookId = bookId;
   popup.style.display = "flex";
 
-  updatePopupNavigation();
+  bindPopupNavigation();
   syncCartIcons();
 
 }
@@ -109,50 +111,35 @@ function renderPopup(bookId) {
 /* =====================================
    GALLERY NAVIGATION (BY BOOK ID)
 ===================================== */
-function updatePopupNavigation() {
-  if (!currentBookId) return;
-
-  const prefix = currentBookId.charAt(0); // B, P, C, etc.
-
-  const categoryBookIds = Object.keys(BOOK_REGISTRY)
-    .filter(id => id.charAt(0) === prefix)
-    .sort((a, b) => {
-      const numA = parseInt(a.slice(1), 10);
-      const numB = parseInt(b.slice(1), 10);
-      return numA - numB;
-    });
-
-  const index = categoryBookIds.indexOf(currentBookId);
-
-  const prevBtn = document.getElementById("popupPrev");
-  const nextBtn = document.getElementById("popupNext");
-
-  /* LEFT */
-  if (index > 0) {
-    prevBtn.classList.remove("hidden");
-    prevBtn.onclick = () => openBookPopup(categoryBookIds[index - 1]);
-  } else {
-    prevBtn.classList.add("hidden");
-  }
-
-  /* RIGHT */
-  if (index < categoryBookIds.length - 1) {
-    nextBtn.classList.remove("hidden");
-    nextBtn.onclick = () => openBookPopup(categoryBookIds[index + 1]);
-  } else {
-    nextBtn.classList.add("hidden");
-  }
-
+function bindPopupNavigation() {
+  const img = document.querySelector(".popup-img");
   const wrapper = document.querySelector(".popup-img-wrapper");
-  const img = wrapper.querySelector(".popup-img");
 
-  // reset skeleton
-  wrapper.classList.remove("loaded");
-  img.classList.remove("loaded");
+  document.getElementById("popupPrev")?.addEventListener("click", () => {
+    navigatePopup(-1);
+  });
 
-  // swap image
-  img.src = newBook.img;
-  img.dataset.bookId = newBook.id;
+  document.getElementById("popupNext")?.addEventListener("click", () => {
+    navigatePopup(1);
+  });
+
+  function navigatePopup(step) {
+    const ids = Object.keys(BOOK_REGISTRY);
+    let index = ids.indexOf(img.dataset.bookId);
+
+    index = (index + step + ids.length) % ids.length;
+    const nextId = ids[index];
+    const nextBook = BOOK_REGISTRY[nextId];
+
+    // 🔄 RESET skeleton
+    wrapper.classList.remove("loaded");
+    img.classList.remove("loaded");
+
+    img.src = nextBook.img;
+    img.dataset.bookId = nextId;
+
+    document.querySelector(".book-title").textContent = nextBook.title;
+  }
 }
 
 /* =====================================
