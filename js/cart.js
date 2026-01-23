@@ -648,17 +648,25 @@ function syncCartIcons() {
 }
 
 /* =====================================
-   PAYMENT → THANK YOU FLOW
+   THANK YOU POPUP (DELIVERY-AWARE)
 ===================================== */
-function showThankYou(message = "Thank you! Your order has been submitted successfully.") {
+function showThankYou() {
   const paymentPopup = document.getElementById("paymentPopup");
   const thankYou = document.getElementById("thankYou");
   const thankYouMsg = document.getElementById("thankYouMsg");
 
   if (paymentPopup) paymentPopup.style.display = "none";
 
+  const delivery =
+    document.querySelector("input[name='delivery']:checked")?.value;
+
+  const msg =
+    "Thank you for your order. Please ensure payment proof has been submitted too.<br><br>Your order will be delivered within <b>" +
+    (delivery === "email" ? "18 hours" : "3 days") +
+    "</b>.";
+
   if (thankYouMsg) {
-    thankYouMsg.innerHTML = message;
+    thankYouMsg.innerHTML = msg;
   }
 
   if (thankYou) {
