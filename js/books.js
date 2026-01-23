@@ -4,9 +4,8 @@ function loadBooks(tabId) {
 
   const books = ALL_BOOKS[tabId];
 
-  // 🚫 Safety: do nothing if no books
   if (!Array.isArray(books) || books.length === 0) {
-    container.innerHTML = "<p>No books available.</p>";
+    // DO NOT overwrite static tabs
     return;
   }
 
@@ -18,34 +17,19 @@ function loadBooks(tabId) {
   books.forEach(book => {
     if (!book.id) return;
 
-    const normalized = {
-      id: book.id,
-      title: book.title || "Untitled",
-      SetQtty: book.qtty || book.NoofBooks || 0,
-      img: book.image || book.Link || "",
-      price: Number(book.price || 0),
-      video: book.youtube || book.video || null,
-      category: tabId
-    };
-
-    BOOK_REGISTRY[normalized.id] = normalized;
-
     const item = document.createElement("div");
     item.className = "book-thumb";
 
     item.innerHTML = `
       <img
-        src="${normalized.img}"
+        src="${book.image || book.Link || ""}"
         class="grid-book-img popup-trigger"
-        data-book-id="${normalized.id}"
+        data-book-id="${book.id}"
       >
       <img
         src="${CART_ICON}"
         class="cart-icon"
-        data-book-id="${normalized.id}"
-        data-title="${normalized.title}"
-        data-price="${normalized.price}"
-        data-setqtty="${normalized.SetQtty}"
+        data-book-id="${book.id}"
       >
     `;
 
