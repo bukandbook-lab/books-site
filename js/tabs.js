@@ -14,6 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function openTab(tabId, btn) {
     hideAll();
     deactivateTabs();
+    
+  // ⛔ EXIT SEARCH MODE
+  const searchGrid = document.getElementById("searchResults");
+  if (searchGrid) searchGrid.remove();
+
+  const searchInput = document.getElementById("bookSearch");
+  if (searchInput) searchInput.value = "";
+
 
     const panel = document.getElementById(tabId);
     if (!panel) return;
@@ -30,15 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
   tabs.forEach(btn => {
     btn.addEventListener("click", () => {
       openTab(btn.dataset.tab, btn);
-
-        // 🧹 Close global search view
-          const searchGrid = document.getElementById("searchResults");
-            if (searchGrid) {
-              searchGrid.remove();
-            }
-
-          const searchInput = document.getElementById("bookSearch");
-            if (searchInput) searchInput.value = "";
 
     });
   });
