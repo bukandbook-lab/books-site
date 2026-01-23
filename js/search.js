@@ -5,9 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let lastTab = null;
 
-  function normalize(t = "") {
-    return t.toLowerCase().replace(/[^a-z0-9]/g, "");
-  }
+  function normalizeWords(text = "") {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, "")
+    .split(/\s+/)
+    .filter(Boolean);
+}
 
   function getActiveTab() {
     return document.querySelector(".tab-btn.active")?.dataset.tab;
@@ -54,7 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ✅ GLOBAL SEARCH (ALL BOOKS, ALL TABS)
     Object.values(BOOK_REGISTRY).forEach(book => {
-      if (!normalize(book.title).includes(keyword)) return;
+      const words = normalizeWords(book.title);
+      if (!words.some(w => w.includes(keyword))) return;
+
 
       const div = document.createElement("div");
       div.className = "book-thumb";
