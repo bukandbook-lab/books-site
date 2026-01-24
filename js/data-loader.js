@@ -20,7 +20,17 @@ const BOOK_SOURCES = {
   Comic:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/comicdata.json"
 };
 
-window.CATEGORY_ORDER = Object.keys(BOOK_SOURCES);
+const CATEGORY_ORDER = [
+  "BeginningReader",
+  "ChapterBook",
+  "PictureBook",
+  "Novel",
+  "Islamic",
+  "Melayu",
+  "Jawi",
+  "Comic"
+];
+
 
 /* =========================================================
    LOAD ALL BOOK DATA
