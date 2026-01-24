@@ -75,17 +75,20 @@ function renderPopup(bookId) {
       ` : ""}
     </div>
   `;
-}
-/* =====================================
-   AFTER RENDER 
-===================================== */
+   /* =============================
+   IMAGE SKELETON HANDLING
+============================= */
 const img = document.querySelector(".popup-img");
 const skeleton = document.querySelector(".img-skeleton");
 
-img.onload = () => {
-  skeleton.remove();
-  img.classList.add("loaded");
-};
+if (img && skeleton) {
+  img.onload = () => {
+    skeleton.remove();
+    img.classList.add("loaded");
+  };
+}
+
+}
 
 /* =====================================
    NAVIGATION (CATEGORY AWARE)
@@ -159,34 +162,39 @@ function closePopup() {
    VIDEO LOGIC
 ===================================== */
 document.addEventListener("click", e => {
-  const btn = e.target.closest(".watch-video-btn");
-  if (!btn) return;
+  if (!e.target.classList.contains("watch-video-btn")) return;
 
   const popup = document.getElementById("BookPopup");
   const book = BOOK_REGISTRY[popup.dataset.bookId];
   const box = popup.querySelector(".video-box");
 
+  if (!book?.video || !box) return;
+
+  /* 🔁 TOGGLE */
   if (box.classList.contains("active")) {
     resetVideo();
     return;
   }
 
+  /* ✅ ACTIVATE HEIGHT FIRST */
   box.classList.add("active");
+
   box.innerHTML = `
     <div class="yt-lazy" data-video-id="${book.video}">
       <img src="https://img.youtube.com/vi/${book.video}/hqdefault.jpg">
+      <span class="yt-play"></span>
     </div>
   `;
 
-  btn.textContent = "Hide Video";
+  e.target.textContent = "Hide Video";
 });
+
 
 document.addEventListener("click", e => {
   const yt = e.target.closest(".yt-lazy");
   if (!yt) return;
-
-  yt.classList.add("active");
-   yt.innerHTML = `
+   
+    yt.innerHTML = `
     <iframe class="book-yt-video"
       src="https://www.youtube.com/embed/${yt.dataset.videoId}?autoplay=1"
       allow="autoplay"
