@@ -145,15 +145,28 @@ function bindPopupNavigation() {
    CLOSE POPUP
 ===================================== */
 document.addEventListener("click", e => {
-  const close = e.target.closest(".close-popup");
-  if (!close) return;
+  const closeBtn = e.target.closest(".close-popup");
+  if (!closeBtn) return;
 
-  const popup = close.closest(".popup");
+  const popup = closeBtn.closest(".popup");
   if (!popup) return;
 
-  resetVideo(popup);
+  // hide popup
   popup.style.display = "none";
+
+  // 🔥 stop any playing video
+  popup.querySelectorAll("iframe").forEach(f => f.remove());
+
+  // 🔄 reset video UI
+  popup.querySelectorAll(".video-box").forEach(v => {
+    v.style.display = "none";
+    v.innerHTML = "";
+  });
+
+  popup.querySelectorAll(".watch-video-btn")
+    .forEach(b => (b.textContent = "Watch Video"));
 });
+
 
 /* =====================================
    WATCH HIDE VIDEO
