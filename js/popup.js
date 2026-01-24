@@ -194,7 +194,14 @@ document.addEventListener("touchstart", e => {
 
 document.addEventListener("touchend", e => {
   if (!e.target.closest(".popup-img")) return;
+   
   const diff = startX - e.changedTouches[0].screenX;
   if (Math.abs(diff) < 50) return;
-  diff > 0 ? navigatePopup(1) : navigatePopup(-1);
+   
+  if (diff > 0) {
+  navigatePopup(1);
+} else {
+  navigatePopup(-1);
+}
+
 });
