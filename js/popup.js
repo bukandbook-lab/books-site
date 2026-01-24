@@ -76,6 +76,16 @@ function renderPopup(bookId) {
     </div>
   `;
 }
+/* =====================================
+   AFTER RENDER 
+===================================== */
+const img = document.querySelector(".popup-img");
+const skeleton = document.querySelector(".img-skeleton");
+
+img.onload = () => {
+  skeleton.remove();
+  img.classList.add("loaded");
+};
 
 /* =====================================
    NAVIGATION (CATEGORY AWARE)
