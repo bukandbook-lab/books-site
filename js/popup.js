@@ -67,7 +67,7 @@ function renderPopup(bookId) {
         data-title="${book.title}"
         data-price="${book.price}"
         data-setqtty="${book.SetQtty || 1}">
-        <b>&nbsp;&nbsp;RM${book.price} ${priceLabel}</b>
+        &nbsp;&nbsp;RM${book.price} ${priceLabel}
         <img class="cart-icon" src="${CART_ICON}" width="22">
       </div>
 
