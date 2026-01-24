@@ -134,13 +134,17 @@ document.addEventListener("click", e => {
   const popup = document.getElementById("BookPopup");
   if (!popup || popup.style.display !== "flex") return;
 
-  // X button
-  if (e.target.classList.contains("close-popup")) {
+  const box = popup.querySelector(".popup-box");
+
+  /* ❌ X BUTTON */
+  if (e.target.closest(".close-popup")) {
+    e.stopPropagation();
     closePopup();
+    return;
   }
 
-  // outside click
-  if (e.target === popup) {
+  /* ❌ CLICK OUTSIDE BOX */
+  if (!box.contains(e.target)) {
     closePopup();
   }
 });
