@@ -200,7 +200,7 @@ document.addEventListener("click", e => {
       <span class="yt-play">▶</span>
     </div>
   `;
-  box.style.display = "block";
+  box.classList.add("active");
   e.target.textContent = "Hide Video";
 });
 
