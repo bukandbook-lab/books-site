@@ -309,30 +309,32 @@ html, body {
 ================================ */
 .popup-img-wrapper {
   position: relative;
-  max-width: 420px;
-  margin: auto;
-}
-
-.popup-img-wrapper .skeleton {
   width: 100%;
   aspect-ratio: 3 / 4;
-  border-radius: 8px;
+}
+
+.img-skeleton {
+  position: absolute;
+  inset: 0;
+  background: #eee;
+  animation: pulse 1.2s infinite;
 }
 
 .popup-img {
-  position: relative;
-  z-index: 1;
   width: 100%;
-  opacity: 0;
-  transition: opacity 0.35s ease;
+  height: 100%;
+  object-fit: contain;
+  display: none;
 }
 
 .popup-img.loaded {
-  opacity: 1;
+  display: block;
 }
 
-.popup-img-wrapper.loaded .skeleton {
-  display: none;
+@keyframes pulse {
+  0% { opacity: .6 }
+  50% { opacity: 1 }
+  100% { opacity: .6 }
 }
 
 
