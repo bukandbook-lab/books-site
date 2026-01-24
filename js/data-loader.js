@@ -19,6 +19,8 @@ const BOOK_SOURCES = {
   Comic:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/comicdata.json"
 };
 
+const CATEGORY_ORDER = Object.keys(BOOK_SOURCES);
+
 window.BOOKS_READY = Promise.all(
   Object.entries(BOOK_SOURCES).map(([category, url]) =>
     fetch(url)
