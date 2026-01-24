@@ -158,7 +158,7 @@ document.addEventListener("click", e => {
 
     /* CLOSE POPUP */
   if (e.target.closest(".close-popup")) {
-    const popup = document.getElementById("BookPopup"); 
+    const popup = document.getElementById("BookPopupContent");
     if (!popup) return;
 
     // stop video
@@ -185,26 +185,23 @@ document.addEventListener("click", e => {
       btn.textContent = "Watch Video";
     } else {
       videoBox.style.display = "block";
+         /* CLICK YOUTUBE COVER → PLAY */
+        const yt = e.target.closest(".yt-lazy");
+        if (!yt) return; 
+           yt.innerHTML = `
+           <iframe
+               src="https://www.youtube.com/embed/${book.video}?autoplay=1"
+               frameborder="0"
+               allow="autoplay; encrypted-media"
+               allowfullscreen
+          ></iframe>
+          `;
       btn.textContent = "Hide Video";
     }
     return;
   }
    
-  /* CLICK YOUTUBE COVER → PLAY */
-  const yt = e.target.closest(".yt-lazy");
-  if (!yt) return;
 
-  const videoId = yt.dataset.video;
-  if (!videoId) return;
-
-  yt.innerHTML = `
-    <iframe
-      src="https://www.youtube.com/embed/${videoId}?autoplay=1"
-      frameborder="0"
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-    ></iframe>
-  `;
 });
 
 /* =====================================
