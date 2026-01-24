@@ -207,11 +207,21 @@ document.addEventListener("click", e => {
   const yt = e.target.closest(".yt-lazy");
   if (!yt) return;
 
-  yt.innerHTML = `
-    <iframe class="book-yt-video" src="https://www.youtube.com/embed/${yt.dataset.videoId}?autoplay=1" 
-      allow="autoplay" allowfullscreen></iframe>
+  const box = yt.closest(".video-box");
+  const id = yt.dataset.videoId;
+
+  box.classList.add("active"); // 🔑 ensures height exists
+
+  box.innerHTML = `
+    <iframe
+      class="book-yt-video"
+      src="https://www.youtube.com/embed/${id}?autoplay=1"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
   `;
 });
+
 
 function resetVideo(popup) {
   popup.querySelectorAll("iframe").forEach(f => f.remove());
