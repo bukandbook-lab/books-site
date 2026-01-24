@@ -88,7 +88,7 @@ function renderPopup(bookId) {
       </div>
 
       ${
-        book.video
+          book.video
           ? `<button class="watch-video-btn">Watch Video</button>
              <div class="video-box" data-youtube="${book.video}" style="display:none;"></div>`
           : ``
@@ -175,18 +175,35 @@ document.addEventListener("click", e => {
       e.target.innerText = "Watch Video";
     } else {
       videoBox.innerHTML = `
-        <iframe
-          width="100%"
-          height="260"
-          src="https://www.youtube.com/embed/${book.video}"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
+        <div class="yt-lazy" data-video-id="${book.video}">
+              <img
+                   src="https://img.youtube.com/vi/${book.video}/hqdefault.jpg"
+                   alt="Video thumbnail"
+                   loading="lazy"
+              >
+              <span class="yt-play">▶</span>
+            </div>
       `;
       videoBox.style.display = "block";
       e.target.innerText = "Hide Video";
     }
   }
+
+   /* CLICK YOUTUBE COVER */
+  const box = e.target.closest(".yt-lazy");
+  if (!box) return;
+
+  const id = box.dataset.video;
+
+  box.innerHTML = `
+    <iframe
+      src="https://www.youtube.com/embed/${id}?autoplay=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+    ></iframe>
+  `;
+
 });
 /* =====================================
    MOBILE SWIPE SUPPORT
