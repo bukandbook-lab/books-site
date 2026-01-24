@@ -28,6 +28,19 @@ window.BOOKS_READY = Promise.all(
       .then(data => {
         ALL_BOOKS[category] = data;
 
+         window.ORDERED_BOOKS_BY_CATEGORY = {};
+
+BOOKS_READY.then(() => {
+  CATEGORY_ORDER.forEach(cat => {
+    ORDERED_BOOKS_BY_CATEGORY[cat] =
+      (ALL_BOOKS[cat] || [])
+        .map(b => b.id || b.ID || b["Book ID"])
+        .filter(Boolean)
+        .sort(); // sort by Book ID
+  });
+});
+
+
 data.forEach(book => {
   const id = book.id || book.ID || book["Book ID"];
   if (!id) return;
