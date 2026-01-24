@@ -204,7 +204,7 @@ document.addEventListener("click", e => {
   if (!yt) return;
 
   yt.innerHTML = `
-    <iframe src="https://www.youtube.com/embed/${yt.dataset.videoId}?autoplay=1" max-height="420px"
+    <iframe class="book-yt-video" src="https://www.youtube.com/embed/${yt.dataset.videoId}?autoplay=1" 
       allow="autoplay" allowfullscreen></iframe>
   `;
 });
