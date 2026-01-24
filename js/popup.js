@@ -158,7 +158,7 @@ document.addEventListener("click", e => {
 
     /* CLOSE POPUP */
   if (e.target.closest(".close-popup")) {
-    const popup = e.target.closest(".popup");
+    const popup = document.getElementById("BookPopup"); 
     if (!popup) return;
 
     // stop video
@@ -194,7 +194,7 @@ document.addEventListener("click", e => {
   const yt = e.target.closest(".yt-lazy");
   if (!yt) return;
 
-  const videoId = yt.dataset.videoId;
+  const videoId = yt.dataset.video;
   if (!videoId) return;
 
   yt.innerHTML = `
