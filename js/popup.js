@@ -183,16 +183,17 @@ document.addEventListener("click", e => {
 document.addEventListener("click", e => {
   if (!e.target.classList.contains("watch-video-btn")) return;
 
-  const popup = e.target.closest(".popup");
+  const popup = document.getElementById("BookPopup");
   const book = BOOK_REGISTRY[popup.dataset.bookId];
-  if (!book?.video) return;
-
   const box = popup.querySelector(".video-box");
-  if (box.style.display === "block") {
+
+  if (!book?.video) return;
+   
+  if (box.classList.contains("active")) {
     resetVideo(popup);
     return;
   }
-
+   
   box.innerHTML = `
     <div class="yt-lazy" data-video-id="${book.video}">
       <img src="https://img.youtube.com/vi/${book.video}/hqdefault.jpg">
