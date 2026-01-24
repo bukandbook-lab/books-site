@@ -545,6 +545,10 @@ html, body {
   margin-top: 12px;
 }
 
+.book-yt-video {
+   max-height: 420px;
+ }
+
 .yt-lazy {
   position: relative;
   max-height: 420px;
