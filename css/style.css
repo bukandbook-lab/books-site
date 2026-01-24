@@ -546,8 +546,12 @@ html, body {
 }
 
 .book-yt-video {
-   max-height: 420px;
- }
+  width: 100%;       /* full width of container */
+  height: 420px;     /* desired height */
+  border: none;      /* optional, remove border */
+  display: block;
+}
+
 
 .yt-lazy {
   position: relative;
