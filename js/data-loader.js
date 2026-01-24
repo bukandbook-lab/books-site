@@ -4,6 +4,7 @@
 
 window.ALL_BOOKS = {};
 window.BOOK_REGISTRY = {};
+window.ORDERED_BOOKS_BY_CATEGORY = {};
 
 /* =========================================================
    BOOK DATA SOURCES
@@ -19,8 +20,11 @@ const BOOK_SOURCES = {
   Comic:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/comicdata.json"
 };
 
-const CATEGORY_ORDER = Object.keys(BOOK_SOURCES);
+window.CATEGORY_ORDER = Object.keys(BOOK_SOURCES);
 
+/* =========================================================
+   LOAD ALL BOOK DATA
+========================================================= */
 window.BOOKS_READY = Promise.all(
   Object.entries(BOOK_SOURCES).map(([category, url]) =>
     fetch(url)
@@ -28,37 +32,32 @@ window.BOOKS_READY = Promise.all(
       .then(data => {
         ALL_BOOKS[category] = data;
 
-         window.ORDERED_BOOKS_BY_CATEGORY = {};
+        // Build registry + ordered list
+        ORDERED_BOOKS_BY_CATEGORY[category] = [];
 
-BOOKS_READY.then(() => {
-  CATEGORY_ORDER.forEach(cat => {
-    ORDERED_BOOKS_BY_CATEGORY[cat] =
-      (ALL_BOOKS[cat] || [])
-        .map(b => b.id || b.ID || b["Book ID"])
-        .filter(Boolean)
-        .sort(); // sort by Book ID
-  });
-});
+        data.forEach(book => {
+          const id = book.id || book.ID || book["Book ID"];
+          if (!id) return;
 
+          ORDERED_BOOKS_BY_CATEGORY[category].push(id);
 
-data.forEach(book => {
-  const id = book.id || book.ID || book["Book ID"];
-  if (!id) return;
+          BOOK_REGISTRY[id] = {
+            id,
+            category, // ✅ CRITICAL
+            title: book.title || book["Book Title"] || "Untitled",
+            img: book.image || book.Link || "",
+            price: Number(book.price || book["Price"] || 0),
+            SetQtty: book.qtty || book["No. of Books"] || 0,
+            video:
+              book["Youtube ID"] ||
+              book.youtube ||
+              book.video ||
+              null
+          };
+        });
 
-  BOOK_REGISTRY[id] = {
-    id,
-    title: book.title || book["Book Title"] || "Untitled",
-    img: book.image || book.Link || "",
-    price: Number(book.price || book["Price"] || 0),
-    SetQtty: book.qtty || book["No. of Books"] || 0,
-    video:
-      book["Youtube ID"] ||
-      book.youtube ||
-      book.video ||
-      null
-  };
-});
-
+        // sort books by ID inside category
+        ORDERED_BOOKS_BY_CATEGORY[category].sort();
       })
   )
 ).then(() => {
