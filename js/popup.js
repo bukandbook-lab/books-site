@@ -33,6 +33,10 @@ function renderPopup(bookId) {
 
   const isSetBook = Number(book.SetQtty) > 1;
   const priceLabel = isSetBook ? "/set" : "/book";
+  const setQtyHTML = isSetBook
+    ? `<div class="set-qty"><b>No. of books:</b> ${book.SetQtty} books / set</div>`
+    : "";
+
 
   document.getElementById("BookPopupContent").innerHTML = `
     <div class="popup-box">
@@ -42,13 +46,19 @@ function renderPopup(bookId) {
       <div class="popup-nav left">‹</div>
 
       <div class="popup-img-wrapper">
-        <img src="${book.img}" class="popup-img" data-book-id="${bookId}">
+        <div class="img-skeleton"></div>
+        <img src="${book.img}"
+             class="popup-img"
+             data-book-id="${bookId}"
+             loading="eager">
       </div>
+
 
       <div class="popup-nav right">›</div>
 
       <div class="book-title">${book.title}</div>
       <div><b>Category:</b> ${book.category}</div>
+       ${setQtyHTML}
 
       <div class="price-box"
         data-book-id="${bookId}"
