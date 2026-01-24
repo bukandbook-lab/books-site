@@ -87,12 +87,21 @@ function renderPopup(bookId) {
         >
       </div>
 
-      ${
-          book.video
-          ? `<button class="watch-video-btn">Watch Video</button>
-             <div class="video-box" data-youtube="${book.video}" style="display:none;"></div>`
-          : ``
-      }
+    ${book.video ? `
+  <button class="watch-video-btn">Watch Video</button>
+
+  <div class="video-box" style="display:none;">
+    <div class="yt-lazy" data-video-id="${book.video}">
+      <img
+        src="https://img.youtube.com/vi/${book.video}/hqdefault.jpg"
+        loading="lazy"
+        alt="Video thumbnail"
+      >
+      <span class="yt-play">▶</span>
+    </div>
+  </div>
+` : ""}
+
 
     </div>
   `;
@@ -147,13 +156,15 @@ function bindPopupNavigation() {
 ===================================== */
 document.addEventListener("click", e => {
 
-  /* CLOSE POPUP */
-  if (e.target.classList.contains("close-popup")) {
+    /* CLOSE POPUP */
+  if (e.target.closest(".close-popup")) {
     const popup = e.target.closest(".popup");
-    if (popup) popup.style.display = "none";
+    if (!popup) return;
 
-    const iframe = popup?.querySelector("iframe");
-    if (iframe) iframe.remove();
+    // stop video
+    popup.querySelectorAll("iframe").forEach(f => f.remove());
+
+    popup.style.display = "none";
     return;
   }
 
@@ -165,46 +176,37 @@ document.addEventListener("click", e => {
     const videoBox = popup.querySelector(".video-box");
     if (!videoBox) return;
 
-    const bookId = popup.dataset.bookId;
-    const book = BOOK_REGISTRY[bookId];
-    if (!book || !book.video) return;
+    const btn = e.target;
 
-    if (videoBox.innerHTML) {
-      videoBox.innerHTML = "";
+    if (videoBox.style.display === "block") {
+      // hide video
+      videoBox.innerHTML = videoBox.innerHTML; // reset iframe
       videoBox.style.display = "none";
-      e.target.innerText = "Watch Video";
+      btn.textContent = "Watch Video";
     } else {
-      videoBox.innerHTML = `
-        <div class="yt-lazy" data-video-id="${book.video}">
-              <img
-                   src="https://img.youtube.com/vi/${book.video}/hqdefault.jpg"
-                   alt="Video thumbnail"
-                   loading="lazy"
-              >
-              <span class="yt-play">▶</span>
-            </div>
-      `;
       videoBox.style.display = "block";
-      e.target.innerText = "Hide Video";
+      btn.textContent = "Hide Video";
     }
+    return;
   }
+   
+  /* CLICK YOUTUBE COVER → PLAY */
+  const yt = e.target.closest(".yt-lazy");
+  if (!yt) return;
 
-   /* CLICK YOUTUBE COVER */
-  const box = e.target.closest(".yt-lazy");
-  if (!box) return;
+  const videoId = yt.dataset.videoId;
+  if (!videoId) return;
 
-  const id = box.dataset.video;
-
-  box.innerHTML = `
+  yt.innerHTML = `
     <iframe
-      src="https://www.youtube.com/embed/${id}?autoplay=1"
+      src="https://www.youtube.com/embed/${videoId}?autoplay=1"
       frameborder="0"
       allow="autoplay; encrypted-media"
       allowfullscreen
     ></iframe>
   `;
-
 });
+
 /* =====================================
    MOBILE SWIPE SUPPORT
 ===================================== */
