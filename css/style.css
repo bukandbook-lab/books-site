@@ -449,12 +449,12 @@ html, body {
   top: 50%;
   transform: translateY(-50%);
   z-index: 5;
-  font-size: 36px;
+  font-size: 32px;
   cursor: pointer;
   background: rgba(0,0,0,.4);
   color: white;
-  width: 40px;
-  height: 60px;
+  width: 20px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
