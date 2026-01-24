@@ -152,21 +152,18 @@ function bindPopupNavigation() {
 }
 
 /* =====================================
+   CLOSE POPUP
+===================================== */
+document.addEventListener("click", e => {
+  if (e.target.closest("#BookPopup .close-popup")) {
+    document.getElementById("BookPopup").style.display = "none";
+  }
+});
+
+/* =====================================
    POPUP INTERACTIONS
 ===================================== */
 document.addEventListener("click", e => {
-
-    /* CLOSE POPUP */
-  if (e.target.closest(".close-popup")) {
-    const popup = document.getElementById("BookPopupContent");
-    if (!popup) return;
-
-    // stop video
-    popup.querySelectorAll("iframe").forEach(f => f.remove());
-
-    popup.style.display = "none";
-    return;
-  }
 
   /* WATCH / HIDE VIDEO */
   if (e.target.classList.contains("watch-video-btn")) {
