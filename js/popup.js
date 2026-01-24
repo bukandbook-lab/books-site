@@ -161,7 +161,8 @@ document.addEventListener("click", e => {
   const yt = e.target.closest(".yt-lazy");
   if (!yt) return;
 
-  yt.innerHTML = `
+  yt.classList.add("active");
+   yt.innerHTML = `
     <iframe class="book-yt-video"
       src="https://www.youtube.com/embed/${yt.dataset.videoId}?autoplay=1"
       allow="autoplay"
