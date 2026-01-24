@@ -166,10 +166,14 @@ function navigatePopup(step) {
    CLOSE CART WHEN X MARK IS CLICKED
 ===================================== */
 document.addEventListener("click", e => {
-  if (e.target.closest("#BookPopup .close-popup")) {
-    document.getElementById("BookPopup")?.classList.remove("open");
-  }
-   resetVideo(popup);
+  const closeBtn = e.target.closest(".close-popup");
+  if (!closeBtn) return;
+
+  const popup = document.getElementById("BookPopup"); // ✅ explicitly get the popup
+  if (!popup) return;
+
+  popup.style.display = "none";
+  resetVideo(popup);
 });
 
 
