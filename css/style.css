@@ -546,6 +546,11 @@ html, body {
   position: relative;
   width: 100%;
   padding-bottom: 56.25%; /* 16:9 ratio */
+  display: none;
+}
+
+.video-box.active {
+  display: block;
 }
 
 .book-yt-video {
