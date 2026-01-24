@@ -59,7 +59,7 @@ function renderPopup(bookId) {
       <div class="popup-nav right" id="popupNext">›</div>
 
       <div class="book-title">${book.title}</div>
-      <div>${book.category}</div>
+      <div><b>Category:</b> ${book.category}</div>
       ${setQtyHTML}
 
       <div class="price-box"
@@ -67,7 +67,7 @@ function renderPopup(bookId) {
         data-title="${book.title}"
         data-price="${book.price}"
         data-setqtty="${book.SetQtty || 1}">
-        <b>RM${book.price} ${priceLabel}</b>
+        <b>&nbsp;&nbsp;RM${book.price} ${priceLabel}</b>
         <img class="cart-icon" src="${CART_ICON}" width="22">
       </div>
 
