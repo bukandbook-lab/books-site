@@ -320,6 +320,8 @@ html, body {
 }
 
 .popup-img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   opacity: 0;
   transition: opacity 0.35s ease;
@@ -446,19 +448,24 @@ html, body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 32px;
+  z-index: 5;
+  font-size: 36px;
   cursor: pointer;
-  user-select: none;
-  padding: 10px;
-  color: #333;
+  background: rgba(0,0,0,.4);
+  color: white;
+  width: 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .popup-nav.left {
-  left: 10px;
+  left: 6px;
 }
 
 .popup-nav.right {
-  right: 10px;
+  right: 6px;
 }
 
 .popup-nav.hidden {
