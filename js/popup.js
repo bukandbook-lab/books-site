@@ -186,9 +186,7 @@ document.addEventListener("click", e => {
   const popup = document.getElementById("BookPopup");
   const book = BOOK_REGISTRY[popup.dataset.bookId];
   const box = popup.querySelector(".video-box");
-
-  if (!book?.video) return;
-   
+ 
   if (box.classList.contains("active")) {
     resetVideo(popup);
     return;
