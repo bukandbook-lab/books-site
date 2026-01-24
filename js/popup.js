@@ -1,7 +1,7 @@
 let currentBookId = null;
 
 /* =====================================
-   OPEN POPUP (CLICK ON BOOK)
+   OPEN POPUP
 ===================================== */
 document.addEventListener("click", e => {
   const trigger = e.target.closest(".popup-trigger");
@@ -10,13 +10,10 @@ document.addEventListener("click", e => {
   openBookPopup(trigger.dataset.bookId);
 });
 
-/* =====================================
-   OPEN BOOK POPUP
-===================================== */
 function openBookPopup(bookId) {
   const popup = document.getElementById("BookPopup");
   const book = BOOK_REGISTRY[bookId];
-  if (!book) return;
+  if (!popup || !book) return;
 
   popup.dataset.bookId = bookId;
   popup.dataset.category = book.category;
@@ -37,204 +34,156 @@ function renderPopup(bookId) {
   const isSetBook = Number(book.SetQtty) > 1;
   const priceLabel = isSetBook ? "/set" : "/book";
 
-  const setQtyHTML = isSetBook
-    ? `<div class="set-qty"><b>No. of books:</b> ${book.SetQtty} books / set</div>`
-    : "";
-
   document.getElementById("BookPopupContent").innerHTML = `
     <div class="popup-box">
 
       <img src="${CLOSE_ICON}" class="close-popup" alt="Close">
 
-      <div class="popup-nav left" id="popupPrev">‹</div>
+      <div class="popup-nav left">‹</div>
 
       <div class="popup-img-wrapper">
-        <div class="skeleton"></div>
-        <img src="${book.img}"
-             class="popup-img"
-             data-book-id="${bookId}"
-             loading="eager">
+        <img src="${book.img}" class="popup-img" data-book-id="${bookId}">
       </div>
 
-      <div class="popup-nav right" id="popupNext">›</div>
+      <div class="popup-nav right">›</div>
 
       <div class="book-title">${book.title}</div>
       <div><b>Category:</b> ${book.category}</div>
-      ${setQtyHTML}
 
       <div class="price-box"
         data-book-id="${bookId}"
         data-title="${book.title}"
         data-price="${book.price}"
         data-setqtty="${book.SetQtty || 1}">
-        &nbsp;&nbsp;RM${book.price} ${priceLabel}
+        RM${book.price} ${priceLabel}
         <img class="cart-icon" src="${CART_ICON}" width="22">
       </div>
 
       ${book.video ? `
         <button class="watch-video-btn">Watch Video</button>
-        <div class="video-box" style="display:none;"></div>
+        <div class="video-box"></div>
       ` : ""}
-
     </div>
   `;
-
-  bindPopupNavigation();
-  syncCartIcons();
 }
 
 /* =====================================
-   CATEGORY-AWARE NAVIGATION (STEP 4)
+   NAVIGATION (CATEGORY AWARE)
 ===================================== */
-function bindPopupNavigation() {
-  document.getElementById("popupPrev")?.addEventListener("click", () => navigatePopup(-1));
-  document.getElementById("popupNext")?.addEventListener("click", () => navigatePopup(1));
-}
+document.addEventListener("click", e => {
+  if (e.target.closest(".popup-nav.left")) navigatePopup(-1);
+  if (e.target.closest(".popup-nav.right")) navigatePopup(1);
+});
 
 function navigatePopup(step) {
   const popup = document.getElementById("BookPopup");
-  if (!popup) return;
 
   let category = popup.dataset.category;
   let bookId = popup.dataset.bookId;
 
-  // 🛑 SAFETY CHECKS
-  if (!category || !bookId) {
-    console.warn("Popup missing category or bookId");
-    return;
-  }
-
-  if (!Array.isArray(CATEGORY_ORDER)) {
-    console.error("CATEGORY_ORDER missing or not an array");
-    return;
-  }
-
-  if (!ORDERED_BOOKS_BY_CATEGORY?.[category]) {
-    console.error("No books for category:", category);
-    return;
-  }
-
   let catIndex = CATEGORY_ORDER.indexOf(category);
   let books = ORDERED_BOOKS_BY_CATEGORY[category];
-
-  if (!Array.isArray(books) || books.length === 0) {
-    console.error("Empty book list for category:", category);
-    return;
-  }
-
   let index = books.indexOf(bookId);
 
-  // fallback if bookId not found
   if (index === -1) index = 0;
-
-  // ➕ move step
   index += step;
 
-  /* ▶ NEXT CATEGORY */
   if (index >= books.length) {
     catIndex = (catIndex + 1) % CATEGORY_ORDER.length;
-    category = CATEGORY_ORDER[catIndex];
-    books = ORDERED_BOOKS_BY_CATEGORY[category];
+    books = ORDERED_BOOKS_BY_CATEGORY[CATEGORY_ORDER[catIndex]];
     index = 0;
   }
 
-  /* ◀ PREVIOUS CATEGORY */
   if (index < 0) {
     catIndex = (catIndex - 1 + CATEGORY_ORDER.length) % CATEGORY_ORDER.length;
-    category = CATEGORY_ORDER[catIndex];
-    books = ORDERED_BOOKS_BY_CATEGORY[category];
+    books = ORDERED_BOOKS_BY_CATEGORY[CATEGORY_ORDER[catIndex]];
     index = books.length - 1;
   }
 
-  const nextId = books[index];
-  if (!nextId) return;
+  popup.dataset.bookId = books[index];
+  popup.dataset.category = CATEGORY_ORDER[catIndex];
 
-  // 🧠 UPDATE POPUP STATE
-  popup.dataset.bookId = nextId;
-  popup.dataset.category = category;
-
-  // 🛑 STOP VIDEO BEFORE SWITCH
-  resetVideo(popup);
-
-  // 🔄 RERENDER BOOK
-  renderPopup(nextId);
+  resetVideo();
+  renderPopup(books[index]);
 }
 
-
-
 /* =====================================
-   CLOSE CART WHEN X MARK IS CLICKED
+   CLOSE POPUP (X + OUTSIDE)
 ===================================== */
 document.addEventListener("click", e => {
-  const closeBtn = e.target.closest(".close-popup");
-  if (!closeBtn) return;
+  const popup = document.getElementById("BookPopup");
+  if (!popup || popup.style.display !== "flex") return;
 
-  const popup = document.getElementById("BookPopup"); // ✅ explicitly get the popup
-  if (!popup) return;
+  // X button
+  if (e.target.classList.contains("close-popup")) {
+    closePopup();
+  }
 
-  popup.style.display = "none";
-  resetVideo(popup);
+  // outside click
+  if (e.target === popup) {
+    closePopup();
+  }
 });
 
+function closePopup() {
+  const popup = document.getElementById("BookPopup");
+  popup.style.display = "none";
+  resetVideo();
+}
 
 /* =====================================
    VIDEO LOGIC
 ===================================== */
 document.addEventListener("click", e => {
-  if (!e.target.classList.contains("watch-video-btn")) return;
+  const btn = e.target.closest(".watch-video-btn");
+  if (!btn) return;
 
   const popup = document.getElementById("BookPopup");
   const book = BOOK_REGISTRY[popup.dataset.bookId];
   const box = popup.querySelector(".video-box");
- 
+
   if (box.classList.contains("active")) {
-    resetVideo(popup);
+    resetVideo();
     return;
   }
-   
+
+  box.classList.add("active");
   box.innerHTML = `
     <div class="yt-lazy" data-video-id="${book.video}">
       <img src="https://img.youtube.com/vi/${book.video}/hqdefault.jpg">
-      <span class="yt-play">▶</span>
     </div>
   `;
-  box.classList.add("active");
-  e.target.textContent = "Hide Video";
+
+  btn.textContent = "Hide Video";
 });
 
 document.addEventListener("click", e => {
   const yt = e.target.closest(".yt-lazy");
   if (!yt) return;
 
-  const box = yt.closest(".video-box");
-  const id = yt.dataset.videoId;
-
-  box.classList.add("active"); // 🔑 ensures height exists
-
-  box.innerHTML = `
-    <iframe
-      class="book-yt-video"
-      src="https://www.youtube.com/embed/${id}?autoplay=1"
-      allow="autoplay; encrypted-media"
-      allowfullscreen>
-    </iframe>
+  yt.innerHTML = `
+    <iframe class="book-yt-video"
+      src="https://www.youtube.com/embed/${yt.dataset.videoId}?autoplay=1"
+      allow="autoplay"
+      allowfullscreen></iframe>
   `;
 });
 
+/* =====================================
+   RESET VIDEO
+===================================== */
+function resetVideo() {
+  const popup = document.getElementById("BookPopup");
+  popup.querySelectorAll("iframe").forEach(i => i.remove());
 
-function resetVideo(popup) {
-  popup.querySelectorAll("iframe").forEach(f => f.remove());
-  const videoBox = popup.querySelector(".video-box");
+  const box = popup.querySelector(".video-box");
   const btn = popup.querySelector(".watch-video-btn");
 
-  if (videoBox) {
-    videoBox.innerHTML = "";
-    videoBox.style.display = "none";
+  if (box) {
+    box.classList.remove("active");
+    box.innerHTML = "";
   }
-
-  if (btn) {
-    btn.textContent = "Watch Video";
-  }
+  if (btn) btn.textContent = "Watch Video";
 }
 
 /* =====================================
@@ -249,33 +198,9 @@ document.addEventListener("touchstart", e => {
 
 document.addEventListener("touchend", e => {
   if (!e.target.closest(".popup-img")) return;
-   
+
   const diff = startX - e.changedTouches[0].screenX;
   if (Math.abs(diff) < 50) return;
-   
-  if (diff > 0) {
-  navigatePopup(1);
-} else {
-  navigatePopup(-1);
-}
 
+  navigatePopup(diff > 0 ? 1 : -1);
 });
-
-/* =====================================
-   WHEN OUTSIDE POPUP IS CLICKED
-===================================== */
-document.addEventListener("click", e => {
-  const popup = document.getElementById("BookPopup");
-  const box = popup?.querySelector(".popup-box");
-
-  if (!popup || popup.style.display !== "flex") return;
-
-  if (!box.contains(e.target) && e.target === popup) {
-    popup.style.display = "none";
-
-    // stop video if any
-    const iframe = popup.querySelector("iframe");
-    if (iframe) iframe.remove();
-  }
-});
-
