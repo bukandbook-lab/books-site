@@ -20,7 +20,7 @@ const BOOK_SOURCES = {
   Comic:           "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/comicdata.json"
 };
 
-const CATEGORY_ORDER = [
+window.CATEGORY_ORDER = [
   "BeginningReader",
   "ChapterBook",
   "PictureBook",
