@@ -161,17 +161,17 @@ function navigatePopup(step) {
 }
 
 
+
 /* =====================================
-   CLOSE POPUP
+   CLOSE CART WHEN X MARK IS CLICKED
 ===================================== */
 document.addEventListener("click", e => {
-  const closeBtn = e.target.closest(".close-popup");
-  if (!closeBtn) return;
-
-  const popup = closeBtn.closest(".popup");
-  popup.style.display = "none";
-  resetVideo(popup);
+  if (e.target.closest("#BookPopup .close-popup")) {
+    document.getElementById("BookPopup")?.classList.remove("open");
+  }
+   resetVideo(popup);
 });
+
 
 /* =====================================
    VIDEO LOGIC
@@ -247,3 +247,22 @@ document.addEventListener("touchend", e => {
 }
 
 });
+
+/* =====================================
+   WHEN OUTSIDE POPUP IS CLICKED
+===================================== */
+document.addEventListener("click", e => {
+  const popup = document.getElementById("BookPopup");
+  const box = popup?.querySelector(".popup-box");
+
+  if (!popup || popup.style.display !== "flex") return;
+
+  if (!box.contains(e.target) && e.target === popup) {
+    popup.style.display = "none";
+
+    // stop video if any
+    const iframe = popup.querySelector("iframe");
+    if (iframe) iframe.remove();
+  }
+});
+
