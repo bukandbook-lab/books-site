@@ -59,6 +59,7 @@ function renderPopup(bookId) {
       <div class="popup-nav right" id="popupNext">›</div>
 
       <div class="book-title">${book.title}</div>
+      <div>${book.category}</div>
       ${setQtyHTML}
 
       <div class="price-box"
