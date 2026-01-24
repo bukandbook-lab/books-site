@@ -92,17 +92,44 @@ function bindPopupNavigation() {
 
 function navigatePopup(step) {
   const popup = document.getElementById("BookPopup");
+  if (!popup) return;
 
   let category = popup.dataset.category;
   let bookId = popup.dataset.bookId;
 
+  // 🛑 SAFETY CHECKS
+  if (!category || !bookId) {
+    console.warn("Popup missing category or bookId");
+    return;
+  }
+
+  if (!Array.isArray(CATEGORY_ORDER)) {
+    console.error("CATEGORY_ORDER missing or not an array");
+    return;
+  }
+
+  if (!ORDERED_BOOKS_BY_CATEGORY?.[category]) {
+    console.error("No books for category:", category);
+    return;
+  }
+
   let catIndex = CATEGORY_ORDER.indexOf(category);
   let books = ORDERED_BOOKS_BY_CATEGORY[category];
+
+  if (!Array.isArray(books) || books.length === 0) {
+    console.error("Empty book list for category:", category);
+    return;
+  }
+
   let index = books.indexOf(bookId);
 
+  // fallback if bookId not found
+  if (index === -1) index = 0;
+
+  // ➕ move step
   index += step;
 
-  // ▶ next category
+  /* ▶ NEXT CATEGORY */
   if (index >= books.length) {
     catIndex = (catIndex + 1) % CATEGORY_ORDER.length;
     category = CATEGORY_ORDER[catIndex];
@@ -110,7 +137,7 @@ function navigatePopup(step) {
     index = 0;
   }
 
-  // ◀ previous category
+  /* ◀ PREVIOUS CATEGORY */
   if (index < 0) {
     catIndex = (catIndex - 1 + CATEGORY_ORDER.length) % CATEGORY_ORDER.length;
     category = CATEGORY_ORDER[catIndex];
@@ -119,13 +146,19 @@ function navigatePopup(step) {
   }
 
   const nextId = books[index];
+  if (!nextId) return;
 
+  // 🧠 UPDATE POPUP STATE
   popup.dataset.bookId = nextId;
   popup.dataset.category = category;
 
+  // 🛑 STOP VIDEO BEFORE SWITCH
   resetVideo(popup);
+
+  // 🔄 RERENDER BOOK
   renderPopup(nextId);
 }
+
 
 /* =====================================
    CLOSE POPUP
