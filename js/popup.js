@@ -177,9 +177,17 @@ document.addEventListener("click", e => {
 
 function resetVideo(popup) {
   popup.querySelectorAll("iframe").forEach(f => f.remove());
-  const box = popup.querySelector(".video-box");
-  if (box) box.style.display = "none";
-  popup.querySelector(".watch-video-btn")?.textContent = "Watch Video";
+  const videoBox = popup.querySelector(".video-box");
+  const btn = popup.querySelector(".watch-video-btn");
+
+  if (videoBox) {
+    videoBox.innerHTML = "";
+    videoBox.style.display = "none";
+  }
+
+  if (btn) {
+    btn.textContent = "Watch Video";
+  }
 }
 
 /* =====================================
