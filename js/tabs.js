@@ -29,9 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
     panel.style.display = "block";
     btn?.classList.add("active");
 
-    // Only render books if this tab has a data source
-    if (BOOK_SOURCES[tabId]) {
-      BOOKS_READY.then(() => loadBooks(tabId));
+    // render books from data source
+    BOOKS_READY.then(() => loadBooks(tabId));
+
     }
   }
 
