@@ -134,26 +134,28 @@ function navigatePopup(step) {
   renderPopup(books[index]);
 }
 
+
 /* =====================================
-   CLOSE POPUP (X + OUTSIDE)
+   WHEN OUTSIDE POPUP IS CLICKED
 ===================================== */
 document.addEventListener("click", e => {
   const popup = document.getElementById("BookPopup");
+  const box = popup?.querySelector(".popup-box");
+
   if (!popup || popup.style.display !== "flex") return;
 
-  const box = popup.querySelector(".popup-box");
+  if (!box.contains(e.target) && e.target === popup) {
+    popup.style.display = "none";
 
-  if (!box.contains(e.target)) {
-    closePopup();
+    // stop video if any
+    const iframe = popup.querySelector("iframe");
+    if (iframe) iframe.remove();
   }
 });
 
 
-function closePopup() {
-  const popup = document.getElementById("BookPopup");
-  popup.style.display = "none";
-  resetVideo();
-}
+
+
 
 /* =====================================
    VIDEO LOGIC
