@@ -550,6 +550,7 @@ html, body {
   padding-bottom: 56.25%;
   height: auto;
   overflow: hidden;
+  display: none;
 }
 
 .video-box.active {
