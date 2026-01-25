@@ -81,4 +81,5 @@ window.BOOKS_READY = Promise.all(
       })
 ).then(() => {
   console.log("✅ All books loaded (global search + popup ready)");
-});
+}));
+
