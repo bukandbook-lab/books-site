@@ -545,17 +545,15 @@ html, body {
   YOUTUBE VIDEO
 ========================= */
 .video-box {
-  margin-top: 12px;
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 ratio */
-  height: 0;
+  padding-bottom: 56.25%;
+  height: auto;
   overflow: hidden;
 }
 
 .video-box.active {
-  height: auto;
-}
+  display: block;
 
 .book-yt-video {
   position: absolute;
