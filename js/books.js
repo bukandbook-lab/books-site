@@ -4,6 +4,12 @@ function loadBooks(tabId) {
 
   const books = ALL_BOOKS[tabId];
 
+  // guard log
+    if (!Array.isArray(books)) {
+    console.warn("No books for tab:", tabId, books);
+    return;
+  }
+
   // Clear only book containers
   container.innerHTML = "";
 
