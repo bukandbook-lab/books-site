@@ -143,18 +143,11 @@ document.addEventListener("click", e => {
 
   const box = popup.querySelector(".popup-box");
 
-  /* ❌ X BUTTON */
-  if (e.target.closest(".close-popup")) {
-    e.stopPropagation();
-    closePopup();
-    return;
-  }
-
-  /* ❌ CLICK OUTSIDE BOX */
   if (!box.contains(e.target)) {
     closePopup();
   }
 });
+
 
 function closePopup() {
   const popup = document.getElementById("BookPopup");
