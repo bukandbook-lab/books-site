@@ -567,7 +567,7 @@ html, body {
 
 .yt-lazy {
   position: relative;
-  max-height: 420px;
+  max-height: 300px;
   margin: auto;
   cursor: pointer;
 }
