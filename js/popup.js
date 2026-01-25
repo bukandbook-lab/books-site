@@ -4,17 +4,14 @@ let currentBookId = null;
    OPEN POPUP
 ===================================== */
 document.addEventListener("click", e => {
-  const trigger =
-    e.target.closest(".popup-trigger") ||
-    e.target.closest(".grid-book-img");
-
+  const trigger = e.target.closest(".popup-trigger");
   if (!trigger) return;
 
-  const bookId = trigger.dataset.bookId;
-  if (!bookId) return;
+  e.stopPropagation(); // ⛔ STOP the outside-click handler
 
-  openBookPopup(bookId);
+  openBookPopup(trigger.dataset.bookId);
 });
+
 
 
 function openBookPopup(bookId) {
