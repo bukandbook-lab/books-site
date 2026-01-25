@@ -153,6 +153,19 @@ document.addEventListener("click", e => {
   }
 });
 
+/* =====================================
+   CLOSE CART WHEN X MARK IS CLICKED
+===================================== */
+document.addEventListener("click", e => {
+  const closeBtn = e.target.closest(".close-popup");
+  if (!closeBtn) return;
+
+  const popup = document.getElementById("BookPopup"); // ✅ explicitly get the popup
+  if (!popup) return;
+
+  popup.style.display = "none";
+  resetVideo(popup);
+});
 
 
 
