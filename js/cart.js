@@ -102,7 +102,10 @@ document.addEventListener("click", e => {
   if (!removeBtn) return;
 
   e.preventDefault();
-  e.stopPropagation();
+   
+ if (e.target.closest("#Cart")) {
+  e.stopPropagation(); // ✅ scoped
+}
 
   cart.items.delete(removeBtn.dataset.bookId);
   renderCart();
