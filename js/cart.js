@@ -98,9 +98,17 @@ function addToCart(bookId) {
 function openCart() {
   const cartEl = document.getElementById("Cart");
   if (!cartEl) return;
+
+  // Add class to slide in
   cartEl.classList.add("open");
 }
 
+function closeCart() {
+  const cartEl = document.getElementById("Cart");
+  if (!cartEl) return;
+
+  cartEl.classList.remove("open");
+}
 
 document.addEventListener("click", e => {
   if (e.target.id === "continueShopping") {
