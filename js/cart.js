@@ -188,7 +188,7 @@ function updatePayButton() {
    RENDER CART
 ===================================== */
 function renderCart() {
-  const box = document.getElementById("CartContent");
+  const box = document.getElementById("Cart");
   if (!box) return;
 
   let total = 0;
@@ -287,8 +287,8 @@ ${cart.delivery === "courier" ? `
     </label><br>
 
   <div class="cart-actions">
-  <button class="continueShopping">CONTINUE SHOPPING</button>
-  <button class="clickToPay">CLICK TO PAY</button>
+  <button id="continueShopping">CONTINUE SHOPPING</button>
+  <button id="clickToPay">CLICK TO PAY</button>
 </div>
 
   `;
