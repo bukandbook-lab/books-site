@@ -694,14 +694,14 @@ document.addEventListener("click", e => {
 
   const box = paymentPopup.querySelector(".popup-box");
 
-  // ❌ X mark clicked
+  // ❌ Close button
   if (e.target.closest("#paymentPopup .close-popup")) {
     paymentPopup.style.display = "none";
     return;
   }
 
-  // Click outside popup box (overlay only)
-  if (e.target === paymentPopup && !box.contains(e.target)) {
+  // ✅ Click outside popup box
+  if (!e.target.closest("#paymentPopup .popup-box")) {
     paymentPopup.style.display = "none";
   }
 });
