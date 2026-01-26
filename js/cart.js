@@ -686,6 +686,26 @@ function syncCartIcons() {
     }
   });
 }
+/* =====================================
+   PAYMENT POPUP 
+===================================== */
+document.addEventListener("click", e => {
+  const paymentPopup = document.getElementById("paymentPopup");
+  if (!paymentPopup || paymentPopup.style.display !== "flex") return;
+
+  const box = paymentPopup.querySelector("paymentPopup .popup-content");
+
+  // ❌ X mark clicked
+  if (e.target.closest("#paymentPopup .close-popup")) {
+    paymentPopup.style.display = "none";
+    return;
+  }
+
+  // Click outside popup box (overlay only)
+  if (e.target === paymentPopup && !box.contains(e.target)) {
+    paymentPopup.style.display = "none";
+  }
+});
 
 /* =====================================
    THANK YOU POPUP (DELIVERY-AWARE)
