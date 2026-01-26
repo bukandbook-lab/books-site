@@ -647,18 +647,18 @@ html, body {
   opacity: 1;
 }
 
-.terms {
+#Cart .terms {
    font-style: italic;
    color: #FF474C;
 }
 /* =========================
    BUTTONS
 ========================= */
-button {
+#Cart button {
   cursor: pointer;
 }
 
-#clickToPay {
+#Cart .clickToPay {
   background: #E0E0E0;
   color: #737373;
   border: none;
@@ -671,7 +671,7 @@ button {
   transition: all 0.2s ease;
 }
 
-#clickToPay.active  {
+#Cart .clickToPay.active  {
   background: #eee;
   background-color: #FF1493;
   border-color: #ffdbe1;
@@ -685,7 +685,7 @@ button {
   pointer-events: auto;
 }
 
-#continueShopping {
+#Cart .continueShopping {
   background: #eee;
   background-color: #FF1493;
   border-color: #ffdbe1;
