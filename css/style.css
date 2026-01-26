@@ -369,7 +369,7 @@ html, body {
   align-items: center;
 
 }
-#paymentPopup {
+#paymentPopup .popup-box {
   position: relative;
 }
 
