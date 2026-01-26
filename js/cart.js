@@ -84,21 +84,13 @@ function addToCart(bookId) {
       title: book.title,
       price: Number(book.price),
       SetQtty: Number(book.SetQtty || 1,
-      qty: 1,
+      qty: 1
     });
   }
 
   renderCart();
   syncCartIcons();
-
-   // auto-close popup if click came from popup
-  const popup = icon.closest(".popup");
-  if (popup) {
-    popup.style.display = "none";
-    popup.querySelector("iframe")?.remove();
-  }
 }
-
 
 
 
