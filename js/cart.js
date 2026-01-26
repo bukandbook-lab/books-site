@@ -99,9 +99,11 @@ function openCart() {
   const cartEl = document.getElementById("Cart");
   if (!cartEl) return;
 
-  // Add class to slide in
   cartEl.classList.add("open");
+
+  console.log("Cart classes after open:", cartEl.className);
 }
+
 
 function closeCart() {
   const cartEl = document.getElementById("Cart");
@@ -186,7 +188,7 @@ function updatePayButton() {
    RENDER CART
 ===================================== */
 function renderCart() {
-  const box = document.getElementById("Cart");
+  const box = document.getElementById("CartContent");
   if (!box) return;
 
   let total = 0;
