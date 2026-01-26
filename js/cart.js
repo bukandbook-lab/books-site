@@ -367,10 +367,12 @@ if (paymentPopup) paymentPopup.style.display = "flex";
    OPEN / CLOSE CART
 ===================================== */
 function openCart() {
-  const cartEl = document.getElementById("Cart");
-  if (cartEl) cartEl.classList.add("open");
+  const cart = document.getElementById("Cart");
+  if (!cart) return;
 
+  cart.classList.add("open");
 }
+
 
 
 document.addEventListener("click", e => {
