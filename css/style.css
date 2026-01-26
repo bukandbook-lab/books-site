@@ -604,7 +604,6 @@ html, body {
 #Cart {
   position: fixed;
   top: 0;
-  right: -420px;              /* hidden off-screen */
   width: 360px;
   max-width: 90vw;
   height: 100vh;
