@@ -369,6 +369,15 @@ html, body {
   align-items: center;
 
 }
+
+#paymentPopup {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
 #paymentPopup .popup-box {
   position: relative;
 }
