@@ -83,7 +83,7 @@ function addToCart(bookId) {
       id,
       title: book.title,
       price: Number(book.price),
-      SetQtty: Number(book.SetQtty || 1,
+      SetQtty: Number(book.SetQtty || 1),
       qty: 1
     });
   }
