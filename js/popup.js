@@ -7,36 +7,37 @@ document.addEventListener("click", e => {
   const trigger = e.target.closest(".popup-trigger");
   if (!trigger) return;
 
- if (e.target.closest("#BookPopup")) {
-  e.stopPropagation(); // ⛔ STOP the outside-click handler
-}
-
-
   openBookPopup(trigger.dataset.bookId);
 });
 
-
-
 function openBookPopup(bookId) {
   const popup = document.getElementById("BookPopup");
-  const book = BOOK_REGISTRY[bookId];
-  if (!popup || !book) return;
+  if (!popup) return;
 
-  popup.dataset.bookId = bookId;
+  const id = String(bookId);        // ✅ normalize
+  const book = BOOK_REGISTRY[id];
+  if (!book) {
+    console.warn("Book not found for popup:", id);
+    return;
+  }
+
+  popup.dataset.bookId = id;
   popup.dataset.category = book.category;
 
-  renderPopup(bookId);
+  renderPopup(id);
   popup.style.display = "flex";
 }
+
 
 /* =====================================
    RENDER POPUP
 ===================================== */
 function renderPopup(bookId) {
-  const book = BOOK_REGISTRY[bookId];
+  const id = String(bookId);        // ✅ normalize
+  const book = BOOK_REGISTRY[id];
   if (!book) return;
 
-  currentBookId = bookId;
+  currentBookId = id;
 
   const isSetBook = Number(book.SetQtty) > 1;
   const priceLabel = isSetBook ? "/set" : "/book";
@@ -56,7 +57,7 @@ function renderPopup(bookId) {
         <div class="img-skeleton"></div>
         <img src="${book.img}"
              class="popup-img"
-             data-book-id="${bookId}"
+             data-book-id="${id}"
              loading="eager">
       </div>
 
@@ -68,7 +69,7 @@ function renderPopup(bookId) {
        ${setQtyHTML}
 
       <div class="price-box"
-        data-book-id="${bookId}"
+        data-book-id="${id}"
         data-title="${book.title}"
         data-price="${book.price}"
         data-setqtty="${book.SetQtty || 1}">
