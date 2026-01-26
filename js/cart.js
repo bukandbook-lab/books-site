@@ -284,12 +284,11 @@ ${cart.delivery === "courier" ? `
       By clicking to pay, I have read and agreed to the Terms and Conditions described in 'READ ME FIRST' section.
     </label><br>
 
-    <div class="cart-actions">
-      <button id="continueShopping">CONTINUE SHOPPING</button>
-      <button id="clickToPay">
-        CLICK TO PAY
-      </button>
-    </div>
+  <div class="cart-actions">
+  <button class="continueShopping">CONTINUE SHOPPING</button>
+  <button class="clickToPay">CLICK TO PAY</button>
+</div>
+
   `;
 
   updatePayButton();
