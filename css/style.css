@@ -656,7 +656,7 @@ html, body {
   cursor: pointer;
 }
 
-#Cart .clickToPay {
+#clickToPay {
   background: #E0E0E0;
   color: #737373;
   border: none;
@@ -669,7 +669,7 @@ html, body {
   transition: all 0.2s ease;
 }
 
-#Cart .clickToPay.active  {
+#clickToPay.active  {
   background: #eee;
   background-color: #FF1493;
   border-color: #ffdbe1;
@@ -683,7 +683,7 @@ html, body {
   pointer-events: auto;
 }
 
-#Cart .continueShopping {
+#continueShopping {
   background: #eee;
   background-color: #FF1493;
   border-color: #ffdbe1;
