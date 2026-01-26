@@ -3,12 +3,6 @@ let currentBookId = null;
 /* =====================================
    OPEN POPUP
 ===================================== */
-document.addEventListener("click", e => {
-  const trigger = e.target.closest(".popup-trigger");
-  if (!trigger) return;
-
-  openBookPopup(trigger.dataset.bookId);
-});
 
 function openBookPopup(bookId) {
   const popup = document.getElementById("BookPopup");
@@ -161,16 +155,17 @@ document.addEventListener("click", e => {
    CLOSE CART WHEN X MARK IS CLICKED
 ===================================== */
 document.addEventListener("click", e => {
-  const closeBtn = e.target.closest("#BookPopup .close-popup");
-  if (!closeBtn) return;
+  if (e.target.closest("#BookPopup .close-popup")) {
+    e.stopPropagation();
+    document.getElementById("BookPopup").style.display = "none";
+    resetVideo(BookPopup);
+    return;
+  }
 
-  const popup = document.getElementById("BookPopup"); // ✅ explicitly get the popup
-  if (!popup) return;
-
-  popup.style.display = "none";
-  resetVideo(popup);
+  if (e.target.closest(".popup-trigger")) {
+    openBookPopup(e.target.closest(".popup-trigger").dataset.bookId);
+  }
 });
-
 
 
 
