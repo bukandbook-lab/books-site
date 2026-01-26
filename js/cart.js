@@ -693,16 +693,16 @@ document.addEventListener("click", e => {
   const paymentPopup = document.getElementById("paymentPopup");
   if (!paymentPopup || paymentPopup.style.display !== "flex") return;
 
-  const box = paymentPopup.querySelector("paymentPopup .popup-content");
+  const box = paymentPopup.querySelector(".popup-content");
 
-  // ❌ X mark clicked
+  // ❌ Close button
   if (e.target.closest("#paymentPopup .close-popup")) {
     paymentPopup.style.display = "none";
     return;
   }
 
-  // Click outside popup box (overlay only)
-  if (e.target === paymentPopup && !box.contains(e.target)) {
+  // ✅ Click outside popup box
+  if (!e.target.closest("#paymentPopup .popup-content")) {
     paymentPopup.style.display = "none";
   }
 });
