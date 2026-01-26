@@ -381,6 +381,10 @@ payText.innerHTML = `
 const cartEl = document.getElementById("Cart");
 if (cartEl) cartEl.classList.remove("open");
 
+const paymentPopup = document.getElementById("paymentPopup");
+if (paymentPopup) paymentPopup.style.display = "flex";
+
+
 });
 
 
@@ -682,26 +686,6 @@ function syncCartIcons() {
     }
   });
 }
-/* =====================================
-   PAYMENT POPUP
-===================================== */
-document.addEventListener("click", e => {
-  const paymentPopup = document.getElementById("paymentPopup");
-  if (!paymentPopup || paymentPopup.style.display !== "flex") return;
-
-  const box = paymentPopup.querySelector(".popup-box");
-
-  // ❌ Close button
-  if (e.target.closest("#paymentPopup .close-popup")) {
-    paymentPopup.style.display = "none";
-    return;
-  }
-
-  // ✅ Click outside popup box
-  if (!e.target.closest("#paymentPopup .popup-box")) {
-    paymentPopup.style.display = "none";
-  }
-});
 
 /* =====================================
    THANK YOU POPUP (DELIVERY-AWARE)
