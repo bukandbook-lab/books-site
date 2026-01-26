@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // render books from data source
     BOOKS_READY.then(() => loadBooks(tabId));
 
-    }
+    
   }
 
   tabs.forEach(btn => {
