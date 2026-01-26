@@ -7,7 +7,10 @@ document.addEventListener("click", e => {
   const trigger = e.target.closest(".popup-trigger");
   if (!trigger) return;
 
+ if (e.target.closest("#BookPopup")) {
   e.stopPropagation(); // ⛔ STOP the outside-click handler
+}
+
 
   openBookPopup(trigger.dataset.bookId);
 });
