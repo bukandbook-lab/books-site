@@ -377,8 +377,9 @@ payText.innerHTML = `
 
   Once payment is made, choose how you want to submit your order below 👇
 `;
-  
 
+const cartEl = document.getElementById("Cart");
+if (cartEl) cartEl.classList.remove("open");
 
 });
 
