@@ -553,7 +553,7 @@ html, body {
 
 .video-box.active {
   display: block;
-
+}
 .book-yt-video {
   position: absolute;
   inset: 0;
