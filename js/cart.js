@@ -92,7 +92,21 @@ function addToCart(bookId) {
   syncCartIcons();
 }
 
+/* =====================================
+   OPEN / CLOSE CART
+===================================== */
+function openCart() {
+  const cartEl = document.getElementById("Cart");
+  if (!cartEl) return;
 
+  cartEl.classList.add("open");
+}
+
+document.addEventListener("click", e => {
+  if (e.target.id === "continueShopping") {
+    document.getElementById("Cart")?.classList.remove("open");
+  }
+});
 
 /* =====================================
    REMOVE ITEM (KEEP CART OPEN)
@@ -363,23 +377,7 @@ if (paymentPopup) paymentPopup.style.display = "flex";
 
 });
 
-/* =====================================
-   OPEN / CLOSE CART
-===================================== */
-function openCart() {
-  const cart = document.getElementById("Cart");
-  if (!cart) return;
 
-  cart.classList.add("open");
-}
-
-
-
-document.addEventListener("click", e => {
-  if (e.target.id === "continueShopping") {
-    document.getElementById("Cart")?.classList.remove("open");
-  }
-});
 
 /* =====================================
    CLOSE THANK YOU POPUP
