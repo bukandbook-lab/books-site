@@ -131,39 +131,50 @@ function navigatePopup(step) {
   resetVideo();
   renderPopup(books[index]);
 }
+ /* =====================
+     ONE master handler
+  ===================== */
 
-
-/* =====================================
-   WHEN OUTSIDE POPUP IS CLICKED
-===================================== */
 document.addEventListener("click", e => {
+
   const popup = document.getElementById("BookPopup");
-  const box = popup?.querySelector(".popup-box");
 
-  if (!popup || popup.style.display !== "flex") return;
-
-  if (!box.contains(e.target) && e.target === popup) {
-    popup.style.display = "none";
-
-    // stop video if any
-    const iframe = popup.querySelector("iframe");
-    if (iframe) iframe.remove();
-  }
-});
-
-/* =====================================
-   CLOSE CART WHEN X MARK IS CLICKED
-===================================== */
-document.addEventListener("click", e => {
+  /* =====================
+     CLOSE POPUP (X)
+  ===================== */
   if (e.target.closest("#BookPopup .close-popup")) {
+    e.preventDefault();
     e.stopPropagation();
-    document.getElementById("BookPopup").style.display = "none";
-    resetVideo(BookPopup);
+
+    popup.style.display = "none";
+    resetVideo(popup);
     return;
   }
 
-  if (e.target.closest(".popup-trigger")) {
-    openBookPopup(e.target.closest(".popup-trigger").dataset.bookId);
+  /* =====================
+     CLOSE POPUP (OUTSIDE)
+  ===================== */
+  if (
+    popup &&
+    popup.style.display === "flex" &&
+    e.target === popup
+  ) {
+    popup.style.display = "none";
+    resetVideo(popup);
+    return;
+  }
+
+  /* =====================
+     IGNORE CLICKS INSIDE POPUP
+  ===================== */
+  if (e.target.closest("#BookPopup")) return;
+
+  /* =====================
+     OPEN POPUP
+  ===================== */
+  const trigger = e.target.closest(".popup-trigger");
+  if (trigger) {
+    openBookPopup(trigger.dataset.bookId);
   }
 });
 
