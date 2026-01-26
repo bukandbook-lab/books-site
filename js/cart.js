@@ -28,40 +28,78 @@ const FORM = {
    ADD TO CART (GRID + POPUP)
 ===================================== */
 document.addEventListener("click", e => {
-  const icon =
-    e.target.closest(".cart-icon[data-book-id]") ||
-    e.target.closest(".price-box[data-book-id]");
-
+  const icon = e.target.closest(".cart-icon[data-book-id]");
   if (!icon) return;
-   
-  e.stopPropagation();   // 👈 add this
-   
-  const bookId = icon.dataset.bookId;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  addToCart(icon.dataset.bookId);
+  openCart();
+});
+
+document.addEventListener("click", e => {
+  const box = e.target.closest(".price-box[data-book-id]");
+  if (!box) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  const popup = box.closest(".popup");
+  if (popup) {
+    popup.style.display = "none";
+    popup.querySelector("iframe")?.remove();
+  }
+
+  addToCart(box.dataset.bookId);
+
+  // 🔑 allow DOM to settle before opening cart
+  requestAnimationFrame(() => {
+    openCart();
+  });
+});
+
+
+
+function addToCart(bookId) {
   if (!bookId) return;
 
-  const book = BOOK_REGISTRY[bookId];
+  // normalize to string
+  const id = String(bookId);
+
+  // get book data
+  const book = BOOK_REGISTRY[id];
   if (!book) {
-    console.error("Book not found in registry:", bookId);
+    console.warn("Book not found in registry:", id);
     return;
   }
 
-  cart.items.set(bookId, {
-    title: book.title,
-    price: Number(book.price),
-    setQtty: Number(book.SetQtty || 0)
-  });
+  // add or increase qty
+  if (cart.items.has(id)) {
+    const item = cart.items.get(id);
+    item.qty += 1;
+  } else {
+    cart.items.set(id, {
+      id,
+      title: book.title,
+      price: Number(book.price),
+      SetQtty: Number(book.SetQtty || 1,
+      qty: 1
+    });
+  }
 
   renderCart();
-  syncCartIcons();   
-  openCart();
+  syncCartIcons();
 
-  // auto-close popup if click came from popup
+   // auto-close popup if click came from popup
   const popup = icon.closest(".popup");
   if (popup) {
     popup.style.display = "none";
     popup.querySelector("iframe")?.remove();
   }
-});
+}
+
+
 
 
 /* =====================================
