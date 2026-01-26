@@ -381,8 +381,7 @@ payText.innerHTML = `
 const cartEl = document.getElementById("Cart");
 if (cartEl) cartEl.classList.remove("open");
 
-const paymentPopup = document.getElementById("paymentPopup");
-if (paymentPopup) paymentPopup.style.display = "flex";
+
 
 
 });
