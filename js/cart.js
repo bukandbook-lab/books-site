@@ -98,9 +98,9 @@ function addToCart(bookId) {
 function openCart() {
   const cartEl = document.getElementById("Cart");
   if (!cartEl) return;
-
   cartEl.classList.add("open");
 }
+
 
 document.addEventListener("click", e => {
   if (e.target.id === "continueShopping") {
