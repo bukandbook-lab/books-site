@@ -220,8 +220,8 @@ function renderCart() {
   const totals = calculateTotals();
   
   box.innerHTML = `
-   <span class="close-popup" alt="Close">X</span>
-   <img width="300px" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1aV6of-uDMKjQSWFV_lKbM_G5ogkqNXjjKfNk1V0VRRJJzQefQ0SgUSi3I7p-9ZtweZeQmZGu9cx6CFvdcvp5b7BxVdbGtQMsRq-DnCHY5hw1K2Z4gXkzMIyMkUUSDqQNWYevmQ_xi_u2NuxiTrLPstKBkTjjqPrsGL0VOiX0V9vfqxj_7Dc7b07WuLCt/s1600/header%202.jpg"/>
+   <span class="close-popup" alt="Close">X</span><br/>
+   <img width="350px" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1aV6of-uDMKjQSWFV_lKbM_G5ogkqNXjjKfNk1V0VRRJJzQefQ0SgUSi3I7p-9ZtweZeQmZGu9cx6CFvdcvp5b7BxVdbGtQMsRq-DnCHY5hw1K2Z4gXkzMIyMkUUSDqQNWYevmQ_xi_u2NuxiTrLPstKBkTjjqPrsGL0VOiX0V9vfqxj_7Dc7b07WuLCt/s1600/header%202.jpg"/>
    <br/><span class="CartTitle">CART</span>
     ${itemsHTML || "<p>No item selected</p>"}
 
