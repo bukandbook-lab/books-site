@@ -654,6 +654,7 @@ html, body {
 .CartTitle {
   color: #FF1493;
   font-size: 20px;
+  display: flex;
 }
 #cartTitles {
   max-height: 120px;
