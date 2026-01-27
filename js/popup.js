@@ -192,37 +192,41 @@ document.addEventListener("click", e => {
 
   if (!book?.video || !box) return;
 
-  /* 🔁 TOGGLE */
+  // Toggle video box
   if (box.classList.contains("active")) {
-    resetVideo();
+    box.classList.remove("active");
+    box.innerHTML = "";
+    e.target.textContent = "Watch Video";
     return;
   }
 
-  /* ✅ ACTIVATE HEIGHT FIRST */
+  // Activate video box
   box.classList.add("active");
+  e.target.textContent = "Hide Video";
 
+  // Add YouTube cover image with play button
   box.innerHTML = `
     <div class="yt-lazy" data-video-id="${book.video}">
       <img src="https://img.youtube.com/vi/${book.video}/hqdefault.jpg">
       <span class="yt-play"></span>
     </div>
   `;
-
-  e.target.textContent = "Hide Video";
 });
 
 
 document.addEventListener("click", e => {
   const yt = e.target.closest(".yt-lazy");
   if (!yt) return;
-   
-    yt.innerHTML = `
+
+  // Replace thumbnail with iframe
+  yt.innerHTML = `
     <iframe class="book-yt-video"
       src="https://www.youtube.com/embed/${yt.dataset.videoId}?autoplay=1"
-      allow="autoplay"
+      allow="autoplay; encrypted-media"
       allowfullscreen></iframe>
   `;
 });
+
 
 /* =====================================
    RESET VIDEO
