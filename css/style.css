@@ -581,10 +581,11 @@ html, body {
 
 
 .yt-lazy {
-  position: relative;
-  max-height: 300px;
-  margin: auto;
+  position: relative; 
+  width: 100%;
+  height: 100%;       /* 🔑 fill the parent .video-box */
   cursor: pointer;
+  margin: auto;
 }
 
 .yt-lazy img {
