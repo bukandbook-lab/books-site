@@ -385,17 +385,6 @@ const paymentPopup = document.getElementById("paymentPopup");
 
 });
 
-
-
-/* =====================================
-   CLOSE THANK YOU POPUP
-===================================== */
-document.addEventListener("click", e => {
-  if (e.target.closest("#thankYou .close-popup")) {
-    document.getElementById("thankYou").style.display = "none";
-  }
-});
-
 /* =====================================
    CLOSE CART WHEN CLICKING OUTSIDE
 ===================================== */
@@ -745,6 +734,24 @@ function showThankYou() {
     thankYou.style.display = "flex";
   }
 }
+/* =====================================
+   THANK YOU POPUP – MASTER CLOSE HANDLER
+===================================== */
+document.addEventListener("click", e => {
+  const thankYou = document.getElementById("thankYou");
+  if (!thankYou || thankYou.style.display !== "flex") return;
+
+  // ❌ Close button
+  if (e.target.closest("#thankYou .close-popup")) {
+    thankYou.style.display = "none";
+    return;
+  }
+
+  // ✅ Click outside popup content
+  if (!e.target.closest("#thankYou .popup-content")) {
+    thankYou.style.display = "none";
+  }
+});
 
 /* =====================================
    FOR PAYMENT POPUP
