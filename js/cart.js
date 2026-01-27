@@ -379,6 +379,11 @@ payText.innerHTML = `
 `;
 
 
+// 🔓 OPEN PAYMENT POPUP
+const paymentPopup = document.getElementById("paymentPopup");
+if (paymentPopup) {
+  paymentPopup.style.display = "flex";
+}
 
 
 
@@ -699,7 +704,7 @@ document.addEventListener("click", e => {
     return;
   }
 
-  // ✅ Click outside popup box
+  // ✅ Click outside popup-content
   if (!e.target.closest("#paymentPopup .popup-content")) {
     paymentPopup.style.display = "none";
   }
