@@ -519,14 +519,6 @@ document.addEventListener("input", e => {
 /* =====================================
    GOOGLE FORM
 ===================================== */
-document.addEventListener("click", e => {
-  if (e.target.id === "submitGoogleForm") {
-    showThankYou();
-    if (!cart.orderId) cart.orderId = generateOrderId();
-    window.open(buildGoogleFormURL(), "_blank");
-  }
-});
-
 function buildGoogleFormURL() {
   const data = buildOrderData();
   const t = data.totals;
@@ -549,6 +541,24 @@ TOTAL: RM${t.grandTotal}`,
   });
 
   return base + params.toString();
+}
+
+/* =====================================
+   GOOGLE FORM BUTTON HANDLER
+===================================== */
+const submitGoogleBtn = document.getElementById("submitGoogleForm");
+
+if (submitGoogleBtn) {
+  submitGoogleBtn.addEventListener("click", () => {
+    showThankYou();
+
+    if (!cart.orderId) {
+      cart.orderId = generateOrderId();
+    }
+
+    const url = buildGoogleFormURL();
+    window.open(url, "_blank");
+  });
 }
 
 
