@@ -764,13 +764,6 @@ html, body {
   white-space: nowrap;
 }
 
-.remove-item {
-  width: 14px;
-  height: 14px;
-  cursor: pointer;
-}
-
-
 .cart-fee,
 .total-row {
   display: flex;
