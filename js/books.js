@@ -62,3 +62,31 @@ function loadBooks(tabId) {
 
   container.appendChild(grid);
 }
+
+/* =====================================
+   SEE MORE SYSTEM
+===================================== */
+const SEE_MORE_BATCH = 50;
+let currentVisible = 0;
+let currentGrid = null;
+
+function applySeeMore(grid) {
+  if (!grid) return;
+
+  const items = [...grid.querySelectorAll(".book-thumb")];
+  currentGrid = grid;
+  currentVisible = SEE_MORE_BATCH;
+
+  // hide all first
+  items.forEach((item, i) => {
+    item.style.display = i < SEE_MORE_BATCH ? "" : "none";
+  });
+
+  const btnBox = document.getElementById("seeMoreContainer");
+
+  if (items.length > SEE_MORE_BATCH) {
+    btnBox.style.display = "block";
+  } else {
+    btnBox.style.display = "none";
+  }
+}
