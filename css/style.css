@@ -651,7 +651,10 @@ html, body {
   transform: translateX(0);
 }
 
-
+.CartTitle {
+  color: #FF1493;
+  font-size: 20px;
+}
 #cartTitles {
   max-height: 120px;
   overflow-y: auto;
