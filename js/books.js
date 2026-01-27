@@ -93,8 +93,24 @@ function applySeeMore(grid) {
   } else {
     btnBox.style.display = "none";
   }
-  
 }
+
+function toggleSeeMoreBtn(books) {
+  const btnBox = document.getElementById("seeMoreContainer");
+  const btn = document.getElementById("seeMoreBtn");
+  if (!btnBox || !btn) return;
+
+  const remaining = books.length - visibleCount;
+
+  if (remaining <= 0) {
+    btnBox.style.display = "none";
+    return;
+  }
+
+  btnBox.style.display = "block";
+  btn.textContent = `See more (${Math.min(BATCH_SIZE, remaining)})`;
+}
+
 /* =====================================
    BUTTON LOGIC
 ===================================== */
@@ -116,7 +132,4 @@ document.addEventListener("click", e => {
     btnBox.style.display = "none";
   }
 });
-
-document.getElementById("seeMoreBtn").textContent =
-  `See more (${Math.min(BATCH_SIZE, books.length - visibleCount)})`;
 
