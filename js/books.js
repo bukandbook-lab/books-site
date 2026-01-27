@@ -61,6 +61,10 @@ function loadBooks(tabId) {
   });
 
   container.appendChild(grid);
+
+/* 🔥 INIT SEE MORE */
+applySeeMore(grid);
+
 }
 
 /* =====================================
@@ -89,4 +93,26 @@ function applySeeMore(grid) {
   } else {
     btnBox.style.display = "none";
   }
+  
 }
+/* =====================================
+   BUTTON LOGIC
+===================================== */
+document.addEventListener("click", e => {
+  if (e.target.id !== "seeMoreBtn") return;
+  if (!currentGrid) return;
+
+  const items = [...currentGrid.querySelectorAll(".book-thumb")];
+  const next = currentVisible + SEE_MORE_BATCH;
+
+  items.forEach((item, i) => {
+    if (i < next) item.style.display = "";
+  });
+
+  currentVisible = next;
+
+  const btnBox = document.getElementById("seeMoreContainer");
+  if (currentVisible >= items.length) {
+    btnBox.style.display = "none";
+  }
+});
