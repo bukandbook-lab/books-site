@@ -116,3 +116,7 @@ document.addEventListener("click", e => {
     btnBox.style.display = "none";
   }
 });
+
+document.getElementById("seeMoreBtn").textContent =
+  `See more (${Math.min(BATCH_SIZE, books.length - visibleCount)})`;
+
