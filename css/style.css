@@ -572,6 +572,7 @@ html, body {
   display: block;
 }
 .book-yt-video {
+  margin-top: 8px;
   position: absolute;
   inset: 0;
   width: 100%;
