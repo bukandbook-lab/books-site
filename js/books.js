@@ -68,12 +68,16 @@ applySeeMore(grid);
 }
 
 /* =====================================
-   SEE MORE SYSTEM
+   SEE MORE SYSTEM (FINAL)
 ===================================== */
+
 const SEE_MORE_BATCH = 50;
 let currentVisible = 0;
 let currentGrid = null;
 
+/* =====================================
+   INIT SEE MORE FOR A GRID
+===================================== */
 function applySeeMore(grid) {
   if (!grid) return;
 
@@ -81,26 +85,23 @@ function applySeeMore(grid) {
   currentGrid = grid;
   currentVisible = SEE_MORE_BATCH;
 
-  // hide all first
+  // hide items beyond first batch
   items.forEach((item, i) => {
     item.style.display = i < SEE_MORE_BATCH ? "" : "none";
   });
 
-  const btnBox = document.getElementById("seeMoreContainer");
-
-  if (items.length > SEE_MORE_BATCH) {
-    btnBox.style.display = "block";
-  } else {
-    btnBox.style.display = "none";
-  }
+  updateSeeMoreText(items.length);
 }
 
-function toggleSeeMoreBtn(books) {
+/* =====================================
+   UPDATE SEE MORE TEXT + VISIBILITY
+===================================== */
+function updateSeeMoreText(totalItems) {
   const btnBox = document.getElementById("seeMoreContainer");
   const btn = document.getElementById("seeMoreBtn");
   if (!btnBox || !btn) return;
 
-  const remaining = books.length - visibleCount;
+  const remaining = totalItems - currentVisible;
 
   if (remaining <= 0) {
     btnBox.style.display = "none";
@@ -108,28 +109,24 @@ function toggleSeeMoreBtn(books) {
   }
 
   btnBox.style.display = "block";
-  btn.textContent = `See more (${Math.min(BATCH_SIZE, remaining)})`;
+  btn.textContent = `See more (${Math.min(SEE_MORE_BATCH, remaining)})`;
 }
 
 /* =====================================
-   BUTTON LOGIC
+   SEE MORE CLICK HANDLER
 ===================================== */
 document.addEventListener("click", e => {
   if (e.target.id !== "seeMoreBtn") return;
   if (!currentGrid) return;
 
   const items = [...currentGrid.querySelectorAll(".book-thumb")];
-  const next = currentVisible + SEE_MORE_BATCH;
+  const nextVisible = currentVisible + SEE_MORE_BATCH;
 
   items.forEach((item, i) => {
-    if (i < next) item.style.display = "";
+    if (i < nextVisible) item.style.display = "";
   });
 
-  currentVisible = next;
+  currentVisible = nextVisible;
 
-  const btnBox = document.getElementById("seeMoreContainer");
-  if (currentVisible >= items.length) {
-    btnBox.style.display = "none";
-  }
+  updateSeeMoreText(items.length);
 });
-
