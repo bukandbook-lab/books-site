@@ -585,6 +585,7 @@ html, body {
   position: absolute; /* fill .video-box */
   top: 0;
   left: 0;
+  margin-top: 8px;
   width: 100%;
   height: 100%;        /* important so iframe fills it later */
   cursor: pointer;
