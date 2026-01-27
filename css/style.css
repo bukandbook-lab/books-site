@@ -816,22 +816,7 @@ html, body {
   z-index: 10;
   float: right;
 }
-/* =========================
-   SEE MORE BUTTON 
-========================= */
-#seeMoreBtn {
-  background: #FF1493;
-  color: #fff;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 14px;
-}
 
-#seeMoreBtn:hover {
-  opacity: 0.9;
-}
 
 /* =========================
    SEE MORE (TEXT STYLE)
