@@ -381,12 +381,7 @@ payText.innerHTML = `
 
 // 🔓 OPEN PAYMENT POPUP
 const paymentPopup = document.getElementById("paymentPopup");
-if (paymentPopup) {
-  paymentPopup.style.display = "flex";
-}
-
-
-
+  if (paymentPopup) paymentPopup.style.display = "flex";
 
 });
 
@@ -696,19 +691,30 @@ document.addEventListener("click", e => {
   const paymentPopup = document.getElementById("paymentPopup");
   if (!paymentPopup || paymentPopup.style.display !== "flex") return;
 
-  const box = paymentPopup.querySelector(".popup-content");
-
-  // ❌ Close button
+  // ❌ Close when X is clicked
   if (e.target.closest("#paymentPopup .close-popup")) {
     paymentPopup.style.display = "none";
     return;
   }
 
-  // ✅ Click outside popup-content
-  if (!e.target.closest("#paymentPopup .popup-content")) {
+  // ❌ Close when clicking outside content
+  if (e.target === paymentPopup) {
     paymentPopup.style.display = "none";
   }
 });
+
+const paymentPopup = document.getElementById("paymentPopup");
+
+if (paymentPopup) {
+  const content = paymentPopup.querySelector(".popup-content");
+
+  if (content) {
+    content.addEventListener("click", e => {
+      e.stopPropagation(); // ✅ keep popup open when clicking inside
+    });
+  }
+}
+
 
 /* =====================================
    THANK YOU POPUP (DELIVERY-AWARE)
