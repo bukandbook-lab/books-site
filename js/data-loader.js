@@ -39,7 +39,7 @@ const BOOK_SOURCES = [
     url: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/jawidata.json"
   },
   {
-    key: "Komik",
+    key: "Comic",
     url: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/comicdata.json"
   },
 ];
