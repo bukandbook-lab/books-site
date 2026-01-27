@@ -678,6 +678,55 @@ function syncCartIcons() {
     }
   });
 }
+
+/* =========================
+   SEE MORE (BATCH LOADER)
+========================= */
+const BATCH_SIZE = 50;
+let visibleCount = 50;
+
+// Init function (controls hiding)
+function initSeeMore(gridSelector) {
+  const grid = document.querySelector(gridSelector);
+  if (!grid) return;
+
+  const books = [...grid.children];
+  visibleCount = BATCH_SIZE;
+
+  books.forEach((book, i) => {
+    book.style.display = i < visibleCount ? "" : "none";
+  });
+
+  toggleSeeMoreButton(books);
+}
+
+// Button click logic
+document.addEventListener("click", e => {
+  if (e.target.id !== "seeMoreBtn") return;
+
+  const grid = document.querySelector(".books-grid.active");
+  if (!grid) return;
+
+  const books = [...grid.children];
+  const nextLimit = visibleCount + BATCH_SIZE;
+
+  books.forEach((book, i) => {
+    if (i < nextLimit) book.style.display = "";
+  });
+
+  visibleCount = nextLimit;
+  toggleSeeMoreButton(books);
+});
+
+// Hide button when done
+function toggleSeeMoreButton(books) {
+  const container = document.getElementById("seeMoreContainer");
+  if (!container) return;
+
+  container.style.display =
+    visibleCount >= books.length ? "none" : "block";
+}
+
 /* =====================================
    PAYMENT POPUP 
 ===================================== */
