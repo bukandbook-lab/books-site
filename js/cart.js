@@ -78,8 +78,10 @@ function addToCart(bookId) {
       id,
       title: book.title,
       price: Number(book.price),
-      setQtty: Number(book.SetQtty || 1),
-    });
+      setQtty: Number(book.SetQtty || 0)
+  });
+      
+
   
   renderCart();
   syncCartIcons();
