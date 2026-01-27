@@ -24,7 +24,7 @@ html, body {
 .site-header img {
   width: 100%;
   max-height: 400px;   /* 🔥 control height */
-  object-fit: contain;
+  object-fit: cover;
   display: block;
   margin: 0;
 }
