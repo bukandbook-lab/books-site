@@ -581,11 +581,15 @@ html, body {
 
 
 .yt-lazy {
-  position: relative; 
+  position: absolute; /* fill .video-box */
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;       /* 🔑 fill the parent .video-box */
+  height: 100%;        /* important so iframe fills it later */
   cursor: pointer;
-  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .yt-lazy img {
