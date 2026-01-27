@@ -750,7 +750,8 @@ html, body {
 .submit-Whatsapp {
    display: inline-flex;
    justify-content: center;
-
+   align-items: center;      /* center horizontally */
+   gap: 8px;                 /* optional spacing between button and image
 }
    
 /* =========================
