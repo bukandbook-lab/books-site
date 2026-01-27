@@ -692,10 +692,14 @@ document.addEventListener("click", e => {
   if (!paymentPopup || paymentPopup.style.display !== "flex") return;
 
   // ❌ Close when X is clicked
-  if (e.target.closest("#paymentPopup .close-popup")) {
-    paymentPopup.style.display = "none";
-    return;
+if (paymentPopup) {
+  const closeBtn = paymentPopup.querySelector(".close-popup");
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      paymentPopup.style.display = "none";
+    });
   }
+}
 
   // ❌ Close when clicking outside content
   if (e.target === paymentPopup) {
