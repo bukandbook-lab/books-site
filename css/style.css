@@ -311,7 +311,7 @@ html, body {
 .popup-img-wrapper {
   position: relative;
   width: 100%;
-  max-height: 45vh;     /* 🔥 controls height */
+  max-height: 80vh;     /* 🔥 controls height */
   overflow: hidden;
 }
 
