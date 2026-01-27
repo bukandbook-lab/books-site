@@ -830,9 +830,6 @@ html, body {
   color: #FF1493;
   font-weight: 600;
   font-size: 14px;
-  display: inline-block;
-  padding: 6px 12px;
-  transition: opacity 0.2s ease, transform 0.2s ease;
   opacity: 0.85;
 }
 
@@ -841,9 +838,19 @@ html, body {
   text-decoration: underline;
 }
 
+
 #seeMoreContainer {
-  text-align: center;
-  margin: 24px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 28px 0;
+}
+
+#seeMoreBtn {
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0.85;
 }
 
 
