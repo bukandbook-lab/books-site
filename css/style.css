@@ -562,8 +562,8 @@ html, body {
 .video-box {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%;
-  height: auto;
+  height: 0;               /* ✅ Important for aspect ratio trick */
+  padding-bottom: 56.25%;  /* 16:9 aspect ratio */
   overflow: hidden;
   display: none;
 }
