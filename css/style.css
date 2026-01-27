@@ -748,11 +748,13 @@ html, body {
 }
 
 .submit-Whatsapp {
-   display: inline-flex;
-   justify-content: center;
-   align-items: center;      /* center horizontally */
-   gap: 8px;                 /* optional spacing between button and image
+  display: flex;            /* use block-level flex */
+  flex-direction: column;   /* stack button + image vertically */
+  align-items: center;      /* center horizontally */
+  gap: 8px;                 /* optional spacing between button and image */
+  margin-top: 16px;
 }
+
    
 /* =========================
    CART ROW + REMOVE ICON IN CART
