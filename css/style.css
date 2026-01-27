@@ -311,8 +311,10 @@ html, body {
 .popup-img-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  max-height: 45vh;     /* 🔥 controls height */
+  overflow: hidden;
 }
+
 
 .img-skeleton {
   position: absolute;
@@ -323,9 +325,9 @@ html, body {
 
 .popup-img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 45vh;
   object-fit: contain;
-  display: none;
 }
 
 .popup-img.loaded {
