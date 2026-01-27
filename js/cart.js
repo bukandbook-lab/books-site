@@ -73,6 +73,14 @@ function addToCart(bookId) {
     console.warn("Book not found in registry:", id);
     return;
   }
+
+    cart.items.set(id, {
+      id,
+      title: book.title,
+      price: Number(book.price),
+      setQtty: Number(book.SetQtty || 1),
+    });
+  
   renderCart();
   syncCartIcons();
 }
