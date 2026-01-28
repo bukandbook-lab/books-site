@@ -59,11 +59,22 @@ function renderPopup(bookId) {
       <div class="popup-nav right">›</div>
 
       <div class="book-title">${book.title}</div>
-     <div><b>Category:</b> ${
-  [book.category, ...(book.tags || [])]
-    .map(prettyCategory)
-    .join(", ")
-}</div>
+<div>
+  <b>Category:</b>
+  ${
+    [book.category, ...(book.tags || [])]
+      .map(cat => `
+        <span
+          class="popup-category"
+          data-category="${cat}"
+        >
+          ${prettyCategory(cat)}
+        </span>
+      `)
+      .join(", ")
+  }
+</div>
+
 
       ${setQtyHTML}
 
