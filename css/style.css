@@ -841,6 +841,7 @@ html, body {
 
 #seeMoreContainer {
   display: none;   /* 🔒 hidden by default */
+  text-align: center;
   margin: 24px 0;
 }
 
