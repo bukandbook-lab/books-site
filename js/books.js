@@ -98,14 +98,14 @@ item.innerHTML = `
   >
 
   <!-- 🔥 HOVER PRICE BOX -->
-  <div class="grid-price-box"
+  <div class="price-box"
     data-book-id="${normalized.id}"
     data-title="${normalized.title}"
     data-price="${normalized.price}"
     data-setqtty="${normalized.SetQtty || 1}"
   >
     RM${normalized.price} ${priceLabel}
-    <img src="${CART_ICON}" class="grid-cart-icon">
+    <img src="${CART_ICON}" class="cart-icon">
   </div>
 `;
 
