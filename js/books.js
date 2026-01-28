@@ -109,7 +109,7 @@ function updateSeeMoreText(totalItems) {
   }
 
   btnBox.style.display = "block";
-  btn.textContent = `See another ${Math.min(SEE_MORE_BATCH, remaining)} books`;
+  btn.textContent = `See another ${Math.min(SEE_MORE_BATCH, remaining)} more books`;
 }
 
 /* =====================================
