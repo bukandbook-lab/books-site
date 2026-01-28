@@ -100,6 +100,7 @@ function applySeeMore(grid) {
   } else {
     btnBox.style.display = "none";
   }
+  updateSeeMoreText(items.length);
 }
 
 
