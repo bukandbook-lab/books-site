@@ -4,7 +4,9 @@ function loadBooks(tabId) {
   const container = document.getElementById(tabId);
   if (!container) return;
 
-  const books = ALL_BOOKS[tabId];
+  const primaryBooks = ALL_BOOKS[tabId] || [];
+  const taggedBooks = [];
+
 
   // guard log
     if (!Array.isArray(books)) {
