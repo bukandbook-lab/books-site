@@ -119,6 +119,17 @@ function updateSeeMoreText(totalItems) {
     return;
   }
 
+  /* =====================================
+   Move seeMoreContainer after the grid (ONLY during search)
+===================================== */
+
+  function moveSeeMoreAfter(element) {
+  const box = document.getElementById("seeMoreContainer");
+  if (!box || !element) return;
+  element.after(box);
+}
+
+
   btnBox.style.display = "block";
   btn.textContent = `---------- See ${Math.min(SEE_MORE_BATCH, remaining)} more books ----------`;
 }
