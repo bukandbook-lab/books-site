@@ -86,3 +86,87 @@ function loadBooks(tabId) {
   // 🔥 INIT SEE MORE AFTER RENDER
   applySeeMore(grid);
 }
+
+
+/* =====================================
+   SEE MORE SYSTEM (FINAL)
+===================================== */
+
+const SEE_MORE_BATCH = 50;
+let currentVisible = 0;
+let currentGrid = null;
+
+/* =====================================
+   INIT SEE MORE FOR A GRID
+===================================== */
+function applySeeMore(grid) {
+  if (!grid) return;
+
+  const items = [...grid.querySelectorAll(".book-thumb")];
+  const btnBox = document.getElementById("seeMoreContainer");
+
+  currentGrid = grid;
+  currentVisible = SEE_MORE_BATCH;
+
+  // Hide/show books
+  items.forEach((item, i) => {
+    item.style.display = i < SEE_MORE_BATCH ? "" : "none";
+  });
+
+  // 🔑 SHOW ONLY IF NEEDED
+  if (items.length > SEE_MORE_BATCH) {
+    btnBox.style.display = "flex"; // center stays intact
+  } else {
+    btnBox.style.display = "none";
+  }
+  updateSeeMoreText(items.length);
+}
+
+
+/* =====================================
+   UPDATE SEE MORE TEXT + VISIBILITY
+===================================== */
+function updateSeeMoreText(totalItems) {
+  const btnBox = document.getElementById("seeMoreContainer");
+  const btn = document.getElementById("seeMoreBtn");
+  if (!btnBox || !btn) return;
+
+  const remaining = totalItems - currentVisible;
+
+  if (remaining <= 0) {
+    btnBox.style.display = "none";
+    return;
+  }
+
+  btnBox.style.display = "block";
+  btn.textContent = `---------- See ${Math.min(SEE_MORE_BATCH, remaining)} more books ----------`;
+}
+
+ /* =====================================
+   Move seeMoreContainer after the grid (ONLY during search)
+===================================== */
+
+  function moveSeeMoreAfter(element) {
+  const box = document.getElementById("seeMoreContainer");
+  if (!box || !element) return;
+  element.after(box);
+}
+/* =====================================
+   SEE MORE CLICK HANDLER
+===================================== */
+document.addEventListener("click", e => {
+  if (e.target.id !== "seeMoreBtn") return;
+  if (!currentGrid) return;
+
+  const items = [...currentGrid.querySelectorAll(".book-thumb")];
+  const nextVisible = currentVisible + SEE_MORE_BATCH;
+
+  items.forEach((item, i) => {
+    if (i < nextVisible) item.style.display = "";
+  });
+
+  currentVisible = nextVisible;
+
+  updateSeeMoreText(items.length);
+});
+
