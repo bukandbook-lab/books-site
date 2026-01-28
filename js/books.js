@@ -82,16 +82,24 @@ function applySeeMore(grid) {
   if (!grid) return;
 
   const items = [...grid.querySelectorAll(".book-thumb")];
+  const btnBox = document.getElementById("seeMoreContainer");
+
   currentGrid = grid;
   currentVisible = SEE_MORE_BATCH;
 
-  // hide items beyond first batch
+  // Hide/show books
   items.forEach((item, i) => {
     item.style.display = i < SEE_MORE_BATCH ? "" : "none";
   });
 
-  updateSeeMoreText(items.length);
+  // 🔑 SHOW ONLY IF NEEDED
+  if (items.length > SEE_MORE_BATCH) {
+    btnBox.style.display = "flex"; // center stays intact
+  } else {
+    btnBox.style.display = "none";
+  }
 }
+
 
 /* =====================================
    UPDATE SEE MORE TEXT + VISIBILITY
