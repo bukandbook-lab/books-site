@@ -173,4 +173,6 @@ document.addEventListener("click", e => {
 
   updateSeeMoreText(items.length);
 });
-
+/* =====================================
+   CLICK HANDLER FOR CATEGORY IN POPUP
+===================================== */
