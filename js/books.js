@@ -183,14 +183,14 @@ document.addEventListener("click", e => {
   const category = cat.dataset.category;
   if (!category) return;
 
-  // 1️⃣ CLOSE POPUP
-  document.querySelector(".popup")?.style.setProperty("display", "none");
+  // 🔥 close popup with animation
+  closeBookPopup();
 
-  // 2️⃣ OPEN TAB
-  const btn = document.querySelector(
-    `.tab-btn[data-tab="${category}"]`
-  );
-
-  btn?.click();
+  // 🔁 open tab AFTER popup animation
+  setTimeout(() => {
+    const btn = document.querySelector(
+      `.tab-btn[data-tab="${category}"]`
+    );
+    btn?.click();
+  }, 250);
 });
-
