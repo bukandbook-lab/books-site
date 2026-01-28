@@ -14,18 +14,25 @@ function loadBooks(tabId) {
   if (!container) return;
 
   const primaryBooks = ALL_BOOKS[tabId] || [];
-  const taggedBooks = [];
+const taggedBooks = [];
 
-  // 🔁 collect tagged books from other categories
-  Object.values(BOOK_REGISTRY).forEach(book => {
+Object.keys(ALL_BOOKS).forEach(cat => {
+  if (cat === tabId) return;
+
+  ALL_BOOKS[cat].forEach(book => {
+    const id = book.id || book.ID || book["Book ID"];
+    const reg = BOOK_REGISTRY[id];
+
     if (
-      book.category !== tabId &&
-      Array.isArray(book.tags) &&
-      book.tags.includes(tabId)
+      reg &&
+      Array.isArray(reg.tags) &&
+      reg.tags.includes(tabId)
     ) {
-      taggedBooks.push(book);
+      taggedBooks.push(reg);
     }
   });
+});
+
 
   // 🔥 merge: primary first, tagged last
   const combinedBooks = [
@@ -88,10 +95,16 @@ function loadBooks(tabId) {
     grid.appendChild(item);
   });
 
-  container.appendChild(grid);
+container.appendChild(grid);
 
-  // 🔥 INIT SEE MORE AFTER RENDER
-  applySeeMore(grid);
+// 🔥 INIT SEE MORE AFTER RENDER
+applySeeMore(grid);
+
+// 🔥 RESET SCROLL SO FIRST BOOKS ARE VISIBLE
+container.scrollTop = 0;
+window.scrollTo({ top: 0, behavior: "instant" });
+
+
 }
 
 
