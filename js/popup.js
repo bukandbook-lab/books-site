@@ -19,7 +19,8 @@ function openBookPopup(bookId) {
   popup.dataset.category = book.category;
 
   renderPopup(id);
-  popup.style.display = "flex";
+  popup.classList.add("show");
+
 }
 
 
@@ -162,7 +163,16 @@ document.addEventListener("click", e => {
     e.preventDefault();
     e.stopPropagation();
 
+     const popup = document.querySelector(".popup");
+  if (!popup) return;
+
+  popup.classList.remove("show");
+
+  // safety fallback
+  setTimeout(() => {
     popup.style.display = "none";
+  }, 300);
+     
     resetVideo(popup);
     return;
   }
