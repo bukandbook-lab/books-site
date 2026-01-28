@@ -75,7 +75,8 @@ window.BOOKS_READY = Promise.all(
             img: book.image || book.Link || "",
             price: Number(book.price || book["Price"] || 0),
             SetQtty: book.qtty || book["No. of Books"] || 0,
-            video: book["Youtube ID"] || null
+            video: book["Youtube ID"] || null,
+            tags: Array.isArray(book.tag) ? book.tag : []
           };
         });
       })
