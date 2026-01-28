@@ -67,6 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
      const grid = panel?.querySelector(".image-grid");
      if (grid && typeof applySeeMore === "function") {
         applySeeMore(grid);
+        moveSeeMoreAfter(grid);
+
      }
 
       return;
@@ -115,7 +117,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (typeof applySeeMore === "function") {
-  applySeeMore(grid);
+      applySeeMore(grid);
+      moveSeeMoreAfter(grid);
+
 }
 
     if (typeof syncCartIcons === "function") {
