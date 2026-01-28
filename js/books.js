@@ -1,4 +1,6 @@
 function loadBooks(tabId) {
+  document.getElementById("seeMoreContainer").style.display = "none";
+
   const container = document.getElementById(tabId);
   if (!container) return;
 
