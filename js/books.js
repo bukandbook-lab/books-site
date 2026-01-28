@@ -91,15 +91,15 @@ Object.keys(ALL_BOOKS).forEach(cat => {
         loading="lazy"
         data-book-id="${normalized.id}"
       >
-      <img
-        src="${CART_ICON}"
-        class="cart-icon"
-        loading="lazy"
+
+      <div class="price-box"
         data-book-id="${normalized.id}"
         data-title="${normalized.title}"
         data-price="${normalized.price}"
-        data-setqtty="${normalized.SetQtty}"
-      >
+        data-setqtty="${normalized.SetQtty}">
+        &nbsp&nbspRM${normalized.price} ${priceLabel}
+        <img class="cart-icon" src="${CART_ICON}" width="22">
+      </div>
     `;
 
     grid.appendChild(item);
