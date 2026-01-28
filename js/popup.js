@@ -8,7 +8,7 @@ function openBookPopup(bookId) {
   const popup = document.getElementById("BookPopup");
   if (!popup) return;
 
-  const id = String(bookId);        // ✅ normalize
+  const id = String(bookId);
   const book = BOOK_REGISTRY[id];
   if (!book) {
     console.warn("Book not found for popup:", id);
@@ -19,9 +19,16 @@ function openBookPopup(bookId) {
   popup.dataset.category = book.category;
 
   renderPopup(id);
-  popup.classList.add("show");
 
+  // 🔑 REQUIRED FOR ANIMATION
+  popup.style.display = "flex";
+
+  // allow browser to paint before animation
+  requestAnimationFrame(() => {
+    popup.classList.add("show");
+  });
 }
+
 
 
 /* =====================================
@@ -285,13 +292,13 @@ document.addEventListener("touchend", e => {
    CLOSE POPUP
 ===================================== */
 function closeBookPopup() {
-  const popup = document.querySelector(".popup");
+  const popup = document.getElementById("BookPopup");
   if (!popup) return;
 
   popup.classList.remove("show");
 
-  // safety fallback
   setTimeout(() => {
     popup.style.display = "none";
-  }, 300);
+  }, 250);
 }
+
