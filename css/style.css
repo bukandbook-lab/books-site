@@ -840,7 +840,7 @@ html, body {
 
 
 #seeMoreContainer {
-  text-align: center;
+  display: none;   /* 🔒 hidden by default */
   margin: 24px 0;
 }
 
