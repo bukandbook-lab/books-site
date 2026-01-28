@@ -555,7 +555,7 @@ html, body {
 }
 
 /* Cart icon hidden by default */
-.book-thumb img.cart-icon {
+.book-thumb .price-box {
   position: absolute;
   right: 4px;
   bottom: 4px;
@@ -567,7 +567,7 @@ html, body {
 }
 
 /* Show on hover */
-.book-thumb:hover .cart-icon {
+.book-thumb:hover .price-box {
   opacity: 1;
   pointer-events: auto;
 }
