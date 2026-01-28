@@ -119,7 +119,11 @@ function updateSeeMoreText(totalItems) {
     return;
   }
 
-  /* =====================================
+  btnBox.style.display = "block";
+  btn.textContent = `---------- See ${Math.min(SEE_MORE_BATCH, remaining)} more books ----------`;
+}
+
+ /* =====================================
    Move seeMoreContainer after the grid (ONLY during search)
 ===================================== */
 
@@ -128,12 +132,6 @@ function updateSeeMoreText(totalItems) {
   if (!box || !element) return;
   element.after(box);
 }
-
-
-  btnBox.style.display = "block";
-  btn.textContent = `---------- See ${Math.min(SEE_MORE_BATCH, remaining)} more books ----------`;
-}
-
 /* =====================================
    SEE MORE CLICK HANDLER
 ===================================== */
