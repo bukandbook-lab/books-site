@@ -429,6 +429,7 @@ html, body {
 .popup-category:hover {
   font-weight: 700;
   text-decoration: underline;
+  color: #0000FF;
 }
 
 .book-title {
@@ -846,6 +847,7 @@ html, body {
 #seeMoreBtn:hover {
   opacity: 1;
   text-decoration: underline;
+  color: #0000FF;
 }
 
 
