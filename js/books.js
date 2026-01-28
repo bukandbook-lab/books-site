@@ -176,3 +176,21 @@ document.addEventListener("click", e => {
 /* =====================================
    CLICK HANDLER FOR CATEGORY IN POPUP
 ===================================== */
+document.addEventListener("click", e => {
+  const cat = e.target.closest(".popup-category");
+  if (!cat) return;
+
+  const category = cat.dataset.category;
+  if (!category) return;
+
+  // 1️⃣ CLOSE POPUP
+  document.querySelector(".popup")?.style.setProperty("display", "none");
+
+  // 2️⃣ OPEN TAB
+  const btn = document.querySelector(
+    `.tab-btn[data-tab="${category}"]`
+  );
+
+  btn?.click();
+});
+
