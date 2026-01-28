@@ -238,6 +238,7 @@ html, body {
   width: 100%;
   aspect-ratio: 2 / 3;          /* book-like proportion */
   background: #fff;
+  border-color: #f2f2f2;          /* 🔥 light grey card */
   border-radius: 6px;
   overflow: hidden;             /* VERY IMPORTANT */
   position: relative;
@@ -246,7 +247,9 @@ html, body {
   align-items: center;
   justify-content: center;
   margin: 0;              /* 🔑 remove default spacing */
-  padding: 0;
+  padding: 0;                /* 🔑 space around image */
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 /* IMAGE */
@@ -256,6 +259,7 @@ html, body {
   height: 100%;
   object-fit: contain;          /* or "cover" (see below) */
   display: block;
+  border-radius: 4px;
 }
 /* ===============================
    SKELETON STYLES (GLOBAL CSS)
