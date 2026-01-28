@@ -237,9 +237,8 @@ html, body {
 .book-thumb {
   width: 100%;
   aspect-ratio: 2 / 3;          /* book-like proportion */
-  background: #f2f2f2;
-  /* border-color: #f2f2f2;           🔥 light grey card */
-  border-radius: 2px;
+  background: #fff;
+  border-color: #f2f2f2;           /* 🔥 light grey card */
   overflow: hidden;             /* VERY IMPORTANT */
   position: relative;
   cursor: pointer;
@@ -255,12 +254,11 @@ html, body {
 /* IMAGE */
 .book-thumb img,
 .grid-book-img {
-  background: #fff;
   width: 100%;
   height: 100%;
   object-fit: contain;          /* or "cover" (see below) */
   display: block;
-  border-radius: 2px;
+  
 }
 /* ===============================
    SKELETON STYLES (GLOBAL CSS)
