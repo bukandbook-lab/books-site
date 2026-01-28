@@ -3,6 +3,9 @@ function prettyCategory(text = "") {
 }
 
 function loadBooks(tabId) {
+  currentVisible = 0;
+  currentGrid = null;
+
   // hide See More first
   const seeMoreBox = document.getElementById("seeMoreContainer");
   if (seeMoreBox) seeMoreBox.style.display = "none";
