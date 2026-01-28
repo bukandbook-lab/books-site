@@ -171,7 +171,6 @@ document.addEventListener("click", e => {
     e.stopPropagation();
 
     closeBookPopup();
-     requestAnimationFrame(() => btn?.click());
     resetVideo(popup);
     return;
   }
@@ -179,15 +178,15 @@ document.addEventListener("click", e => {
   /* =====================
      CLOSE POPUP (OUTSIDE)
   ===================== */
-  if (
-    popup &&
-    popup.style.display === "flex" &&
-    e.target === popup
-  ) {
-    popup.style.display = "none";
-    resetVideo(popup);
-    return;
-  }
+if (
+  popup &&
+  popup.classList.contains("show") &&
+  e.target === popup
+) {
+  closeBookPopup();
+  resetVideo();
+  return;
+}
 
   /* =====================
      IGNORE CLICKS INSIDE POPUP
