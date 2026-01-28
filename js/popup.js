@@ -60,6 +60,7 @@ function renderPopup(bookId) {
 
       <div class="book-title">${book.title}</div>
       <div><b>Category:</b> ${book.category}</div>
+      div><b>Tag:</b> ${book.tags}</div>
        ${setQtyHTML}
 
       <div class="price-box"
