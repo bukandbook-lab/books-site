@@ -76,7 +76,7 @@ window.BOOKS_READY = Promise.all(
             price: Number(book.price || book["Price"] || 0),
             SetQtty: book.qtty || book["No. of Books"] || 0,
             video: book["Youtube ID"] || null,
-            tags: Array.isArray(book.tag) ? book.tag : []
+            tags: Array.isArray( book["Tag"]) ?  book["Tag"] : []
           };
         });
       })
