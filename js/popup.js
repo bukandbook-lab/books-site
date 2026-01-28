@@ -59,9 +59,8 @@ function renderPopup(bookId) {
       <div class="popup-nav right">›</div>
 
       <div class="book-title">${book.title}</div>
-      <div><b>Category:</b> ${book.category}</div>
-      div><b>Tag:</b> ${book.tags}</div>
-       ${setQtyHTML}
+      <div><b>Category:</b> ${book.category}, ${book.tags}</div>
+      ${setQtyHTML}
 
       <div class="price-box"
         data-book-id="${id}"
