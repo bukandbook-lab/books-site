@@ -351,29 +351,25 @@ html, body {
   POPUP 
 ========================= */
 .popup {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 }
 
+.popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
 
 .popup-content {
-  background: #fff;
-  width: 92%;
-  max-width: 420px;
-  padding: 14px;
-  border-radius: 12px;
-  position: relative;
-  max-height: 90vh;
-  overflow-y: auto;
-  justify-content: center;
-  align-items: center;
-
+  transform: scale(0.95);
+  transition: transform 0.25s ease;
 }
+
+.popup.show .popup-content {
+  transform: scale(1);
+}
+
 
 #paymentPopup {
   position: fixed;
