@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+  
+  function hideSeeMore() {
+  const box = document.getElementById("seeMoreContainer");
+  if (box) box.style.display = "none";
+}
+
   const searchInput = document.getElementById("bookSearch");
   if (!searchInput) return;
 
@@ -33,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   searchInput.addEventListener("input", () => {
+    hideSeeMore(); 
     const keyword = searchInput.value.trim().toLowerCase();
 
     // 🧠 remember last active tab BEFORE search starts
@@ -55,6 +62,12 @@ document.addEventListener("DOMContentLoaded", () => {
         .forEach(btn =>
           btn.classList.toggle("active", btn.dataset.tab === lastTab)
         );
+
+     // 🔑 RE-APPLY SEE MORE FOR CURRENT TAB
+     const grid = panel?.querySelector(".image-grid");
+     if (grid && typeof applySeeMore === "function") {
+        applySeeMore(grid);
+     }
 
       return;
     }
@@ -100,6 +113,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       grid.appendChild(div);
     });
+
+    if (typeof applySeeMore === "function") {
+  applySeeMore(grid);
+}
 
     if (typeof syncCartIcons === "function") {
       syncCartIcons();
