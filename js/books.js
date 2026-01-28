@@ -75,7 +75,7 @@ Object.keys(ALL_BOOKS).forEach(cat => {
       video: book["Youtube ID"] || book.video || null
     };
 
-    const priceLabel = isSetBook ? "/set" : "/book";
+    
     const item = document.createElement("div");
     item.className = "book-thumb";
 
