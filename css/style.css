@@ -840,17 +840,10 @@ html, body {
 
 
 #seeMoreContainer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 28px 0;
+  text-align: center;
+  margin: 24px 0;
 }
 
-#seeMoreBtn {
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 500;
-  opacity: 0.85;
-}
+
 
 
