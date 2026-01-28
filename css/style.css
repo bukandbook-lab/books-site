@@ -428,6 +428,7 @@ html, body {
 
 .popup-category:hover {
   font-weight: 700;
+  text-decoration: underline;
 }
 
 .book-title {
