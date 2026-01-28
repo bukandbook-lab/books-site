@@ -377,7 +377,14 @@ payText.innerHTML = `
 
 // 🔓 OPEN PAYMENT POPUP
 const paymentPopup = document.getElementById("paymentPopup");
-  if (paymentPopup) paymentPopup.style.display = "flex";
+
+if (paymentPopup) {
+  paymentPopup.style.display = "flex"; // 🔑 REQUIRED
+  requestAnimationFrame(() => {
+    paymentPopup.classList.add("show"); // animation
+  });
+}
+
 
 });
 
