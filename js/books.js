@@ -1,3 +1,7 @@
+function prettyCategory(text = "") {
+  return text.replace(/([a-z])([A-Z])/g, "$1 $2");
+}
+
 function loadBooks(tabId) {
   // hide See More first
   const seeMoreBox = document.getElementById("seeMoreContainer");
