@@ -1,8 +1,18 @@
+const NON_BOOK_TABS = ["ReadMeFirst", "EPUBReader"];
+
 function prettyCategory(text = "") {
   return text.replace(/([a-z])([A-Z])/g, "$1 $2");
 }
 
 function loadBooks(tabId) {
+
+  // ✅ NON-BOOK TAB → DO NOTHING
+  if (NON_BOOK_TABS.includes(tabId)) {
+    const seeMoreBox = document.getElementById("seeMoreContainer");
+    if (seeMoreBox) seeMoreBox.style.display = "none";
+    return;
+  }
+
   currentVisible = 0;
   currentGrid = null;
 
