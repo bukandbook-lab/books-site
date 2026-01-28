@@ -78,11 +78,15 @@ window.BOOKS_READY = Promise.all(
             video: book["Youtube ID"] || null,
             
      // 🔑 FIXED TAG NORMALIZATION
-           tags: Array.isArray(book["Tag"])
-             ? book["Tag"]
-             : book["Tag"]
-               ? [book["Tag"]]
-                  : []
+tags: typeof book["Tag"] === "string"
+  ? book["Tag"]
+      .split(",")
+      .map(t => t.trim())
+      .filter(Boolean)
+  : Array.isArray(book["Tag"])
+    ? book["Tag"]
+    : []
+
           };
         });
       })
