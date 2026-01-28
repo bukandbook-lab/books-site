@@ -395,6 +395,7 @@ html, body {
   display: none;
   justify-content: center;
   align-items: center;
+  z-index: 10001;
 }
 
 #paymentPopup .popup-content {
