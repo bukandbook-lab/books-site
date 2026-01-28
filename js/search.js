@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-
+  document.getElementById("seeMoreContainer").style.display = "none";
   const searchInput = document.getElementById("bookSearch");
   if (!searchInput) return;
 
