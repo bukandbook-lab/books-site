@@ -84,24 +84,31 @@ Object.keys(ALL_BOOKS).forEach(cat => {
       item.classList.add("tagged-book");
     }
 
-    item.innerHTML = `
-      <div class="skeleton"></div>
-      <img
-        src="${normalized.img}"
-        class="grid-book-img popup-trigger"
-        loading="lazy"
-        data-book-id="${normalized.id}"
-      >
+const isSetBook = normalized.SetQtty > 1;
+const priceLabel = isSetBook ? "/set" : "/book";
 
-      <div class="price-box"
-        data-book-id="${normalized.id}"
-        data-title="${normalized.title}"
-        data-price="${normalized.price}"
-        data-setqtty="${normalized.SetQtty}">
-        &nbsp&nbspRM${normalized.price} ${priceLabel}
-        <img class="cart-icon" src="${CART_ICON}" width="22">
-      </div>
-    `;
+item.innerHTML = `
+  <div class="skeleton"></div>
+
+  <img
+    src="${normalized.img}"
+    class="grid-book-img popup-trigger"
+    loading="lazy"
+    data-book-id="${normalized.id}"
+  >
+
+  <!-- 🔥 HOVER PRICE BOX -->
+  <div class="grid-price-box"
+    data-book-id="${normalized.id}"
+    data-title="${normalized.title}"
+    data-price="${normalized.price}"
+    data-setqtty="${normalized.SetQtty || 1}"
+  >
+    RM${normalized.price} ${priceLabel}
+    <img src="${CART_ICON}" class="grid-cart-icon">
+  </div>
+`;
+
 
     grid.appendChild(item);
   });
