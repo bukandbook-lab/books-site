@@ -164,6 +164,7 @@ document.addEventListener("click", e => {
     e.stopPropagation();
 
     closeBookPopup();
+     requestAnimationFrame(() => btn?.click());
     resetVideo(popup);
     return;
   }
