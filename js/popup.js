@@ -163,16 +163,7 @@ document.addEventListener("click", e => {
     e.preventDefault();
     e.stopPropagation();
 
-     const popup = document.querySelector(".popup");
-  if (!popup) return;
-
-  popup.classList.remove("show");
-
-  // safety fallback
-  setTimeout(() => {
-    popup.style.display = "none";
-  }, 300);
-     
+    closeBookPopup();
     resetVideo(popup);
     return;
   }
@@ -289,3 +280,17 @@ document.addEventListener("touchend", e => {
 
   navigatePopup(diff > 0 ? 1 : -1);
 });
+/* =====================================
+   CLOSE POPUP
+===================================== */
+function closeBookPopup() {
+  const popup = document.querySelector(".popup");
+  if (!popup) return;
+
+  popup.classList.remove("show");
+
+  // safety fallback
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 300);
+}
