@@ -101,9 +101,9 @@ function renderPopup(bookId) {
       ` : ""}
     </div>
   `;
-   /* =============================
-   IMAGE SKELETON HANDLING
-============================= */
+   
+  // IMAGE SKELETON HANDLING
+
 const img = document.querySelector(".popup-img");
 const skeleton = document.querySelector(".img-skeleton");
 
@@ -113,6 +113,21 @@ if (img && skeleton) {
     img.classList.add("loaded");
   };
 }
+
+     // 🔥 FORCE CART STATUS CHECK FOR THIS BOOK
+  const popupIcon = popup.querySelector(
+    `.cart-icon[data-book-id="${book.id}"]`
+  );
+
+  if (popupIcon) {
+    if (cart.items.has(String(book.id))) {
+      popupIcon.src = CHECK_ICON;
+      popupIcon.classList.add("in-cart");
+    } else {
+      popupIcon.src = CART_ICON;
+      popupIcon.classList.remove("in-cart");
+    }
+  }
 
 }
 
