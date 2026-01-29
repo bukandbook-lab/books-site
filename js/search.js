@@ -94,23 +94,32 @@ document.addEventListener("DOMContentLoaded", () => {
       const div = document.createElement("div");
       div.className = "book-thumb";
 
+      const isSetBook = Number(book.SetQtty) > 1;
+      const priceLabel = isSetBook ? "/set" : "/book";
+
       div.innerHTML = `
-      <div class="skeleton"></div>
-        <img
-          src="${book.img}"
-          class="grid-book-img popup-trigger"
-          loading="lazy" 
-          data-book-id="${book.id}"
-        >
-        <img
-          src="${CART_ICON}"
-          class="cart-icon"
-          loading="lazy" 
-          data-book-id="${book.id}"
-          data-title="${book.title}"
-          data-price="${book.price}"
-          data-setqtty="${book.SetQtty}"
-        >
+  <div class="skeleton"></div>
+
+  <img
+    src="${book.img}"
+    class="grid-book-img popup-trigger"
+    loading="lazy"
+    data-book-id="${book.id}"
+  >
+
+  <!-- 🔥 HOVER PRICE BOX -->
+  <div class="price-box"
+    data-book-id="${book.id}"
+    data-title="${book.title}"
+    data-price="${Number(book.price).toFixed(2)}"
+    data-setqtty="${book.SetQtty || 1}"
+  >
+    &nbsp&nbspRM${Number(book.price).toFixed(2)}${priceLabel}
+    <img
+      data-book-id="${book.id}"
+      src="${CART_ICON}"
+      class="cart-icon"
+    >
       `;
 
       grid.appendChild(div);
