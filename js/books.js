@@ -104,7 +104,7 @@ item.innerHTML = `
     data-price="${Number(normalized.price).toFixed(2)}"
     data-setqtty="${normalized.SetQtty || 1}"
   >
-    &nbsp&nbspRM${Number(normalized.price).toFixed(2)} ${priceLabel}
+    &nbsp&nbspRM${Number(normalized.price).toFixed(2)}${priceLabel}
     <img src="${CART_ICON}" class="cart-icon">
   </div>
 `;
