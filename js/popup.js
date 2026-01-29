@@ -5,8 +5,6 @@ let currentBookId = null;
 ===================================== */
 
 function openBookPopup(bookId) {
-  syncCartIcons() ;
-   
   const popup = document.getElementById("BookPopup");
   if (!popup) return;
 
@@ -200,7 +198,9 @@ if (
   ===================== */
   const trigger = e.target.closest(".popup-trigger");
   if (trigger) {
+    syncCartIcons();
     openBookPopup(trigger.dataset.bookId);
+    
   }
 });
 
