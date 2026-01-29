@@ -607,6 +607,23 @@ function syncCartIcons() {
   });
 }
 
+/* =====================================
+  RESET CART
+===================================== */
+
+function resetCart() {
+  cart.items.clear();
+  cart.delivery = "email";
+  cart.deliveryDetails = "";
+  cart.agreed = false;
+  cart.orderId = "";
+
+  renderCart();
+  syncCartIcons();
+
+  // Close cart UI if open
+  document.getElementById("Cart")?.classList.remove("open");
+}
 
 
 /* =====================================
@@ -667,6 +684,11 @@ function showThankYou() {
   requestAnimationFrame(() => {
     thankYou.classList.add("show");
   });
+   
+  // 🔥 AUTO-CLEAR CART (DELAY = SAFE)
+  setTimeout(() => {
+    resetCart();
+  }, 300);
 }
 
 /* =====================================
