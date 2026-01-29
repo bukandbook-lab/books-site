@@ -101,10 +101,10 @@ item.innerHTML = `
   <div class="price-box"
     data-book-id="${normalized.id}"
     data-title="${normalized.title}"
-    data-price="${normalized.price}"
+    data-price="${Number(normalized.price).toFixed(2)}"
     data-setqtty="${normalized.SetQtty || 1}"
   >
-    RM${normalized.price} ${priceLabel}
+    &nbsp&nbspRM${Number(normalized.price).toFixed(2)} ${priceLabel}
     <img src="${CART_ICON}" class="cart-icon">
   </div>
 `;
