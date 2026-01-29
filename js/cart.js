@@ -421,7 +421,7 @@ function buildOrderData() {
     if (item.setQtty > 0 && item.price !== 1) {
       line += ` (${item.setQtty} books)`;
     }
-    line += ` [RM${item.price}]`;
+    line += ` [RM${item.price.toFixed(2)}]`;
     bookLines.push(line);
     i++;
   });
@@ -574,7 +574,7 @@ function calculateTotals() {
   let booksSubtotal = 0;
 
   cart.items.forEach(item => {
-    booksSubtotal += item.price;
+    booksSubtotal += item.price.toFixed(2);
   });
 
   let shippingFee = 0;
