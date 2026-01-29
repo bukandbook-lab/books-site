@@ -642,7 +642,13 @@ function showThankYou() {
   const thankYou = document.getElementById("thankYou");
   const thankYouMsg = document.getElementById("thankYouMsg");
 
-  if (paymentPopup) paymentPopup.style.display = "none";
+  if (!thankYou) return;
+
+  // Close payment popup
+  if (paymentPopup) {
+    paymentPopup.classList.remove("show");
+    paymentPopup.style.display = "none";
+  }
 
   const delivery =
     document.querySelector("input[name='delivery']:checked")?.value;
@@ -656,28 +662,31 @@ function showThankYou() {
     thankYouMsg.innerHTML = msg;
   }
 
-  if (thankYou) {
-    thankYou.style.display = "flex";
-  }
+  // 🔥 SHOW THANK YOU POPUP PROPERLY
+  thankYou.style.display = "flex";
+  requestAnimationFrame(() => {
+    thankYou.classList.add("show");
+  });
 }
+
 /* =====================================
    THANK YOU POPUP – MASTER CLOSE HANDLER
 ===================================== */
 document.addEventListener("click", e => {
   const thankYou = document.getElementById("thankYou");
-  if (!thankYou || thankYou.style.display !== "flex") return;
+  if (!thankYou || !thankYou.classList.contains("show")) return;
 
-  // ❌ Close button
-  if (e.target.closest("#thankYou .close-popup")) {
-    thankYou.style.display = "none";
-    return;
-  }
-
-  // ✅ Click outside popup content
-  if (!e.target.closest("#thankYou .popup-content")) {
-    thankYou.style.display = "none";
+  if (
+    e.target.closest("#thankYou .close-popup") ||
+    !e.target.closest("#thankYou .popup-content")
+  ) {
+    thankYou.classList.remove("show");
+    setTimeout(() => {
+      thankYou.style.display = "none";
+    }, 250);
   }
 });
+
 
 /* =====================================
    FOR PAYMENT POPUP
