@@ -115,7 +115,7 @@ if (img && skeleton) {
 }
 
      // 🔥 FORCE CART STATUS CHECK FOR THIS BOOK
-  const popupIcon = popup.querySelector(
+  const popupIcon = document.querySelector(
     `.cart-icon[data-book-id="${book.id}"]`
   );
 
