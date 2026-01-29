@@ -5,6 +5,8 @@ let currentBookId = null;
 ===================================== */
 
 function openBookPopup(bookId) {
+  syncCartIcons() ;
+   
   const popup = document.getElementById("BookPopup");
   if (!popup) return;
 
