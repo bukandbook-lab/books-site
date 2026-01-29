@@ -77,7 +77,7 @@ function addToCart(bookId) {
     cart.items.set(id, {
       id,
       title: book.title,
-      price: Number(book.price),
+      price: Number(book.price.toFixed(2)),
       setQtty: Number(book.SetQtty || 0)
   });
       
@@ -203,7 +203,7 @@ function renderCart() {
         </span>
 
         <span class="price-right">
-          <span>RM${item.price}</span>
+          <span>RM${item.price.toFixed(2)}</span>
             <img
              src="${CLOSE_ICON}"
              class="remove-item"
@@ -228,7 +228,7 @@ function renderCart() {
     
     <div class="cart-fee">
       <span><b>SUBTOTAL</b></span>
-      <span><b>RM${totals.booksSubtotal}</b></span>
+      <span><b>RM${totals.booksSubtotal.toFixed(2)}</b></span>
     </div>
     <hr>
 
@@ -262,11 +262,11 @@ function renderCart() {
 ${cart.delivery === "courier" ? `
   <br><div class="cart-fee">
     <span>Shipping Fee</span>
-    <span>RM${totals.shippingFee}</span>
+    <span>RM${totals.shippingFee.toFixed(2)}</span>
   </div>
   <div class="cart-fee">
     <span>Thumb Drive Charge</span>
-    <span>RM${totals.thumbFee}</span>
+    <span>RM${totals.thumbFee.toFixed(2)}</span>
   </div>
 ` : ""}
 
@@ -274,7 +274,7 @@ ${cart.delivery === "courier" ? `
 
      <div class="total-row">
         <span><b>GRAND TOTAL</b></span>
-        <span><b>RM${totals.grandTotal}</b></span>
+        <span><b>RM${totals.grandTotal.toFixed(2)}</b></span>
      </div><br>
 
     <label class="terms">
