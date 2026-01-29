@@ -89,9 +89,9 @@ function renderPopup(bookId) {
       <div class="price-box"
         data-book-id="${id}"
         data-title="${book.title}"
-        data-price="${book.price}"
+        data-price="${book.price.toFixed(2)}"
         data-setqtty="${book.SetQtty || 1}">
-        &nbsp&nbspRM${book.price} ${priceLabel}
+        &nbsp&nbspRM${book.price.toFixed(2)} ${priceLabel}
         <img class="cart-icon" src="${CART_ICON}" width="22">
       </div>
 
