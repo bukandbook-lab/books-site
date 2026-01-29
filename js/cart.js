@@ -28,7 +28,7 @@ const FORM = {
    ADD TO CART (GRID + POPUP) 
 ===================================== */
 document.addEventListener("click", e => {
-  const btn = e.target.closest(".cart-icon, .price-box");
+  const btn = e.target.closest(".price-box .cart-icon, .price-box");
   if (!btn) return;
 
   e.preventDefault();
