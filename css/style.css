@@ -463,10 +463,10 @@ html, body {
   color: white;
   border-radius: 18px;
   padding: 3px 3px;
-  font-size: 14px;
+  font-size:  12px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   cursor: pointer;
 }
 
@@ -560,7 +560,7 @@ html, body {
   right: 4px;
   bottom: 4px;
   width: 90px;
-  height: 22px;
+  height: 24px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
