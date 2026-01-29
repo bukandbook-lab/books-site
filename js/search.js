@@ -91,8 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const words = normalizeWords(book.title);
       if (!words.some(w => w.includes(keyword))) return;
       
-      const isSetBook = normalized.SetQtty > 1;
-      const priceLabel = isSetBook ? "/set" : "/book";
       const div = document.createElement("div");
       div.className = "book-thumb";
 
@@ -113,7 +111,7 @@ div.innerHTML = `
     data-price="${Number(normalized.price).toFixed(2)}"
     data-setqtty="${normalized.SetQtty || 1}"
   >
-    &nbsp&nbspRM${Number(normalized.price).toFixed(2)}${priceLabel}
+    &nbsp&nbspRM${Number(normalized.price).toFixed(2)}
     <img data-book-id="${normalized.id}" src="${CART_ICON}" class="cart-icon">
   </div>
 `;
