@@ -367,7 +367,7 @@ if (!payText) {
 }
 
 payText.innerHTML = `
-  Please bank in <b>RM${total}</b> to:<br><br>
+  Please bank in <b>RM${total.toFixed(2)}</b> to:<br><br>
   <b>Account Number:</b><br>
   1234567890 (Maybank)<br><br>
 
@@ -462,14 +462,14 @@ function buildWhatsAppMessage() {
   msg += `📚 *List of Books:*\n${data.booksText}\n\n`;
 
   msg += `💵 *Payment Breakdown*\n`;
-  msg += `📚 Subtotal: RM${t.booksSubtotal}\n`;
+  msg += `📚 Subtotal: RM${t.booksSubtotal.toFixed(2)}\n`;
 
   if (cart.delivery === "courier") {
-    msg += `🚚 Shipping: RM${t.shippingFee}\n`;
-    msg += `💾 Thumb Drive: RM${t.thumbFee}\n`;
+    msg += `🚚 Shipping: RM${t.shippingFee.toFixed(2)}\n`;
+    msg += `💾 Thumb Drive: RM${t.thumbFee.toFixed(2)}\n`;
   }
 
-  msg += `\n💰 *TOTAL: RM${t.grandTotal}*\n\n`;
+  msg += `\n💰 *TOTAL: RM${t.grandTotal.toFixed(2)}*\n\n`;
   msg += `🚚 *Delivery Method:* ${data.delivery}\n`;
   msg += `📝 *Delivery Details:*\n${data.deliveryDetails}\n\n`;
   msg += `📸 *Payment Screenshot:* (attach below)`;
@@ -523,11 +523,11 @@ function buildGoogleFormURL() {
     [FORM.books]:
       data.booksText,
     [FORM.total]:
-`Subtotal: RM${t.booksSubtotal}
-Shipping: RM${t.shippingFee}
-Thumb Drive: RM${t.thumbFee}
+`Subtotal: RM${t.booksSubtotal.toFixed(2)}
+Shipping: RM${t.shippingFee.toFixed(2)}
+Thumb Drive: RM${t.thumbFee.toFixed(2)}
 -----------------
-TOTAL: RM${t.grandTotal}`,
+TOTAL: RM${t.grandTotal.toFixed(2)}`,
     [FORM.method]: cart.delivery,
     [FORM.delivery]: data.deliveryDetails
   });
@@ -625,14 +625,14 @@ function buildTelegramMessage() {
   msg += `📚 *List of Books:*\n${data.booksText}\n\n`;
 
   msg += `💵 *Payment Breakdown*\n`;
-  msg += `📚 Subtotal: RM${t.booksSubtotal}\n`;
+  msg += `📚 Subtotal: RM${t.booksSubtotal.toFixed(2)}\n`;
 
   if (cart.delivery === "courier") {
-    msg += `🚚 Shipping: RM${t.shippingFee}\n`;
-    msg += `💾 Thumb Drive: RM${t.thumbFee}\n`;
+    msg += `🚚 Shipping: RM${t.shippingFee.toFixed(2)}\n`;
+    msg += `💾 Thumb Drive: RM${t.thumbFee.toFixed(2)}\n`;
   }
 
-  msg += `\n💰 *TOTAL: RM${t.grandTotal}*\n\n`;
+  msg += `\n💰 *TOTAL: RM${t.grandTotal.toFixed(2)}*\n\n`;
   msg += `📦 *Delivery Method:* ${data.delivery}\n`;
   msg += `📝 *Delivery Details:*\n${data.deliveryDetails}`;
 
