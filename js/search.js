@@ -90,12 +90,11 @@ document.addEventListener("DOMContentLoaded", () => {
     Object.values(BOOK_REGISTRY).forEach(book => {
       const words = normalizeWords(book.title);
       if (!words.some(w => w.includes(keyword))) return;
-
+      
+      const isSetBook = normalized.SetQtty > 1;
+      const priceLabel = isSetBook ? "/set" : "/book";
       const div = document.createElement("div");
       div.className = "book-thumb";
-
-const isSetBook = normalized.SetQtty > 1;
-const priceLabel = isSetBook ? "/set" : "/book";
 
 div.innerHTML = `
   <div class="skeleton"></div>
