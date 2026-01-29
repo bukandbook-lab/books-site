@@ -334,24 +334,6 @@ if (paymentPopup) {
 
 });
 
-/* =====================================
-   CLOSE CART WHEN CLICKING OUTSIDE
-===================================== */
-document.addEventListener("click", e => {
-  const cartEl = document.getElementById("Cart");
-  if (!cartEl || !cartEl.classList.contains("open")) return;
-
-  if (e.target.closest("#Cart")) return;
-if (
-  e.target.closest(".cart-icon") ||
-  e.target.closest(".price-box") ||
-  e.target.id === "clickToPay"
-) return;
-
-  if (e.target.closest(".remove-item")) return;
-
-  cartEl.classList.remove("open");
-});
 
 /* =====================================
    STANDARDIZED ORDER DATA
