@@ -92,7 +92,7 @@ function renderPopup(bookId) {
         data-price="${book.price.toFixed(2)}"
         data-setqtty="${book.SetQtty || 1}">
         &nbsp&nbspRM${book.price.toFixed(2)} ${priceLabel}
-        <img class="cart-icon" src="${CART_ICON}" width="22">
+        <img data-book-id="${id}" class="cart-icon" src="${CART_ICON}" width="22">
       </div>
 
       ${book.video ? `
