@@ -198,9 +198,7 @@ if (
   ===================== */
   const trigger = e.target.closest(".popup-trigger");
   if (trigger) {
-    syncCartIcons();
     openBookPopup(trigger.dataset.bookId);
-    
   }
 });
 
