@@ -94,24 +94,30 @@ document.addEventListener("DOMContentLoaded", () => {
       const div = document.createElement("div");
       div.className = "book-thumb";
 
-      div.innerHTML = `
-      <div class="skeleton"></div>
-        <img
-          src="${book.img}"
-          class="grid-book-img popup-trigger"
-          loading="lazy" 
-          data-book-id="${book.id}"
-        >
-        <img
-          src="${CART_ICON}"
-          class="cart-icon"
-          loading="lazy" 
-          data-book-id="${book.id}"
-          data-title="${book.title}"
-          data-price="${book.price}"
-          data-setqtty="${book.SetQtty}"
-        >
-      `;
+const isSetBook = normalized.SetQtty > 1;
+const priceLabel = isSetBook ? "/set" : "/book";
+
+div.innerHTML = `
+  <div class="skeleton"></div>
+
+  <img
+    src="${normalized.img}"
+    class="grid-book-img popup-trigger"
+    loading="lazy"
+    data-book-id="${normalized.id}"
+  >
+
+  <!-- 🔥 HOVER PRICE BOX -->
+  <div class="price-box"
+    data-book-id="${normalized.id}"
+    data-title="${normalized.title}"
+    data-price="${Number(normalized.price).toFixed(2)}"
+    data-setqtty="${normalized.SetQtty || 1}"
+  >
+    &nbsp&nbspRM${Number(normalized.price).toFixed(2)}${priceLabel}
+    <img data-book-id="${normalized.id}" src="${CART_ICON}" class="cart-icon">
+  </div>
+`;
 
       grid.appendChild(div);
     });
