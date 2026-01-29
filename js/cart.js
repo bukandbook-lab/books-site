@@ -600,8 +600,10 @@ window.addEventListener("resize", updateTabArrows);
 function syncCartIcons() {
   document.querySelectorAll(".cart-icon[data-book-id]").forEach(icon => {
     const id = icon.dataset.bookId;
-    icon.src = cart.items.has(id) ? CHECK_ICON : CART_ICON;
-    icon.classList.toggle("in-cart", cart.items.has(id));
+    const inCart = cart.items.has(id);
+
+    icon.src = inCart ? CHECK_ICON : CART_ICON;
+    icon.classList.toggle("in-cart", inCart);
   });
 }
 
