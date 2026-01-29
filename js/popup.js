@@ -115,19 +115,19 @@ if (img && skeleton) {
 }
 
      // 🔥 FORCE CART STATUS CHECK FOR THIS BOOK
-  const popupIcon = document.querySelector(
-    `.cart-icon[data-book-id="${book.id}"]`
-  );
+const popup = document.getElementById("BookPopup");
 
-  if (popupIcon) {
-    if (cart.items.has(String(book.id))) {
-      popupIcon.src = CHECK_ICON;
-      popupIcon.classList.add("in-cart");
-    } else {
-      popupIcon.src = CART_ICON;
-      popupIcon.classList.remove("in-cart");
-    }
-  }
+const popupIcon = popup.querySelector(
+  `.cart-icon[data-book-id="${id}"]`
+);
+
+if (popupIcon) {
+  const inCart = cart.items.has(id);
+
+  popupIcon.src = inCart ? CHECK_ICON : CART_ICON;
+  popupIcon.classList.toggle("in-cart", inCart);
+}
+
 
 }
 
