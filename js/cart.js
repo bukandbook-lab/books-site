@@ -4,14 +4,14 @@
 const cart = {
   items: new Map(),
   delivery: "email",
-  deliveryDetails: "",   // ✅ ADD THIS
+  deliveryDetails: "",
   agreed: false,
-  orderId: ""            // ✅ for Order ID
-   
+  orderId: ""
 };
 
 const SHIPPING_FEE = 10;
 const THUMB_DRIVE_FEE = 7;
+
 
 /* =====================================
    DEFINE FOR GOOGLE FORM INPUT
@@ -25,64 +25,37 @@ const FORM = {
 };
 
 /* =====================================
-   ADD TO CART (GRID + POPUP)
+   ADD TO CART (GRID + POPUP) 
 ===================================== */
 document.addEventListener("click", e => {
-  const icon = e.target.closest(".cart-icon[data-book-id]");
-  if (!icon) return;
+  const btn = e.target.closest(".cart-icon, .price-box");
+  if (!btn) return;
 
   e.preventDefault();
   e.stopPropagation();
 
-  addToCart(icon.dataset.bookId);
+  const bookId = btn.dataset.bookId;
+  if (!bookId) return;
+
+  addToCart(bookId);
   openCart();
 });
 
-document.addEventListener("click", e => {
-  const box = e.target.closest(".price-box[data-book-id]");
-  if (!box) return;
-
-  e.preventDefault();
-  e.stopPropagation();
-
-  const popup = box.closest(".popup");
-  if (popup) {
-    popup.style.display = "none";
-    popup.querySelector("iframe")?.remove();
-  }
-
-  addToCart(box.dataset.bookId);
-
-  // 🔑 allow DOM to settle before opening cart
-  requestAnimationFrame(() => {
-    openCart();
-  });
-});
-
-
-
+/* =====================================
+   ADD TO CART FUNCTION
+===================================== */
 function addToCart(bookId) {
-  if (!bookId) return;
-
-  // normalize to string
   const id = String(bookId);
-
-  // get book data
   const book = BOOK_REGISTRY[id];
-  if (!book) {
-    console.warn("Book not found in registry:", id);
-    return;
-  }
+  if (!book) return;
 
-    cart.items.set(id, {
-      id,
-      title: book.title,
-      price: Number(book.price.toFixed(2)),
-      setQtty: Number(book.SetQtty || 0)
+  cart.items.set(id, {
+    id,
+    title: book.title,
+    price: Number(book.price),      // 🔑 keep NUMBER
+    setQtty: Number(book.SetQtty || 0)
   });
-      
 
-  
   renderCart();
   syncCartIcons();
 }
@@ -91,55 +64,30 @@ function addToCart(bookId) {
    OPEN / CLOSE CART
 ===================================== */
 function openCart() {
-  const cartEl = document.getElementById("Cart");
-  if (!cartEl) return;
-
-  cartEl.classList.add("open");
-
-  console.log("Cart classes after open:", cartEl.className);
+  document.getElementById("Cart")?.classList.add("open");
 }
 
-
 function closeCart() {
-  const cartEl = document.getElementById("Cart");
-  if (!cartEl) return;
-
-  cartEl.classList.remove("open");
+  document.getElementById("Cart")?.classList.remove("open");
 }
 
 document.addEventListener("click", e => {
-  if (e.target.id === "continueShopping") {
-    document.getElementById("Cart")?.classList.remove("open");
-  }
+  if (e.target.id === "continueShopping") closeCart();
+  if (e.target.closest("#Cart .close-popup")) closeCart();
 });
 
 /* =====================================
    REMOVE ITEM (KEEP CART OPEN)
 ===================================== */
 document.addEventListener("click", e => {
-  const removeBtn = e.target.closest(".remove-item");
-  if (!removeBtn) return;
+  const btn = e.target.closest(".remove-item");
+  if (!btn) return;
 
-  e.preventDefault();
-   
- if (e.target.closest("#Cart")) {
-  e.stopPropagation(); // ✅ scoped
-}
-
-  cart.items.delete(removeBtn.dataset.bookId);
+  e.stopPropagation();
+  cart.items.delete(btn.dataset.bookId);
   renderCart();
   syncCartIcons();
 });
-/* =====================================
-   CLOSE CART WHEN X MARK IS CLICKED
-===================================== */
-document.addEventListener("click", e => {
-  if (e.target.closest("#Cart .close-popup")) {
-    document.getElementById("Cart")?.classList.remove("open");
-  }
-});
-
-
 
 /* =====================================
    DELIVERY CHANGE
@@ -164,20 +112,18 @@ document.addEventListener("change", e => {
 
 
 /* =====================================
-   PAY BUTTON VISUAL STATE ONLY
+   CLICK-TO-PAY BUTTON VISUAL STATE ONLY
 ===================================== */
 function updatePayButton() {
-  const payBtn = document.getElementById("clickToPay");
-  if (!payBtn) return;
+  const btn = document.getElementById("clickToPay");
+  if (!btn) return;
 
-  const canPay = cart.items.size > 0 && cart.agreed;
-
-  if (canPay) {
-    payBtn.classList.add("active");
-  } else {
-    payBtn.classList.remove("active");
-  }
+  btn.classList.toggle(
+    "active",
+    cart.items.size > 0 && cart.agreed
+  );
 }
+
 
 /* =====================================
    RENDER CART
@@ -574,16 +520,11 @@ function calculateTotals() {
   let booksSubtotal = 0;
 
   cart.items.forEach(item => {
-    booksSubtotal += item.price.toFixed(2);
+    booksSubtotal += item.price; // ✅ NUMBER
   });
 
-  let shippingFee = 0;
-  let thumbFee = 0;
-
-  if (cart.delivery === "courier") {
-    shippingFee = SHIPPING_FEE;
-    thumbFee = THUMB_DRIVE_FEE;
-  }
+  const shippingFee = cart.delivery === "courier" ? SHIPPING_FEE : 0;
+  const thumbFee = cart.delivery === "courier" ? THUMB_DRIVE_FEE : 0;
 
   return {
     booksSubtotal,
@@ -676,16 +617,12 @@ window.addEventListener("resize", updateTabArrows);
 ===================================== */
 function syncCartIcons() {
   document.querySelectorAll(".cart-icon[data-book-id]").forEach(icon => {
-    const bookId = icon.dataset.bookId;
-    if (cart.items.has(bookId)) {
-      icon.src = CHECK_ICON;
-      icon.classList.add("in-cart");
-    } else {
-      icon.src = CART_ICON;
-      icon.classList.remove("in-cart");
-    }
+    const id = icon.dataset.bookId;
+    icon.src = cart.items.has(id) ? CHECK_ICON : CART_ICON;
+    icon.classList.toggle("in-cart", cart.items.has(id));
   });
 }
+
 
 
 /* =====================================
