@@ -372,7 +372,7 @@ html, body {
 }
 
 .popup-content {
-    background: #fff;
+  background: #fff;
   width: 92%;
   max-width: 420px;
   padding: 14px;
@@ -559,8 +559,8 @@ html, body {
   position: absolute;
   right: 4px;
   bottom: 4px;
-  width: 75px;
-  height: 25px;
+  width: 90px;
+  height: 22px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
