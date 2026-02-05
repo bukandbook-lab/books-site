@@ -229,7 +229,7 @@ html, body {
 .image-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 0;  /* 🔑 controls space */
+  gap: 2px;  /* 🔑 controls space */
   padding: 0;
   margin: 2px;
 }
