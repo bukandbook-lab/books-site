@@ -37,7 +37,7 @@ html, body {
 #HeaderWithTab {
   position: sticky;
   top: 0;
-  background: #ffffff;
+  background: #ffecf2;
   z-index: 1000;
   padding: 6px;
   border-bottom: 2px solid #f0f0f0;
@@ -231,7 +231,7 @@ html, body {
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 0;  /* 🔑 controls space */
   padding: 0;
-  margin: 0;
+  margin: 2px;
 }
 
 /* BOOK CARD */
