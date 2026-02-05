@@ -70,12 +70,18 @@ window.BOOKS_READY = Promise.all(
           BOOK_REGISTRY[id] = {
             id,
             category,
-            categoryIndex, // ✅ HERE
+            categoryIndex, // 
             title: book.title || book["Book Title"] || "Untitled",
             img: book.image || book.Link || "",
             price: Number(book.price || book["Price"] || 0),
             SetQtty: book.qtty || book["No. of Books"] || 0,
+            SetTotal: Number( book["Set Total"] || 0),
             video: book["Youtube ID"] || null,
+            
+             Author: book["Author"] || "",
+             Status: book["Status"] || "",
+             MissingTitle: book["Missing Title"] || "",
+             Series: book["Series"] || "",
             
      // 🔑 FIXED TAG NORMALIZATION
 tags: typeof book["Tag"] === "string"
