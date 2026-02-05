@@ -42,9 +42,12 @@ function renderPopup(bookId) {
   currentBookId = id;
 
   const isSetBook = Number(book.SetQtty) > 1;
+  const isSetTotal = Number(book.SetTotal) > 1;
   const priceLabel = isSetBook ? "/set" : "/book";
   const setQtyHTML = isSetBook
-    ? `<div class="set-qty"><b>No. of books:</b> ${book.SetQtty} books / set</div>`
+    ? `<div class="set-qty"><b>No. of books:</b> ${book.SetQtty}/${book.SetTotal} books
+       <br/> <b>Status:</b>${book.Status} set
+       <br/> <b>Missing Title:</b>${book.MissingTitle} </div>`
     : "";
 
 
@@ -67,6 +70,11 @@ function renderPopup(bookId) {
       <div class="popup-nav right">›</div>
 
       <div class="book-title">${book.title}</div>
+          
+      ${book.Author ? `
+      <div><b>Author:</b> ${book.Author}</div>
+    ` : ""}
+    
 <div>
   <b>Category:</b>
   ${
@@ -85,6 +93,10 @@ function renderPopup(bookId) {
 
 
       ${setQtyHTML}
+
+      ${book.Series ? `
+      <div><b>Series:</b> ${book.Series}</div>
+    ` : ""}
 
       <div class="price-box"
         data-book-id="${id}"
