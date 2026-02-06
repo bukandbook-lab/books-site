@@ -259,8 +259,19 @@ html, body {
   height: 100%;
   object-fit: contain;          /* or "cover" (see below) */
   display: block;
+  position: relative;
   
 }
+
+.book-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px);
+  transform: scale(1.1); /* prevents edge blur gap */
+}
+
 /* ===============================
    SKELETON STYLES (GLOBAL CSS)
 ================================ */
