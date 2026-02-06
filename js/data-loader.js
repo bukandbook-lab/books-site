@@ -67,6 +67,16 @@ window.BOOKS_READY = Promise.all(
 
           ORDERED_BOOKS_BY_CATEGORY[category].push(id);
 
+           const rawVideo = book["Youtube ID"];
+
+const video =
+  rawVideo &&
+  rawVideo !== "#VALUE!" &&
+  rawVideo !== "N/A" 
+    ? rawVideo.trim()
+    : null;
+
+
           BOOK_REGISTRY[id] = {
             id,
             category,
@@ -76,7 +86,7 @@ window.BOOKS_READY = Promise.all(
             price: Number(book.price || book["Price"] || 0),
             SetQtty: book.qtty || book["No. of Books"] || 0,
             SetTotal: Number( book["Set Total"] || 0),
-            video: book["Youtube ID"] || null,
+            video,
             
              Author: book["Author"] || "",
              Status: book["Status"] || "",
