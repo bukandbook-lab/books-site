@@ -247,11 +247,13 @@ document.addEventListener("click", e => {
     const searchInput = document.getElementById("bookSearch");
     if (!searchInput) return;
 
-    searchInput.value = author;
-    searchInput.dispatchEvent(
-      new Event("input", { bubbles: true })
-    );
-  }, 250);
+searchInput.value = author;
+
+// 🔥 HARD trigger
+searchInput.focus();
+searchInput.dispatchEvent(new Event("input"));
+searchInput.dispatchEvent(new KeyboardEvent("keyup"));
+
 });
 
 /* =====================================
@@ -271,8 +273,10 @@ document.addEventListener("click", e => {
     if (!searchInput) return;
 
     searchInput.value = series;
-    searchInput.dispatchEvent(
-      new Event("input", { bubbles: true })
-    );
-  }, 250);
+
+// 🔥 HARD trigger
+searchInput.focus();
+searchInput.dispatchEvent(new Event("input"));
+searchInput.dispatchEvent(new KeyboardEvent("keyup"));
+
 });
