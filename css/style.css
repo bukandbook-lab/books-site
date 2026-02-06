@@ -429,9 +429,7 @@ html, body {
   max-width: 95vw;
   position: relative;
   box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+
 }
 
 .popup-box img {
