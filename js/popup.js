@@ -109,7 +109,7 @@ ${book.Author ? `
       `)
       .join(", ")
   }
-</div>
+
 
 
       ${setQtyHTML}
