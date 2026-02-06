@@ -238,18 +238,19 @@ document.addEventListener("click", e => {
   const author = authorEl.dataset.author;
   if (!author) return;
 
-  // 🔥 close popup first
   closeBookPopup();
 
-  // 🔍 trigger search
   setTimeout(() => {
-    const searchInput = document.getElementById("searchInput");
+    const searchInput = document.getElementById("bookSearch");
     if (!searchInput) return;
 
     searchInput.value = author;
-    searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+    searchInput.dispatchEvent(
+      new Event("input", { bubbles: true })
+    );
   }, 250);
 });
+
 /* =====================================
    CLICK HANDLER FOR SERIES IN POPUP
 ===================================== */
@@ -260,12 +261,10 @@ document.addEventListener("click", e => {
   const series = seriesEl.dataset.series;
   if (!series) return;
 
-  // 🔥 close popup first
   closeBookPopup();
 
-  // 🔍 trigger search
   setTimeout(() => {
-    const searchInput = document.getElementById("searchInput");
+    const searchInput = document.getElementById("bookSearch");
     if (!searchInput) return;
 
     searchInput.value = series;
@@ -274,4 +273,3 @@ document.addEventListener("click", e => {
     );
   }, 250);
 });
-
