@@ -228,3 +228,50 @@ document.addEventListener("click", e => {
     btn?.click();
   }, 250);
 });
+/* =====================================
+   CLICK HANDLER FOR AUTHOR IN POPUP
+===================================== */
+document.addEventListener("click", e => {
+  const authorEl = e.target.closest(".popup-author");
+  if (!authorEl) return;
+
+  const author = authorEl.dataset.author;
+  if (!author) return;
+
+  // 🔥 close popup first
+  closeBookPopup();
+
+  // 🔍 trigger search
+  setTimeout(() => {
+    const searchInput = document.getElementById("searchInput");
+    if (!searchInput) return;
+
+    searchInput.value = author;
+    searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+  }, 250);
+});
+/* =====================================
+   CLICK HANDLER FOR SERIES IN POPUP
+===================================== */
+document.addEventListener("click", e => {
+  const seriesEl = e.target.closest(".popup-series");
+  if (!seriesEl) return;
+
+  const series = seriesEl.dataset.series;
+  if (!series) return;
+
+  // 🔥 close popup first
+  closeBookPopup();
+
+  // 🔍 trigger search
+  setTimeout(() => {
+    const searchInput = document.getElementById("searchInput");
+    if (!searchInput) return;
+
+    searchInput.value = series;
+    searchInput.dispatchEvent(
+      new Event("input", { bubbles: true })
+    );
+  }, 250);
+});
+
