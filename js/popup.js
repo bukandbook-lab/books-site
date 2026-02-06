@@ -127,7 +127,8 @@ ${book.Series ? `
 ` : ""}
 
 
-      <div class="price-box"
+
+   <br/><div class="price-box"
         data-book-id="${id}"
         data-title="${book.title}"
         data-price="${book.price.toFixed(2)}"
