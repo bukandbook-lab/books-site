@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 
   const searchInput = document.getElementById("bookSearch");
+console.log("SEARCH INPUT FOUND?", searchInput);
+
   if (!searchInput) return;
 
   let lastTab = "BeginningReader"; // 🧠 default fallback
