@@ -51,7 +51,7 @@ function renderPopup(bookId) {
 
    let setQtyHTML = "";
 
-if (hasSetQtty) {
+if (isSetBook) {
   setQtyHTML = `
     <div class="set-qty">
       <b>No. of Books:</b>
