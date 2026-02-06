@@ -41,14 +41,27 @@ function renderPopup(bookId) {
 
   currentBookId = id;
 
-  const isSetBook = Number(book.SetQtty) > 1;
-  const isSetTotal = Number(book.SetTotal) > 1;
+   const isSetBook = Number(book.SetQtty) > 1;
+   const hasSetTotal = Number(book.SetTotal) > 0;
+   const hasStatus = book.Status && book.Status.trim() !== "";
+   const hasMissingTitle =
+      book.MissingTitle && book.MissingTitle.trim() !== "";
+
   const priceLabel = isSetBook ? "/set" : "/book";
-  const setQtyHTML = isSetBook
-    ? `<div class="set-qty"><b>No. of books:</b> ${book.SetQtty} out of ${book.SetTotal} books
-       <br/> <b>Status: </b>${book.Status} set
-       <br/> <b>Missing Title:</b>${book.MissingTitle} </div>`
-    : "";
+
+   let setQtyHTML = "";
+
+if (hasSetQtty) {
+  setQtyHTML = `
+    <div class="set-qty">
+      <b>No. of Books:</b>
+      ${book.SetQtty}${hasSetTotal ? ` / ${book.SetTotal}` : ""}
+      ${hasStatus ? `<br><b>Status:</b> ${book.Status}` : ""}
+      ${hasMissingTitle ? `<br><b>Missing Title:</b> ${book.MissingTitle}` : ""}
+    </div>
+  `;
+}
+
 
 
   document.getElementById("BookPopupContent").innerHTML = `
