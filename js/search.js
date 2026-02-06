@@ -98,7 +98,10 @@ const searchableText = [
 
 const words = normalizeWords(searchableText);
 
-if (!words.some(w => w.includes(keyword))) return;
+// 🔥 every keyword word must match somewhere
+if (!keywordWords.every(kw =>
+  words.some(w => w.includes(kw))
+)) return;
 
 
 
