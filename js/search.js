@@ -89,22 +89,19 @@ console.log("SEARCH INPUT FOUND?", searchInput);
     const grid = getSearchGrid();
     grid.innerHTML = "";
 
-    Object.values(BOOK_REGISTRY).forEach(book => {
-const searchableText = [
-  book.title,
-  book.Author,
-  book.Series
-].filter(Boolean).join(" ");
+Object.values(BOOK_REGISTRY).forEach(book => {
+  const searchableText = [
+    book.title,
+    book.Author,
+    book.Series
+  ].filter(Boolean).join(" ");
 
+  const words = normalizeWords(searchableText);
+  const keywordWords = normalizeWords(keyword);
 
-const keywordWords = normalizeWords(searchableText);
-
-// 🔥 every keyword word must match somewhere
-if (!keywordWords.every(kw =>
-  words.some(w => w.includes(kw))
-)) return;
-
-
+  if (!keywordWords.every(kw =>
+    words.some(w => w.includes(kw))
+  )) return;
 
 
       const div = document.createElement("div");
