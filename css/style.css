@@ -378,7 +378,7 @@ html, body {
   padding: 14px;
   border-radius: 12px;
   position: relative;
-  max-height: 90vh;
+  max-height: 100vh;
   overflow-y: auto;
   justify-content: center;
   align-items: center;
@@ -434,7 +434,6 @@ html, body {
 
 .popup-box img {
   max-width: 100%;
-  max-height: 80vh;
   display: block;
   margin: auto;
 }
