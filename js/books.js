@@ -237,7 +237,6 @@ document.addEventListener("click", e => {
 
   console.log("AUTHOR CLICKED", authorEl.dataset.author);
 
-
   const author = authorEl.dataset.author;
   if (!author) return;
 
@@ -247,14 +246,16 @@ document.addEventListener("click", e => {
     const searchInput = document.getElementById("bookSearch");
     if (!searchInput) return;
 
-searchInput.value = author;
+    searchInput.value = author;
 
-// 🔥 HARD trigger
-searchInput.focus();
-searchInput.dispatchEvent(new Event("input"));
-searchInput.dispatchEvent(new KeyboardEvent("keyup"));
+    searchInput.focus();
+    searchInput.dispatchEvent(new Event("input"));
+    searchInput.dispatchEvent(new KeyboardEvent("keyup"));
+
+  }, 250);
 
 });
+
 
 /* =====================================
    CLICK HANDLER FOR SERIES IN POPUP
@@ -274,9 +275,11 @@ document.addEventListener("click", e => {
 
     searchInput.value = series;
 
-// 🔥 HARD trigger
-searchInput.focus();
-searchInput.dispatchEvent(new Event("input"));
-searchInput.dispatchEvent(new KeyboardEvent("keyup"));
+    searchInput.focus();
+    searchInput.dispatchEvent(new Event("input"));
+    searchInput.dispatchEvent(new KeyboardEvent("keyup"));
+
+  }, 250);
 
 });
+
