@@ -90,12 +90,16 @@ const priceLabel = isSetBook ? "/set" : "/book";
 item.innerHTML = `
   <div class="skeleton"></div>
 
-  <img
-    src="${normalized.img}"
-    class="grid-book-img popup-trigger"
-    loading="lazy"
-    data-book-id="${normalized.id}"
-  >
+<div class="book-bg"
+     style="background-image:url('${normalized.img}')"></div>
+
+<img
+  src="${normalized.img}"
+  class="grid-book-img popup-trigger"
+  loading="lazy"
+  data-book-id="${normalized.id}"
+>
+
 
   <!-- 🔥 HOVER PRICE BOX -->
   <div class="price-box"
