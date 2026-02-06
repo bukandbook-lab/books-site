@@ -235,6 +235,9 @@ document.addEventListener("click", e => {
   const authorEl = e.target.closest(".popup-author");
   if (!authorEl) return;
 
+  console.log("AUTHOR CLICKED", authorEl.dataset.author);
+
+
   const author = authorEl.dataset.author;
   if (!author) return;
 
