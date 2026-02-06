@@ -329,7 +329,6 @@ html, body {
 
 .popup-img {
   width: 100%;
-  height: auto;
   max-height: 45vh;
   object-fit: contain;
 }
@@ -379,7 +378,7 @@ html, body {
   padding: 14px;
   border-radius: 12px;
   position: relative;
-  max-height: 100vh;
+  max-height: 90vh;
   overflow-y: auto;
   justify-content: center;
   align-items: center;
@@ -428,10 +427,11 @@ html, body {
   border-radius: 16px;
   padding: 20px;
   max-width: 95vw;
-  max-height: 95vh;
   position: relative;
   box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .popup-box img {
