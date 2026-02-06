@@ -88,8 +88,18 @@ document.addEventListener("DOMContentLoaded", () => {
     grid.innerHTML = "";
 
     Object.values(BOOK_REGISTRY).forEach(book => {
-const words = normalizeWords(book.title);
+const fields = [
+  book.title,
+  book.Author,
+  book.Series,
+  book.category,
+  ...(Array.isArray(book.tags) ? book.tags : [])
+];
+
+const words = fields.flatMap(f => normalizeWords(f));
+
 if (!words.some(w => w.includes(keyword))) return;
+
 
 
       const div = document.createElement("div");
