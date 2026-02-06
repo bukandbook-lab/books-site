@@ -55,7 +55,7 @@ if (isSetBook) {
   setQtyHTML = `
     <div class="set-qty">
       <b>No. of Books:</b>
-      ${book.SetQtty} books/set ${hasSetTotal ? ` out of ${book.SetTotal} books` : ""}
+      ${book.SetQtty}${hasSetTotal ? ` out of ${book.SetTotal}` : ""} books per set
       ${hasStatus ? `<br><b>Status:</b> ${book.Status} set` : ""}
       ${hasMissingTitle ? `<br><b>Missing Title:</b> ${book.MissingTitle}` : ""}
     </div>
