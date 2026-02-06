@@ -84,11 +84,18 @@ if (isSetBook) {
 
       <div class="book-title">${book.title}</div>
           
-      ${book.Author ? `
-      <div><b>Author:</b> ${book.Author}</div>
-    ` : ""}
-    
-<div>
+${book.Author ? `
+  <div>
+    <b>Author:</b>
+    <span
+      class="popup-author"
+      data-author="${book.Author}"
+    >
+      ${book.Author}
+    </span>
+  </div>
+` : ""}
+
   <b>Category:</b>
   ${
     [book.category, ...(book.tags || [])]
@@ -107,9 +114,18 @@ if (isSetBook) {
 
       ${setQtyHTML}
 
-      ${book.Series ? `
-      <div><b>Series:</b> ${book.Series}</div>
-    ` : ""}
+${book.Series ? `
+  <div>
+    <b>Series:</b>
+    <span
+      class="popup-series"
+      data-series="${book.Series}"
+    >
+      ${book.Series}
+    </span>
+  </div>
+` : ""}
+
 
       <div class="price-box"
         data-book-id="${id}"
