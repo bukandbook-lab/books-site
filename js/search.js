@@ -88,8 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
     grid.innerHTML = "";
 
     Object.values(BOOK_REGISTRY).forEach(book => {
-const words = normalizeWords(getSearchText(book));
+const searchableText = [
+  book.title,
+  book.Author,
+  book.Series
+].filter(Boolean).join(" ");
+
+const words = normalizeWords(searchableText);
+
 if (!words.some(w => w.includes(keyword))) return;
+
 
 
 
@@ -139,12 +147,4 @@ if (!words.some(w => w.includes(keyword))) return;
   });
 });
 
-function getSearchText(book) {
-  return [
-  book.title,
-  book.Author,
-  book.Series,
-  book.category,
-  ...(Array.isArray(book.tags) ? book.tags : [])
-  ].filter(Boolean).join(" ");
-}
+
