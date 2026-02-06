@@ -96,7 +96,8 @@ const searchableText = [
   book.Series
 ].filter(Boolean).join(" ");
 
-const words = normalizeWords(searchableText);
+
+const keywordWords = normalizeWords(searchableText);
 
 // 🔥 every keyword word must match somewhere
 if (!keywordWords.every(kw =>
