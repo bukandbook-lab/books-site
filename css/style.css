@@ -440,17 +440,6 @@ html, body {
   margin: auto;
 }
 
-.popup-category {
-  cursor: pointer;
-  transition: font-weight 0.15s ease;
-}
-
-.popup-category:hover {
-  font-weight: 700;
-  text-decoration: underline;
-  color: #0000FF;
-}
-
 .book-title {
   font-weight: 900;
   font-size: 16px;
@@ -544,6 +533,45 @@ html, body {
 .popup-img {
   transition: transform 0.25s ease;
 }
+
+/* =========================
+   AUTHOR,CATEGORY, AND SERIES IN POPUP
+========================= */
+
+.popup-category {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #0000FF;
+  transition: font-weight 0.15s ease;
+}
+
+.popup-category:hover {
+  font-weight: 700;
+
+}
+
+.popup-author {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #0000FF;
+  transition: font-weight 0.15s ease;
+}
+
+.popup-author:hover {
+  font-weight: 700;
+}
+
+.popup-series {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #0000FF;
+  transition: font-weight 0.15s ease;
+}
+
+.popup-series:hover {
+   font-weight: 700;
+}
+
 
 /* =========================
    CART-ICON
