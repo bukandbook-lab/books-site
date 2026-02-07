@@ -88,8 +88,8 @@ function renderMultipleForm(container) {
     <input id="reqAuthor" placeholder="Author (optional)">
 
     <div class="price-box request-add" data-price="1">
-      RM1 / book 🛒
-    </div>
+      RM1 / book <img data-book-id="${id}" class="cart-icon" src="${CART_ICON}" width="22">
+      </div>
   `;
 
   updateMultiInputs(1);
