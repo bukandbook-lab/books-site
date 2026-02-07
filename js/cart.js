@@ -28,20 +28,17 @@ const FORM = {
    ADD TO CART (GRID + POPUP) 
 ===================================== */
 document.addEventListener("click", e => {
-  const icon = e.target.closest(".cart-icon");
-  if (!icon) return;
+  const priceBox = e.target.closest(".price-box");
+  if (!priceBox) return;
 
   e.preventDefault();
   e.stopPropagation();
 
-
-  const priceBox = icon.closest(".price-box");
   const bookId = priceBox.dataset.bookId;
 
   addToCart(bookId, priceBox);
 });
-
-/* =====================================
+===================================
    ADD TO CART FUNCTION
 ===================================== */
 function addToCart(bookId, sourceEl = null) {
@@ -49,14 +46,22 @@ function addToCart(bookId, sourceEl = null) {
   let book = BOOK_REGISTRY[id];
 
   // 🔥 CUSTOM REQUEST BOOK
-  if (!book && sourceEl) {
-    book = {
-      id,
-      title: sourceEl.dataset.title || "Untitled request",
-      price: Number(sourceEl.dataset.price || 1),
-      SetQtty: 1
-    };
+
+if (!book && sourceEl) {
+  const title = sourceEl.dataset.title?.trim();
+
+  if (!title) {
+    alert("Please enter a book title first 😊");
+    return;
   }
+
+  book = {
+    id,
+    title,
+    price: Number(sourceEl.dataset.price || 1),
+    SetQtty: 1
+  };
+}
 
   if (!book) return;
 
