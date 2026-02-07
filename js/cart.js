@@ -38,7 +38,7 @@ document.addEventListener("click", e => {
 
   addToCart(bookId, priceBox);
 });
-===================================
+/* ===================================
    ADD TO CART FUNCTION
 ===================================== */
 function addToCart(bookId, sourceEl = null) {
