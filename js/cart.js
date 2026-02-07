@@ -28,37 +28,49 @@ const FORM = {
    ADD TO CART (GRID + POPUP) 
 ===================================== */
 document.addEventListener("click", e => {
-  const btn = e.target.closest(".cart-icon, .price-box");
-  if (!btn) return;
+  const icon = e.target.closest(".cart-icon");
+  if (!icon) return;
 
   e.preventDefault();
   e.stopPropagation();
 
-  const bookId = btn.dataset.bookId;
-  if (!bookId) return;
 
-  addToCart(bookId);
-  openCart();
+  const priceBox = icon.closest(".price-box");
+  const bookId = priceBox.dataset.bookId;
+
+  addToCart(bookId, priceBox);
 });
 
 /* =====================================
    ADD TO CART FUNCTION
 ===================================== */
-function addToCart(bookId) {
+function addToCart(bookId, sourceEl = null) {
   const id = String(bookId);
-  const book = BOOK_REGISTRY[id];
+  let book = BOOK_REGISTRY[id];
+
+  // 🔥 CUSTOM REQUEST BOOK
+  if (!book && sourceEl) {
+    book = {
+      id,
+      title: sourceEl.dataset.title || "Untitled request",
+      price: Number(sourceEl.dataset.price || 1),
+      SetQtty: 1
+    };
+  }
+
   if (!book) return;
 
   cart.items.set(id, {
-    id,
+    id: book.id,
     title: book.title,
-    price: Number(book.price),      // 🔑 keep NUMBER
-    setQtty: Number(book.SetQtty || 0)
+    price: Number(book.price),
+    setQtty: Number(book.SetQtty || 1)
   });
 
   renderCart();
   syncCartIcons();
 }
+
 
 /* =====================================
    OPEN / CLOSE CART
