@@ -93,3 +93,13 @@ function findExistingBook(title, author) {
   });
 }
 
+/* =====================================
+   Generate Request Book ID
+===================================== */
+let requestCounter = 1;
+
+function generateRequestId() {
+  return "R" + String(requestCounter++).padStart(3, "0");
+}
+
+
