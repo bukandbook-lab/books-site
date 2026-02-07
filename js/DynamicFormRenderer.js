@@ -68,20 +68,35 @@ function renderBookTitleForm(container) {
 ================================ */
 function updateBookInputs(count) {
   const wrap = document.getElementById("bookTitleInputs");
+  if (!wrap) return;
+
   wrap.innerHTML = "";
 
   for (let i = 1; i <= count; i++) {
     const id = `R${String(i).padStart(3, "0")}`;
 
-    wrap.innerHTML += `
+    const row = document.createElement("div");
+    row.className = "req-book-row";
+    row.dataset.bookId = id;
+
+    row.innerHTML = `
       <input
         class="req-book-title"
         data-book-id="${id}"
         placeholder="Book title (${id})"
       >
+
+      <input
+        class="req-book-author"
+        data-book-id="${id}"
+        placeholder="Author (optional)"
+      >
     `;
+
+    wrap.appendChild(row);
   }
 }
+
 
 
 
