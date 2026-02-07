@@ -81,9 +81,10 @@ Hi there! Kids’ Books Catalogue is here to help you to find suitable books for
 1.	The small payment is not for the e- books but for the cataloging and delivery service we bring to you. The service is established so that parents can cultivate reading habit for kids at low cost. Please support our mission.<br/><br/>
 2.	No physical book and ONLY digital copy will be delivered. <br/><br/>
 3.	Only proceed to ‘Click to Pay’ if you don’t mind. <br/> <br/>
-4.	Digital copy might be in .pdf, .epub or other file type that can be opened with apps reader. <br/><br/>
-5.	You might need to install apps reader first. Click Apps Reader button to find the recommended reader.<br/><br/>
-	<div id="EPUBReader"><br/><br/>
+4.	Digital copy might be in .pdf, .epub or other file type that can be opened with E-book Reader apps. <br/><br/>
+5.	You might need to install Apps Reader first. Click Apps Reader button to find the recommended reader.<button id="toggleEbookReaderBtn">E-book Reader</button><br/>
+	
+	<div id="EbookReader" style="display:none; margin-top:10px;"><br/><br/>
 If the file is in .epub, .azw3, .mobi etc., please download EPUB reader apps to be able to open the file. Below are several EPUB readers recommended. Please click the image to download the apps or software :- <br/><br/>
 <table><tr>
 	<td><a href="https://calibre-ebook.com/download" target="_blank"><img loading="lazy" class="epubreadericon" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEix05oSmIzIQV7JM-js5uXat2ogmuQBlGi5B-Q3EJ0RyIZvj9jlaa62swlX1biscWvZj8oZmIaIt06olkirlU0SLlqhyphenhyphensmo6dr0BVBq44Gu_LZr0Mi0DQXBSnpLVfwVwRbA2stHJNbAQJnqWsSDLH-lnL6MD_LwDX-PF8nyKTnBULALiqBH9ztCiAYDlcvr/s320/Calibre_logo_2.png"/></a></td>
@@ -99,7 +100,8 @@ If the file is in .epub, .azw3, .mobi etc., please download EPUB reader apps to 
 <table><tr>
 	<td><a href="https://epub-reader.online/" target="_blank"><img loading="lazy" class="epubreadericon" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgGeyYm2um3IYpIphKjGUP1LCUrBkfvnI6p40ikjmJFag6WHVTrUCYpDy8Qj0fS3w7OqbF0ViFOglRjsjC87TMdiHNe2eR31xvVoWrxR1y_cIbS2XeuPs89vtqwlB-2y67zInJC2g3VPu1LXt9f_tvR3BGLcu7MCx9taRXqgxEYmOiJpezyr1C-bDKYNAmJ/s320/icon-512.png"/></a></td>
 	<td><a href="https://www.neat-reader.com/webapp#/" target="_blank"><img loading="lazy" class="epubreadericon" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh_Y_N67uNk1zEpma2dsE1TjpuVskMLPHkwxsH6hprHnMOlycOJBA6mp44CzRrsZz74F-QVtD4x5Hy61u8qcWVk6GguirOSx0xZAh_WTvBwAt3r4byDmJvET8R0fzmugjuAmvypQim2tjWdZzZ2ZMM3Da7G7dxIN80qwUI3HY4WEHWvwAZeo-A1sURysbqR/s320/iconneat.png"/></a></td>
-</tr></table></div>
+</tr></table></div><br/>
+	
 6.	There is no guarantee the condition of the e-books is perfect. Some e-books might look greyish/ shadowish due to poor lighting or yellowish due to old condition. Some might have minor tear, scribble, stain, brown spots, wormholes. While some .epub might have slight misalignment.Some might don't have cover. But all e-books are readable. <br/><br/>
 7.	Book image and video doesn't reflect the real condition or content of the books but to give you the oversight of the book.<br/><br/>
 8.  Order will ONLY be processed with payment proof and complete delivery details.<br/><br/>
@@ -202,6 +204,24 @@ If the file is in .epub, .azw3, .mobi etc., please download EPUB reader apps to 
 <script src="js/search.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/popup.js"></script>
+
+<!-- FOR EBOOK READER BUTTON -->
+	<script>
+  const btn = document.getElementById("toggleEbookReaderBtn");
+  const content = document.getElementById("EbookReader");
+
+  btn.addEventListener("click", () => {
+    if (content.style.display === "none") {
+      content.style.display = "block";
+      btn.textContent = "Hide";
+    } else {
+      content.style.display = "none";
+      btn.textContent = "Show";
+    }
+  });
+</script>
+
+<!-- FOR SEARCH -->	
 <script>
   const searchInput = document.getElementById("bookSearch");
   const clearBtn = document.getElementById("clearSearch");
@@ -219,6 +239,7 @@ If the file is in .epub, .azw3, .mobi etc., please download EPUB reader apps to 
   }
 </script>
 
+<!-- FOR SKELETON -->
 <script>
 document.addEventListener("load", e => {
   const img = e.target;
