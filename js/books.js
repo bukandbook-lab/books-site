@@ -286,4 +286,17 @@ document.addEventListener("click", e => {
   }, 250);
 
 });
+/* =====================================
+   Price-Box Click Dispatcher
+===================================== */
+document.addEventListener("click", e => {
+  const box = e.target.closest(".price-box");
+  if (!box) return;
+
+  const mode = box.dataset.mode;
+
+  if (mode === "single") handleSingleRequest();
+  if (mode === "multiple") handleMultipleRequest();
+  if (mode === "series") handleSeriesRequest();
+});
 
