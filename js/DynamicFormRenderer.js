@@ -47,12 +47,6 @@ function renderBookTitleForm(container) {
 
     <div id="bookTitleInputs"></div>
 
-    <input id="bookAuthor" placeholder="Author (optional)">
-
-    <div class="price-box request-add" data-price="1">
-      RM1 / book
-      <img src="${CART_ICON}" class="cart-icon">
-    </div>
   `;
 
   updateBookInputs(1);
@@ -91,6 +85,11 @@ function updateBookInputs(count) {
         data-book-id="${id}"
         placeholder="Author (optional)"
       >
+      
+    <div class="price-box request-add" data-book-id="${id}" data-price="1">
+      RM1 / book
+      <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
+    </div>
     `;
 
     wrap.appendChild(row);
