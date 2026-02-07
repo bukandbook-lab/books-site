@@ -1,234 +1,167 @@
 /* ==============================
-   Dynamic Form Renderer
+   DynamicFormRenderer.js — foundation
 ================================ */
-function renderRequestForm(type) {
-  const box = document.getElementById("requestForm");
-  if (!box) return;
 
-  if (type === "single") {
-    box.innerHTML = `
-      <input id="reqTitle" placeholder="Book title">
-      <input id="reqAuthor" placeholder="Author (optional)">
-
-      <div class="price-box" data-mode="single">
-        RM1 / book
-        <img class="cart-icon">
-      </div>
-    `;
-  }
-
-  if (type === "multiple") {
-    box.innerHTML = `
-      <input type="number" id="reqCount" min="1" value="1">
-      <div id="multiTitles"></div>
-      <input id="reqAuthor" placeholder="Author (optional)">
-
-      <div class="price-box" data-mode="multiple">
-        RM1 / book
-        <img class="cart-icon">
-      </div>
-    `;
-    updateMultiInputs(1);
-  }
-
-  if (type === "series") {
-    box.innerHTML = `
-      <input id="reqSeries" placeholder="Series name">
-      <input id="reqAuthor" placeholder="Author (optional)">
-
-      <div class="price-box" data-mode="series">
-        RM4 / set
-        <img class="cart-icon">
-      </div>
-    `;
-  }
-}
+document.addEventListener("DOMContentLoaded", () => {
+  initRequestBook();
+});
 
 /* ==============================
-   Radio handler:
+   Global state VERY IMPORTANT
 ================================ */
-document.querySelectorAll("input[name='requestType']")
-  .forEach(r => {
-    r.addEventListener("change", e => {
+let requestCounter = 1; // R001, R002...
+
+/* ==============================
+   Init + radio switching
+================================ */
+function initRequestBook() {
+  const radios = document.querySelectorAll("input[name='requestType']");
+  radios.forEach(radio => {
+    radio.addEventListener("change", e => {
       renderRequestForm(e.target.value);
     });
   });
 
-renderRequestForm("single");
+  renderRequestForm("book"); // default
+}
 
 /* ==============================
-   STEP 3: Multiple Titles Input Generator
+   Form router
 ================================ */
-function updateMultiInputs(count) {
-  const box = document.getElementById("multiTitles");
-  box.innerHTML = "";
+function renderRequestForm(type) {
+  const box = document.getElementById("requestFormContainer");
+  if (!box) return;
+
+  if (type === "book") renderBookTitleForm(box);
+  if (type === "series") renderSeriesForm(box);
+}
+/* ==============================
+   BOOK TITLE FORM
+================================ */
+function renderBookTitleForm(container) {
+  container.innerHTML = `
+    <div class="request-row">
+      <label>Number of books</label>
+      <input type="number" id="bookCount" min="1" value="1">
+    </div>
+
+    <div id="bookTitleInputs"></div>
+
+    <input id="bookAuthor" placeholder="Author (optional)">
+
+    <div class="price-box request-add" data-price="1">
+      RM1 / book
+      <img src="${CART_ICON}" class="cart-icon">
+    </div>
+  `;
+
+  updateBookInputs(1);
+
+  document.getElementById("bookCount")
+    .addEventListener("input", e => {
+      updateBookInputs(+e.target.value);
+    });
+}
+
+/* ==============================
+   Dynamic input + BookID logic THIS IS THE HEART
+================================ */
+function updateBookInputs(count) {
+  const wrap = document.getElementById("bookTitleInputs");
+  wrap.innerHTML = "";
 
   for (let i = 0; i < count; i++) {
-    box.innerHTML += `
-      <input class="multi-title" placeholder="Book title ${i + 1}">
+    const id = generateRequestId();
+
+    wrap.innerHTML += `
+      <input
+        class="req-book-title"
+        data-book-id="${id}"
+        placeholder="Book title (${id})"
+      >
     `;
   }
 }
 
-document.addEventListener("input", e => {
-  if (e.target.id === "reqCount") {
-    updateMultiInputs(Number(e.target.value));
-  }
-});
-
-
 /* ==============================
-   Form renderers - Multiple titles
+   BookID generator
 ================================ */
-function renderMultipleForm(container) {
+function generateRequestId() {
+  const id = `R${String(requestCounter).padStart(3, "0")}`;
+  requestCounter++;
+  return id;
+}
+/* ==============================
+   SERIES FORM
+================================ */
+function renderSeriesForm(container) {
   container.innerHTML = `
-    <input type="number" id="multiCount" min="1" value="1">
-    <div id="multiInputs"></div>
+    <input
+      id="seriesTitle"
+      data-book-id="${generateRequestId()}"
+      placeholder="Series title"
+    >
 
-    <input id="reqAuthor" placeholder="Author (optional)">
+    <input id="seriesAuthor" placeholder="Author (optional)">
 
-    <div class="price-box request-add" data-price="1">
-      RM1 / book <img data-book-id="${id}" class="cart-icon" src="${CART_ICON}" width="22">
-      </div>
+    <div class="price-box request-add" data-price="4">
+      RM4 / set
+      <img src="${CART_ICON}" class="cart-icon">
+    </div>
   `;
-
-  updateMultiInputs(1);
-
-  document.getElementById("multiCount")
-    .addEventListener("input", e => {
-      updateMultiInputs(+e.target.value);
-    });
-}
-
-function updateMultiInputs(count) {
-  const box = document.getElementById("multiInputs");
-  box.innerHTML = "";
-  for (let i = 0; i < count; i++) {
-    box.innerHTML += `<input placeholder="Book title ${i + 1}">`;
-  }
 }
 
 /* ==============================
-  STEP 4: SEARCH OR CREATE LOGIC (KEY PART)
-================================ */
-function findExistingBook(title, author) {
-  const key = title.toLowerCase();
-
-  return Object.values(BOOK_REGISTRY).find(b => {
-    if (!b.title) return false;
-    if (!b.title.toLowerCase().includes(key)) return false;
-
-    if (author) {
-      return (b.Author || "").toLowerCase().includes(author.toLowerCase());
-    }
-    return true;
-  });
-}
-
-/* ==============================
-   STEP 5: Generate Request Book ID
-================================ */
-
-function handleRequestAdd(price) {
-  const type = document.querySelector("input[name='requestType']:checked").value;
-
-  if (type === "single") {
-    processSingle(price);
-  }
-  if (type === "multiple") {
-    processMultiple(price);
-  }
-  if (type === "series") {
-    processSeries(price);
-  }
-}
-/* ==============================
-   STEP 6: Add Request Books to Cart
-================================ */
-function handleSingleRequest() {
-  const title = document.getElementById("reqTitle").value.trim();
-  const author = document.getElementById("reqAuthor").value.trim();
-
-  if (!title) return alert("Please enter a title");
-
-  const found = findExistingBook(title, author);
-
-  if (found) {
-    openSearchResult(found.title);
-    return;
-  }
-
-  const id = generateRequestId();
-
-  const virtualBook = {
-    id,
-    title,
-    price: 1,
-    SetQtty: 1,
-    isRequest: true
-  };
-
-  cart.items.set(id, virtualBook);
-  openCart();
-}
-function handleMultipleRequest() {
-  const titles = [...document.querySelectorAll(".multi-title")]
-    .map(i => i.value.trim())
-    .filter(Boolean);
-
-  titles.forEach(title => {
-    const found = findExistingBook(title);
-    if (found) {
-      openSearchResult(found.title);
-      return;
-    }
-
-    const id = generateRequestId();
-    cart.items.set(id, {
-      id,
-      title,
-      price: 1,
-      SetQtty: 1,
-      isRequest: true
-    });
-  });
-
-  openCart();
-}
-function handleSeriesRequest() {
-  const series = document.getElementById("reqSeries").value.trim();
-  const author = document.getElementById("reqAuthor").value.trim();
-
-  if (!series) return alert("Please enter series");
-
-  const found = findExistingBook(series, author);
-  if (found) {
-    openSearchResult(found.Series || found.title);
-    return;
-  }
-
-  const id = generateRequestId();
-  cart.items.set(id, {
-    id,
-    title: series + " (Series Request)",
-    price: 4,
-    SetQtty: 1,
-    isRequest: true
-  });
-
-  openCart();
-}
-
-/* ==============================
-   Price-Box Click Dispatcher
+   Inject data into price-box / cart-icon
 ================================ */
 document.addEventListener("click", e => {
-  const box = e.target.closest(".price-box");
-  if (!box) return;
+  const btn = e.target.closest(".request-add");
+  if (!btn) return;
 
-  const mode = box.dataset.mode;
+  const type = document.querySelector("input[name='requestType']:checked").value;
+  const price = Number(btn.dataset.price);
 
-  if (mode === "single") handleSingleRequest();
-  if (mode === "multiple") handleMultipleRequest();
-  if (mode === "series") handleSeriesRequest();
+  if (type === "book") collectBookTitleData(price);
+  if (type === "series") collectSeriesData(price);
 });
+
+/* ==============================
+   Collect Book Title data
+================================ */
+function collectBookTitleData(price) {
+  const titles = document.querySelectorAll(".req-book-title");
+  const author = document.getElementById("bookAuthor").value.trim();
+
+  const payload = [];
+
+  titles.forEach(input => {
+    if (!input.value.trim()) return;
+
+    payload.push({
+      bookId: input.dataset.bookId,
+      title: input.value.trim(),
+      author,
+      price
+    });
+  });
+
+  console.log("READY FOR CART:", payload);
+}
+
+/* ==============================
+   Collect Book Title data
+================================ */
+
+function collectSeriesData(price) {
+  const input = document.getElementById("seriesTitle");
+  if (!input.value.trim()) return;
+
+  const payload = {
+    bookId: input.dataset.bookId,
+    title: input.value.trim(),
+    author: document.getElementById("seriesAuthor").value.trim(),
+    price
+  };
+
+  console.log("READY FOR CART:", payload);
+}
