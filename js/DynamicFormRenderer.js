@@ -41,3 +41,17 @@ function renderRequestForm(type) {
     `;
   }
 }
+
+/* =====================================
+   RADIO HANDLER
+===================================== */
+document.querySelectorAll("input[name='requestType']")
+  .forEach(r => {
+    r.addEventListener("change", e => {
+      renderRequestForm(e.target.value);
+    });
+  });
+
+renderRequestForm("single");
+
+
