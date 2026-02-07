@@ -73,27 +73,55 @@ function updateBookInputs(count) {
     row.className = "req-book-row";
     row.dataset.bookId = id;
 
-    row.innerHTML = `
-      <input
-        class="req-book-title"
-        data-book-id="${id}"
-        placeholder="Book title (${id})"
-      >
+row.innerHTML = `
+  <input
+    class="req-book-title"
+    data-book-id="${id}"
+    placeholder="Book title (${id})"
+  >
 
-      <input
-        class="req-book-author"
-        data-book-id="${id}"
-        placeholder="Author (optional)"
-      >
-      
-    <div class="price-box" data-book-id="${id}" data-title="" data-price="1">
-      RM1 / book
-      <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
-    </div>
-    `;
+  <input
+    class="req-book-author"
+    data-book-id="${id}"
+    placeholder="Author (optional)"
+  >
+
+  <div class="price-box"
+       data-book-id="${id}"
+       data-title=""
+       data-author=""
+       data-price="1">
+    RM1 / book
+    <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
+  </div>
+`;
 
     wrap.appendChild(row);
   }
 }
+/* ==============================
+   update data-title live as user types
+================================ */
+document.addEventListener("input", e => {
+  const titleInput = e.target.closest(".req-book-title");
+  if (!titleInput) return;
+
+  const row = titleInput.closest(".req-book-row");
+  const priceBox = row.querySelector(".price-box");
+
+  priceBox.dataset.title = titleInput.value.trim();
+});
 
 
+/* ==============================
+   sync author too
+================================ */
+document.addEventListener("input", e => {
+  const authorInput = e.target.closest(".req-book-author");
+  if (!authorInput) return;
+
+  const row = authorInput.closest(".req-book-row");
+  const priceBox = row.querySelector(".price-box");
+
+  priceBox.dataset.author = authorInput.value.trim();
+});
