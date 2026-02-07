@@ -70,8 +70,8 @@ function updateBookInputs(count) {
   const wrap = document.getElementById("bookTitleInputs");
   wrap.innerHTML = "";
 
-  for (let i = 0; i < count; i++) {
-    const id = generateRequestId();
+  for (let i = 1; i <= count; i++) {
+    const id = `R${String(i).padStart(3, "0")}`;
 
     wrap.innerHTML += `
       <input
@@ -83,14 +83,12 @@ function updateBookInputs(count) {
   }
 }
 
+
+
 /* ==============================
    BookID generator
 ================================ */
-function generateRequestId() {
-  const id = `R${String(requestCounter).padStart(3, "0")}`;
-  requestCounter++;
-  return id;
-}
+
 /* ==============================
    SERIES FORM
 ================================ */
