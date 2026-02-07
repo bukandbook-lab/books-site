@@ -1,4 +1,4 @@
-const NON_BOOK_TABS = ["ReadMeFirst", "EPUBReader"];
+const NON_BOOK_TABS = ["ReadMeFirst", "RequestBook"];
 
 function prettyCategory(text = "") {
   return text.replace(/([a-z])([A-Z])/g, "$1 $2");
