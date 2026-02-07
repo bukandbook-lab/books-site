@@ -82,7 +82,7 @@ Hi there! Kids’ Books Catalogue is here to help you to find suitable books for
 2.	No physical book and ONLY digital copy will be delivered. <br/><br/>
 3.	Only proceed to ‘Click to Pay’ if you don’t mind. <br/> <br/>
 4.	Digital copy might be in .pdf, .epub or other file type that can be opened with E-book Reader apps. <br/><br/>
-5.	You might need to install Apps Reader first. Click Apps Reader button to find the recommended reader.<button id="toggleEbookReaderBtn">E-book Reader</button><br/>
+5.	You might need to install Apps Reader first. Click Apps Reader button to find the recommended reader.<button id="toggleEbookReaderBtn"></button><br/>
 	
 	<div id="EbookReader" style="display:none; margin-top:10px;"><br/><br/>
 If the file is in .epub, .azw3, .mobi etc., please download EPUB reader apps to be able to open the file. Below are several EPUB readers recommended. Please click the image to download the apps or software :- <br/><br/>
@@ -213,10 +213,10 @@ If the file is in .epub, .azw3, .mobi etc., please download EPUB reader apps to 
   btn.addEventListener("click", () => {
     if (content.style.display === "none") {
       content.style.display = "block";
-      btn.textContent = "Hide";
+      btn.textContent = "Show E-book Reader";
     } else {
       content.style.display = "none";
-      btn.textContent = "Show";
+      btn.textContent = "Show E-book Reader";
     }
   });
 </script>
