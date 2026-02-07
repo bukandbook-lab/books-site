@@ -55,3 +55,41 @@ document.querySelectorAll("input[name='requestType']")
 renderRequestForm("single");
 
 
+
+/* =====================================
+   MULTIPLE TITLES INPUT GENERATOR
+===================================== */
+
+function updateMultiInputs(count) {
+  const box = document.getElementById("multiTitles");
+  box.innerHTML = "";
+
+  for (let i = 0; i < count; i++) {
+    box.innerHTML += `
+      <input class="multi-title" placeholder="Book title ${i + 1}">
+    `;
+  }
+}
+
+document.addEventListener("input", e => {
+  if (e.target.id === "reqCount") {
+    updateMultiInputs(Number(e.target.value));
+  }
+});
+/* =====================================
+   Helper: find existing book
+===================================== */
+function findExistingBook(title, author) {
+  const key = title.toLowerCase();
+
+  return Object.values(BOOK_REGISTRY).find(b => {
+    if (!b.title) return false;
+    if (!b.title.toLowerCase().includes(key)) return false;
+
+    if (author) {
+      return (b.Author || "").toLowerCase().includes(author.toLowerCase());
+    }
+    return true;
+  });
+}
+
