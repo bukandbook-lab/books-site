@@ -86,7 +86,7 @@ function updateBookInputs(count) {
         placeholder="Author (optional)"
       >
       
-    <div class="price-box request-add" data-book-id="${id}" data-price="1">
+    <div class="price-box" data-book-id="${id}" data-title="" data-price="1">
       RM1 / book
       <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
     </div>
@@ -96,30 +96,5 @@ function updateBookInputs(count) {
   }
 }
 
-
-
-
-/* ==============================
-   BookID generator
-================================ */
-
-/* ==============================
-   SERIES FORM
-================================ */
-function renderSeriesForm(container) {
-  container.innerHTML = `
-    <input
-      id="seriesTitle"
-      data-book-id="${generateRequestId()}"
-      placeholder="Series title"
-    >
-
-    <input id="seriesAuthor" placeholder="Author (optional)">
-
-    <div class="price-box request-add" data-price="4">
-      RM4 / set
-      <img src="${CART_ICON}" class="cart-icon">
-    </div>
-  `;
 }
 
