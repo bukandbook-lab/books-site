@@ -892,17 +892,17 @@ html, body {
   height: 25px;
   width: 200px;
 }
-   
+#bookCount{
+  height: 25px;
+  width: 50px;
+}
+
 .req-book-row .remove-request{
   width: 20px;
   height: 20px;
   cursor: pointer;
 }
-.req-series-row .remove-request{
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
+
 
 /* =========================
    SEARCH RESULT IN REQUEST
