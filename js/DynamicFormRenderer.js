@@ -123,11 +123,15 @@ document.addEventListener("input", e => {
 
   const row = titleInput.closest(".req-book-row");
   const priceBox = row.querySelector(".price-box");
+  const grid = ensureInlineGrid(row);
 
   const keyword = titleInput.value.trim();
   priceBox.dataset.title = keyword;
 
-  // Empty input → reset
+  // Clear state
+  grid.innerHTML = "";
+  grid.classList.add("hidden");
+
   if (!keyword) {
     resetPriceBox(priceBox, row.dataset.bookId);
     return;
@@ -136,27 +140,50 @@ document.addEventListener("input", e => {
   const results = searchBooks(keyword);
 
   if (!results.length) {
+    grid.innerHTML = `<div style="grid-column:1/-1;opacity:.6">No results found</div>`;
+    grid.classList.remove("hidden");
     resetPriceBox(priceBox, row.dataset.bookId);
     return;
   }
 
-  // Use FIRST match
-  const book = results[0];
-  const isSet = Number(book.SetQtty) > 1;
-  const priceLabel = isSet ? "/set" : "/book";
+  grid.classList.remove("hidden");
 
-  priceBox.dataset.bookId = book.id;
-  priceBox.dataset.price = Number(book.price).toFixed(2);
+  results.slice(0, 8).forEach(book => {
+    const item = document.createElement("div");
+    item.className = "inline-search-item";
 
-  priceBox.innerHTML = `
-    RM${Number(book.price).toFixed(2)}${priceLabel}
-    <img src="${CART_ICON}" data-book-id="${book.id}" class="cart-icon">
-  `;
+    item.innerHTML = `
+      <img src="${book.img}" loading="lazy">
+      <div>${book.title}</div>
+    `;
 
-  if (typeof syncCartIcons === "function") {
-    syncCartIcons();
-  }
+    item.addEventListener("click", () => {
+      const isSet = Number(book.SetQtty) > 1;
+      const priceLabel = isSet ? "/set" : "/book";
+
+      titleInput.value = book.title;
+
+      priceBox.dataset.bookId = book.id;
+      priceBox.dataset.price = Number(book.price).toFixed(2);
+      priceBox.dataset.title = book.title;
+
+      priceBox.innerHTML = `
+        RM${Number(book.price).toFixed(2)}${priceLabel}
+        <img src="${CART_ICON}" data-book-id="${book.id}" class="cart-icon">
+      `;
+
+      grid.innerHTML = "";
+      grid.classList.add("hidden");
+
+      if (typeof syncCartIcons === "function") {
+        syncCartIcons();
+      }
+    });
+
+    grid.appendChild(item);
+  });
 });
+
 
 /* ==============================
    AUTHOR LIVE UPDATE
