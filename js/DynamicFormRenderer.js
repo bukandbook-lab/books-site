@@ -158,6 +158,7 @@ document.addEventListener("input", e => {
       const priceLabel = isSetBook ? "/set" : "/book";
 
       div.innerHTML = `
+      The book is found in our catalogue:<br/>
   <div class="skeleton"></div>
 
   <div class="book-bg"
