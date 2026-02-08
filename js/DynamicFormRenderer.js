@@ -78,7 +78,7 @@ function updateBookInputs(count) {
   const existing = wrap.querySelectorAll(".req-book-row").length;
 
   for (let i = existing + 1; i <= count; i++) {
-    const id = `R${String(i).padStart(3, "0")}`;
+     const id = `R${String(i).padStart(3, "0")}`;
 
     const row = document.createElement("div");
     row.className = "req-book-row";
@@ -89,9 +89,17 @@ function updateBookInputs(count) {
 
 
     row.innerHTML = `
-      <input class="req-book-title" data-book-id="${id}" placeholder="Enter title for Book/Series #${i}"><br/>
+      <br/>
+      ${i}. 
+      
+     <div>
+          <label><input type="radio" data-book-id="${id}" value="book" checked> Book</label>
+          <label><input type="radio" data-book-id="${id}" value="series"> Series</label>
+      </div>
+      
+      <input class="req-book-title" data-book-id="${id}" placeholder="Enter title for Book/Series"><br/>
       <input class="req-book-author" data-book-id="${id}" placeholder="Author's name (optional)">
-      <input class="req-book-specific" data-book-id="${id}" placeholder="Specific book title for Series #${i}(if any)">
+      <input class="req-book-specific" data-book-id="${id}" placeholder="Specific book title for Series(if any)">
 
       ${i === 1 ? "" : `
         <img src="${CLOSE_ICON}" class="remove-request" data-book-id="${id}">
