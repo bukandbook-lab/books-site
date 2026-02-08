@@ -146,7 +146,7 @@ function updateSeriesInputs(count) {
 
 
 /* ==============================
-   update data-title live as user types
+   update book-title live as user types
 ================================ */
 document.addEventListener("input", e => {
   const titleInput = e.target.closest(".req-book-title");
@@ -160,7 +160,7 @@ document.addEventListener("input", e => {
 
 
 /* ==============================
-   sync author too
+   update book-author live as user types
 ================================ */
 document.addEventListener("input", e => {
   const authorInput = e.target.closest(".req-book-author");
@@ -171,8 +171,35 @@ document.addEventListener("input", e => {
 
   priceBox.dataset.author = authorInput.value.trim();
 });
+
 /* ==============================
-   close icon to remove item
+   update series-title live as user types
+================================ */
+document.addEventListener("input", e => {
+  const titleInput = e.target.closest(".req-series-title");
+  if (!titleInput) return;
+
+  const row = titleInput.closest(".req-series-row");
+  const priceBox = row.querySelector(".price-box");
+
+  priceBox.dataset.title = titleInput.value.trim();
+});
+
+
+/* ==============================
+   update series-author live as user types
+================================ */
+document.addEventListener("input", e => {
+  const authorInput = e.target.closest(".req-series-author");
+  if (!authorInput) return;
+
+  const row = authorInput.closest(".req-series-row");
+  const priceBox = row.querySelector(".price-box");
+
+  priceBox.dataset.author = authorInput.value.trim();
+});
+/* ==============================
+   close icon to remove book item
 ================================ */
 document.addEventListener("click", e => {
   const btn = e.target.closest(".remove-request");
@@ -184,4 +211,16 @@ document.addEventListener("click", e => {
   const row = btn.closest(".req-book-row");
   row?.remove();
 });
+/* ==============================
+   close icon to remove series item
+================================ */
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".remove-request");
+  if (!btn) return;
 
+  e.preventDefault();
+  e.stopPropagation();
+
+  const row = btn.closest(".req-series-row");
+  row?.remove();
+});
