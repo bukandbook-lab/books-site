@@ -158,6 +158,9 @@ document.addEventListener("input", e => {
       <div>${book.title}</div>
     `;
 
+
+
+     
     item.addEventListener("click", () => {
       const isSet = Number(book.SetQtty) > 1;
       const priceLabel = isSet ? "/set" : "/book";
