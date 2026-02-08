@@ -51,10 +51,19 @@ function renderBookTitleForm(container) {
 
   updateBookInputs(1);
 
-  document.getElementById("bookCount")
-    .addEventListener("input", e => {
-      updateBookInputs(+e.target.value);
-    });
+const bookCount = document.getElementById("bookCount");
+
+["input", "change"].forEach(evt => {
+  bookCount.addEventListener(evt, e => {
+    let val = Number(e.target.value);
+
+    if (!val || val < 1) val = 1;
+
+    e.target.value = val;      // normalize value
+    updateBookInputs(val);
+  });
+});
+
 }
 
 /* ==============================
