@@ -881,13 +881,13 @@ html, body {
    CLOSE ICON TO REMOVE ITEM IN REQUEST BOOK
 ========================= */
 .req-book-row .remove-request{
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
 }
 .req-series-row .remove-request{
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
 }
 
