@@ -3,14 +3,8 @@
 ================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("requestFormContainer");
-  if (!container) return;
-
-  // render Book section
-  renderBookTitleForm(container);
-
-  // render Series section (default 1)
-  updateSeriesInputs(1);
+  renderBookTitleForm();
+  renderSeriesForm();
 });
 
 
@@ -20,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 let requestCounter = 1; // R001, R002...
 
 /* ==============================
-   BOOK TITLE FORM
+   BOOK FORM
 ================================ */
 function renderBookTitleForm() {
   const bookWrap = document.getElementById("bookTitleInputs");
@@ -97,9 +91,13 @@ function updateBookInputs(count) {
         RM1 / book
         <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">     
       </div>
-                <img src="${CLOSE_ICON}"
+      
+${i === 1 ? "" : `
+  <img src="${CLOSE_ICON}"
        class="remove-request"
        data-book-id="${id}">
+`}
+
     `;
 
     wrap.appendChild(row);
@@ -109,6 +107,43 @@ function updateBookInputs(count) {
   while (wrap.children.length > count) {
     wrap.removeChild(wrap.lastElementChild);
   }
+}
+/* ==============================
+   SERIES FORM
+================================ */
+function renderSeriesForm() {
+  const seriesWrap = document.getElementById("seriesInputs");
+  if (!seriesWrap) return;
+
+  seriesWrap.insertAdjacentHTML("beforebegin", `
+    <div class="request-row">
+      <label>Number of series</label>
+      <input
+        type="text"
+        id="seriesCount"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        value="1"
+      />
+    </div>
+  `);
+
+  updateSeriesInputs(1);
+
+  const seriesCount = document.getElementById("seriesCount");
+  seriesCount.addEventListener("input", e => {
+    let val = e.target.value.replace(/\D/g, "");
+
+    if (val === "") {
+      e.target.value = "";
+      return;
+    }
+
+    val = Math.max(1, Number(val)); // 🚫 NO ZERO
+    e.target.value = val;
+
+    updateSeriesInputs(val);
+  });
 }
 
 /* ==============================
@@ -139,9 +174,13 @@ function updateSeriesInputs(count) {
         RM4 / set
         <img src="${CART_ICON}" class="cart-icon">
       </div>
-                      <img src="${CLOSE_ICON}"
+      
+${i === 1 ? "" : `
+  <img src="${CLOSE_ICON}"
        class="remove-request"
        data-book-id="${id}">
+`}
+
     `;
 
     wrap.appendChild(row);
