@@ -201,7 +201,7 @@ document.addEventListener("input", e => {
    
     grid.appendChild(item);
   });
-});
+
 
 
 /* ==============================
