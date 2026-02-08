@@ -1,5 +1,5 @@
 /* ==============================
-   DynamicFormRenderer.js — FINAL
+   DynamicFormRenderer.js — LIVE SEARCH ENABLED
 ================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -7,7 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ==============================
-   SEARCH UTIL
+   GLOBAL STATE
+================================ */
+let requestCounter = 1;
+
+/* ==============================
+   SEARCH UTIL (shared logic)
 ================================ */
 function normalizeWords(text = "") {
   return text
@@ -21,62 +26,78 @@ function searchBooks(keyword) {
   if (!keyword || !window.BOOK_REGISTRY) return [];
 
   const keywordWords = normalizeWords(keyword);
+  const results = [];
 
-  return Object.values(BOOK_REGISTRY).filter(book => {
-    const searchable = [book.title, book.Author, book.Series]
+  Object.values(BOOK_REGISTRY).forEach(book => {
+    const searchableText = [book.title, book.Author, book.Series]
       .filter(Boolean)
       .join(" ");
-    const words = normalizeWords(searchable);
 
-    return keywordWords.every(kw =>
-      words.some(w => w.includes(kw))
-    );
+    const words = normalizeWords(searchableText);
+
+    if (keywordWords.every(kw => words.some(w => w.includes(kw)))) {
+      results.push(book);
+    }
   });
+
+  return results;
 }
 
 /* ==============================
-   FORM
+   BOOK FORM
 ================================ */
 function renderBookTitleForm() {
-  const wrap = document.getElementById("bookTitleInputs");
-  if (!wrap) return;
+  const bookWrap = document.getElementById("bookTitleInputs");
+  if (!bookWrap) return;
 
-  wrap.insertAdjacentHTML("beforebegin", `
+  bookWrap.insertAdjacentHTML("beforebegin", `
     <div class="request-row">
-      <label>Number of books / series</label>
-      <input id="bookCount" value="1">
-      <button id="resetBooks">Reset</button>
+      <label>Number of books/series</label>
+      <input type="text" id="bookCount" inputmode="numeric" pattern="[0-9]*" value="1" />
+      <button type="button" id="resetBooks">Reset</button>
     </div>
   `);
 
   updateBookInputs(1);
 
   document.getElementById("bookCount").addEventListener("input", e => {
-    const val = Math.max(1, Number(e.target.value.replace(/\D/g, "")));
-    e.target.value = val;
-    updateBookInputs(val);
+    let val = e.target.value.replace(/\D/g, "");
+    if (!val) return;
+    e.target.value = Math.max(1, Number(val));
+    updateBookInputs(e.target.value);
   });
 }
 
 /* ==============================
-   ROW CREATION
+   BOOK INPUTS
 ================================ */
 function updateBookInputs(count) {
   const wrap = document.getElementById("bookTitleInputs");
+  if (!wrap) return;
 
-  while (wrap.children.length < count) {
-    const i = wrap.children.length + 1;
+  const existing = wrap.querySelectorAll(".req-book-row").length;
+
+  for (let i = existing + 1; i <= count; i++) {
     const id = `R${String(i).padStart(3, "0")}`;
 
     const row = document.createElement("div");
     row.className = "req-book-row";
     row.dataset.bookId = id;
 
+    const priceBox = ensurePriceBox(row);
+    setRequestType(priceBox, row.dataset.bookId, "book");
+
+
     row.innerHTML = `
-      <input class="req-book-title" placeholder="Title">
-      <input class="req-book-author" placeholder="Author (optional)">
-      <input class="req-book-specific" placeholder="Specific book (optional)">
-      <div class="inline-search-grid hidden"></div>
+      <input class="req-book-title" data-book-id="${id}" placeholder="Enter title for Book/Series #${i}"><br/>
+      <input class="req-book-author" data-book-id="${id}" placeholder="Author's name (optional)">
+      <input class="req-book-specific" data-book-id="${id}" placeholder="Specific book title for Series #${i}(if any)">
+
+      ${i === 1 ? "" : `
+        <img src="${CLOSE_ICON}" class="remove-request" data-book-id="${id}">
+      `}
+      <div class="inline-search-grid"></div>
+
     `;
 
     wrap.appendChild(row);
@@ -88,7 +109,181 @@ function updateBookInputs(count) {
 }
 
 /* ==============================
-   ENSURE PRICE BOX
+   LIVE SEARCH ON BOOK TITLE
+================================ */
+document.addEventListener("input", e => {
+  const titleInput = e.target.closest(".req-book-title");
+  if (!titleInput) return;
+
+  const row = titleInput.closest(".req-book-row");
+  const priceBox = ensurePriceBox(row);
+  const grid = ensureInlineGrid(row);
+
+  const keyword = titleInput.value.trim();
+  priceBox.dataset.title = keyword;
+
+  // Clear state
+  grid.innerHTML = "";
+  grid.classList.add("hidden");
+
+  if (!keyword) {
+    resetPriceBox(priceBox, row.dataset.bookId);
+    return;
+  }
+
+  const results = searchBooks(keyword);
+
+  if (!results.length) {
+    //grid.innerHTML = `<div style="grid-column:1/-1;opacity:.6">No search results found. Click 'Add to Cart' to proceed with request for books/series</div>`;
+    grid.classList.remove("hidden");
+    resetPriceBox(priceBox, row.dataset.bookId);
+    return;
+  }
+
+  grid.classList.remove("hidden");
+
+  results.slice().forEach(book => {
+      const div = document.createElement("div");
+      div.className = "book-thumb";
+
+      const isSetBook = Number(book.SetQtty) > 1;
+      const priceLabel = isSetBook ? "/set" : "/book";
+
+      div.innerHTML = `
+  <div class="skeleton"></div>
+
+  <div class="book-bg"
+     style="background-image:url('${book.img}')"></div>
+
+  <img
+    src="${book.img}"
+    class="grid-book-img popup-trigger"
+    loading="lazy"
+    data-book-id="${book.id}"
+  >
+
+  <!-- 🔥 HOVER PRICE BOX -->
+  <div class="price-box"
+    data-book-id="${book.id}"
+    data-title="${book.title}"
+    data-price="${Number(book.price).toFixed(2)}"
+    data-setqtty="${book.SetQtty || 1}"
+  >
+    &nbsp&nbspRM${Number(book.price).toFixed(2)}${priceLabel}
+    <img
+      data-book-id="${book.id}"
+      src="${CART_ICON}"
+      class="cart-icon"
+    >
+      `;
+
+      grid.appendChild(div);
+    });
+   
+    if (typeof applySeeMore === "function") {
+      applySeeMore(grid);
+      moveSeeMoreAfter(grid);
+
+}
+
+    if (typeof syncCartIcons === "function") {
+      syncCartIcons();
+    }
+       
+   
+    grid.appendChild(item);
+  });
+
+
+
+/* ==============================
+   AUTHOR LIVE UPDATE
+================================ */
+document.addEventListener("input", e => {
+  const authorInput = e.target.closest(".req-book-author");
+  if (!authorInput) return;
+
+  const row = authorInput.closest(".req-book-row");
+  row.querySelector(".price-box").dataset.author = authorInput.value.trim();
+});
+
+/* ==============================
+   SPECIFIC LIVE UPDATE
+================================ */
+document.addEventListener("input", e => {
+  const SpecificInput = e.target.closest(".req-book-specific");
+  if (!SpecificInput) return;
+
+  const row = SpecificInput.closest(".req-book-row");
+  row.querySelector(".price-box").dataset.specific = SpecificInput.value.trim();
+});
+/* ==============================
+   set Request Type
+================================ */
+function setRequestType(priceBox, id, type) {
+  if (!priceBox) return;
+
+  priceBox.dataset.bookId = id;
+
+  if (type === "series") {
+    priceBox.dataset.price = "4";
+    priceBox.dataset.type = "series";
+    priceBox.innerHTML = `
+      RM4 / set
+      <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
+    `;
+  } else {
+    priceBox.dataset.price = "1";
+    priceBox.dataset.type = "book";
+    priceBox.innerHTML = `
+      RM1 / book
+      <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
+    `;
+  }
+
+  if (typeof syncCartIcons === "function") {
+    syncCartIcons();
+  }
+}
+
+/* ==============================
+   REMOVE ROW
+================================ */
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".remove-request");
+  if (!btn) return;
+
+  e.preventDefault();
+  btn.closest(".req-book-row")?.remove();
+});
+
+/* ==============================
+   RESET
+================================ */
+document.addEventListener("click", e => {
+  if (e.target.id === "resetBooks") {
+    e.preventDefault();
+    const wrap = document.getElementById("bookTitleInputs");
+    document.getElementById("bookCount").value = 1;
+    [...wrap.children].slice(1).forEach(r => r.remove());
+  }
+});
+
+/* ==============================
+   helper to ensure grid exists
+================================ */
+function ensureInlineGrid(row) {
+  let grid = row.querySelector(".inline-search-grid");
+  if (!grid) {
+    grid = document.createElement("div");
+    grid.className = "inline-search-grid hidden";
+    row.appendChild(grid);
+  }
+  return grid;
+}
+
+/* ==============================
+   helper to ensure price-box exists
 ================================ */
 function ensurePriceBox(row) {
   let priceBox = row.querySelector(".price-box");
@@ -109,129 +304,3 @@ function ensurePriceBox(row) {
   return priceBox;
 }
 
-/* ==============================
-   LIVE SEARCH (MERGED)
-================================ */
-document.addEventListener("input", e => {
-  const row = e.target.closest(".req-book-row");
-  if (!row) return;
-
-  const title = row.querySelector(".req-book-title").value.trim();
-  const author = row.querySelector(".req-book-author").value.trim();
-  const specific = row.querySelector(".req-book-specific").value.trim();
-
-  const grid = row.querySelector(".inline-search-grid");
-  const priceBox = ensurePriceBox(row);
-
-  priceBox.dataset.title = title;
-  priceBox.dataset.author = author;
-  priceBox.dataset.specific = specific;
-
-  grid.innerHTML = "";
-  grid.classList.add("hidden");
-
-  if (!title) return;
-
-  const results = searchBooks([title, author, specific].join(" "));
-
-  /* ===== NO RESULTS ===== */
-  if (!results.length) {
-    grid.classList.remove("hidden");
-    grid.innerHTML = `
-      <div style="grid-column:1/-1;opacity:.7">
-        No search results found.<br>
-        Choose request type:
-        <div>
-          <label><input type="radio" name="req-${row.dataset.bookId}" value="book" checked> Book</label>
-          <label><input type="radio" name="req-${row.dataset.bookId}" value="series"> Series</label>
-        </div>
-      </div>
-    `;
-    setRequestType(priceBox, row.dataset.bookId, "book");
-    return;
-  }
-
-  /* ===== RESULTS FOUND ===== */
-  grid.classList.remove("hidden");
-
-  results.forEach(book => {
-    const item = document.createElement("div");
-    item.className = "book-thumb";
-
-    const isSet = Number(book.SetQtty) > 1;
-    const label = isSet ? "/set" : "/book";
-
-    item.innerHTML = `
-      <img src="${book.img}" loading="lazy">
-      <div>RM${Number(book.price).toFixed(2)}${label}</div>
-    `;
-
-    item.addEventListener("click", () => {
-      row.querySelector(".req-book-title").value = book.title;
-
-      priceBox.dataset.bookId = book.id;
-      priceBox.dataset.price = Number(book.price).toFixed(2);
-      priceBox.dataset.type = isSet ? "series" : "book";
-
-      priceBox.innerHTML = `
-        RM${Number(book.price).toFixed(2)}${label}
-        <img src="${CART_ICON}" data-book-id="${book.id}" class="cart-icon">
-      `;
-
-      grid.innerHTML = "";
-      grid.classList.add("hidden");
-
-      if (typeof syncCartIcons === "function") syncCartIcons();
-    });
-
-    grid.appendChild(item);
-  });
-});
-
-/* ==============================
-   RADIO HANDLER
-================================ */
-document.addEventListener("change", e => {
-  if (!e.target.matches("input[type=radio][name^='req-']")) return;
-
-  const row = e.target.closest(".req-book-row");
-  const priceBox = ensurePriceBox(row);
-
-  setRequestType(priceBox, row.dataset.bookId, e.target.value);
-});
-
-/* ==============================
-   PRICE SWITCHER
-================================ */
-function setRequestType(priceBox, id, type) {
-  priceBox.dataset.bookId = id;
-
-  if (type === "series") {
-    priceBox.dataset.price = "4";
-    priceBox.dataset.type = "series";
-    priceBox.innerHTML = `
-      RM4 / set
-      <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
-    `;
-  } else {
-    priceBox.dataset.price = "1";
-    priceBox.dataset.type = "book";
-    priceBox.innerHTML = `
-      RM1 / book
-      <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
-    `;
-  }
-
-  if (typeof syncCartIcons === "function") syncCartIcons();
-}
-
-/* ==============================
-   RESET
-================================ */
-document.addEventListener("click", e => {
-  if (e.target.id === "resetBooks") {
-    document.getElementById("bookCount").value = 1;
-    const wrap = document.getElementById("bookTitleInputs");
-    [...wrap.children].slice(1).forEach(r => r.remove());
-  }
-});
