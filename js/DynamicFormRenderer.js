@@ -54,7 +54,7 @@ function renderBookTitleForm() {
   bookWrap.insertAdjacentHTML("beforebegin", `
     <div class="request-row">
       <label>Number of books/series</label>
-      <input type="text" id="bookCount" width="50px" inputmode="numeric" pattern="[0-9]*" value="1" />
+      <input type="text" id="bookCount" inputmode="numeric" pattern="[0-9]*" value="1" />
       <button type="button" id="resetBooks">Reset</button>
     </div>
   `);
