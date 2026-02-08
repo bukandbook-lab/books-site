@@ -260,4 +260,43 @@ document.addEventListener("click", e => {
   btn.closest(".req-book-row")?.remove();
   btn.closest(".req-series-row")?.remove();
 });
+/* ==============================
+   RESET LOGIC
+================================ */
+
+document.addEventListener("click", e => {
+
+  /* ========= RESET BOOKS ========= */
+  if (e.target.id === "resetBooks") {
+    e.preventDefault();
+
+    const input = document.getElementById("bookCount");
+    const wrap = document.getElementById("bookTitleInputs");
+
+    if (!input || !wrap) return;
+
+    input.value = 1;
+
+    // keep only first row
+    [...wrap.children].slice(1).forEach(row => row.remove());
+
+    return;
+  }
+
+  /* ========= RESET SERIES ========= */
+  if (e.target.id === "resetSeries") {
+    e.preventDefault();
+
+    const input = document.getElementById("seriesCount");
+    const wrap = document.getElementById("seriesInputs");
+
+    if (!input || !wrap) return;
+
+    input.value = 1;
+
+    // keep only first row
+    [...wrap.children].slice(1).forEach(row => row.remove());
+  }
+});
+
 
