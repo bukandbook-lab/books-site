@@ -85,12 +85,11 @@ row.innerHTML = `
     data-book-id="${id}"
     placeholder="Author (optional)"
   >
-
-  <div class="price-box"
-       data-book-id="${id}"
-       data-title=""
-       data-author=""
-       data-price="1">
+<div class="price-box request-price-box"
+     data-book-id="${id}"
+     data-title=""
+     data-author=""
+     data-price="1">
     RM1 / book
     <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
   </div>
