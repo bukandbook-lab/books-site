@@ -184,7 +184,7 @@ function renderCart() {
     itemsHTML += `
       <div class="cart-row">
         <span>
-           ${index}. ${item.isRequest ? "Request a book – " : ""}${item.title}
+           ${index}. ${item.title}
            ${item.setQtty > 0 && item.price !== 1
            ? ` (${item.setQtty} books)`
            : ``}
