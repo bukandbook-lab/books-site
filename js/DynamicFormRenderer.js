@@ -256,3 +256,18 @@ function updateSeriesInputs(count) {
     wrap.lastElementChild.remove();
   }
 }
+
+/* ==============================
+   helper to ensure grid exists
+================================ */
+
+function ensureInlineGrid(row) {
+  let grid = row.querySelector(".inline-search-grid");
+  if (!grid) {
+    grid = document.createElement("div");
+    grid.className = "inline-search-grid hidden";
+    row.appendChild(grid);
+  }
+  return grid;
+}
+
