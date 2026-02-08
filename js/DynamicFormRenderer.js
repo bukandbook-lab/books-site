@@ -4,7 +4,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   renderBookTitleForm();
-  renderSeriesForm();
+  
 });
 
 /* ==============================
@@ -53,8 +53,8 @@ function renderBookTitleForm() {
 
   bookWrap.insertAdjacentHTML("beforebegin", `
     <div class="request-row">
-      <label>Number of books</label>
-      <input type="text" id="bookCount" inputmode="numeric" pattern="[0-9]*" value="1" />
+      <label>Number of books/series</label>
+      <input type="text" id="bookCount" width="50px" inputmode="numeric" pattern="[0-9]*" value="1" />
       <button type="button" id="resetBooks">Reset</button>
     </div>
   `);
@@ -86,8 +86,9 @@ function updateBookInputs(count) {
     row.dataset.bookId = id;
 
     row.innerHTML = `
-      <input class="req-book-title" data-book-id="${id}" placeholder="Title for Book ${i}">
-      <input class="req-book-author" data-book-id="${id}" placeholder="Author (optional)">
+      <input class="req-book-title" data-book-id="${id}" width="250px" placeholder="Enter title for Book/Series #${i}">
+      <input class="req-book-author" data-book-id="${id}" width="100px" placeholder="Enter author's name for Book/Series #${i}(optional)">
+      <input class="req-book-specific" data-book-id="${id}" width="150px" placeholder="Enter specific book title for Series #${i}(oif any)">
 
       <div class="price-box request-price-box"
            data-book-id="${id}"
@@ -140,7 +141,7 @@ document.addEventListener("input", e => {
   const results = searchBooks(keyword);
 
   if (!results.length) {
-    grid.innerHTML = `<div style="grid-column:1/-1;opacity:.6">No results found</div>`;
+    //grid.innerHTML = `<div style="grid-column:1/-1;opacity:.6">No results found</div>`;
     grid.classList.remove("hidden");
     resetPriceBox(priceBox, row.dataset.bookId);
     return;
