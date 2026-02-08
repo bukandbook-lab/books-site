@@ -76,7 +76,7 @@ if (!book && sourceEl) {
 
   book = {
     id,
-    title: `Request a book – ${rawTitle}`, // 🔥 PREFIX HERE
+    title: `Request a book/series – ${rawTitle} by (sourceEl.dataset.author) - (sourceEl.dataset.specific || 1) `, // 🔥 PREFIX HERE
     price: Number(sourceEl.dataset.price || 1),
     SetQtty: 1
   };
