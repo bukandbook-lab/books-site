@@ -881,16 +881,16 @@ html, body {
    CLOSE ICON TO REMOVE ITEM IN REQUEST BOOK
 ========================= */
 .req-book-title{
-  width: 25px;
-  height: 400px;
+  height: 25px;
+  width: 400px;
 }
 .req-book-author{
-  width: 25px;
-  height: 1500px;
+  height: 25px;
+  width: 1500px;
 }
 .req-book-specific{
-  width: 25px;
-  height: 200px;
+  height: 25px;
+  width: 200px;
 }
    
 .req-book-row .remove-request{
