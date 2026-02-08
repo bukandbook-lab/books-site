@@ -888,17 +888,20 @@ html, body {
 .req-book-author{
   height: 25px;
   width: 150px;
-  margin: 2px;
+  margin: 1px;
+  padding: 1px;
 }
 .req-book-specific{
   height: 25px;
   width: 200px;
-  margin: 2px;
+  margin: 1px;
+  padding: 1px;
 }
 #bookCount{
   height: 25px;
   width: 50px;
-  margin: 2px;
+  margin: 1px;
+  padding: 1px;
 }
 
 .req-book-row .remove-request{
