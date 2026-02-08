@@ -54,7 +54,7 @@ bookCount.addEventListener("input", e => {
 }
 
 /* ==============================
-   Dynamic input + BookID logic THIS IS THE HEART
+   BOOKS INPUT
 ================================ */
 function updateBookInputs(count) {
   const wrap = document.getElementById("bookTitleInputs");
@@ -105,6 +105,45 @@ function updateBookInputs(count) {
     wrap.removeChild(wrap.lastElementChild);
   }
 }
+
+/* ==============================
+   SERIES INPUT
+================================ */
+function updateSeriesInputs(count) {
+  const wrap = document.getElementById("seriesInputs");
+  if (!wrap) return;
+
+  while (wrap.children.length < count) {
+    const i = wrap.children.length + 1;
+    const id = `S${String(i).padStart(3, "0")}`;
+
+    const row = document.createElement("div");
+    row.className = "req-series-row";
+
+    row.innerHTML = `
+      <input class="req-series-title"
+             placeholder="Title for Series ${i}">
+
+      <input class="req-series-author"
+             placeholder="Author for Series ${i}(optional)">
+
+      <div class="price-box request-price-box"
+           data-book-id="${id}"
+           data-title=""
+           data-price="4">
+        RM4 / set
+        <img src="${CART_ICON}" class="cart-icon">
+      </div>
+    `;
+
+    wrap.appendChild(row);
+  }
+
+  while (wrap.children.length > count) {
+    wrap.removeChild(wrap.lastElementChild);
+  }
+}
+
 
 /* ==============================
    update data-title live as user types
