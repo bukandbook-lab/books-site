@@ -28,16 +28,36 @@ const FORM = {
    ADD TO CART (GRID + POPUP) 
 ===================================== */
 document.addEventListener("click", e => {
-  const priceBox = e.target.closest(".price-box");
-  if (!priceBox) return;
+
+  /* ==========================
+     REQUEST BOOK PRICE BOX
+  ========================== */
+  const requestBox = e.target.closest(".request-price-box");
+  if (requestBox) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const bookId = requestBox.dataset.bookId;
+    addToCart(bookId, requestBox);
+    return; // 🚫 STOP HERE
+  }
+
+  /* ==========================
+     NORMAL GRID / POPUP CART
+  ========================== */
+  const normalBox = e.target.closest(".price-box");
+  if (!normalBox) return;
+
+  // ignore request ones (safety)
+  if (normalBox.classList.contains("request-price-box")) return;
 
   e.preventDefault();
   e.stopPropagation();
 
-  const bookId = priceBox.dataset.bookId;
-
-  addToCart(bookId, priceBox);
+  const bookId = normalBox.dataset.bookId;
+  addToCart(bookId);
 });
+
 /* ===================================
    ADD TO CART FUNCTION
 ===================================== */
