@@ -22,44 +22,42 @@ let requestCounter = 1; // R001, R002...
 /* ==============================
    BOOK TITLE FORM
 ================================ */
-function renderBookTitleForm(container) {
-  container.innerHTML = `
+function renderBookTitleForm() {
+  const bookWrap = document.getElementById("bookTitleInputs");
+  if (!bookWrap) return;
+
+  // insert book-count UI BEFORE inputs
+  bookWrap.insertAdjacentHTML("beforebegin", `
     <div class="request-row">
       <label>Number of books</label>
       <input
-  type="text"
-  id="bookCount"
-  inputmode="numeric"
-  pattern="[0-9]*"
-  value="1"
-/>
-
+        type="text"
+        id="bookCount"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        value="1"
+      />
     </div>
-
-    <div id="bookTitleInputs"></div>
-
-  `;
+  `);
 
   updateBookInputs(1);
 
-const bookCount = document.getElementById("bookCount");
+  const bookCount = document.getElementById("bookCount");
+  bookCount.addEventListener("input", e => {
+    let val = e.target.value.replace(/\D/g, "");
 
-bookCount.addEventListener("input", e => {
-  let val = e.target.value.replace(/\D/g, ""); // digits only
+    if (val === "") {
+      e.target.value = "";
+      return;
+    }
 
-  if (val === "") {
-    e.target.value = "";
-    return;
-  }
+    val = Math.max(1, Number(val));
+    e.target.value = val;
 
-  val = Math.max(1, Number(val));
-  e.target.value = val;
-
-  updateBookInputs(val);
-});
-
-
+    updateBookInputs(val);
+  });
 }
+
 
 /* ==============================
    BOOKS INPUT
