@@ -97,12 +97,11 @@ function updateBookInputs(count) {
            data-author=""
            data-price="1">
         RM1 / book
-        <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
-        
-          <img src="${CLOSE_ICON}"
+        <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">     
+      </div>
+                <img src="${CLOSE_ICON}"
        class="remove-request"
        data-book-id="${id}">
-      </div>
     `;
 
     wrap.appendChild(row);
@@ -142,6 +141,9 @@ function updateSeriesInputs(count) {
         RM4 / set
         <img src="${CART_ICON}" class="cart-icon">
       </div>
+                      <img src="${CLOSE_ICON}"
+       class="remove-request"
+       data-book-id="${id}">
     `;
 
     wrap.appendChild(row);
@@ -207,7 +209,7 @@ document.addEventListener("input", e => {
   priceBox.dataset.author = authorInput.value.trim();
 });
 /* ==============================
-   close icon to remove book item
+   close icon to remove item
 ================================ */
 document.addEventListener("click", e => {
   const btn = e.target.closest(".remove-request");
@@ -216,19 +218,7 @@ document.addEventListener("click", e => {
   e.preventDefault();
   e.stopPropagation();
 
-  const row = btn.closest(".req-book-row");
-  row?.remove();
+  btn.closest(".req-book-row")?.remove();
+  btn.closest(".req-series-row")?.remove();
 });
-/* ==============================
-   close icon to remove series item
-================================ */
-document.addEventListener("click", e => {
-  const btn = e.target.closest(".remove-request");
-  if (!btn) return;
 
-  e.preventDefault();
-  e.stopPropagation();
-
-  const row = btn.closest(".req-series-row");
-  row?.remove();
-});
