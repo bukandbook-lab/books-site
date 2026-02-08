@@ -114,115 +114,116 @@ function updateBookInputs(count) {
   }
 }
 
-/* ==============================
-   LIVE SEARCH ON BOOK TITLE
-================================ */
-document.addEventListener("input", e => {
-  const titleInput = e.target.closest(".req-book-title");
-  if (!titleInput) return;
+  /* ==============================
+      MERGED & INTEGRATED handler
+  ================================= */
 
-  const row = titleInput.closest(".req-book-row");
+document.addEventListener("input", e => {
+  const row = e.target.closest(".req-book-row");
+  if (!row) return;
+
+  const titleInput = row.querySelector(".req-book-title");
+  const authorInput = row.querySelector(".req-book-author");
+  const specificInput = row.querySelector(".req-book-specific");
   const priceBox = row.querySelector(".price-box");
   const grid = ensureInlineGrid(row);
 
-  const keyword = titleInput.value.trim();
-  priceBox.dataset.title = keyword;
+  const title = titleInput.value.trim();
+  const author = authorInput.value.trim();
+  const specific = specificInput.value.trim();
 
-  // Clear state
+  // sync dataset
+  priceBox.dataset.title = title;
+  priceBox.dataset.author = author;
+  priceBox.dataset.specific = specific;
+
+  // clear grid state
   grid.innerHTML = "";
   grid.classList.add("hidden");
 
-  if (!keyword) {
+  if (!title) {
     resetPriceBox(priceBox, row.dataset.bookId);
     return;
   }
 
+  const keyword = [title, author, specific].join(" ").trim();
   const results = searchBooks(keyword);
 
+  /* ==============================
+     NO SEARCH RESULTS
+  ================================= */
   if (!results.length) {
-    grid.innerHTML = `<div style="grid-column:1/-1;opacity:.6">No search results found. Click 'Add to Cart' to proceed with request for books/series</div>`;
     grid.classList.remove("hidden");
-    resetPriceBox(priceBox, row.dataset.bookId);
+
+    grid.innerHTML = `
+      <div style="grid-column:1/-1;opacity:.7">
+        No search results found.<br/>
+        Choose request type:
+        <div style="margin-top:6px">
+          <label>
+            <input type="radio" name="reqType-${row.dataset.bookId}" value="book" checked>
+            Book
+          </label>
+          &nbsp;&nbsp;
+          <label>
+            <input type="radio" name="reqType-${row.dataset.bookId}" value="series">
+            Series
+          </label>
+        </div>
+      </div>
+    `;
+
+    // default → Book
+    setRequestType(priceBox, row.dataset.bookId, "book");
+
     return;
   }
 
+  /* ==============================
+     SEARCH RESULTS FOUND
+  ================================= */
   grid.classList.remove("hidden");
 
-  results.slice().forEach(book => {
-      const div = document.createElement("div");
-      div.className = "book-thumb";
+  results.forEach(book => {
+    const div = document.createElement("div");
+    div.className = "book-thumb";
 
-      const isSetBook = Number(book.SetQtty) > 1;
-      const priceLabel = isSetBook ? "/set" : "/book";
+    const isSet = Number(book.SetQtty) > 1;
+    const priceLabel = isSet ? "/set" : "/book";
 
-      div.innerHTML = `
-  <div class="skeleton"></div>
+    div.innerHTML = `
+      <img src="${book.img}" class="grid-book-img" loading="lazy">
+      <div class="price-box"
+           data-book-id="${book.id}"
+           data-price="${Number(book.price).toFixed(2)}">
+        RM${Number(book.price).toFixed(2)}${priceLabel}
+      </div>
+    `;
 
-  <div class="book-bg"
-     style="background-image:url('${book.img}')"></div>
+    div.addEventListener("click", () => {
+      titleInput.value = book.title;
 
-  <img
-    src="${book.img}"
-    class="grid-book-img popup-trigger"
-    loading="lazy"
-    data-book-id="${book.id}"
-  >
+      priceBox.dataset.bookId = book.id;
+      priceBox.dataset.price = Number(book.price).toFixed(2);
+      priceBox.dataset.type = isSet ? "series" : "book";
 
-  <!-- 🔥 HOVER PRICE BOX -->
-  <div class="price-box"
-    data-book-id="${book.id}"
-    data-title="${book.title}"
-    data-price="${Number(book.price).toFixed(2)}"
-    data-setqtty="${book.SetQtty || 1}"
-  >
-    &nbsp&nbspRM${Number(book.price).toFixed(2)}${priceLabel}
-    <img
-      data-book-id="${book.id}"
-      src="${CART_ICON}"
-      class="cart-icon"
-    >
+      priceBox.innerHTML = `
+        RM${Number(book.price).toFixed(2)}${priceLabel}
+        <img src="${CART_ICON}" data-book-id="${book.id}" class="cart-icon">
       `;
 
-      grid.appendChild(div);
+      grid.innerHTML = "";
+      grid.classList.add("hidden");
+
+      if (typeof syncCartIcons === "function") {
+        syncCartIcons();
+      }
     });
-   
-    if (typeof applySeeMore === "function") {
-      applySeeMore(grid);
-      moveSeeMoreAfter(grid);
 
-}
-
-    if (typeof syncCartIcons === "function") {
-      syncCartIcons();
-    }
-       
-   
-    grid.appendChild(item);
+    grid.appendChild(div);
   });
-
-
-
-/* ==============================
-   AUTHOR LIVE UPDATE
-================================ */
-document.addEventListener("input", e => {
-  const authorInput = e.target.closest(".req-book-author");
-  if (!authorInput) return;
-
-  const row = authorInput.closest(".req-book-row");
-  row.querySelector(".price-box").dataset.author = authorInput.value.trim();
 });
 
-/* ==============================
-   SPECIFIC LIVE UPDATE
-================================ */
-document.addEventListener("input", e => {
-  const SpecificInput = e.target.closest(".req-book-specific");
-  if (!SpecificInput) return;
-
-  const row = SpecificInput.closest(".req-book-row");
-  row.querySelector(".price-box").dataset.specific = SpecificInput.value.trim();
-});
 /* ==============================
    PRICE RESET HELPER
 ================================ */
@@ -274,5 +275,46 @@ function ensureInlineGrid(row) {
   }
   return grid;
 }
+/* ==============================
+   radio-button behavior listener
+================================ */
+document.addEventListener("change", e => {
+  if (!e.target.matches("input[type=radio][name^='reqType-']")) return;
+
+  const row = e.target.closest(".req-book-row");
+  const priceBox = row.querySelector(".price-box");
+
+  setRequestType(priceBox, row.dataset.bookId, e.target.value);
+});
+
+/* ==============================
+   price switcher helper
+================================ */
+function setRequestType(priceBox, requestId, type) {
+  if (type === "series") {
+    priceBox.dataset.bookId = requestId;
+    priceBox.dataset.price = "4";
+    priceBox.dataset.type = "series";
+
+    priceBox.innerHTML = `
+      RM4 / set
+      <img src="${CART_ICON}" data-book-id="${requestId}" class="cart-icon">
+    `;
+  } else {
+    priceBox.dataset.bookId = requestId;
+    priceBox.dataset.price = "1";
+    priceBox.dataset.type = "book";
+
+    priceBox.innerHTML = `
+      RM1 / book
+      <img src="${CART_ICON}" data-book-id="${requestId}" class="cart-icon">
+    `;
+  }
+
+  if (typeof syncCartIcons === "function") {
+    syncCartIcons();
+  }
+}
+
 
 
