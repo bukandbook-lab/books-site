@@ -882,7 +882,7 @@ html, body {
 ========================= */
 .req-book-title{
   height: 25px;
-  width: 400px;
+  width: 360px;
   margin: 2px;
 }
 .req-book-author{
@@ -893,7 +893,7 @@ html, body {
 }
 .req-book-specific{
   height: 25px;
-  width: 200px;
+  width: 210px;
   margin: 1px;
   padding: 1px;
 }
