@@ -149,41 +149,55 @@ document.addEventListener("input", e => {
 
   grid.classList.remove("hidden");
 
-  results.slice(0, 8).forEach(book => {
-    const item = document.createElement("div");
-    item.className = "inline-search-item";
+  results.slice().forEach(book => {
+      const div = document.createElement("div");
+      div.className = "book-thumb";
 
-    item.innerHTML = `
-      <img src="${book.img}" loading="lazy">
-      <div>${book.title}</div>
-    `;
+      const isSetBook = Number(book.SetQtty) > 1;
+      const priceLabel = isSetBook ? "/set" : "/book";
 
+      div.innerHTML = `
+  <div class="skeleton"></div>
 
+  <div class="book-bg"
+     style="background-image:url('${book.img}')"></div>
 
-     
-    item.addEventListener("click", () => {
-      const isSet = Number(book.SetQtty) > 1;
-      const priceLabel = isSet ? "/set" : "/book";
+  <img
+    src="${book.img}"
+    class="grid-book-img popup-trigger"
+    loading="lazy"
+    data-book-id="${book.id}"
+  >
 
-      titleInput.value = book.title;
-
-      priceBox.dataset.bookId = book.id;
-      priceBox.dataset.price = Number(book.price).toFixed(2);
-      priceBox.dataset.title = book.title;
-
-      priceBox.innerHTML = `
-        RM${Number(book.price).toFixed(2)}${priceLabel}
-        <img src="${CART_ICON}" data-book-id="${book.id}" class="cart-icon">
+  <!-- 🔥 HOVER PRICE BOX -->
+  <div class="price-box"
+    data-book-id="${book.id}"
+    data-title="${book.title}"
+    data-price="${Number(book.price).toFixed(2)}"
+    data-setqtty="${book.SetQtty || 1}"
+  >
+    &nbsp&nbspRM${Number(book.price).toFixed(2)}${priceLabel}
+    <img
+      data-book-id="${book.id}"
+      src="${CART_ICON}"
+      class="cart-icon"
+    >
       `;
 
-      grid.innerHTML = "";
-      grid.classList.add("hidden");
-
-      if (typeof syncCartIcons === "function") {
-        syncCartIcons();
-      }
+      grid.appendChild(div);
     });
+   
+    if (typeof applySeeMore === "function") {
+      applySeeMore(grid);
+      moveSeeMoreAfter(grid);
 
+}
+
+    if (typeof syncCartIcons === "function") {
+      syncCartIcons();
+    }
+       
+   
     grid.appendChild(item);
   });
 });
@@ -239,54 +253,6 @@ document.addEventListener("click", e => {
   }
 });
 
-/* ==============================
-   SERIES (UNCHANGED)
-================================ */
-function renderSeriesForm() {
-  const wrap = document.getElementById("seriesInputs");
-  if (!wrap) return;
-
-  wrap.insertAdjacentHTML("beforebegin", `
-    <div class="request-row">
-      <label>Number of series</label>
-      <input type="text" id="seriesCount" value="1">
-      <button type="button" id="resetSeries">Reset</button>
-    </div>
-  `);
-
-  updateSeriesInputs(1);
-
-  document.getElementById("seriesCount").addEventListener("input", e => {
-    const v = Math.max(1, Number(e.target.value.replace(/\D/g, "")));
-    e.target.value = v;
-    updateSeriesInputs(v);
-  });
-}
-
-function updateSeriesInputs(count) {
-  const wrap = document.getElementById("seriesInputs");
-  if (!wrap) return;
-
-  while (wrap.children.length < count) {
-    const i = wrap.children.length + 1;
-    const id = `S${String(i).padStart(3, "0")}`;
-
-    wrap.insertAdjacentHTML("beforeend", `
-      <div class="req-series-row">
-        <input class="req-series-title" placeholder="Series ${i}">
-        <input class="req-series-author" placeholder="Author (optional)">
-        <div class="price-box request-price-box" data-book-id="${id}" data-price="4">
-          RM4 / set
-          <img src="${CART_ICON}" class="cart-icon">
-        </div>
-      </div>
-    `);
-  }
-
-  while (wrap.children.length > count) {
-    wrap.lastElementChild.remove();
-  }
-}
 
 /* ==============================
    helper to ensure grid exists
