@@ -4,7 +4,6 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   renderBookTitleForm();
-  
 });
 
 /* ==============================
@@ -103,8 +102,6 @@ function updateBookInputs(count) {
       ${i === 1 ? "" : `
         <img src="${CLOSE_ICON}" class="remove-request" data-book-id="${id}">
       `}
-
-      <div class="inline-search-grid"></div>
 
     `;
 
@@ -255,17 +252,4 @@ document.addEventListener("click", e => {
 });
 
 
-/* ==============================
-   helper to ensure grid exists
-================================ */
-
-function ensureInlineGrid(row) {
-  let grid = row.querySelector(".inline-search-grid");
-  if (!grid) {
-    grid = document.createElement("div");
-    grid.className = "inline-search-grid hidden";
-    row.appendChild(grid);
-  }
-  return grid;
-}
 
