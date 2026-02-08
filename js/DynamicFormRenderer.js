@@ -98,13 +98,13 @@ function updateBookInputs(count) {
       <input
         class="req-book-title"
         data-book-id="${id}"
-        placeholder="Title for Book (i)"
+        placeholder="Title for Book ${i}"
       >
 
       <input
         class="req-book-author"
         data-book-id="${id}"
-        placeholder="Author for Book (i) (optional)"
+        placeholder="Author for Book ${i} (optional)"
       >
 
       <div class="price-box"
