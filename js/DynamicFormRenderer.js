@@ -140,7 +140,7 @@ document.addEventListener("input", e => {
   const results = searchBooks(keyword);
 
   if (!results.length) {
-    grid.innerHTML = `<div style="grid-column:1/-1;opacity:.6">No search results found. You may proceed with request books/series</div>`;
+    grid.innerHTML = `<div style="grid-column:1/-1;opacity:.6">No search results found. Click 'Add to Cart' to proceed with request for books/series</div>`;
     grid.classList.remove("hidden");
     resetPriceBox(priceBox, row.dataset.bookId);
     return;
