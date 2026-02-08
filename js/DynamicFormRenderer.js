@@ -89,15 +89,6 @@ function updateBookInputs(count) {
       <input class="req-book-author" data-book-id="${id}" placeholder="Author's name (optional)">
       <input class="req-book-specific" data-book-id="${id}" placeholder="Specific book title for Series #${i}(if any)">
 
-      <div class="price-box request-price-box"
-           data-book-id="${id}"
-           data-title=""
-           data-author=""
-           data-specific=""
-           data-price="1">
-        RM1 / book
-        <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
-      </div>
 
       ${i === 1 ? "" : `
         <img src="${CLOSE_ICON}" class="remove-request" data-book-id="${id}">
@@ -171,6 +162,15 @@ document.addEventListener("input", e => {
           </label>
         </div>
       </div>
+            <div class="price-box request-price-box"
+           data-book-id="${id}"
+           data-title="${priceBox.dataset.title}"
+           data-author="${priceBox.dataset.author}"
+           data-specific="${priceBox.dataset.specific}"
+           data-price="">
+        RM1 / book
+        <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
+      </div>
     `;
 
     // default → Book
@@ -227,12 +227,12 @@ document.addEventListener("input", e => {
 /* ==============================
    PRICE RESET HELPER
 ================================ */
-function resetPriceBox(priceBox, requestId) {
-  priceBox.dataset.bookId = requestId;
+function resetPriceBox(priceBox, id) {
+  priceBox.dataset.bookId = ${id};
   priceBox.dataset.price = "1";
   priceBox.innerHTML = `
     RM1 / book
-    <img src="${CART_ICON}" data-book-id="${requestId}" class="cart-icon">
+    <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
   `;
 
   if (typeof syncCartIcons === "function") {
@@ -290,24 +290,24 @@ document.addEventListener("change", e => {
 /* ==============================
    price switcher helper
 ================================ */
-function setRequestType(priceBox, requestId, type) {
+function setRequestType(priceBox, id, type) {
   if (type === "series") {
-    priceBox.dataset.bookId = requestId;
+    priceBox.dataset.bookId = ${id};
     priceBox.dataset.price = "4";
     priceBox.dataset.type = "series";
 
     priceBox.innerHTML = `
       RM4 / set
-      <img src="${CART_ICON}" data-book-id="${requestId}" class="cart-icon">
+      <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
     `;
   } else {
-    priceBox.dataset.bookId = requestId;
+    priceBox.dataset.bookId = ${id};
     priceBox.dataset.price = "1";
     priceBox.dataset.type = "book";
 
     priceBox.innerHTML = `
       RM1 / book
-      <img src="${CART_ICON}" data-book-id="${requestId}" class="cart-icon">
+      <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
     `;
   }
 
