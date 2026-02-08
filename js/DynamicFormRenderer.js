@@ -12,30 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 let requestCounter = 1; // R001, R002...
 
 /* ==============================
-   Init + radio switching
-================================ */
-function initRequestBook() {
-  const radios = document.querySelectorAll("input[name='requestType']");
-  radios.forEach(radio => {
-    radio.addEventListener("change", e => {
-      renderRequestForm(e.target.value);
-    });
-  });
-
-  renderRequestForm("book"); // default
-}
-
-/* ==============================
-   Form router
-================================ */
-function renderRequestForm(type) {
-  const box = document.getElementById("requestFormContainer");
-  if (!box) return;
-
-  if (type === "book") renderBookTitleForm(box);
-  if (type === "series") renderSeriesForm(box);
-}
-/* ==============================
    BOOK TITLE FORM
 ================================ */
 function renderBookTitleForm(container) {
@@ -107,13 +83,17 @@ function updateBookInputs(count) {
         placeholder="Author for Book ${i} (optional)"
       >
 
-      <div class="price-box"
+      <div class="price-box request-price-box"
            data-book-id="${id}"
            data-title=""
            data-author=""
            data-price="1">
         RM1 / book
         <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
+        
+          <img src="${CLOSE_ICON}"
+       class="remove-request"
+       data-book-id="${id}">
       </div>
     `;
 
@@ -152,3 +132,17 @@ document.addEventListener("input", e => {
 
   priceBox.dataset.author = authorInput.value.trim();
 });
+/* ==============================
+   close icon to remove item
+================================ */
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".remove-request");
+  if (!btn) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  const row = btn.closest(".req-book-row");
+  row?.remove();
+});
+
