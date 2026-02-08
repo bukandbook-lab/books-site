@@ -883,18 +883,22 @@ html, body {
 .req-book-title{
   height: 25px;
   width: 400px;
+  margin: 2px;
 }
 .req-book-author{
   height: 25px;
-  width: 1500px;
+  width: 150px;
+  margin: 2px;
 }
 .req-book-specific{
   height: 25px;
   width: 200px;
+  margin: 2px;
 }
 #bookCount{
   height: 25px;
   width: 50px;
+  margin: 2px;
 }
 
 .req-book-row .remove-request{
