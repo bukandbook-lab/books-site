@@ -880,12 +880,12 @@ html, body {
 /* =========================
    CLOSE ICON TO REMOVE ITEM IN REQUEST BOOK
 ========================= */
-.req-book-row remove-request{
+.req-book-row .remove-request{
   width: 16px;
   height: 16px;
   cursor: pointer;
 }
-.req-series-row remove-request{
+.req-series-row .remove-request{
   width: 16px;
   height: 16px;
   cursor: pointer;
