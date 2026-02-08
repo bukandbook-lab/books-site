@@ -31,6 +31,7 @@ function renderBookTitleForm() {
         pattern="[0-9]*"
         value="1"
       />
+      <button type="button" id="resetBooks">Reset</button>
     </div>
   `);
 
@@ -125,6 +126,7 @@ function renderSeriesForm() {
         pattern="[0-9]*"
         value="1"
       />
+      <button type="button" id="resetSeries">Reset</button>
     </div>
   `);
 
