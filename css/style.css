@@ -892,6 +892,34 @@ html, body {
 }
 
 /* =========================
+   SEARCH RESULT IN REQUEST
+========================= */
+.inline-search-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.inline-search-grid.hidden {
+  display: none;
+}
+
+.inline-search-item {
+  cursor: pointer;
+  text-align: center;
+  font-size: 12px;
+}
+
+.inline-search-item img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+
+/* =========================
    CLOSE ICON FOR THANK YOU POPUP 
 ========================= */
 #thankYou .close-popup {
