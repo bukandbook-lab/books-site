@@ -64,47 +64,50 @@ function updateBookInputs(count) {
   const wrap = document.getElementById("bookTitleInputs");
   if (!wrap) return;
 
-  const existingRows = wrap.querySelectorAll(".req-book-row");
+  const rows = [...wrap.querySelectorAll(".req-book-row")];
+  const current = rows.length;
 
-  // 🔻 Remove extra rows
-  if (existingRows.length > count) {
-    for (let i = existingRows.length - 1; i >= count; i--) {
-      existingRows[i].remove();
+  // 🔻 Remove extra rows (from the end only)
+  if (count < current) {
+    for (let i = current - 1; i >= count; i--) {
+      rows[i].remove();
     }
   }
 
   // 🔺 Add missing rows
-  for (let i = existingRows.length + 1; i <= count; i++) {
-    const id = `R${String(i).padStart(3, "0")}`;
+  if (count > current) {
+    for (let i = current + 1; i <= count; i++) {
+      const id = `R${String(i).padStart(3, "0")}`;
 
-    const row = document.createElement("div");
-    row.className = "req-book-row";
-    row.dataset.bookId = id;
+      const row = document.createElement("div");
+      row.className = "req-book-row";
+      row.dataset.bookId = id;
 
-    row.innerHTML = `
-      <input
-        class="req-book-title"
-        data-book-id="${id}"
-        placeholder="Book title (${id})"
-      >
+      row.innerHTML = `
+        <input
+          class="req-book-title"
+          data-book-id="${id}"
+          placeholder="Book title (${id})"
+        >
 
-      <input
-        class="req-book-author"
-        data-book-id="${id}"
-        placeholder="Author (optional)"
-      >
+        <input
+          class="req-book-author"
+          data-book-id="${id}"
+          placeholder="Author (optional)"
+        >
 
-      <div class="price-box request-price-box"
-           data-book-id="${id}"
-           data-title=""
-           data-author=""
-           data-price="1">
-        RM1 / book
-        <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
-      </div>
-    `;
+        <div class="price-box"
+             data-book-id="${id}"
+             data-title=""
+             data-author=""
+             data-price="1">
+          RM1 / book
+          <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
+        </div>
+      `;
 
-    wrap.appendChild(row);
+      wrap.appendChild(row);
+    }
   }
 }
 
