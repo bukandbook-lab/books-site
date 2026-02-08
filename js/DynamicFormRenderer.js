@@ -3,8 +3,16 @@
 ================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-  initRequestBook();
+  const container = document.getElementById("requestFormContainer");
+  if (!container) return;
+
+  // render Book section
+  renderBookTitleForm(container);
+
+  // render Series section (default 1)
+  updateSeriesInputs(1);
 });
+
 
 /* ==============================
    Global state VERY IMPORTANT
