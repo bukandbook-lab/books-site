@@ -86,14 +86,15 @@ function updateBookInputs(count) {
     row.dataset.bookId = id;
 
     row.innerHTML = `
-      <input class="req-book-title" data-book-id="${id}" width="350px" placeholder="Enter title for Book/Series #${i}"><br/>
-      <input class="req-book-author" data-book-id="${id}" width="100px" placeholder="Enter author's name for Book/Series #${i}(optional)">
-      <input class="req-book-specific" data-book-id="${id}" width="150px" placeholder="Enter specific book title for Series #${i}(oif any)">
+      <input class="req-book-title" data-book-id="${id}" placeholder="Enter title for Book/Series #${i}"><br/>
+      <input class="req-book-author" data-book-id="${id}" placeholder="Enter author's name for Book/Series #${i}(optional)">
+      <input class="req-book-specific" data-book-id="${id}" placeholder="Enter specific book title for Series #${i}(oif any)">
 
       <div class="price-box request-price-box"
            data-book-id="${id}"
            data-title=""
            data-author=""
+           data-specific=""
            data-price="1">
         RM1 / book
         <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
