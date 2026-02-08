@@ -42,7 +42,14 @@ function renderBookTitleForm(container) {
   container.innerHTML = `
     <div class="request-row">
       <label>Number of books</label>
-      <input type="number" id="bookCount" min="1" value="1">
+      <input
+  type="text"
+  id="bookCount"
+  inputmode="numeric"
+  pattern="[0-9]*"
+  value="1"
+/>
+
     </div>
 
     <div id="bookTitleInputs"></div>
@@ -53,16 +60,20 @@ function renderBookTitleForm(container) {
 
 const bookCount = document.getElementById("bookCount");
 
-["input", "change"].forEach(evt => {
-  bookCount.addEventListener(evt, e => {
-    let val = Number(e.target.value);
+bookCount.addEventListener("input", e => {
+  let val = e.target.value.replace(/\D/g, ""); // digits only
 
-    if (!val || val < 1) val = 1;
+  if (val === "") {
+    e.target.value = "";
+    return;
+  }
 
-    e.target.value = val;      // normalize value
-    updateBookInputs(val);
-  });
+  val = Math.max(1, Number(val));
+  e.target.value = val;
+
+  updateBookInputs(val);
 });
+
 
 }
 
