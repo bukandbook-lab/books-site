@@ -74,15 +74,16 @@ if (!book && sourceEl) {
     return;
   }
 
+
   book = {
     id,
-    title,
+    title: `Request a book – ${rawTitle}`, // 🔥 PREFIX HERE
     price: Number(sourceEl.dataset.price || 1),
-    SetQtty: 1,
-    isRequest: true   // 🔥 FLAG IT
+    SetQtty: 1
   };
 }
 
+   
 
   if (!book) return;
 
@@ -91,7 +92,6 @@ cart.items.set(id, {
   title: book.title,
   price: Number(book.price),
   setQtty: Number(book.SetQtty || 1),
-  isRequest: book.isRequest || false
 });
 
 
