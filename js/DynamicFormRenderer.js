@@ -214,6 +214,16 @@ document.addEventListener("input", e => {
 });
 
 /* ==============================
+   SPECIFIC LIVE UPDATE
+================================ */
+document.addEventListener("input", e => {
+  const SpecificInput = e.target.closest(".req-book-specific");
+  if (!SpecificInput) return;
+
+  const row = SpecificInput.closest(".req-book-row");
+  row.querySelector(".price-box").dataset.specific = SpecificInput.value.trim();
+});
+/* ==============================
    PRICE RESET HELPER
 ================================ */
 function resetPriceBox(priceBox, requestId) {
