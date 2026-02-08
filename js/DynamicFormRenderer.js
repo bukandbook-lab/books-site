@@ -101,6 +101,9 @@ function updateBookInputs(count) {
       ${i === 1 ? "" : `
         <img src="${CLOSE_ICON}" class="remove-request" data-book-id="${id}">
       `}
+
+      <div class="inline-search-grid"></div>
+
     `;
 
     wrap.appendChild(row);
