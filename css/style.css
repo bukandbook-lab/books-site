@@ -878,6 +878,20 @@ html, body {
   cursor: pointer;
 }
 /* =========================
+   CLOSE ICON TO REMOVE ITEM IN REQUEST BOOK
+========================= */
+.req-book-row{
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.req-series-row{
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* =========================
    CLOSE ICON FOR THANK YOU POPUP 
 ========================= */
 #thankYou .close-popup {
