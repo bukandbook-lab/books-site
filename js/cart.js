@@ -66,7 +66,6 @@ function addToCart(bookId, sourceEl = null) {
   let book = BOOK_REGISTRY[id];
 
   // 🔥 CUSTOM REQUEST BOOK
-
 if (!book && sourceEl) {
   const title = sourceEl.dataset.title?.trim();
 
@@ -79,18 +78,22 @@ if (!book && sourceEl) {
     id,
     title,
     price: Number(sourceEl.dataset.price || 1),
-    SetQtty: 1
+    SetQtty: 1,
+    isRequest: true   // 🔥 FLAG IT
   };
 }
 
+
   if (!book) return;
 
-  cart.items.set(id, {
-    id: book.id,
-    title: book.title,
-    price: Number(book.price),
-    setQtty: Number(book.SetQtty || 1)
-  });
+cart.items.set(id, {
+  id: book.id,
+  title: book.title,
+  price: Number(book.price),
+  setQtty: Number(book.SetQtty || 1),
+  isRequest: book.isRequest || false
+});
+
 
   renderCart();
   syncCartIcons();
@@ -181,7 +184,7 @@ function renderCart() {
     itemsHTML += `
       <div class="cart-row">
         <span>
-           ${index}. ${item.title}
+           ${index}. ${item.isRequest ? "Request a book – " : ""}${item.title}
            ${item.setQtty > 0 && item.price !== 1
            ? ` (${item.setQtty} books)`
            : ``}
