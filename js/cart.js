@@ -94,6 +94,8 @@ if (!book && sourceEl) {
 
   renderCart();
   syncCartIcons();
+  openCart?.();
+
 }
 
 
