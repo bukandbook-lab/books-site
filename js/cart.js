@@ -67,13 +67,12 @@ function addToCart(bookId, sourceEl = null) {
 
   // 🔥 CUSTOM REQUEST BOOK
 if (!book && sourceEl) {
-  const title = sourceEl.dataset.title?.trim();
+  const rawTitle = sourceEl.dataset.title?.trim();
 
-  if (!title) {
+  if (!rawTitle) {
     alert("Please enter a book title first 😊");
     return;
   }
-
 
   book = {
     id,
@@ -82,6 +81,7 @@ if (!book && sourceEl) {
     SetQtty: 1
   };
 }
+
 
    
 
