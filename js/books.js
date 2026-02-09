@@ -211,6 +211,16 @@ function bindSeeMoreToGrid(grid) {
   grid.after(box);
 }
 
+/* =====================================
+   HIDE SEE MORE
+===================================== */
+function hideSeeMore() {
+  const box = document.getElementById("seeMoreContainer");
+  if (!box) return;
+
+  box.style.display = "none";
+  delete box.dataset.boundTo;
+}
 
 
 
