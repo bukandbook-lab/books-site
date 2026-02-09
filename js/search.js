@@ -200,8 +200,7 @@ Object.values(BOOK_REGISTRY).forEach(book => {
       div.innerHTML = `
   <div class="skeleton"></div>
 
-  <div class="book-bg"
-     style="background-image:url('${book.img}')"></div>
+<div class="book-bg" data-bg="img.jpg"></div>
 
   <img
     src="${book.img}"
