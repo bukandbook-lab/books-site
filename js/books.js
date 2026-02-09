@@ -207,8 +207,9 @@ function hideSeeMore() {
   if (!box) return;
 
   box.classList.add("hidden");
-  delete box.dataset.boundTo; // 👈 important
+  delete box.dataset.boundTo;
 }
+
 
 
 /* =====================================
