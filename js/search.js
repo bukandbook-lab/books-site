@@ -89,6 +89,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const grid = getSearchGrid();
     grid.innerHTML = "";
 
+    let hasResult = false;
+
 Object.values(BOOK_REGISTRY).forEach(book => {
   const searchableText = [
     book.title,
@@ -103,6 +105,7 @@ Object.values(BOOK_REGISTRY).forEach(book => {
     words.some(w => w.includes(kw))
   )) return;
 
+  hasResult = true;
 
       const div = document.createElement("div");
       div.className = "book-thumb";
@@ -151,6 +154,18 @@ Object.values(BOOK_REGISTRY).forEach(book => {
       syncCartIcons();
     }
   });
+
+  const msg = document.getElementById("noSearchResult");
+
+if (!hasResult) {
+  msg.classList.remove("hidden");
+  grid.classList.add("hidden");
+  hideSeeMore();
+} else {
+  msg.classList.add("hidden");
+  grid.classList.remove("hidden");
+}
+
 });
 
 
