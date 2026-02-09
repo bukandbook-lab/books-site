@@ -84,10 +84,6 @@ function updateBookInputs(count) {
     row.className = "req-book-row";
     row.dataset.bookId = id;
 
-    const priceBox = ensurePriceBox(row);
-    setRequestType(priceBox, row.dataset.bookId, "book");
-
-
     row.innerHTML = `
       <br/>
       ${i}. 
