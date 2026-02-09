@@ -3,6 +3,31 @@ function hideTabs() {
     .forEach(t => t.style.display = "none");
 }
 
+  function getNoSearchResultBox() {
+  let box = document.getElementById("noSearchResult");
+
+  if (!box) {
+    box = document.createElement("div");
+    box.id = "noSearchResult";
+    box.className = "no-search-result hidden";
+    box.style.gridColumn = "1 / -1";
+    box.style.margin = "12px 0";
+    box.innerHTML = `
+      No search result found.<br/>
+      Do you want to make a special request instead?
+      <div style="margin-top:8px">
+        <button id="reqYes">Yes</button>
+        <button id="reqNo">No</button>
+      </div>
+    `;
+
+    document.body.appendChild(box);
+  }
+
+  return box;
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const searchInput = document.getElementById("bookSearch");
@@ -34,31 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return g;
   }
-
-  function getNoSearchResultBox() {
-  let box = document.getElementById("noSearchResult");
-
-  if (!box) {
-    box = document.createElement("div");
-    box.id = "noSearchResult";
-    box.className = "no-search-result hidden";
-    box.style.gridColumn = "1 / -1";
-    box.style.margin = "12px 0";
-    box.innerHTML = `
-      No search result found.<br/>
-      Do you want to make a special request instead?
-      <div style="margin-top:8px">
-        <button id="reqYes">Yes</button>
-        <button id="reqNo">No</button>
-      </div>
-    `;
-
-    document.body.appendChild(box);
-  }
-
-  return box;
-}
-
   
   searchInput.addEventListener("input", () => {
     hideSeeMore(); 
