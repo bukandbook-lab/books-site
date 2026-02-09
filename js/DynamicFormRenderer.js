@@ -340,6 +340,8 @@ document.addEventListener("click", e => {
 
   if (action === "reqYes") {
     hideTabs();
+    getNoSearchResultBox().classList.add("hidden");
+
 
     const panel = document.getElementById("RequestBook");
     if (panel) panel.style.display = "block";
@@ -352,6 +354,8 @@ document.addEventListener("click", e => {
 
   if (action === "reqNo") {
     hideTabs();
+    getNoSearchResultBox().classList.add("hidden");
+
 
     const panel = document.getElementById(lastTab);
     if (panel) panel.style.display = "block";
