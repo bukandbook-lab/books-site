@@ -331,50 +331,6 @@ document.addEventListener("change", e => {
   row.querySelector(".inline-search-grid")?.classList.add("hidden");
 });
 
-/* ==============================
-   handler for yes or no proceed to request
-================================ */
-document.addEventListener("click", e => {
-  const action = e.target.dataset.action;
-  if (!action) return;
-
-  if (action === "reqYes") {
-    hideTabs();
-    getNoSearchResultBox().classList.add("hidden");
-
-
-    const panel = document.getElementById("RequestBook");
-    if (panel) panel.style.display = "block";
-
-    document.querySelectorAll(".tab-btn")
-      .forEach(btn => btn.classList.remove("active"));
-
-    hideSeeMore();
-  }
-
-  if (action === "reqNo") {
-    hideTabs();
-    getNoSearchResultBox().classList.add("hidden");
-    hideSeeMore();
-
-
-    const panel = document.getElementById(lastTab);
-    if (panel) panel.style.display = "block";
-
-    document.querySelectorAll(".tab-btn")
-      .forEach(btn =>
-        btn.classList.toggle("active", btn.dataset.tab === lastTab)
-      );
-
-    const grid = panel?.querySelector(".image-grid");
-    if (grid && typeof applySeeMore === "function") {
-      applySeeMore(grid);
-      bindSeeMoreToGrid(grid);
-    }
-
-   
-  }
-});
 
 
 /* ==============================
