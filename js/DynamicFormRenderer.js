@@ -317,26 +317,9 @@ function LiveSearch(row) {
 
   if (!title && !author && !specific) {
     setRequestType(priceBox, row.dataset.bookId, "book");
+    priceBox.classList.add("hidden");
     return;
   }
-
- /* ==============================
-     VISIBILITY CONTROL FOR PRICE-BOX
-  ================================= */
-   if (!title && !author && !specific) {
-  priceBox.classList.add("hidden");
-  return;
-}
-
-   if (!results.length) {
-  grid.classList.remove("hidden");
-
-  priceBox.classList.remove("hidden"); // ✅ SHOW
-  setRequestType(priceBox, row.dataset.bookId, "book");
-
-  return;
-}
-
 
   /* ==============================
      START WITH FULL DATASET
@@ -363,10 +346,11 @@ function LiveSearch(row) {
   ================================= */
   if (!results.length) {
     grid.classList.remove("hidden");
+    priceBox.classList.remove("hidden"); // ✅ SHOW
     setRequestType(priceBox, row.dataset.bookId, "book");
     return;
   }
-   
+
 /* ==============================
    SEARCH RESULTS FOUND
 ================================ */
