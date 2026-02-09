@@ -315,7 +315,19 @@ function filterBySeries(list, series) {
     return words.every(w => seriesWords.some(s => s.includes(w)));
   });
 }
+/* ==============================
+   handler for Yes, proceed with request
+================================ */
+document.addEventListener("change", e => {
+  if (e.target.value === "yesproceed") {
+    const row = e.target.closest(".req-book-row");
+    if (!row) return;
 
+    const priceBox = ensurePriceBox(row);
+    priceBox.classList.remove("hidden"); // show request price
+    setRequestType(priceBox, row.dataset.bookId, "book"); // default request
+  }
+});
 
 /* ==============================
    function live search
@@ -359,13 +371,12 @@ function LiveSearch(row) {
   if (title) results = filterByTitle(results, title);
   if (specific) results = filterBySeries(results, specific);
 
-  if (!results.length) {
-    // ❌ No search results → show request price-box
-    priceBox.classList.remove("hidden");
-    setRequestType(priceBox, row.dataset.bookId, "book"); // default
-    grid.classList.remove("hidden"); // show "No results" message handled elsewhere
-    return;
-  }
+
+   if (results.length) {
+  // Hide row-level request price-box
+  priceBox.classList.add("hidden");
+
+  grid.classList.remove("hidden");
 
   // ✅ Search results exist → hide request price-box
   priceBox.classList.add("hidden");
@@ -421,6 +432,12 @@ grid.appendChild(msg);
 
     grid.appendChild(div);
   });
+        // Append message & results...
+} else {
+  // No results → show request price-box
+  priceBox.classList.remove("hidden");
+  setRequestType(priceBox, row.dataset.bookId, "book");
+}
 
   if (typeof applySeeMore === "function") {
     applySeeMore(grid);
