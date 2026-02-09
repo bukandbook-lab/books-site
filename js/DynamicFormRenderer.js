@@ -265,8 +265,12 @@ function LiveSearch(){  const row = titleInput.closest(".req-book-row");
     return;
   }
 
+ const message = document.createElement("div");
+ message.innerHTML = `
+      The book is found in our catalogue:<br/>`;
+                      
   grid.classList.remove("hidden");
-
+                      
   results.slice().forEach(book => {
       const div = document.createElement("div");
       div.className = "book-thumb";
@@ -275,7 +279,6 @@ function LiveSearch(){  const row = titleInput.closest(".req-book-row");
       const priceLabel = isSetBook ? "/set" : "/book";
 
       div.innerHTML = `
-      The book is found in our catalogue:<br/>
   <div class="skeleton"></div>
 
   <div class="book-bg"
