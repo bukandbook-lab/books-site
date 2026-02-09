@@ -363,7 +363,8 @@ document.getElementById("reqNo").addEventListener("click", () => {
   const grid = panel?.querySelector(".image-grid");
   if (grid && typeof applySeeMore === "function") {
     applySeeMore(grid);
-    moveSeeMoreAfter(grid);
+    bindSeeMoreToGrid(grid);
+
   }
 
   document.getElementById("noSearchResult")?.classList.add("hidden");
