@@ -16,7 +16,7 @@ window.getNoSearchResultBox = function () {
   box = document.createElement("div");
   box.id = "noSearchResultBox";
   box.className = "noSearchResult hidden";
-  box.style.margin = "12px";
+  box.style.margin = "12px 0";
   box.style.fontWeight = "500";
 
   box.innerHTML = `
@@ -27,12 +27,18 @@ window.getNoSearchResultBox = function () {
     <button id="reqNo">No</button>
   `;
 
-  // 🔑 IMPORTANT: append near search UI, not body
-  const searchInput = document.getElementById("bookSearch");
-  (searchInput?.parentElement || document.body).appendChild(box);
+  // ✅ Insert AFTER search results container
+  const searchGrid = document.getElementById("searchResults");
+  if (searchGrid) {
+    searchGrid.insertAdjacentElement("afterend", box);
+  } else {
+    // fallback
+    document.body.appendChild(box);
+  }
 
   return box;
 };
+
 
  /* ============================
        LISTENER FOR YES NO PROCEED TO REQUEST
