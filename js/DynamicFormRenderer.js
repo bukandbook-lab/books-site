@@ -324,6 +324,14 @@ document.addEventListener("change", e => {
     const priceBox = row.querySelector(".request-price-box");
     priceBox.classList.remove("hidden"); // show request price box
     setRequestType(priceBox, row.dataset.bookId, "book"); // set default
+
+   const grid = row.querySelector(".inline-search-grid");
+   if (grid) grid.classList.add("hidden"); // hide search results
+
+     
+   const mesage = row.querySelector(".search-found-message");
+   if (mesage) mesage.classList.add("hidden"); // hide search results
+
   }
 });
 
