@@ -219,6 +219,16 @@ Object.values(BOOK_REGISTRY).forEach(book => {
       grid.appendChild(div);
     });
 
+const box = getNoSearchResultBox();
+
+if (!hasResult) {
+  box.classList.remove("hidden");
+  grid.classList.add("hidden");
+  hideSeeMore();
+} else {
+  box.classList.add("hidden");
+  grid.classList.remove("hidden");
+}
 
 
 
