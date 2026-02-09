@@ -77,7 +77,7 @@ if (!book && sourceEl) {
   const author = sourceEl.dataset.author?.trim();
   const specific = sourceEl.dataset.specific?.trim();
 
-  let requestTitle = `Request book/series – ${rawTitle}`;
+  let requestTitle = `Request for book/series: ${rawTitle}`;
 
   if (author) {
     requestTitle += ` by ${author}`;
