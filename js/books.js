@@ -218,7 +218,7 @@ function hideSeeMore() {
   const box = document.getElementById("seeMoreContainer");
   if (!box) return;
 
-  box.classList.add("hidden");
+  box.style.display = "none";
   delete box.dataset.boundTo;
 }
 
