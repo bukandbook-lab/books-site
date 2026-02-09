@@ -65,7 +65,7 @@ function addToCart(bookId, sourceEl = null) {
   const id = String(bookId);
   let book = BOOK_REGISTRY[id];
 
-  // 🔥 CUSTOM REQUEST BOOK
+// 🔥 CUSTOM REQUEST BOOK 
 if (!book && sourceEl) {
   const rawTitle = sourceEl.dataset.title?.trim();
 
@@ -74,16 +74,26 @@ if (!book && sourceEl) {
     return;
   }
 
+  const author = sourceEl.dataset.author?.trim();
+  const specific = sourceEl.dataset.specific?.trim();
+
+  let requestTitle = `Request book/series – ${rawTitle}`;
+
+  if (author) {
+    requestTitle += ` by ${author}`;
+  }
+
+  if (specific) {
+    requestTitle += ` - ${specific}`;
+  }
+
   book = {
     id,
-    title: `Request a book/series – ${rawTitle} by ${sourceEl.dataset.author} - ${sourceEl.dataset.specific} `, // 🔥 PREFIX HERE
+    title: requestTitle,
     price: Number(sourceEl.dataset.price || 1),
     SetQtty: 1
   };
 }
-
-
-   
 
   if (!book) return;
 
