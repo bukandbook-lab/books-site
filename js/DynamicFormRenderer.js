@@ -334,38 +334,43 @@ document.addEventListener("change", e => {
 /* ==============================
    handler for yes or no proceed to request
 ================================ */
-document.getElementById("reqYes").addEventListener("click", () => {
-  hideTabs();
+document.addEventListener("click", e => {
+  const action = e.target.dataset.action;
+  if (!action) return;
 
-  document.getElementById("RequestBook").style.display = "block";
+  if (action === "reqYes") {
+    hideTabs();
 
-  document.querySelectorAll(".tab-btn")
-    .forEach(btn => btn.classList.remove("active"));
+    const panel = document.getElementById("RequestBook");
+    if (panel) panel.style.display = "block";
 
-  hideSeeMore(); // no see more in request flow
-});
+    document.querySelectorAll(".tab-btn")
+      .forEach(btn => btn.classList.remove("active"));
 
-document.getElementById("reqNo").addEventListener("click", () => {
-  hideTabs();
-
-  const panel = document.getElementById(lastTab);
-  if (panel) panel.style.display = "block";
-
-  document.querySelectorAll(".tab-btn")
-    .forEach(btn =>
-      btn.classList.toggle("active", btn.dataset.tab === lastTab)
-    );
-
-  // restore see more for that tab
-  const grid = panel?.querySelector(".image-grid");
-  if (grid && typeof applySeeMore === "function") {
-    applySeeMore(grid);
-    bindSeeMoreToGrid(grid);
-
+    hideSeeMore();
   }
 
-  document.getElementById("noSearchResult")?.classList.add("hidden");
+  if (action === "reqNo") {
+    hideTabs();
+
+    const panel = document.getElementById(lastTab);
+    if (panel) panel.style.display = "block";
+
+    document.querySelectorAll(".tab-btn")
+      .forEach(btn =>
+        btn.classList.toggle("active", btn.dataset.tab === lastTab)
+      );
+
+    const grid = panel?.querySelector(".image-grid");
+    if (grid && typeof applySeeMore === "function") {
+      applySeeMore(grid);
+      bindSeeMoreToGrid(grid);
+    }
+
+    document.getElementById("noSearchResult")?.classList.add("hidden");
+  }
 });
+
 
 /* ==============================
    function live search
