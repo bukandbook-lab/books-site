@@ -217,6 +217,18 @@ function ensurePriceBox(row) {
   }
   return priceBox;
 }
+/* ==============================
+   radio handler
+================================ */
+document.addEventListener("change", e => {
+  if (e.target.type !== "radio") return;
+
+  const row = e.target.closest(".req-book-row");
+  if (!row) return;
+
+  const priceBox = ensurePriceBox(row);
+  setRequestType(priceBox, row.dataset.bookId, e.target.value);
+});
 
 
 /* ==============================
