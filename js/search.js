@@ -24,11 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return document.querySelector(".tab-btn.active")?.dataset.tab;
   }
 
-  function hideTabs() {
-    document.querySelectorAll(".tabcontent")
-      .forEach(t => t.style.display = "none");
-  }
-
   function getSearchGrid() {
     let g = document.getElementById("searchResults");
     if (!g) {
