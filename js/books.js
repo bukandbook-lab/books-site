@@ -113,6 +113,8 @@ item.innerHTML = `
 
 
     grid.appendChild(item);
+    progressiveImageLoad(item);
+
   });
 
 container.appendChild(grid);
