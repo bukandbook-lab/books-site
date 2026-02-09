@@ -89,8 +89,7 @@ const priceLabel = isSetBook ? "/set" : "/book";
 item.innerHTML = `
   <div class="skeleton"></div>
 
-<div class="book-bg"
-     style="background-image:url('${normalized.img}')"></div>
+<div class="book-bg" data-bg="img.jpg"></div>
 
 <img
   src="${normalized.img}"
