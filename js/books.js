@@ -311,3 +311,28 @@ document.addEventListener("click", e => {
   }, 250);
 
 });
+/* =====================================
+   load background AFTER image loads
+===================================== */
+
+function progressiveImageLoad(container) {
+  const img = container.querySelector(".grid-book-img");
+  const bg = container.querySelector(".book-bg");
+
+  if (!img || !bg) return;
+
+  // when front image is ready
+  img.addEventListener("load", () => {
+    const bgUrl = bg.dataset.bg;
+    if (!bgUrl) return;
+
+    const preload = new Image();
+    preload.src = bgUrl;
+
+    preload.onload = () => {
+      bg.style.backgroundImage = `url('${bgUrl}')`;
+      bg.classList.add("loaded");
+    };
+  });
+}
+
