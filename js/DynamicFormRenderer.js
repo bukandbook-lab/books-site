@@ -396,8 +396,8 @@ msg.innerHTML = `The book is found as below. Not the book?
 <label>
   <input
     type="radio"
-    name="requestType-${id}"
-    data-book-id="${id}"
+    name="requestType-${row.dataset.bookId}"
+    data-book-id="${row.dataset.bookId}"
     value="yesproceed"
   > Yes
 </label>`;
