@@ -877,9 +877,40 @@ html, body {
   height: 16px;
   cursor: pointer;
 }
+
 /* =========================
-   CLOSE ICON TO REMOVE ITEM IN REQUEST BOOK
+   REQUEST BOOK SECTION
 ========================= */
+/* Request-level price box (user can click cart for custom request) */
+.request-price-box {
+  background-color: #FF1493;
+  color: white;
+  border-radius: 18px;
+  padding: 3px 6px;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+/* Grid search result boxes */
+.result-price-box {
+  background-color: #FF69B4;
+  color: white;
+  border-radius: 12px;
+  padding: 2px 4px;
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
 .req-book-title{
   height: 25px;
   width: 360px;
@@ -893,7 +924,7 @@ html, body {
 }
 .req-book-specific{
   height: 25px;
-  width: 210px;
+  width: 220px;
   margin: 1px;
   padding: 1px;
 }
