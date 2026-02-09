@@ -347,27 +347,61 @@ function LiveSearch(row) {
     setRequestType(priceBox, row.dataset.bookId, "book");
     return;
   }
-
+   
+/* ==============================
+   SEARCH RESULTS FOUND
+================================ */
   grid.classList.remove("hidden");
 
+/* 🔔 Message */
+const msg = document.createElement("div");
+msg.className = "search-found-message";
+msg.style.gridColumn = "1 / -1";
+msg.style.marginBottom = "6px";
+msg.style.fontWeight = "500";
+msg.textContent = "The book is found in our catalogue:";
+
+grid.appendChild(msg);
+
+/* 📚 Results */
   results.forEach(book => {
     const div = document.createElement("div");
     div.className = "book-thumb";
 
-    const isSet = Number(book.SetQtty) > 1;
-    const priceLabel = isSet ? "/set" : "/book";
+    const isSetBook = Number(book.SetQtty) > 1;
+    const priceLabel = isSetBook ? "/set" : "/book";
 
     div.innerHTML = `
-      <img src="${book.img}" class="grid-book-img" loading="lazy">
-      <div class="price-box">
+      <div class="book-bg" style="background-image:url('${book.img}')"></div>
+      <img
+    src="${book.img}"
+    class="grid-book-img popup-trigger"
+    loading="lazy"
+    data-book-id="${book.id}"
+      >
+
+
+      <div class="price-box"
+        data-book-id="${book.id}"
+        data-title="${book.title}"
+        data-price="${Number(book.price).toFixed(2)}"
+        data-setqtty="${book.SetQtty || 1}"
+      >
         RM${Number(book.price).toFixed(2)}${priceLabel}
+        <img src="${CART_ICON}" data-book-id="${book.id}" class="cart-icon">
       </div>
     `;
 
     grid.appendChild(div);
   });
 
+  if (typeof applySeeMore === "function") {
+    applySeeMore(grid);
+    moveSeeMoreAfter(grid);
+  }
+
   if (typeof syncCartIcons === "function") {
     syncCartIcons();
   }
 }
+
