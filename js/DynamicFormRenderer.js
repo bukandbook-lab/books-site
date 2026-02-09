@@ -484,10 +484,7 @@ grid.appendChild(msg);
 
 }
 
-  if (typeof applySeeMore === "function") {
-    applySeeMore(grid);
-    moveSeeMoreAfter(grid);
-  }
+
 
   if (typeof syncCartIcons === "function") {
     syncCartIcons();
