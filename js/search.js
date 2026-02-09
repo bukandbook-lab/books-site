@@ -1,3 +1,8 @@
+function hideTabs() {
+  document.querySelectorAll(".tabcontent")
+    .forEach(t => t.style.display = "none");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const searchInput = document.getElementById("bookSearch");
