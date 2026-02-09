@@ -416,7 +416,7 @@ grid.appendChild(msg);
     const priceLabel = isSetBook ? "/set" : "/book";
 
     div.innerHTML = `
-      <div class="book-bg" data-bg="img.jpg"></div>
+      <div class="book-bg" data-bg="${book.img}"></div>
       <img
     src="${book.img}"
     class="grid-book-img popup-trigger"
