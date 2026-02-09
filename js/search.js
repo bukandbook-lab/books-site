@@ -125,9 +125,12 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ============================
        🔙 SEARCH CLEARED
     ============================ */
-    if (!keyword) {
-      document.getElementById("searchResults")?.remove();
-      getNoSearchResultBox().classList.add("hidden");
+if (!keyword) {
+  document.getElementById("searchResults")?.remove();
+
+  const box = getNoSearchResultBox();
+  box.classList.add("hidden");
+        
       hideTabs();
 
       // restore last tab
