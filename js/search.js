@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
      const grid = panel?.querySelector(".image-grid");
      if (grid && typeof applySeeMore === "function") {
         applySeeMore(grid);
-        bindSeeMoreToGrid(grid);
+        
  
 
      }
@@ -176,7 +176,7 @@ if (!hasResult) {
 
     if (typeof applySeeMore === "function") {
       applySeeMore(grid);
-      bindSeeMoreToGrid(grid);
+      moveSeeMoreAfter(grid);
 
 
 }
