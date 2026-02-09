@@ -334,6 +334,40 @@ document.addEventListener("change", e => {
 
   }
 });
+/* ==============================
+   handler for yes or no proceed to request
+================================ */
+document.getElementById("reqYes").addEventListener("click", () => {
+  hideTabs();
+
+  document.getElementById("RequestBook").style.display = "block";
+
+  document.querySelectorAll(".tab-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+  hideSeeMore(); // no see more in request flow
+});
+
+document.getElementById("reqNo").addEventListener("click", () => {
+  hideTabs();
+
+  const panel = document.getElementById(lastTab);
+  if (panel) panel.style.display = "block";
+
+  document.querySelectorAll(".tab-btn")
+    .forEach(btn =>
+      btn.classList.toggle("active", btn.dataset.tab === lastTab)
+    );
+
+  // restore see more for that tab
+  const grid = panel?.querySelector(".image-grid");
+  if (grid && typeof applySeeMore === "function") {
+    applySeeMore(grid);
+    moveSeeMoreAfter(grid);
+  }
+
+  document.getElementById("noSearchResult")?.classList.add("hidden");
+});
 
 /* ==============================
    function live search
@@ -440,7 +474,7 @@ grid.appendChild(msg);
 
     grid.appendChild(div);
   });
-        // Append message & results...
+        
 } else {
   // No results → show request price-box
   priceBox.classList.remove("hidden");
