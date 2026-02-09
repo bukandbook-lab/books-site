@@ -11,11 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
     tabs.forEach(t => t.classList.remove("active"));
   }
 
-  function openTab(tabId, btn) {
-    hideAll();
-    getNoSearchResultBox().classList.add("hidden");
-    deactivateTabs();
-    
+function openTab(tabId, btn) {
+  hideAll();
+  deactivateTabs();
+
   // ⛔ EXIT SEARCH MODE
   const searchGrid = document.getElementById("searchResults");
   if (searchGrid) searchGrid.remove();
@@ -23,18 +22,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("bookSearch");
   if (searchInput) searchInput.value = "";
 
+  // ✅ HIDE "NO SEARCH RESULT" MESSAGE
+  const box = window.getNoSearchResultBox?.();
+  if (box) box.classList.add("hidden");
 
-    const panel = document.getElementById(tabId);
-    if (!panel) return;
+  const panel = document.getElementById(tabId);
+  if (!panel) return;
 
-    panel.style.display = "block";
-    btn?.classList.add("active");
+  panel.style.display = "block";
+  btn?.classList.add("active");
 
-    // render books from data source
-    BOOKS_READY.then(() => loadBooks(tabId));
+  // render books from data source
+  BOOKS_READY.then(() => loadBooks(tabId));
+}
 
-    
-  }
 
   tabs.forEach(btn => {
     btn.addEventListener("click", () => {
