@@ -214,16 +214,7 @@ Object.values(BOOK_REGISTRY).forEach(book => {
     });
 
 
-const noResultBox = getNoSearchResultBox();
 
-if (!hasResult) {
-  noResultBox.classList.remove("hidden");
-  grid.classList.add("hidden");
-  hideSeeMore();
-} else {
-  noResultBox.classList.add("hidden");
-  grid.classList.remove("hidden");
-}
 
 
     if (typeof applySeeMore === "function") {
