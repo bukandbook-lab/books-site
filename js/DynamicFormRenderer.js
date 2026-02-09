@@ -200,10 +200,10 @@ function ensureInlineGrid(row) {
    helper to ensure price-box exists
 ================================ */
 function ensurePriceBox(row) {
-  let priceBox = row.querySelector(".price-box");
+  let priceBox = row.querySelector(".request-price-box");
   if (!priceBox) {
     priceBox = document.createElement("div");
-    priceBox.className = "price-box request-price-box hidden"; // 👈 hidden by default
+    priceBox.className = "price-box request-price-box hidden";
     priceBox.dataset.bookId = row.dataset.bookId;
     priceBox.dataset.price = "1";
     priceBox.dataset.type = "book";
@@ -217,6 +217,7 @@ function ensurePriceBox(row) {
   }
   return priceBox;
 }
+
 /* ==============================
    radio handler
 ================================ */
@@ -413,7 +414,7 @@ grid.appendChild(msg);
       >
 
 
-      <div class="price-box"
+      <div class="price-box result-price-box"
         data-book-id="${book.id}"
         data-title="${book.title}"
         data-price="${Number(book.price).toFixed(2)}"
