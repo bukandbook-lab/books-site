@@ -186,18 +186,12 @@ function updateSeeMoreText(totalItems) {
  /* =====================================
    Move seeMoreContainer after the grid (ONLY during search)
 ===================================== */
-
-function moveSeeMoreAfter(grid) {
+function moveSeeMoreAfter(element) {
   const box = document.getElementById("seeMoreContainer");
-  if (!box || !grid) return;
-
-  // 🔗 bind See More to this request row
-  box.dataset.boundTo =
-    grid.closest(".req-book-row")?.dataset.bookId || "";
-
-  box.classList.remove("hidden");
-  grid.after(box);
+  if (!box || !element) return;
+  element.after(box);
 }
+
 
  /* =====================================
    bind seeMore to ONE grid at a time
@@ -219,7 +213,7 @@ function hideSeeMore() {
   if (!box) return;
 
   box.style.display = "none";
-  delete box.dataset.boundTo;
+  //delete box.dataset.boundTo;
 }
 
 
