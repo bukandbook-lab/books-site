@@ -130,9 +130,10 @@ document.addEventListener("input", e => {
     e.target.matches(".req-book-author") ||
     e.target.matches(".req-book-specific")
   ) {
-    LiveSearch(row);
+    LiveSearch(row, e.target);
   }
 });
+
 
 /* ==============================
    set Request Type
@@ -224,7 +225,7 @@ function ensurePriceBox(row) {
 /* ==============================
    function live search
 ================================ */
-function LiveSearch(row) {
+function LiveSearch(row, sourceInput) {
   const titleInput = row.querySelector(".req-book-title");
   const authorInput = row.querySelector(".req-book-author");
   const specificInput = row.querySelector(".req-book-specific");
@@ -236,7 +237,7 @@ function LiveSearch(row) {
   const author = authorInput.value.trim();
   const specific = specificInput.value.trim();
 
-  // Save datasets
+  // sync dataset
   priceBox.dataset.title = title;
   priceBox.dataset.author = author;
   priceBox.dataset.specific = specific;
@@ -244,61 +245,73 @@ function LiveSearch(row) {
   grid.innerHTML = "";
   grid.classList.add("hidden");
 
-  // Nothing typed at all → reset
-  if (!title && !author && !specific) {
-    setRequestType(priceBox, row.dataset.bookId, "book");
-    return;
+  /* ==============================
+     DETERMINE SEARCH MODE
+  ================================= */
+  let searchMode = "combined";
+
+  if (sourceInput.classList.contains("req-book-author") && author) {
+    searchMode = "author-only";
   }
 
-  // Combine search terms
-  const keyword = [title, author, specific].join(" ").trim();
-  const results = searchBooks(keyword);
+  if (sourceInput.classList.contains("req-book-title") && title) {
+    searchMode = "title-only";
+  }
 
-  /* ===== NO RESULTS ===== */
+  if (sourceInput.classList.contains("req-book-specific") && specific) {
+    searchMode = "series-only";
+  }
+
+  /* ==============================
+     BUILD SEARCH KEYWORDS
+  ================================= */
+  let results = [];
+
+  if (searchMode === "author-only") {
+    results = searchBooksByAuthor(author);
+  } 
+  else if (searchMode === "title-only") {
+    results = searchBooksByTitle(title);
+  } 
+  else if (searchMode === "series-only") {
+    results = searchBooksBySeries(specific);
+  } 
+  else {
+    const keyword = [title, author, specific].join(" ").trim();
+    if (!keyword) {
+      setRequestType(priceBox, row.dataset.bookId, "book");
+      return;
+    }
+    results = searchBooks(keyword);
+  }
+
+  /* ==============================
+     HANDLE RESULTS
+  ================================= */
   if (!results.length) {
     grid.classList.remove("hidden");
     setRequestType(priceBox, row.dataset.bookId, "book");
     return;
   }
 
-  /* ===== RESULTS FOUND ===== */
   grid.classList.remove("hidden");
 
   results.forEach(book => {
     const div = document.createElement("div");
     div.className = "book-thumb";
 
-    const isSetBook = Number(book.SetQtty) > 1;
-    const priceLabel = isSetBook ? "/set" : "/book";
+    const isSet = Number(book.SetQtty) > 1;
+    const priceLabel = isSet ? "/set" : "/book";
 
     div.innerHTML = `
-      <div class="book-bg" style="background-image:url('${book.img}')"></div>
-      <img
-    src="${book.img}"
-    class="grid-book-img popup-trigger"
-    loading="lazy"
-    data-book-id="${book.id}"
-      >
-
-
-      <div class="price-box"
-        data-book-id="${book.id}"
-        data-title="${book.title}"
-        data-price="${Number(book.price).toFixed(2)}"
-        data-setqtty="${book.SetQtty || 1}"
-      >
+      <img src="${book.img}" class="grid-book-img" loading="lazy">
+      <div class="price-box">
         RM${Number(book.price).toFixed(2)}${priceLabel}
-        <img src="${CART_ICON}" data-book-id="${book.id}" class="cart-icon">
       </div>
     `;
 
     grid.appendChild(div);
   });
-
-  if (typeof applySeeMore === "function") {
-    applySeeMore(grid);
-    moveSeeMoreAfter(grid);
-  }
 
   if (typeof syncCartIcons === "function") {
     syncCartIcons();
