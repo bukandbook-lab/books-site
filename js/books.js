@@ -200,6 +200,19 @@ function moveSeeMoreAfter(grid) {
 }
 
  /* =====================================
+   bind seeMore to ONE grid at a time
+===================================== */
+function bindSeeMoreToGrid(grid) {
+  const box = document.getElementById("seeMoreContainer");
+  if (!box || !grid) return;
+
+  box.dataset.boundTo = grid.id || "";
+  box.style.display = "block";
+  grid.after(box);
+}
+
+
+ /* =====================================
    HIDE SEE MORE
 ===================================== */
 function hideSeeMore() {
