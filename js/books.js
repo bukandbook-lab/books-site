@@ -191,7 +191,11 @@ function moveSeeMoreAfter(grid) {
   const box = document.getElementById("seeMoreContainer");
   if (!box || !grid) return;
 
-  box.classList.remove("hidden"); // 👈 ensure visible
+  // 🔗 bind See More to this request row
+  box.dataset.boundTo =
+    grid.closest(".req-book-row")?.dataset.bookId || "";
+
+  box.classList.remove("hidden");
   grid.after(box);
 }
 
@@ -200,8 +204,12 @@ function moveSeeMoreAfter(grid) {
 ===================================== */
 function hideSeeMore() {
   const box = document.getElementById("seeMoreContainer");
-  if (box) box.classList.add("hidden");
+  if (!box) return;
+
+  box.classList.add("hidden");
+  delete box.dataset.boundTo; // 👈 important
 }
+
 
 /* =====================================
    SEE MORE CLICK HANDLER
