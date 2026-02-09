@@ -1,9 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   
-  function hideSeeMore() {
-  const box = document.getElementById("seeMoreContainer");
-  if (box) box.style.display = "none";
-}
+
 
   const searchInput = document.getElementById("bookSearch");
 
