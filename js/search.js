@@ -35,6 +35,31 @@ document.addEventListener("DOMContentLoaded", () => {
     return g;
   }
 
+  function getNoSearchResultBox() {
+  let box = document.getElementById("noSearchResult");
+
+  if (!box) {
+    box = document.createElement("div");
+    box.id = "noSearchResult";
+    box.className = "no-search-result hidden";
+    box.style.gridColumn = "1 / -1";
+    box.style.margin = "12px 0";
+    box.innerHTML = `
+      No search result found.<br/>
+      Do you want to make a special request instead?
+      <div style="margin-top:8px">
+        <button id="reqYes">Yes</button>
+        <button id="reqNo">No</button>
+      </div>
+    `;
+
+    document.body.appendChild(box);
+  }
+
+  return box;
+}
+
+  
   searchInput.addEventListener("input", () => {
     hideSeeMore(); 
     const keyword = searchInput.value.trim().toLowerCase();
@@ -49,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ============================ */
     if (!keyword) {
       document.getElementById("searchResults")?.remove();
-
+      getNoSearchResultBox().classList.add("hidden");
       hideTabs();
 
       // restore last tab
@@ -142,37 +167,17 @@ Object.values(BOOK_REGISTRY).forEach(book => {
     });
 
 
-let msg = document.getElementById("noSearchResult");
-
-if (!msg) {
-  msg = document.createElement("div");
-  msg.id = "noSearchResult";
-  msg.className = "hidden";
-  msg.style.gridColumn = "1 / -1";
-  msg.style.marginBottom = "6px";
-  msg.style.fontWeight = "500";
-
-  msg.innerHTML = `
-    No search result found.<br>
-    Do you want to make a special request instead?
-    <br><br>
-    <button data-action="reqYes">Yes</button>
-    <button data-action="reqNo">No</button>
-  `;
-
-  grid.parentNode.insertBefore(msg, grid);
-}
-
-
+const noResultBox = getNoSearchResultBox();
 
 if (!hasResult) {
-  msg.classList.remove("hidden");
+  noResultBox.classList.remove("hidden");
   grid.classList.add("hidden");
   hideSeeMore();
 } else {
-  msg.classList.add("hidden");
+  noResultBox.classList.add("hidden");
   grid.classList.remove("hidden");
 }
+
 
     if (typeof applySeeMore === "function") {
       applySeeMore(grid);
