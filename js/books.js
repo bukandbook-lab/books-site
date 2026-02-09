@@ -96,6 +96,8 @@ item.innerHTML = `
   class="grid-book-img popup-trigger"
   loading="lazy"
   data-book-id="${normalized.id}"
+  decoding="async"
+  fetchpriority="high"
 >
 
 
