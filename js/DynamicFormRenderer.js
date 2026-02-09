@@ -321,11 +321,9 @@ function filterBySeries(list, series) {
 document.addEventListener("change", e => {
   if (e.target.value === "yesproceed") {
     const row = e.target.closest(".req-book-row");
-    if (!row) return;
-
-    const priceBox = ensurePriceBox(row);
-    priceBox.classList.remove("hidden"); // show request price
-    setRequestType(priceBox, row.dataset.bookId, "book"); // default request
+    const priceBox = row.querySelector(".request-price-box");
+    priceBox.classList.remove("hidden"); // show request price box
+    setRequestType(priceBox, row.dataset.bookId, "book"); // set default
   }
 });
 
