@@ -142,16 +142,27 @@ Object.values(BOOK_REGISTRY).forEach(book => {
     });
 
 
-const msg = document.createElement("div");
-msg.className = "noSearchResult";
-msg.classList = "hidden";
-msg.style.gridColumn = "1 / -1";
-msg.style.marginBottom = "6px";
-msg.style.fontWeight = "500";
-msg.innerHTML = `>No search result found. Do you want to make a special request instead?<br/>
-  <button id="reqYes">Yes</button>
-  <button id="reqNo">No</button>
-`;
+let msg = document.getElementById("noSearchResult");
+
+if (!msg) {
+  msg = document.createElement("div");
+  msg.id = "noSearchResult";
+  msg.className = "hidden";
+  msg.style.gridColumn = "1 / -1";
+  msg.style.marginBottom = "6px";
+  msg.style.fontWeight = "500";
+
+  msg.innerHTML = `
+    No search result found.<br>
+    Do you want to make a special request instead?
+    <br><br>
+    <button data-action="reqYes">Yes</button>
+    <button data-action="reqNo">No</button>
+  `;
+
+  grid.parentNode.insertBefore(msg, grid);
+}
+
 
 
 if (!hasResult) {
