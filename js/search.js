@@ -153,7 +153,18 @@ Object.values(BOOK_REGISTRY).forEach(book => {
       grid.appendChild(div);
     });
 
-      const msg = document.getElementById("noSearchResult");
+
+const msg = document.createElement("div");
+msg.className = "noSearchResult";
+msg.classList = "hidden";
+msg.style.gridColumn = "1 / -1";
+msg.style.marginBottom = "6px";
+msg.style.fontWeight = "500";
+msg.innerHTML = `>No search result found. Do you want to make a special request instead?<br/>
+  <button id="reqYes">Yes</button>
+  <button id="reqNo">No</button>
+`;
+
 
 if (!hasResult) {
   msg.classList.remove("hidden");
