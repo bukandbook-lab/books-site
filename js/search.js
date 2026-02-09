@@ -1,5 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-  
+/* =====================================
+   HIDE SEE MORE
+===================================== */
+function hideSeeMore() {
+  const box = document.getElementById("seeMoreContainer");
+  if (!box) return;
+
+  box.style.display = "none";
+  delete box.dataset.boundTo;
+}
+
 
 
   const searchInput = document.getElementById("bookSearch");
