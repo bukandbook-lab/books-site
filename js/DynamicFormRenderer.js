@@ -118,22 +118,6 @@ function updateBookInputs(count) {
   }
 }
 
-/* ==============================
-   LIVE SEARCH ON BOOK TITLE AUTHOR AND SERIS
-================================ */
-document.addEventListener("input", e => {
-  const row = e.target.closest(".req-book-row");
-  if (!row) return;
-
-  if (
-    e.target.matches(".req-book-title") ||
-    e.target.matches(".req-book-author") ||
-    e.target.matches(".req-book-specific")
-  ) {
-    LiveSearch(row, e.target);
-  }
-});
-
 
 /* ==============================
    set Request Type
@@ -223,6 +207,21 @@ function ensurePriceBox(row) {
 }
 
 /* ==============================
+   LIVE SEARCH ON BOOK TITLE AUTHOR AND SERIS
+================================ */
+document.addEventListener("input", e => {
+  const row = e.target.closest(".req-book-row");
+  if (!row) return;
+
+  if (
+    e.target.matches(".req-book-title") ||
+    e.target.matches(".req-book-author") ||
+    e.target.matches(".req-book-specific")
+  ) {
+    LiveSearch(row);
+  }
+});
+/* ==============================
    search helpers
 ================================ */
 function searchBooksByAuthor(author) {
@@ -262,12 +261,22 @@ function searchBooksBySeries(series) {
   /* ==============================
      add filter helper
   ================================= */
+function filterByAuthor(list, author) {
+  const words = normalizeWords(author);
+
+  return list.filter(book => {
+    if (!book.Author) return false;
+    const authorWords = normalizeWords(book.Author);
+    return words.every(w => authorWords.some(a => a.includes(w)));
+  });
+}
+
 function filterByTitle(list, title) {
   const words = normalizeWords(title);
 
   return list.filter(book => {
-    const text = normalizeWords(book.title || "");
-    return words.every(w => text.some(t => t.includes(w)));
+    const titleWords = normalizeWords(book.title || "");
+    return words.every(w => titleWords.some(t => t.includes(w)));
   });
 }
 
@@ -275,8 +284,9 @@ function filterBySeries(list, series) {
   const words = normalizeWords(series);
 
   return list.filter(book => {
-    const text = normalizeWords(book.Series || "");
-    return words.every(w => text.some(t => t.includes(w)));
+    if (!book.Series) return false;
+    const seriesWords = normalizeWords(book.Series);
+    return words.every(w => seriesWords.some(s => s.includes(w)));
   });
 }
 
@@ -284,7 +294,7 @@ function filterBySeries(list, series) {
 /* ==============================
    function live search
 ================================ */
-function LiveSearch(row, sourceInput) {
+function LiveSearch(row) {
   const titleInput = row.querySelector(".req-book-title");
   const authorInput = row.querySelector(".req-book-author");
   const specificInput = row.querySelector(".req-book-specific");
@@ -310,38 +320,28 @@ function LiveSearch(row, sourceInput) {
   }
 
   /* ==============================
-     AUTHOR-FIRST CONSTRAINT
+     START WITH FULL DATASET
   ================================= */
-
-  let baseResults = [];
-
-  // 1️⃣ If author exists → restrict first
-  if (author) {
-    baseResults = searchBooksByAuthor(author);
-  } else {
-    baseResults = Object.values(BOOK_REGISTRY);
-  }
+  let results = Object.values(BOOK_REGISTRY);
 
   /* ==============================
-     APPLY SECONDARY FILTER
+     APPLY HARD FILTERS (AND)
   ================================= */
+  if (author) {
+    results = filterByAuthor(results, author);
+  }
 
-  let results = baseResults;
-
-  // If typing in title
-  if (sourceInput.classList.contains("req-book-title") && title) {
+  if (title) {
     results = filterByTitle(results, title);
   }
 
-  // If typing in series/specific
-  if (sourceInput.classList.contains("req-book-specific") && specific) {
+  if (specific) {
     results = filterBySeries(results, specific);
   }
 
   /* ==============================
      RESULT HANDLING
   ================================= */
-
   if (!results.length) {
     grid.classList.remove("hidden");
     setRequestType(priceBox, row.dataset.bookId, "book");
