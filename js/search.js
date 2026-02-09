@@ -207,6 +207,8 @@ Object.values(BOOK_REGISTRY).forEach(book => {
     class="grid-book-img popup-trigger"
     loading="lazy"
     data-book-id="${book.id}"
+    decoding="async"
+    fetchpriority="high"
   >
 
   <!-- 🔥 HOVER PRICE BOX -->
