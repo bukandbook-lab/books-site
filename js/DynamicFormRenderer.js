@@ -437,6 +437,8 @@ grid.appendChild(msg);
     `;
 
     grid.appendChild(div);
+    progressiveImageLoad(div);
+
   });
         
 } else {
