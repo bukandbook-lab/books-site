@@ -374,6 +374,7 @@ html, body {
   z-index: 9999;
   opacity: 0;
   pointer-events: none;
+  overflow-y: auto;
   transition: opacity 0.25s ease;
 }
 
@@ -753,9 +754,6 @@ html, body {
 /* =========================
    BUTTONS
 ========================= */
-#Cart button {
-  cursor: pointer;
-}
 
 #clickToPay {
   background: #E0E0E0;
@@ -896,7 +894,7 @@ html, body {
 
 /* Grid search result boxes */
 .result-price-box {
-  background-color: #FF69B4;
+  background-color: #FF1493;
   color: white;
   border-radius: 12px;
   padding: 2px 4px;
