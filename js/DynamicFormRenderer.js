@@ -339,6 +339,8 @@ document.addEventListener("change", e => {
    function live search
 ================================ */
 function LiveSearch(row) {
+  hideSeeMore(); 
+   
   const titleInput = row.querySelector(".req-book-title");
   const authorInput = row.querySelector(".req-book-author");
   const specificInput = row.querySelector(".req-book-specific");
@@ -443,6 +445,8 @@ grid.appendChild(msg);
   // No results → show request price-box
   priceBox.classList.remove("hidden");
   setRequestType(priceBox, row.dataset.bookId, "book");
+  hideSeeMore();
+
 }
 
   if (typeof applySeeMore === "function") {
