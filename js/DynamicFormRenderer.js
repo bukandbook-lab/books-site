@@ -355,6 +355,7 @@ document.addEventListener("click", e => {
   if (action === "reqNo") {
     hideTabs();
     getNoSearchResultBox().classList.add("hidden");
+    hideSeeMore();
 
 
     const panel = document.getElementById(lastTab);
@@ -371,7 +372,7 @@ document.addEventListener("click", e => {
       bindSeeMoreToGrid(grid);
     }
 
-    document.getElementById("noSearchResult")?.classList.add("hidden");
+   
   }
 });
 
