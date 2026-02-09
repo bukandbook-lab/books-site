@@ -143,14 +143,14 @@ function setRequestType(priceBox, id, type) {
     priceBox.dataset.price = "4";
     priceBox.dataset.type = "series";
     priceBox.innerHTML = `
-      RM4 / set
+      Request at RM4 / set
       <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
     `;
   } else {
     priceBox.dataset.price = "1";
     priceBox.dataset.type = "book";
     priceBox.innerHTML = `
-      RM1 / book
+      Request at RM1 / book
       <img src="${CART_ICON}" data-book-id="${id}" class="cart-icon">
     `;
   }
