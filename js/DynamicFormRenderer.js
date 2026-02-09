@@ -93,7 +93,7 @@ function updateBookInputs(count) {
           <label><input type="radio" data-book-id="${id}" value="series"> Series</label>
       </div>
       
-      <input class="req-book-title" data-book-id="${id}" placeholder="Enter title for Book/Series">
+      <input class="req-book-title" data-book-id="${id}" placeholder="Enter exact title for Book/Series">
       ${i === 1 ? "" : `
         <img src="${CLOSE_ICON}" class="remove-request" data-book-id="${id}">
       `}
