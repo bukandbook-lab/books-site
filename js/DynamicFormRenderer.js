@@ -209,7 +209,7 @@ function ensurePriceBox(row) {
     priceBox.dataset.type = "book";
 
     priceBox.innerHTML = `
-      RM1 / book
+      Request at RM1 / book
       <img src="${CART_ICON}" data-book-id="${row.dataset.bookId}" class="cart-icon">
     `;
 
@@ -392,7 +392,15 @@ msg.className = "search-found-message";
 msg.style.gridColumn = "1 / -1";
 msg.style.marginBottom = "6px";
 msg.style.fontWeight = "500";
-msg.textContent = "The book is found in our catalogue:";
+msg.innerHTML = `The book is found as below. Not the book?
+<label>
+  <input
+    type="radio"
+    name="requestType-${id}"
+    data-book-id="${id}"
+    value="yesproceed"
+  > Yes
+</label>`;
 
 grid.appendChild(msg);
 
