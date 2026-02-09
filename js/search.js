@@ -11,12 +11,26 @@ function hideTabs() {
     ============================ */
 window.getNoSearchResultBox = function () {
   let box = document.getElementById("noSearchResultBox");
-  if (!box) {
-    box = document.createElement("div");
-    box.id = "noSearchResultBox";
-    box.className = "noSearchResult hidden";
-    document.body.appendChild(box);
-  }
+  if (box) return box;
+
+  box = document.createElement("div");
+  box.id = "noSearchResultBox";
+  box.className = "noSearchResult hidden";
+  box.style.margin = "12px";
+  box.style.fontWeight = "500";
+
+  box.innerHTML = `
+    <div style="margin-bottom:6px">
+      No search result found. Do you want to make a special request instead?
+    </div>
+    <button id="reqYes">Yes</button>
+    <button id="reqNo">No</button>
+  `;
+
+  // 🔑 IMPORTANT: append near search UI, not body
+  const searchInput = document.getElementById("bookSearch");
+  (searchInput?.parentElement || document.body).appendChild(box);
+
   return box;
 };
 
