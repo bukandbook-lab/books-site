@@ -969,9 +969,8 @@ html, body {
 
 .inline-search-item img {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 2 / 3;
   object-fit: cover;
-  border-radius: 6px;
 }
 
 
