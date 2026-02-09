@@ -298,7 +298,10 @@ function LiveSearch(row) {
 
   const priceBox = ensurePriceBox(row);
   const grid = ensureInlineGrid(row);
-
+   
+ // 🔒 HARD RESET VISIBILITY (IMPORTANT)
+  priceBox.classList.add("hidden");
+   
   const title = titleInput.value.trim();
   const author = authorInput.value.trim();
   const specific = specificInput.value.trim();
