@@ -259,6 +259,27 @@ function searchBooksBySeries(series) {
     return words.every(w => seriesWords.some(s => s.includes(w)));
   });
 }
+  /* ==============================
+     add filter helper
+  ================================= */
+function filterByTitle(list, title) {
+  const words = normalizeWords(title);
+
+  return list.filter(book => {
+    const text = normalizeWords(book.title || "");
+    return words.every(w => text.some(t => t.includes(w)));
+  });
+}
+
+function filterBySeries(list, series) {
+  const words = normalizeWords(series);
+
+  return list.filter(book => {
+    const text = normalizeWords(book.Series || "");
+    return words.every(w => text.some(t => t.includes(w)));
+  });
+}
+
 
 /* ==============================
    function live search
@@ -283,49 +304,44 @@ function LiveSearch(row, sourceInput) {
   grid.innerHTML = "";
   grid.classList.add("hidden");
 
-  /* ==============================
-     DETERMINE SEARCH MODE
-  ================================= */
-  let searchMode = "combined";
-
-  if (sourceInput.classList.contains("req-book-author") && author) {
-    searchMode = "author-only";
+  if (!title && !author && !specific) {
+    setRequestType(priceBox, row.dataset.bookId, "book");
+    return;
   }
 
+  /* ==============================
+     AUTHOR-FIRST CONSTRAINT
+  ================================= */
+
+  let baseResults = [];
+
+  // 1️⃣ If author exists → restrict first
+  if (author) {
+    baseResults = searchBooksByAuthor(author);
+  } else {
+    baseResults = Object.values(BOOK_REGISTRY);
+  }
+
+  /* ==============================
+     APPLY SECONDARY FILTER
+  ================================= */
+
+  let results = baseResults;
+
+  // If typing in title
   if (sourceInput.classList.contains("req-book-title") && title) {
-    searchMode = "title-only";
+    results = filterByTitle(results, title);
   }
 
+  // If typing in series/specific
   if (sourceInput.classList.contains("req-book-specific") && specific) {
-    searchMode = "series-only";
+    results = filterBySeries(results, specific);
   }
 
   /* ==============================
-     BUILD SEARCH KEYWORDS
+     RESULT HANDLING
   ================================= */
-  let results = [];
 
-  if (searchMode === "author-only") {
-    results = searchBooksByAuthor(author);
-  } 
-  else if (searchMode === "title-only") {
-    results = searchBooksByTitle(title);
-  } 
-  else if (searchMode === "series-only") {
-    results = searchBooksBySeries(specific);
-  } 
-  else {
-    const keyword = [title, author, specific].join(" ").trim();
-    if (!keyword) {
-      setRequestType(priceBox, row.dataset.bookId, "book");
-      return;
-    }
-    results = searchBooks(keyword);
-  }
-
-  /* ==============================
-     HANDLE RESULTS
-  ================================= */
   if (!results.length) {
     grid.classList.remove("hidden");
     setRequestType(priceBox, row.dataset.bookId, "book");
