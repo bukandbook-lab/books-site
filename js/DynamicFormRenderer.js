@@ -319,21 +319,18 @@ function filterBySeries(list, series) {
    handler for Yes, proceed with request
 ================================ */
 document.addEventListener("change", e => {
-  if (e.target.value === "yesproceed") {
-    const row = e.target.closest(".req-book-row");
-    const priceBox = row.querySelector(".request-price-box");
-    priceBox.classList.remove("hidden"); // show request price box
-    setRequestType(priceBox, row.dataset.bookId, "book"); // set default
+  if (e.target.value !== "yesproceed") return;
 
-   const grid = row.querySelector(".inline-search-grid");
-   if (grid) grid.classList.add("hidden"); // hide search results
+  const row = e.target.closest(".req-book-row");
+  if (!row) return;
 
-     
-   const mesage = row.querySelector(".search-found-message");
-   if (mesage) mesage.classList.add("hidden"); // hide search results
+  const priceBox = ensurePriceBox(row);
+  priceBox.classList.remove("hidden");
+  setRequestType(priceBox, row.dataset.bookId, "book");
 
-  }
+  row.querySelector(".inline-search-grid")?.classList.add("hidden");
 });
+
 /* ==============================
    handler for yes or no proceed to request
 ================================ */
