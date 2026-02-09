@@ -325,65 +325,51 @@ function LiveSearch(row) {
   const authorInput = row.querySelector(".req-book-author");
   const specificInput = row.querySelector(".req-book-specific");
 
-  const priceBox = ensurePriceBox(row);
+  const priceBox = ensurePriceBox(row);            // request-level
   const grid = ensureInlineGrid(row);
-   
- // 🔒 HARD RESET VISIBILITY (IMPORTANT)
-  priceBox.classList.add("hidden");
-   
+
   const title = titleInput.value.trim();
   const author = authorInput.value.trim();
   const specific = specificInput.value.trim();
 
-  // sync dataset
+  // Always hide request price-box by default
+  priceBox.classList.add("hidden");
+
+  // Clear dataset
   priceBox.dataset.title = title;
   priceBox.dataset.author = author;
   priceBox.dataset.specific = specific;
 
+  // Clear grid
   grid.innerHTML = "";
   grid.classList.add("hidden");
 
   if (!title && !author && !specific) {
+    // No input at all → show default request price
     setRequestType(priceBox, row.dataset.bookId, "book");
-    priceBox.classList.add("hidden");
+    priceBox.classList.remove("hidden");
     return;
   }
 
-  /* ==============================
-     START WITH FULL DATASET
-  ================================= */
+  // Start with full dataset
   let results = Object.values(BOOK_REGISTRY);
 
-  /* ==============================
-     APPLY HARD FILTERS (AND)
-  ================================= */
-  if (author) {
-    results = filterByAuthor(results, author);
-  }
+  // Apply filters
+  if (author) results = filterByAuthor(results, author);
+  if (title) results = filterByTitle(results, title);
+  if (specific) results = filterBySeries(results, specific);
 
-  if (title) {
-    results = filterByTitle(results, title);
-  }
-
-  if (specific) {
-    results = filterBySeries(results, specific);
-  }
-
-  /* ==============================
-     RESULT HANDLING
-  ================================= */
   if (!results.length) {
-    grid.classList.remove("hidden");
-    priceBox.classList.remove("hidden"); // ✅ SHOW
-    setRequestType(priceBox, row.dataset.bookId, "book");
+    // ❌ No search results → show request price-box
+    priceBox.classList.remove("hidden");
+    setRequestType(priceBox, row.dataset.bookId, "book"); // default
+    grid.classList.remove("hidden"); // show "No results" message handled elsewhere
     return;
   }
 
-/* ==============================
-   SEARCH RESULTS FOUND
-================================ */
-grid.classList.remove("hidden");
-priceBox.classList.add("hidden"); // 👈 IMPORTANT
+  // ✅ Search results exist → hide request price-box
+  priceBox.classList.add("hidden");
+  grid.classList.remove("hidden");
 
 
 /* 🔔 Message */
