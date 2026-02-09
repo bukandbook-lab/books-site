@@ -211,7 +211,6 @@ function bindSeeMoreToGrid(grid) {
   grid.after(box);
 }
 
-
  /* =====================================
    HIDE SEE MORE
 ===================================== */
@@ -222,6 +221,7 @@ function hideSeeMore() {
   box.classList.add("hidden");
   delete box.dataset.boundTo;
 }
+
 
 
 
