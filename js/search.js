@@ -1,8 +1,14 @@
+    /* ============================
+       HIDE TAB
+    ============================ */
 function hideTabs() {
   document.querySelectorAll(".tabcontent")
     .forEach(t => t.style.display = "none");
 }
 
+    /* ============================
+       getNoSearchResultBox
+    ============================ */
   function getNoSearchResultBox() {
   let box = document.getElementById("noSearchResult");
 
@@ -26,7 +32,48 @@ function hideTabs() {
 
   return box;
 }
+ /* ============================
+       LISTENER FOR YES NO PROCEED TO REQUEST
+    ============================ */
+document.addEventListener("click", e => {
+  // YES → go to RequestBook
+  if (e.target.id === "reqYes") {
+    hideTabs();
 
+    document.getElementById("RequestBook")?.style.display = "block";
+
+    document.querySelectorAll(".tab-btn")
+      .forEach(btn => btn.classList.remove("active"));
+
+    getNoSearchResultBox().classList.add("hidden");
+    hideSeeMore();
+  }
+
+  // NO → return to last tab
+  if (e.target.id === "reqNo") {
+    hideTabs();
+
+    const panel = document.getElementById(window.lastTab);
+    if (panel) panel.style.display = "block";
+
+    document.querySelectorAll(".tab-btn")
+      .forEach(btn =>
+        btn.classList.toggle("active", btn.dataset.tab === window.lastTab)
+      );
+
+    const grid = panel?.querySelector(".image-grid");
+    if (grid && typeof applySeeMore === "function") {
+      applySeeMore(grid);
+      bindSeeMoreToGrid(grid);
+    }
+
+    getNoSearchResultBox().classList.add("hidden");
+  }
+});
+
+ /* ============================
+       SEARCH.JS
+    ============================ */
 
 document.addEventListener("DOMContentLoaded", () => {
 
