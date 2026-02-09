@@ -28,7 +28,11 @@ document.addEventListener("click", e => {
   if (e.target.id === "reqYes") {
     hideTabs();
 
-    document.getElementById("RequestBook")?.style.display = "block";
+const reqTab = document.getElementById("RequestBook");
+if (reqTab) {
+  reqTab.style.display = "block";
+}
+
 
     document.querySelectorAll(".tab-btn")
       .forEach(btn => btn.classList.remove("active"));
