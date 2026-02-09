@@ -935,7 +935,7 @@ html, body {
 }
 #bookCount{
   height: 25px;
-  width: 50px;
+  width: 40px;
   margin: 1px;
   padding: 1px;
 }
@@ -952,9 +952,9 @@ html, body {
 ========================= */
 .inline-search-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  gap: 10px;
-  margin-top: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 5px;
+  margin: 2px;
 }
 
 .inline-search-grid.hidden {
