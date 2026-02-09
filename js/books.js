@@ -17,8 +17,7 @@ function loadBooks(tabId) {
   currentGrid = null;
 
   // hide See More first
-  const seeMoreBox = document.getElementById("seeMoreContainer");
-  if (seeMoreBox) seeMoreBox.style.display = "none";
+  hideSeeMore();
 
   const container = document.getElementById(tabId);
   if (!container) return;
@@ -188,11 +187,22 @@ function updateSeeMoreText(totalItems) {
    Move seeMoreContainer after the grid (ONLY during search)
 ===================================== */
 
-  function moveSeeMoreAfter(element) {
+function moveSeeMoreAfter(grid) {
   const box = document.getElementById("seeMoreContainer");
-  if (!box || !element) return;
-  element.after(box);
+  if (!box || !grid) return;
+
+  box.classList.remove("hidden"); // 👈 ensure visible
+  grid.after(box);
 }
+
+ /* =====================================
+   HIDE SEE MORE
+===================================== */
+function hideSeeMore() {
+  const box = document.getElementById("seeMoreContainer");
+  if (box) box.classList.add("hidden");
+}
+
 /* =====================================
    SEE MORE CLICK HANDLER
 ===================================== */
