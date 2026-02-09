@@ -225,6 +225,8 @@ Object.values(BOOK_REGISTRY).forEach(book => {
       `;
 
       grid.appendChild(div);
+      progressiveImageLoad(div);
+
     });
 
 const box = getNoSearchResultBox();
