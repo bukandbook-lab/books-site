@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openTab(tabId, btn) {
     hideAll();
+    getNoSearchResultBox().classList.add("hidden");
     deactivateTabs();
     
   // ⛔ EXIT SEARCH MODE
