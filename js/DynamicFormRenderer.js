@@ -320,6 +320,24 @@ function LiveSearch(row) {
     return;
   }
 
+ /* ==============================
+     VISIBILITY CONTROL FOR PRICE-BOX
+  ================================= */
+   if (!title && !author && !specific) {
+  priceBox.classList.add("hidden");
+  return;
+}
+
+   if (!results.length) {
+  grid.classList.remove("hidden");
+
+  priceBox.classList.remove("hidden"); // ✅ SHOW
+  setRequestType(priceBox, row.dataset.bookId, "book");
+
+  return;
+}
+
+
   /* ==============================
      START WITH FULL DATASET
   ================================= */
@@ -352,7 +370,9 @@ function LiveSearch(row) {
 /* ==============================
    SEARCH RESULTS FOUND
 ================================ */
-  grid.classList.remove("hidden");
+grid.classList.remove("hidden");
+priceBox.classList.add("hidden"); // 👈 IMPORTANT
+
 
 /* 🔔 Message */
 const msg = document.createElement("div");
