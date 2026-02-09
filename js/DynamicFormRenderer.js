@@ -246,7 +246,7 @@ function LiveSearch(row) {
 
   // Nothing typed at all → reset
   if (!title && !author && !specific) {
-    resetPriceBox(priceBox, row.dataset.bookId);
+    setRequestType(priceBox, row.dataset.bookId, "book");
     return;
   }
 
@@ -257,7 +257,7 @@ function LiveSearch(row) {
   /* ===== NO RESULTS ===== */
   if (!results.length) {
     grid.classList.remove("hidden");
-    resetPriceBox(priceBox, row.dataset.bookId);
+    setRequestType(priceBox, row.dataset.bookId, "book");
     return;
   }
 
