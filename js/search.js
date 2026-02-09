@@ -9,29 +9,17 @@ function hideTabs() {
     /* ============================
        getNoSearchResultBox
     ============================ */
-  function getNoSearchResultBox() {
-  let box = document.getElementById("noSearchResult");
-
+window.getNoSearchResultBox = function () {
+  let box = document.getElementById("noSearchResultBox");
   if (!box) {
     box = document.createElement("div");
-    box.id = "noSearchResult";
-    box.className = "no-search-result hidden";
-    box.style.gridColumn = "1 / -1";
-    box.style.margin = "12px 0";
-    box.innerHTML = `
-      No search result found.<br/>
-      Do you want to make a special request instead?
-      <div style="margin-top:8px">
-        <button id="reqYes">Yes</button>
-        <button id="reqNo">No</button>
-      </div>
-    `;
-
+    box.id = "noSearchResultBox";
+    box.className = "noSearchResult hidden";
     document.body.appendChild(box);
   }
-
   return box;
-}
+};
+
  /* ============================
        LISTENER FOR YES NO PROCEED TO REQUEST
     ============================ */
