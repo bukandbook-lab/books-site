@@ -223,6 +223,44 @@ function ensurePriceBox(row) {
 }
 
 /* ==============================
+   search helpers
+================================ */
+function searchBooksByAuthor(author) {
+  if (!author || !window.BOOK_REGISTRY) return [];
+
+  const words = normalizeWords(author);
+
+  return Object.values(BOOK_REGISTRY).filter(book => {
+    if (!book.Author) return false;
+    const authorWords = normalizeWords(book.Author);
+    return words.every(w => authorWords.some(a => a.includes(w)));
+  });
+}
+
+function searchBooksByTitle(title) {
+  if (!title || !window.BOOK_REGISTRY) return [];
+
+  const words = normalizeWords(title);
+
+  return Object.values(BOOK_REGISTRY).filter(book => {
+    const text = normalizeWords(book.title || "");
+    return words.every(w => text.some(t => t.includes(w)));
+  });
+}
+
+function searchBooksBySeries(series) {
+  if (!series || !window.BOOK_REGISTRY) return [];
+
+  const words = normalizeWords(series);
+
+  return Object.values(BOOK_REGISTRY).filter(book => {
+    if (!book.Series) return false;
+    const seriesWords = normalizeWords(book.Series);
+    return words.every(w => seriesWords.some(s => s.includes(w)));
+  });
+}
+
+/* ==============================
    function live search
 ================================ */
 function LiveSearch(row, sourceInput) {
