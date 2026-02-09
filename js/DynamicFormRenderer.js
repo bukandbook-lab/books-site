@@ -191,7 +191,7 @@ function ensurePriceBox(row) {
   let priceBox = row.querySelector(".price-box");
   if (!priceBox) {
     priceBox = document.createElement("div");
-    priceBox.className = "price-box request-price-box";
+    priceBox.className = "price-box request-price-box hidden"; // 👈 hidden by default
     priceBox.dataset.bookId = row.dataset.bookId;
     priceBox.dataset.price = "1";
     priceBox.dataset.type = "book";
@@ -205,6 +205,7 @@ function ensurePriceBox(row) {
   }
   return priceBox;
 }
+
 
 /* ==============================
    LIVE SEARCH ON BOOK TITLE AUTHOR AND SERIS
