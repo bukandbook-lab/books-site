@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   searchInput.addEventListener("input", () => {
     hideSeeMore(); 
     const keyword = searchInput.value.trim().toLowerCase();
+    let hasResult = false;
 
     // 🧠 remember last active tab BEFORE search starts
     const active = getActiveTab();
@@ -89,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const grid = getSearchGrid();
     grid.innerHTML = "";
 
-    let hasResult = false;
+    
 
 Object.values(BOOK_REGISTRY).forEach(book => {
   const searchableText = [
@@ -144,6 +145,17 @@ Object.values(BOOK_REGISTRY).forEach(book => {
       grid.appendChild(div);
     });
 
+      const msg = document.getElementById("noSearchResult");
+
+if (!hasResult) {
+  msg.classList.remove("hidden");
+  grid.classList.add("hidden");
+  hideSeeMore();
+} else {
+  msg.classList.add("hidden");
+  grid.classList.remove("hidden");
+}
+
     if (typeof applySeeMore === "function") {
       applySeeMore(grid);
       moveSeeMoreAfter(grid);
@@ -155,16 +167,7 @@ Object.values(BOOK_REGISTRY).forEach(book => {
     }
   });
 
-  const msg = document.getElementById("noSearchResult");
 
-if (!hasResult) {
-  msg.classList.remove("hidden");
-  grid.classList.add("hidden");
-  hideSeeMore();
-} else {
-  msg.classList.add("hidden");
-  grid.classList.remove("hidden");
-}
 
 });
 
