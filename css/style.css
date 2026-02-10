@@ -771,7 +771,6 @@ body.cart-open {
 /* underline clickable text */
 .terms-link {
   text-decoration: underline;
-  color: #ff1493;
   font-weight:700;
   cursor: pointer;
 }
@@ -790,7 +789,7 @@ body.cart-open {
 
 /* scrollable content */
 .terms-content {
-  max-height: 250px;
+  max-height: 350px;
   overflow-y: auto;
   font-size: 12px;
   line-height: 1.4;
