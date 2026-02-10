@@ -395,7 +395,7 @@ msg.className = "search-found-message";
 msg.style.gridColumn = "1 / -1";
 msg.style.marginBottom = "6px";
 msg.style.fontWeight = "500";
-msg.innerHTML = `The book is found as below. Not the book?
+msg.innerHTML = `Book found as below. Not the book?
 <label>
   <input
     type="radio"
