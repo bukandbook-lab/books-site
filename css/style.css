@@ -411,6 +411,7 @@ html, body {
 
 
 #paymentPopup {
+  background: #ffffff;
   position: fixed;
   inset: 0;
   display: none;
