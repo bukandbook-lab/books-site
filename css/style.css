@@ -892,7 +892,7 @@ html, body {
 }
 
 #requestFormContainer h3 {
-  margin: 4px 0 6px;
+  margin: 0;
 }
 
 /* Request-level price box (user can click cart for custom request) */
