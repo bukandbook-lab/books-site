@@ -754,13 +754,56 @@ html, body {
 #Cart .close-popup:hover {
   opacity: 1;
 }
+/* =========================
+   CART TERMS
+========================= */
 
 #Cart .terms {
    font-style: italic;
    color: #FF474C;
 }
+/* underline clickable text */
+.terms-link {
+  text-decoration: underline;
+  color: #ff1493;
+  font-weight:700;
+  cursor: pointer;
+}
+
+/* container */
+.terms-box {
+  position: relative;
+  margin-top: 6px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 8px 8px;
+  background: #fff;
+  max-height: 80px;
+  overflow: hidden;
+}
+
+/* scrollable content */
+.terms-content {
+  max-height: 80px;
+  overflow-y: auto;
+  font-size: 12px;
+  line-height: 1.4;
+  padding-right: 20px; /* space for close btn */
+}
+
+/* close button */
+.terms-close {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 /* =========================
-   BUTTONS
+   CART AND PAYMENT BUTTONS
 ========================= */
 
 #clickToPay {
