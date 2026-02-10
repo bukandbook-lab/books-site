@@ -699,6 +699,18 @@ function resetCart() {
   document.getElementById("Cart")?.classList.remove("open");
 }
 
+/* =====================================
+  CART TERMS AND CONDITIONS
+===================================== */
+document.addEventListener("click", e => {
+  if (e.target.id === "openTerms") {
+    document.getElementById("termsBox")?.classList.remove("hidden");
+  }
+
+  if (e.target.id === "closeTerms") {
+    document.getElementById("termsBox")?.classList.add("hidden");
+  }
+});
 
 /* =====================================
    PAYMENT POPUP 
