@@ -277,8 +277,31 @@ ${cart.delivery === "courier" ? `
 
     <label class="terms">
       <input type="checkbox" id="agreeTerms" ${cart.agreed ? "checked" : ""}>
-      By clicking to pay, I have read and agreed to the Terms and Conditions described in 'READ ME FIRST' section.
+      By clicking to pay, I have read and agreed to the <span id="openTerms" class="terms-link">Terms and Conditions.</span>
     </label><br>
+    
+<div id="termsBox" class="terms-box hidden">
+  <button type="button" class="terms-close" id="closeTerms">✕</button>
+
+  <div class="terms-content">
+    <p>
+      • No physical book and ONLY digital copy will be delivered.<br>
+      • <b>Payment</b> is for access to seller digital curation through <b>cataloging and delivery service.</b><br>
+      • Only proceed to ‘Click to Pay’ if buyer can accept this kind of service.<br>
+      • Digital copy might be in .pdf, .epub or other file type.<br>
+      • Buyer might need to install E-book Reader first.<br>
+      • There is no guarantee the condition of the e-books is perfect. But all e-books are readable.<br>
+      • Book images and videos are for illustration purposes only; actual book condition and content may vary by edition or print.<br>
+      • Order will ONLY be processed with payment proof and complete delivery details.<br>
+      • Delivery timelines may vary.<br>
+      • No guarantee for specific outcomes, results, or satisfaction.<br>
+      • No refund. Pay at your own risk. You can try buy 1 book first.<br>
+      • Special requests may take longer to process.<br>
+      • Additional terms apply.<br>
+      • More explanation about Terms and Conditions can be found in MAIN section.<br>
+    </p>
+  </div>
+</div>
 
   <div class="cart-actions">
   <button id="continueShopping">CONTINUE SHOPPING</button>
