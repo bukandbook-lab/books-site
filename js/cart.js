@@ -80,7 +80,10 @@ if (!book && sourceEl) {
     alert("Please choose Book or Series first 😊");
     return;
   }
-
+   
+// 🔑 READ USER CHOICE HERE
+  const requestType = sourceEl.dataset.requestType || "book";
+   
   const label =
     requestType === "series"
       ? "Request for Series"
