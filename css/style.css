@@ -411,7 +411,6 @@ html, body {
 
 
 #paymentPopup {
-  background: #ffffff;
   position: fixed;
   inset: 0;
   display: none;
@@ -421,6 +420,7 @@ html, body {
 }
 
 #paymentPopup .popup-content {
+  background: #ffffff;
   position: relative;
 }
 
@@ -1047,8 +1047,13 @@ body.cart-open {
 
 
 /* =========================
-   CLOSE ICON FOR THANK YOU POPUP 
+    THANK YOU POPUP 
 ========================= */
+#thankYou .popup-content {
+  background: #ffffff;
+  position: relative;
+}
+
 #thankYou .close-popup {
   position: relative;
   width: 20px;
