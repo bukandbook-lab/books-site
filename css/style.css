@@ -374,10 +374,10 @@ html, body {
 .popup {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.6);
+  background: rgba(0,0,0,.5;
   display: none;
   justify-content: center;
-  align-items: flex-start; /* ✅ NOT center */
+  align-items: center; /*flex-start;  ✅ NOT center */
   padding: 20px 0;         /* ✅ breathing room */
   z-index: 9999;
   opacity: 0;
@@ -390,7 +390,8 @@ html, body {
   pointer-events: auto;
 }
 .popup-content {
-  background: #fff;
+  background: none;
+  padding: 0;
   width: 92%;
   max-width: 420px;
   padding: 14px;
