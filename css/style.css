@@ -706,6 +706,7 @@ html, body {
    CART SLIDE PANEL (RIGHT)
 ========================= */
 #Cart {
+  padding: 5px;
   position: fixed;
   top: 0;
   right: 0; 
@@ -798,8 +799,10 @@ body.cart-open {
 
 /* scrollable content */
 .terms-content {
-  max-height: none;
-  overflow-y: visible;
+  max-height: 130px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   font-size: 12px;
   line-height: 1.4;
   padding-right: 20px; /* space for close btn */
