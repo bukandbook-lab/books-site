@@ -96,7 +96,7 @@ book = {
   price: Number(sourceEl.dataset.price || 1),
 };
 
-
+}
 
   if (!book) return;
 
