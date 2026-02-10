@@ -718,13 +718,19 @@ html, body {
   transform: translateX(100%);
   transition: transform 0.3s ease;
   overflow-y: auto;
-  padding: 16px;
-   
+  touch-action: pan-y;
+}
+
+#Cart button,
+#Cart .remove-item,
+#Cart .terms-link {
+  touch-action: manipulation;
 }
 
 body.cart-open {
   overflow: hidden;
-  height: 100vh;
+  position: fixed;
+  width: 100%;
 }
 
 
@@ -733,6 +739,9 @@ body.cart-open {
   transform: translateX(0);
 }
 
+#Cart * {
+  touch-action: pan-y;
+}
 .CartTitle {
   color: #FF1493;
   font-size: 20px;
@@ -789,8 +798,8 @@ body.cart-open {
 
 /* scrollable content */
 .terms-content {
-  max-height: 130px;
-  overflow-y: auto;
+  max-height: none;
+  overflow-y: visible;
   font-size: 12px;
   line-height: 1.4;
   padding-right: 20px; /* space for close btn */
