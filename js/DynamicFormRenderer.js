@@ -222,15 +222,20 @@ function ensurePriceBox(row) {
    radio handler
 ================================ */
 document.addEventListener("change", e => {
-  if (e.target.type !== "radio") return;
+  if (!e.target.matches('input[type="radio"][name^="requestType-"]')) return;
 
   const row = e.target.closest(".req-book-row");
   if (!row) return;
 
-  const priceBox = ensurePriceBox(row);
-  setRequestType(priceBox, row.dataset.bookId, e.target.value);
-});
+  // 🔑 STORE USER CHOICE ON THE ROW
+  row.dataset.requestType = e.target.value;
 
+  // Optional: update price box immediately
+  const priceBox = row.querySelector(".request-price-box");
+  if (priceBox) {
+    setRequestType(priceBox, row.dataset.bookId, e.target.value);
+  }
+});
 
 /* ==============================
    LIVE SEARCH ON BOOK TITLE AUTHOR AND SERIS
