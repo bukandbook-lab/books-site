@@ -65,6 +65,36 @@ function addToCart(bookId, sourceEl = null) {
   const id = String(bookId);
   let book = BOOK_REGISTRY[id];
 
+// 🔥 CUSTOM REQUEST BOOK / SERIES (based on user radio)
+if (!book && sourceEl) {
+  const rawTitle = sourceEl.dataset.title?.trim();
+
+  if (!rawTitle) {
+    alert("Please enter a book title first 😊");
+    return;
+  }
+
+ const requestType = sourceEl.dataset[`requestType${id}`];
+
+  if (!requestType) {
+    alert("Please choose Book or Series first 😊");
+    return;
+  }
+
+  const label =
+    requestType === "series"
+      ? "Request for Series"
+      : "Request for Book";
+
+  book = {
+    id,
+    title: `${label} – ${rawTitle}` +
+           (sourceEl.dataset.author ? ` by ${sourceEl.dataset.author}` : "") +
+           (sourceEl.dataset.specific ? ` - ${sourceEl.dataset.specific}` : ""),
+    price: Number(sourceEl.dataset.price || 1),
+    SetQtty: Number(sourceEl.dataset.setqtty || 1)
+  };
+}
 // 🔥 CUSTOM REQUEST BOOK / SERIES
 if (!book && sourceEl) {
   const rawTitle = sourceEl.dataset.title?.trim();
