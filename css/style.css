@@ -12,7 +12,7 @@ html, body {
   background: #ffecf2;
 }
 
-}
+
 /* =========================
    HEADER IMAGE
 ========================= */
@@ -374,8 +374,7 @@ html, body {
 .popup {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.5;
-  display: none;
+  background: rgba(0,0,0,.5);
   justify-content: center;
   align-items: center; /*flex-start;  ✅ NOT center */
   padding: 20px 0;         /* ✅ breathing room */
@@ -394,7 +393,6 @@ html, body {
   padding: 0;
   width: 92%;
   max-width: 420px;
-  padding: 14px;
   border-radius: 12px;
   position: relative;
 
