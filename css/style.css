@@ -422,6 +422,7 @@ html, body {
 #paymentPopup .popup-content {
   background: #ffffff;
   position: relative;
+  padding: 10px;
 }
 
 #paymentPopup .close-popup {
@@ -1052,6 +1053,7 @@ body.cart-open {
 #thankYou .popup-content {
   background: #ffffff;
   position: relative;
+  padding: 10px;
 }
 
 #thankYou .close-popup {
