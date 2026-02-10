@@ -202,9 +202,10 @@ function renderCart() {
         <span>
            ${index}. ${item.title}
            ${item.setQtty > 0 && item.price !== 1
-           ? ` (${item.setQtty} books)`
-           : ``}
+             ? ` (${item.setQtty} ${item.setQtty === 1 ? "book" : "books"})`
+             : ``}
         </span>
+
 
         <span class="price-right">
           <span>RM${item.price.toFixed(2)}</span>
