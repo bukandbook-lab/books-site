@@ -90,7 +90,7 @@ const label =
 
 book = {
   id,
-  title: `${label} – ${rawTitle}` +
+  title: `${label} : ${rawTitle}` +
          (sourceEl.dataset.author ? ` by ${sourceEl.dataset.author}` : "") +
          (sourceEl.dataset.specific ? ` - ${sourceEl.dataset.specific}` : ""),
   price: Number(sourceEl.dataset.price || 1),
