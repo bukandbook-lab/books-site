@@ -738,14 +738,15 @@ body.cart-open {
   font-size: 20px;
   display: flex;
 }
+
 #cartTitles {
-  max-height: 120px;
-  overflow-y: auto;
+  max-height: none;
+  overflow: visible;
   border: 1px solid #eee;
   padding: 6px;
   margin-bottom: 8px;
-}
 
+}
 
 #Cart .close-popup {
   color: #FF1493;
@@ -789,7 +790,7 @@ body.cart-open {
 
 /* scrollable content */
 .terms-content {
-  max-height: 150px;
+  max-height: 250px;
   overflow-y: auto;
   font-size: 12px;
   line-height: 1.4;
