@@ -789,7 +789,7 @@ body.cart-open {
 
 /* scrollable content */
 .terms-content {
-  max-height: 350px;
+  max-height: 140px;
   overflow-y: auto;
   font-size: 12px;
   line-height: 1.4;
