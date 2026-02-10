@@ -284,7 +284,7 @@ ${cart.delivery === "courier" ? `
   <button type="button" class="terms-close" id="closeTerms">✕</button>
 
   <div class="terms-content">
-    <p>
+    <p><b>TERMS AND CONDITIONS</b>
       • No physical book and ONLY digital copy will be delivered.<br>
       • <b>Payment</b> is for access to seller digital curation through <b>cataloging and delivery service.</b><br>
       • Only proceed to ‘Click to Pay’ if buyer can accept this kind of service.<br>
