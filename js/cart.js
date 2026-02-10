@@ -75,26 +75,26 @@ if (!book && sourceEl) {
   }
 
 // 🔑 READ USER CHOICE HERE
-  const requestType = sourceEl.dataset.requestType || "book";
+const row = sourceEl.closest(".req-book-row");
+const requestType = row?.dataset.requestType;
 
-  if (!requestType) {
-    alert("Please choose Book or Series first 😊");
-    return;
-  }
-     
-  const label =
-    requestType === "series"
-      ? "Request for Series"
-      : "Request for Book";
-
-  book = {
-    id,
-    title: `${label} – ${rawTitle}` +
-           (sourceEl.dataset.author ? ` by ${sourceEl.dataset.author}` : "") +
-           (sourceEl.dataset.specific ? ` - ${sourceEl.dataset.specific}` : ""),
-    price: Number(sourceEl.dataset.price || 1),
-  };
+if (!requestType) {
+  alert("Please choose Book or Series first 😊");
+  return;
 }
+
+const label =
+  requestType === "series"
+    ? "Request for Series"
+    : "Request for Book";
+
+book = {
+  id,
+  title: `${label} – ${rawTitle}` +
+         (sourceEl.dataset.author ? ` by ${sourceEl.dataset.author}` : "") +
+         (sourceEl.dataset.specific ? ` - ${sourceEl.dataset.specific}` : ""),
+  price: Number(sourceEl.dataset.price || 1),
+};
 
 
 
