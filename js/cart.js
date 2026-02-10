@@ -116,12 +116,15 @@ cart.items.set(id, {
    OPEN / CLOSE CART
 ===================================== */
 function openCart() {
-  document.getElementById("Cart")?.classList.add("open");
+  document.getElementById("Cart").classList.add("open");
+  document.body.classList.add("cart-open");
 }
 
 function closeCart() {
-  document.getElementById("Cart")?.classList.remove("open");
+  document.getElementById("Cart").classList.remove("open");
+  document.body.classList.remove("cart-open");
 }
+
 
 document.addEventListener("click", e => {
   if (e.target.id === "continueShopping") closeCart();
