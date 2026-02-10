@@ -93,32 +93,9 @@ if (!book && sourceEl) {
            (sourceEl.dataset.author ? ` by ${sourceEl.dataset.author}` : "") +
            (sourceEl.dataset.specific ? ` - ${sourceEl.dataset.specific}` : ""),
     price: Number(sourceEl.dataset.price || 1),
-    SetQtty: Number(sourceEl.dataset.setqtty || 1)
   };
 }
-// 🔥 CUSTOM REQUEST BOOK / SERIES
-if (!book && sourceEl) {
-  const rawTitle = sourceEl.dataset.title?.trim();
 
-  if (!rawTitle) {
-    alert("Please enter a book title first 😊");
-    return;
-  }
-
-  const setQtty = Number(sourceEl.dataset.setqtty || 1);
-  const requestType = setQtty > 1
-    ? "Request for Series"
-    : "Request for Book";
-
-  book = {
-    id,
-    title: `${requestType} – ${rawTitle}` +
-           (sourceEl.dataset.author ? ` by ${sourceEl.dataset.author}` : "") +
-           (sourceEl.dataset.specific ? ` - ${sourceEl.dataset.specific}` : ""),
-    price: Number(sourceEl.dataset.price || 1),
-    SetQtty: setQtty
-  };
-}
 
 
   if (!book) return;
