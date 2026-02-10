@@ -722,6 +722,12 @@ html, body {
    
 }
 
+body.cart-open {
+  overflow: hidden;
+  height: 100vh;
+}
+
+
 /* OPEN STATE */
 #Cart.open {
   transform: translateX(0);
