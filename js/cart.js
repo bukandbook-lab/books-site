@@ -290,8 +290,7 @@ ${cart.delivery === "courier" ? `
   <div class="terms-content">
     <p>
       • No physical book and ONLY digital copy will be delivered.<br>
-      • <b>Payment is for</b> access to our digital curation through <b>cataloging and delivery service.</b><br>
-      • Only proceed to ‘Click to Pay’ if buyer can accept this kind of service.<br>
+      • <b>Payment is for our cataloging and delivery service.</b> Only proceed to ‘Click to Pay’ if you accept it.<br>
       • Digital copy might be in .pdf, .epub or other file type.<br>
       • Buyer might need to install E-book Reader first.<br>
       • There is no guarantee the condition of the e-books is perfect. But all e-books are readable.<br>
