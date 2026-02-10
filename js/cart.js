@@ -74,16 +74,14 @@ if (!book && sourceEl) {
     return;
   }
 
- const requestType = sourceEl.dataset[`requestType${id}`];
+// 🔑 READ USER CHOICE HERE
+  const requestType = sourceEl.dataset.requestType || "book";
 
   if (!requestType) {
     alert("Please choose Book or Series first 😊");
     return;
   }
-   
-// 🔑 READ USER CHOICE HERE
-  const requestType = sourceEl.dataset.requestType || "book";
-   
+     
   const label =
     requestType === "series"
       ? "Request for Series"
