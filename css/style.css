@@ -180,7 +180,7 @@ html, body {
 
 #bookSearch {
   width: 100%;
-  padding: 6px 10px 6px 10px;
+  padding: 6px 6px 6px 6px;
   font-size: 13px;
   border-radius: 20px;
   border: 1px solid #ccc;
@@ -216,6 +216,10 @@ html, body {
   }
 }
 
+#searchResults {
+   margin:4px;
+   padding: 4px;
+}
 /* =========================
    TAB CONTENT
 ========================= */
