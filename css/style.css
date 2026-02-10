@@ -784,7 +784,7 @@ html, body {
 
 /* scrollable content */
 .terms-content {
-  max-height: 80px;
+  max-height: 150px;
   overflow-y: auto;
   font-size: 12px;
   line-height: 1.4;
