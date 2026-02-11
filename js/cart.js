@@ -145,7 +145,7 @@ function closeCart() {
   requestAnimationFrame(() => {
     window.scrollTo({ top: lastScrollY, behavior: "instant" });
   });
-}
+
 
 
 document.addEventListener("click", e => {
