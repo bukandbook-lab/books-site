@@ -44,6 +44,61 @@ const BOOK_SOURCES = [
   },
 ];
 
+/* ==============================
+   YOUTUBE LINK NORMALIZER
+================================ */
+
+function toYouTubeEmbed(url) {
+  if (!url || typeof url !== "string") return null;
+
+  const clean = url.trim();
+
+  if (
+    clean === "" ||
+    clean === "#VALUE!" ||
+    clean.toUpperCase() === "N/A"
+  ) return null;
+
+  let videoId = null;
+
+  try {
+    const u = new URL(clean);
+
+    // ▶ Normal YouTube
+    if (u.hostname.includes("youtube.com")) {
+      // watch?v=ID
+      if (u.searchParams.get("v")) {
+        videoId = u.searchParams.get("v");
+      }
+
+      // shorts/ID
+      else if (u.pathname.startsWith("/shorts/")) {
+        videoId = u.pathname.split("/shorts/")[1];
+      }
+
+      // embed/ID (already embed)
+      else if (u.pathname.startsWith("/embed/")) {
+        videoId = u.pathname.split("/embed/")[1];
+      }
+    }
+
+    // ▶ youtu.be short link
+    if (u.hostname.includes("youtu.be")) {
+      videoId = u.pathname.slice(1);
+    }
+
+  } catch (e) {
+    return null;
+  }
+
+  if (!videoId) return null;
+
+  // strip anything extra
+  videoId = videoId.split(/[?&/]/)[0];
+
+  return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+}
+
 /* =========================================================
    LOAD ALL BOOK DATA
 ========================================================= */
@@ -67,14 +122,9 @@ window.BOOKS_READY = Promise.all(
 
           ORDERED_BOOKS_BY_CATEGORY[category].push(id);
 
-           const rawVideo = book["Youtube ID"];
+const primaryVideo = toYouTubeEmbed(book["YT Link"] || book["Youtube ID"]);
+const altVideo     = toYouTubeEmbed(book["YT Alternative"]);
 
-const video =
-  rawVideo &&
-  rawVideo !== "#VALUE!" &&
-  rawVideo !== "N/A" 
-    ? rawVideo.trim()
-    : null;
 
 
           BOOK_REGISTRY[id] = {
@@ -86,7 +136,8 @@ const video =
             price: Number(book.price || book["Price"] || 0),
             SetQtty: book.qtty || book["No. of Books"] || 0,
             SetTotal: Number( book["Set Total"] || 0),
-            video,
+              video: primaryVideo,
+              videoAlt: altVideo,
             
              Author: book["Author"] || "",
              Status: book["Status"] || "",
