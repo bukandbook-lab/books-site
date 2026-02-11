@@ -302,7 +302,7 @@ document.addEventListener("click", e => {
   // Replace thumbnail with iframe
   yt.innerHTML = `
     <iframe class="book-yt-video"
-      src="https://www.youtube.com/embed/${yt.dataset.videoId}?autoplay=1"
+      src="https://www.youtube-nocookie.com/embed/${yt.dataset.videoId}?autoplay=1"
       allow="autoplay; encrypted-media"
       allowfullscreen></iframe>
   `;
