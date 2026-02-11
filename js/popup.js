@@ -137,10 +137,11 @@ ${book.Series ? `
         <img data-book-id="${id}" class="cart-icon" src="${CART_ICON}" width="22">
       </div>
 
-      ${book.video ? `
-        <button class="watch-video-btn">Watch Video</button>
-        <div class="video-box"></div>
-      ` : ""}
+${book.videoID ? `
+  <button class="watch-video-btn">Watch Video</button>
+  <div class="video-box"></div>
+` : ""}
+
     </div>
   `;
    
