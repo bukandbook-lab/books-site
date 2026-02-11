@@ -43,9 +43,44 @@ const BOOK_SOURCES = [
     url: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/comicdata.json"
   },
 ];
+/* ==============================
+   YOUTUBE LINK NORMALIZER FOR DATA HAS THAT YOUTUBE ID
+================================ */
+function normalizeYouTubeEmbed(input) {
+  if (!input) return null;
+
+  const raw = input.trim();
+  if (raw === "#VALUE!" || raw === "N/A") return null;
+
+  let videoId = null;
+
+  // 1️⃣ Already just an ID
+  if (/^[a-zA-Z0-9_-]{11}$/.test(raw)) {
+    videoId = raw;
+  }
+
+  // 2️⃣ youtube.com/watch?v=
+  else if (raw.includes("watch?v=")) {
+    videoId = new URL(raw).searchParams.get("v");
+  }
+
+  // 3️⃣ youtu.be/ID
+  else if (raw.includes("youtu.be/")) {
+    videoId = raw.split("youtu.be/")[1].split(/[?&]/)[0];
+  }
+
+  // 4️⃣ youtube.com/shorts/ID
+  else if (raw.includes("/shorts/")) {
+    videoId = raw.split("/shorts/")[1].split(/[?&]/)[0];
+  }
+
+  if (!videoId) return null;
+
+  return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+}
 
 /* ==============================
-   YOUTUBE LINK NORMALIZER
+   YOUTUBE LINK NORMALIZER FOR DATA HAS THAT YOUTUBE LINK
 ================================ */
 
 function toYouTubeEmbed(url) {
@@ -121,9 +156,15 @@ window.BOOKS_READY = Promise.all(
           if (!id) return;
 
           ORDERED_BOOKS_BY_CATEGORY[category].push(id);
+           
+const video = normalizeYouTubeEmbed(
+  book["Youtube ID"] || book["YT Link"] || ""
+);
 
-const primaryVideo = toYouTubeEmbed(book["YT Link"] || book["Youtube ID"]);
-const altVideo     = toYouTubeEmbed(book["YT Alternative"]);
+const videoAlt = normalizeYouTubeEmbed(
+  book["YT Alternative"] || ""
+);
+
 
 
 
