@@ -286,39 +286,46 @@ document.addEventListener("click", e => {
   e.target.textContent = "Hide Video";
 
   // Add YouTube cover image with play button
+if (book.videoID) {
   box.innerHTML = `
-    <div class="yt-lazy" data-video-id="${book.video}">
-      <img src="https://img.youtube.com/vi/${book.video}/hqdefault.jpg">
+    <div class="yt-lazy"
+         data-video-id="${book.videoID}"
+         data-video-alt="${book.videoAltID || ""}">
+      <img loading="lazy"
+           src="https://img.youtube.com/vi/${book.videoID}/hqdefault.jpg"
+           alt="Video thumbnail">
       <span class="yt-play"></span>
     </div>
   `;
-});
+}
 
 
 document.addEventListener("click", e => {
   const yt = e.target.closest(".yt-lazy");
   if (!yt) return;
 
+  const primaryID = yt.dataset.videoId;
+  const altID = yt.dataset.videoAlt;
+
+  if (!primaryID) return;
+
+  // Create iframe
+  const iframe = document.createElement("iframe");
+  iframe.className = "book-yt-video";
+  iframe.allow = "autoplay; encrypted-media";
+  iframe.allowFullscreen = true;
+  iframe.src = `https://www.youtube.com/embed/${primaryID}?autoplay=1`;
+
+  // 🔁 Fallback to alternative if error
+  iframe.onerror = () => {
+    if (altID) {
+      iframe.src = `https://www.youtube.com/embed/${altID}?autoplay=1`;
+    }
+  };
+
   // Replace thumbnail with iframe
-   const videoSrc = book.video || book.videoAlt;
-
-if (videoSrc) {
-  container.innerHTML = `
-    <iframe
-      class="book-yt-video"
-      src="${videoSrc}"
-      allow="autoplay; encrypted-media"
-      allowfullscreen>
-    </iframe>
-  `;
-}
-
-   iframe.onerror = () => {
-  if (book.videoAlt && iframe.src !== book.videoAlt) {
-    iframe.src = book.videoAlt;
-  }
-};
-
+  yt.innerHTML = "";
+  yt.appendChild(iframe);
 });
 
 
