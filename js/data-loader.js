@@ -10,7 +10,7 @@ window.ORDERED_BOOKS_BY_CATEGORY = {};
    GOOGLE APPS SCRIPT ENDPOINT
 ========================================================= */
 const GAS_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbyrj1_rXFvSPD7NGsBYZH2XykoH3ZJdlYmOaHlRnqQbSHl0iN8qdI51Vlocq0EEr7s5/exec";
+  "https://script.google.com/macros/s/AKfycbytkA0PFsOTV_XsCyQVRNh4-7GJtnfylCToLJhOOVNez7p9JxsOR8iH8AUYFAyQDCnq/exec";
 
 /* =========================================================
    CATEGORY LIST (SHEET NAMES)
