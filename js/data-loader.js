@@ -44,94 +44,42 @@ const BOOK_SOURCES = [
   },
 ];
 /* ==============================
-   YOUTUBE LINK NORMALIZER FOR DATA HAS THAT YOUTUBE ID
+   extract YouTube ID
 ================================ */
-function normalizeYouTubeEmbed(input) {
+function extractYouTubeID(input) {
   if (!input) return null;
 
   const raw = input.trim();
   if (raw === "#VALUE!" || raw === "N/A") return null;
 
-  let videoId = null;
-
-  // 1️⃣ Already just an ID
+  // 1️⃣ Already an ID
   if (/^[a-zA-Z0-9_-]{11}$/.test(raw)) {
-    videoId = raw;
+    return raw;
   }
-
-  // 2️⃣ youtube.com/watch?v=
-  else if (raw.includes("watch?v=")) {
-    videoId = new URL(raw).searchParams.get("v");
-  }
-
-  // 3️⃣ youtu.be/ID
-  else if (raw.includes("youtu.be/")) {
-    videoId = raw.split("youtu.be/")[1].split(/[?&]/)[0];
-  }
-
-  // 4️⃣ youtube.com/shorts/ID
-  else if (raw.includes("/shorts/")) {
-    videoId = raw.split("/shorts/")[1].split(/[?&]/)[0];
-  }
-
-  if (!videoId) return null;
-
-  return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-}
-
-/* ==============================
-   YOUTUBE LINK NORMALIZER FOR DATA HAS THAT YOUTUBE LINK
-================================ */
-
-function toYouTubeEmbed(url) {
-  if (!url || typeof url !== "string") return null;
-
-  const clean = url.trim();
-
-  if (
-    clean === "" ||
-    clean === "#VALUE!" ||
-    clean.toUpperCase() === "N/A"
-  ) return null;
-
-  let videoId = null;
 
   try {
-    const u = new URL(clean);
+    const url = new URL(raw);
 
-    // ▶ Normal YouTube
-    if (u.hostname.includes("youtube.com")) {
-      // watch?v=ID
-      if (u.searchParams.get("v")) {
-        videoId = u.searchParams.get("v");
-      }
-
-      // shorts/ID
-      else if (u.pathname.startsWith("/shorts/")) {
-        videoId = u.pathname.split("/shorts/")[1];
-      }
-
-      // embed/ID (already embed)
-      else if (u.pathname.startsWith("/embed/")) {
-        videoId = u.pathname.split("/embed/")[1];
-      }
+    // youtube.com/watch?v=
+    if (url.searchParams.get("v")) {
+      return url.searchParams.get("v");
     }
 
-    // ▶ youtu.be short link
-    if (u.hostname.includes("youtu.be")) {
-      videoId = u.pathname.slice(1);
+    // youtu.be/
+    if (url.hostname.includes("youtu.be")) {
+      return url.pathname.replace("/", "");
+    }
+
+    // /shorts/
+    if (url.pathname.includes("/shorts/")) {
+      return url.pathname.split("/shorts/")[1];
     }
 
   } catch (e) {
     return null;
   }
 
-  if (!videoId) return null;
-
-  // strip anything extra
-  videoId = videoId.split(/[?&/]/)[0];
-
-  return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  return null;
 }
 
 /* =========================================================
@@ -157,13 +105,12 @@ window.BOOKS_READY = Promise.all(
 
           ORDERED_BOOKS_BY_CATEGORY[category].push(id);
            
-const video = normalizeYouTubeEmbed(
-  book["Youtube ID"] || book["YT Link"] || ""
-);
+const videoID =
+  extractYouTubeID(book["YT Link"]) ||
+  extractYouTubeID(book["Youtube ID"]);
 
-const videoAlt = normalizeYouTubeEmbed(
-  book["YT Alternative"] || ""
-);
+const videoAltID =
+  extractYouTubeID(book["YT Alternative"]);
 
 
 
@@ -178,8 +125,9 @@ const videoAlt = normalizeYouTubeEmbed(
             SetQtty: book.qtty || book["No. of Books"] || 0,
             SetTotal: Number( book["Set Total"] || 0),
 
-              video,       // ✅ normalized embed URL
-              videoAlt,    // ✅ optional fallback
+videoID,
+videoAltID,
+
             
              Author: book["Author"] || "",
              Status: book["Status"] || "",
