@@ -298,6 +298,7 @@ if (book.videoID) {
     </div>
   `;
 }
+}
 
 
 document.addEventListener("click", e => {
@@ -327,7 +328,6 @@ document.addEventListener("click", e => {
   yt.innerHTML = "";
   yt.appendChild(iframe);
 });
-
 
 /* =====================================
    RESET VIDEO
