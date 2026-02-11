@@ -86,7 +86,7 @@ function updateBookInputs(count) {
 
     row.innerHTML = `
       <br/>
-      <u>Request No. ${i}</u><br/> 
+      <u class="request-label">Request No. ${i}</u><br/><br/> 
       
 <div>  
 <label>
@@ -351,10 +351,10 @@ function reindexRequestRows() {
     // update dataset
     row.dataset.bookId = newId;
 
-    // update visible number (the "1. 2. 3.")
-    const numberNode = row.firstChild;
-    if (numberNode && numberNode.nodeType === Node.TEXT_NODE) {
-      numberNode.textContent = `\n      ${newIndex}. \n`;
+    // ✅ update visible label
+    const label = row.querySelector(".request-label");
+    if (label) {
+      label.textContent = `Request No. ${newIndex}`;
     }
 
     // update radios
@@ -368,15 +368,18 @@ function reindexRequestRows() {
       input.dataset.bookId = newId;
     });
 
-    // update price box if exists
+    // update price box
     const priceBox = row.querySelector(".price-box");
     if (priceBox) {
       priceBox.dataset.bookId = newId;
-      priceBox.querySelector(".cart-icon")?.setAttribute("data-book-id", newId);
+      priceBox.querySelector(".cart-icon")
+        ?.setAttribute("data-book-id", newId);
     }
   });
-}
 
+  // keep counter in sync
+  document.getElementById("bookCount").value = rows.length;
+}
 /* ==============================
    FUNCTION LIVE SEARCH
 ================================ */
