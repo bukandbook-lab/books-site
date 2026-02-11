@@ -86,7 +86,7 @@ function updateBookInputs(count) {
 
     row.innerHTML = `
       <br/>
-      ${i}. 
+      <u>Request No. ${i}</u><br/> 
       
 <div>  
 <label>
