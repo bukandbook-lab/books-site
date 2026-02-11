@@ -300,12 +300,25 @@ document.addEventListener("click", e => {
   if (!yt) return;
 
   // Replace thumbnail with iframe
-  yt.innerHTML = `
-    <iframe class="book-yt-video"
-      src="https://www.youtube.com/embed/${yt.dataset.videoId}?autoplay=1"
+   const videoSrc = book.video || book.videoAlt;
+
+if (videoSrc) {
+  container.innerHTML = `
+    <iframe
+      class="book-yt-video"
+      src="${videoSrc}"
       allow="autoplay; encrypted-media"
-      allowfullscreen></iframe>
+      allowfullscreen>
+    </iframe>
   `;
+}
+
+   iframe.onerror = () => {
+  if (book.videoAlt && iframe.src !== book.videoAlt) {
+    iframe.src = book.videoAlt;
+  }
+};
+
 });
 
 
