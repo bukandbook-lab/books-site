@@ -331,7 +331,7 @@ document.addEventListener("change", e => {
 
   const priceBox = ensurePriceBox(row);
   priceBox.classList.remove("hidden");
-  setRequestType(priceBox, row.dataset.bookId, "book");
+  setRequestType(priceBox, row.dataset.bookId, requestType);
 
   row.querySelector(".inline-search-grid")?.classList.add("hidden");
 });
@@ -343,6 +343,7 @@ document.addEventListener("change", e => {
 ================================ */
 function LiveSearch(row) {
   
+ const requestType = row.dataset.requestType || "book";
    
   const titleInput = row.querySelector(".req-book-title");
   const authorInput = row.querySelector(".req-book-author");
@@ -369,7 +370,7 @@ function LiveSearch(row) {
 
   if (!title && !author && !specific) {
     // No input at all → show default request price
-    setRequestType(priceBox, row.dataset.bookId, "book");
+    setRequestType(priceBox, row.dataset.bookId, requestType);
     priceBox.classList.remove("hidden");
     return;
   }
@@ -451,7 +452,7 @@ grid.appendChild(msg);
 } else {
   // No results → show request price-box
   priceBox.classList.remove("hidden");
-  setRequestType(priceBox, row.dataset.bookId, "book");
+  setRequestType(priceBox, row.dataset.bookId, requestType);
  
 
 }
@@ -462,4 +463,3 @@ grid.appendChild(msg);
     syncCartIcons();
   }
 }
-
