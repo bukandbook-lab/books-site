@@ -168,7 +168,9 @@ document.addEventListener("click", e => {
   if (!btn) return;
 
   e.preventDefault();
-  btn.closest(".req-book-row")?.remove();
+ const row = btn.closest(".req-book-row");
+row?.remove();
+reindexRequestRows();
 });
 
 /* ==============================
@@ -336,10 +338,47 @@ document.addEventListener("change", e => {
   row.querySelector(".inline-search-grid")?.classList.add("hidden");
 });
 
+/* ==============================
+   REINDEX FUNCTION
+================================ */
+function reindexRequestRows() {
+  const rows = document.querySelectorAll(".req-book-row");
 
+  rows.forEach((row, index) => {
+    const newIndex = index + 1;
+    const newId = `R${String(newIndex).padStart(3, "0")}`;
+
+    // update dataset
+    row.dataset.bookId = newId;
+
+    // update visible number (the "1. 2. 3.")
+    const numberNode = row.firstChild;
+    if (numberNode && numberNode.nodeType === Node.TEXT_NODE) {
+      numberNode.textContent = `\n      ${newIndex}. \n`;
+    }
+
+    // update radios
+    row.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.name = `requestType-${newId}`;
+      radio.dataset.bookId = newId;
+    });
+
+    // update inputs
+    row.querySelectorAll("input[data-book-id]").forEach(input => {
+      input.dataset.bookId = newId;
+    });
+
+    // update price box if exists
+    const priceBox = row.querySelector(".price-box");
+    if (priceBox) {
+      priceBox.dataset.bookId = newId;
+      priceBox.querySelector(".cart-icon")?.setAttribute("data-book-id", newId);
+    }
+  });
+}
 
 /* ==============================
-   function live search
+   FUNCTION LIVE SEARCH
 ================================ */
 function LiveSearch(row) {
   
