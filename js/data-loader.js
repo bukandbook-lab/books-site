@@ -7,52 +7,35 @@ window.BOOK_REGISTRY = {};
 window.ORDERED_BOOKS_BY_CATEGORY = {};
 
 /* =========================================================
-   BOOK DATA SOURCES
+   GOOGLE APPS SCRIPT ENDPOINT
+========================================================= */
+const GAS_ENDPOINT =
+  "https://script.google.com/macros/s/AKfycbyGzkasHiedph2cEVs4Om_ykrLXlcQfJIlEXRuZU02MwDZ3svMBm3eTdB0TX4R4Jkjt/exec";
+
+/* =========================================================
+   CATEGORY LIST (SHEET NAMES)
 ========================================================= */
 const BOOK_SOURCES = [
-  {
-    key: "BeginningReader",
-    url: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/BeginningReaderData.json"
-  },
-  {
-    key: "ChapterBook",
-    url: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/ChapterBookData.json"
-  },
-  {
-    key: "PictureBook",
-    url: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/PictureBookData.json"
-  },
-  {
-    key: "Novel",
-    url: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/NovelData.json"
-  },
-  {
-    key: "Islamic",
-    url: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/islamicdata.json"
-  },
-  {
-    key: "Melayu",
-    url: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/MelayuData.json"
-  },
-  {
-    key: "Jawi",
-    url: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/jawidata.json"
-  },
-  {
-    key: "Comic",
-    url: "https://raw.githubusercontent.com/bukandbook-lab/books-site/main/data/comicdata.json"
-  },
+  { key: "BeginningReader" },
+  { key: "ChapterBook" },
+  { key: "PictureBook" },
+  { key: "Novel" },
+  { key: "Islamic" },
+  { key: "Melayu" },
+  { key: "Jawi" },
+  { key: "Comic" }
 ];
+
 /* ==============================
    extract YouTube ID
 ================================ */
 function extractYouTubeID(input) {
   if (!input) return null;
 
-  const raw = input.trim();
+  const raw = input.toString().trim();
   if (raw === "#VALUE!" || raw === "N/A") return null;
 
-  // 1️⃣ Already an ID
+  // Already pure ID
   if (/^[a-zA-Z0-9_-]{11}$/.test(raw)) {
     return raw;
   }
@@ -60,17 +43,14 @@ function extractYouTubeID(input) {
   try {
     const url = new URL(raw);
 
-    // youtube.com/watch?v=
     if (url.searchParams.get("v")) {
       return url.searchParams.get("v");
     }
 
-    // youtu.be/
     if (url.hostname.includes("youtu.be")) {
       return url.pathname.replace("/", "");
     }
 
-    // /shorts/
     if (url.pathname.includes("/shorts/")) {
       return url.pathname.split("/shorts/")[1];
     }
@@ -83,70 +63,69 @@ function extractYouTubeID(input) {
 }
 
 /* =========================================================
-   LOAD ALL BOOK DATA
+   LOAD ALL BOOK DATA FROM SPREADSHEET
 ========================================================= */
+
 window.CATEGORY_ORDER = [];
+
 window.BOOKS_READY = Promise.all(
   BOOK_SOURCES.map((source, index) =>
-    fetch(source.url)
+    fetch(`${GAS_ENDPOINT}?category=${source.key}`)
       .then(res => res.json())
       .then(data => {
 
         const category = source.key;
-        const categoryIndex = index + 1; // 👈 CATEGORY NUMBER
+        const categoryIndex = index + 1;
 
         CATEGORY_ORDER.push(category);
         ALL_BOOKS[category] = data;
         ORDERED_BOOKS_BY_CATEGORY[category] = [];
 
         data.forEach(book => {
+
           const id = book.id || book.ID || book["Book ID"];
           if (!id) return;
 
           ORDERED_BOOKS_BY_CATEGORY[category].push(id);
-           
-const videoID =
-  extractYouTubeID(book["YT Link"]) ||
-  extractYouTubeID(book["Youtube ID"]);
 
-const videoAltID =
-  extractYouTubeID(book["YT Alternative"]);
+          const videoID =
+            extractYouTubeID(book["YT Link"]) ||
+            extractYouTubeID(book["Youtube ID"]);
 
-
-
+          const videoAltID =
+            extractYouTubeID(book["YT Alternative"]);
 
           BOOK_REGISTRY[id] = {
             id,
             category,
-            categoryIndex, // 
+            categoryIndex,
+
             title: book.title || book["Book Title"] || "Untitled",
-            img: book.image || book.Link || "",
+            img: book.image || book["Image"] || book["Link"] || "",
             price: Number(book.price || book["Price"] || 0),
             SetQtty: book.qtty || book["No. of Books"] || 0,
-            SetTotal: Number( book["Set Total"] || 0),
+            SetTotal: Number(book["Set Total"] || 0),
 
-videoID,
-videoAltID,
+            videoID,
+            videoAltID,
 
-            
-             Author: book["Author"] || "",
-             Status: book["Status"] || "",
-             MissingTitle: book["Missing Title"] || "",
-             Series: book["Series"] || "",
-            
-     // 🔑 FIXED TAG NORMALIZATION
-tags: typeof book["Tag"] === "string"
-  ? book["Tag"]
-      .split(",")
-      .map(t => t.trim())
-      .filter(Boolean)
-  : Array.isArray(book["Tag"])
-    ? book["Tag"]
-    : []
+            Author: book["Author"] || "",
+            Status: book["Status"] || "",
+            MissingTitle: book["Missing Title"] || "",
+            Series: book["Series"] || "",
 
+            tags: typeof book["Tag"] === "string"
+              ? book["Tag"]
+                  .split(",")
+                  .map(t => t.trim())
+                  .filter(Boolean)
+              : Array.isArray(book["Tag"])
+                ? book["Tag"]
+                : []
           };
+
         });
+
       })
   )
 );
-
