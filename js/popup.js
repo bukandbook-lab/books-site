@@ -272,7 +272,7 @@ document.addEventListener("click", e => {
   const book = BOOK_REGISTRY[popup.dataset.bookId];
   const box = popup.querySelector(".video-box");
 
-  if (!book?.video || !box) return;
+  if (!book?.videoID || !box) return;
 
   // Toggle video box
   if (box.classList.contains("active")) {
