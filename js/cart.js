@@ -1,6 +1,8 @@
 /* =====================================
    CART STATE (SINGLE SOURCE OF TRUTH)
 ===================================== */
+let lastScrollY = 0;
+
 const cart = {
   items: new Map(),
   delivery: "email",
@@ -118,8 +120,6 @@ cart.items.set(id, {
 /* =====================================
    OPEN / CLOSE CART
 ===================================== */
-let scrollY = 0;
-
 function openCart() {
   scrollY = window.scrollY;
 
