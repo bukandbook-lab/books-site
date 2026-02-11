@@ -118,17 +118,28 @@ cart.items.set(id, {
 /* =====================================
    OPEN / CLOSE CART
 ===================================== */
-let lastScrollY = 0;
+let scrollY = 0;
 
 function openCart() {
-  lastScrollY = window.scrollY;      // 🔑 save position
+  scrollY = window.scrollY;
+
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.width = "100%";
+
   document.getElementById("Cart").classList.add("open");
-  document.body.classList.add("cart-open");
 }
 
 function closeCart() {
   document.getElementById("Cart").classList.remove("open");
-  document.body.classList.remove("cart-open");
+
+  document.body.style.position = "";
+  document.body.style.top = "";
+  document.body.style.width = "";
+
+  window.scrollTo(0, scrollY);
+}
+
 
   // 🔑 restore scroll AFTER cart closes
   requestAnimationFrame(() => {
