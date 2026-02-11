@@ -118,7 +118,10 @@ cart.items.set(id, {
 /* =====================================
    OPEN / CLOSE CART
 ===================================== */
+let lastScrollY = 0;
+
 function openCart() {
+  lastScrollY = window.scrollY;      // 🔑 save position
   document.getElementById("Cart").classList.add("open");
   document.body.classList.add("cart-open");
 }
@@ -126,6 +129,11 @@ function openCart() {
 function closeCart() {
   document.getElementById("Cart").classList.remove("open");
   document.body.classList.remove("cart-open");
+
+  // 🔑 restore scroll AFTER cart closes
+  requestAnimationFrame(() => {
+    window.scrollTo({ top: lastScrollY, behavior: "instant" });
+  });
 }
 
 
@@ -133,6 +141,7 @@ document.addEventListener("click", e => {
   if (e.target.id === "continueShopping") closeCart();
   if (e.target.closest("#Cart .close-popup")) closeCart();
 });
+
 
 /* =====================================
    REMOVE ITEM (KEEP CART OPEN)
