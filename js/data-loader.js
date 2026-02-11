@@ -177,8 +177,9 @@ const videoAlt = normalizeYouTubeEmbed(
             price: Number(book.price || book["Price"] || 0),
             SetQtty: book.qtty || book["No. of Books"] || 0,
             SetTotal: Number( book["Set Total"] || 0),
-              video: primaryVideo,
-              videoAlt: altVideo,
+
+              video,       // ✅ normalized embed URL
+              videoAlt,    // ✅ optional fallback
             
              Author: book["Author"] || "",
              Status: book["Status"] || "",
