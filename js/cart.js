@@ -142,6 +142,22 @@ document.addEventListener("click", e => {
   if (e.target.closest("#Cart .close-popup")) closeCart();
 });
 
+document.addEventListener("click", e => {
+  const cartBox = document.getElementById("Cart");
+  if (!cartBox || !cartBox.classList.contains("open")) return;
+
+  // ❌ clicked inside cart → ignore
+  if (e.target.closest("#Cart")) return;
+
+  // ❌ clicked on cart-trigger → ignore
+  if (
+    e.target.closest(".price-box") ||
+    e.target.closest(".cart-icon")
+  ) return;
+
+  // ✅ clicked outside → close cart
+  closeCart();
+});
 
 /* =====================================
    REMOVE ITEM (KEEP CART OPEN)
