@@ -298,7 +298,7 @@ if (book.videoID) {
     </div>
   `;
 }
-}
+});
 
 
 document.addEventListener("click", e => {
