@@ -644,7 +644,7 @@ function sendOrderToTelegram() {
   if (!cart.orderId) cart.orderId = generateOrderId();
 
   const GAS_URL =
-    "https://script.google.com/macros/s/AKfycbwkVq9p7RXnCPoPWf2m0K-Ipm2c4Qo2LdoRpAPx-oUkQY-9C_tTVW_vopTOBPhbrSxj/exec";
+    "https://script.google.com/macros/s/AKfycbyPWGVV5tXyrAMQNeUyCrtNvS8_beUwVkQGX2Ri4zrtPjpb0kfZGGuoo0kmiOsil_4/exec";
 
   fetch(GAS_URL, {
     method: "POST",
