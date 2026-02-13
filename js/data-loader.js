@@ -1,10 +1,4 @@
-/* =====================================
-   GLOBAL BOOK DATA LOADER (RUN ONCE)
-===================================== */
 
-window.ALL_BOOKS = {};
-window.BOOK_REGISTRY = {};
-window.ORDERED_BOOKS_BY_CATEGORY = {};
 
 
 /* ==============================
