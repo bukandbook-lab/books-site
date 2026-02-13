@@ -1,3 +1,4 @@
+
 /* =====================================
    GLOBAL BOOK DATA LOADER (RUN ONCE)
 ===================================== */
@@ -5,26 +6,6 @@
 window.ALL_BOOKS = {};
 window.BOOK_REGISTRY = {};
 window.ORDERED_BOOKS_BY_CATEGORY = {};
-
-/* =========================================================
-   GOOGLE APPS SCRIPT ENDPOINT
-========================================================= */
-const GAS_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbwuwFd406eeq9xS_qC_WJ1WENmRdvZ2LjJp7mqF4Dtif8pnw5raPaqR8OIp8BzmYSM_Yw/exec";
-
-/* =========================================================
-   CATEGORY LIST (SHEET NAMES)
-========================================================= */
-const BOOK_SOURCES = [
-  { key: "BeginningReader" },
-  { key: "ChapterBook" },
-  { key: "PictureBook" },
-  { key: "Novel" },
-  { key: "Islamic" },
-  { key: "Melayu" },
-  { key: "Jawi" },
-  { key: "Comic" }
-];
 
 /* ==============================
    extract YouTube ID
@@ -63,19 +44,22 @@ function extractYouTubeID(input) {
 }
 
 /* =========================================================
-   LOAD ALL BOOK DATA FROM SPREADSHEET
+   LOAD ALL BOOK DATA FROM STATIC JSON (FAST)
 ========================================================= */
+
+const STATIC_JSON_URL =
+  "https://script.google.com/macros/s/AKfycbwuwFd406eeq9xS_qC_WJ1WENmRdvZ2LjJp7mqF4Dtif8pnw5raPaqR8OIp8BzmYSM_Yw/exec";
 
 window.CATEGORY_ORDER = [];
 
-window.BOOKS_READY = Promise.all(
-  BOOK_SOURCES.map((source, index) =>
-    fetch(`${GAS_ENDPOINT}?category=${source.key}`)
-      .then(res => res.json())
-      .then(data => {
+window.BOOKS_READY = fetch(STATIC_JSON_URL)
+  .then(res => res.json())
+  .then(allData => {
 
-        const category = source.key;
-        const categoryIndex = index + 1;
+    Object.keys(allData).forEach((category, index) => {
+
+      const data = allData[category];
+      const categoryIndex = index + 1;
 
         CATEGORY_ORDER.push(category);
         ALL_BOOKS[category] = data;
@@ -122,10 +106,10 @@ window.BOOKS_READY = Promise.all(
               : Array.isArray(book["Tag"])
                 ? book["Tag"]
                 : []
-          };
+        };
 
-        });
+      });
 
-      })
-  )
-);
+    });
+
+  });
