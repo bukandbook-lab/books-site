@@ -421,7 +421,7 @@ const deliveryField = document.getElementById("deliveryDetails");
   if (hidden) hidden.value = titles.join(" | ");
 
     // 1️⃣ Send Telegram automatically
-  sendOrderToTelegram();
+  sendOrderToTelegram ();
    
   const payText = document.getElementById("payText");
 if (!payText) {
@@ -644,7 +644,7 @@ function sendOrderToTelegram() {
   if (!cart.orderId) cart.orderId = generateOrderId();
 
   const GAS_URL =
-    "https://script.google.com/macros/s/AKfycbx0QMl6W6c4dIFSEUNUSPzK6k66mce5SQnfYPIrCMuekdgb-YNkDZzB61vvxO6gPj1d/exec";
+    "https://script.google.com/macros/s/bAKfycbx0QMl6W6c4dIFSEUNUSPzK6k66mce5SQnfYPIrCMuekdgb-YNkDZzB61vvxO6gPj1d/exec";
 
   fetch(GAS_URL, {
     method: "POST",
