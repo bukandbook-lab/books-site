@@ -756,6 +756,68 @@ document.addEventListener("click", e => {
 });
 
 /* =====================================
+    INVOICE IN PAYMENT POPUP 
+===================================== */
+function renderInvoice() {
+  if (cart.length === 0) {
+    alert("Cart is empty!");
+    return;
+  }
+
+  const orderId = generateOrderId();
+  window.currentOrderId = orderId;
+
+  let booksHtml = "";
+  let subtotal = 0;
+
+  cart.forEach(item => {
+    const total = item.price * item.quantity;
+    subtotal += total;
+
+    booksHtml += `
+      <tr>
+        <td>${item.title}</td>
+        <td>${item.quantity}</td>
+        <td>RM${item.price.toFixed(2)}</td>
+        <td>RM${total.toFixed(2)}</td>
+      </tr>
+    `;
+  });
+
+  const shippingFee = 0; // adjust if needed
+  const grandTotal = subtotal + shippingFee;
+
+  const invoiceHTML = `
+    <div style="text-align:left;">
+      <p><strong>Order ID:</strong> ${orderId}</p>
+      <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
+
+      <table border="1" width="100%" cellpadding="5" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Book</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${booksHtml}
+        </tbody>
+      </table>
+
+      <p style="margin-top:10px;">
+        <strong>Subtotal:</strong> RM${subtotal.toFixed(2)}<br>
+        <strong>Shipping:</strong> RM${shippingFee.toFixed(2)}<br>
+        <strong>Grand Total:</strong> RM${grandTotal.toFixed(2)}
+      </p>
+    </div>
+  `;
+
+  document.getElementById("invoiceContent").innerHTML = invoiceHTML;
+}
+
+/* =====================================
    PAYMENT POPUP 
 ===================================== */
 document.addEventListener("click", e => {
