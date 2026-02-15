@@ -792,7 +792,7 @@ function renderInvoice() {
 /* =====================================
    PAYMENT POPUP 
 ===================================== */
-document.getElementById("clickToPayBtn").addEventListener("click", () => {
+document.getElementById("clickToPay").addEventListener("click", () => {
   renderInvoice();
   const paymentPopup = document.getElementById("paymentPopup");
   if (!paymentPopup || paymentPopup.style.display !== "flex") return;
