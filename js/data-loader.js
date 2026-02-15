@@ -67,13 +67,26 @@ function loadCategory(category, index) {
     `${GAS_ENDPOINT}?key=${SECRET_KEY}&category=${category}`
   )
     .then(res => res.json())
-    .then(data => {
+    .then(response => {
 
-      ALL_BOOKS[category] = data;
-      ORDERED_BOOKS_BY_CATEGORY[category] = [];
-      CATEGORY_LOADED[category] = true;
+  // 🔑 Normalize response
+  const books = Array.isArray(response)
+    ? response
+    : Array.isArray(response.data)
+      ? response.data
+      : Array.isArray(response.books)
+        ? response.books
+        : [];
 
-      data.forEach(book => {
+  if (!Array.isArray(books)) {
+    throw new Error("Invalid GAS response shape");
+  }
+
+  ALL_BOOKS[category] = books;
+  ORDERED_BOOKS_BY_CATEGORY[category] = [];
+  CATEGORY_LOADED[category] = true;
+
+  books.forEach(book => {
 
         const id = book.id || book.ID || book["Book ID"];
         if (!id) return;
