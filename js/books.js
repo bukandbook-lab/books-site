@@ -15,23 +15,26 @@ function lazyRender(container, books) {
     entries.forEach(entry => {
 
       if (entry.isIntersecting) {
+
         const el = entry.target;
-        const bookId = el.dataset.id;
-        renderBook(bookId, el);
+        const book = JSON.parse(el.dataset.book);
+
+        renderBookCard(el, book);
+
         observer.unobserve(el);
       }
 
     });
 
   }, {
-    rootMargin: "200px" // preload slightly before visible
+    rootMargin: "300px"
   });
 
-  books.forEach(bookId => {
+  books.forEach(book => {
 
     const placeholder = document.createElement("div");
-    placeholder.className = "book-placeholder";
-    placeholder.dataset.id = bookId;
+    placeholder.className = "book-thumb";
+    placeholder.dataset.book = JSON.stringify(book);
 
     container.appendChild(placeholder);
     observer.observe(placeholder);
@@ -39,6 +42,56 @@ function lazyRender(container, books) {
   });
 
 }
+
+/* =====================================
+   Extract Card HTML into renderBookCard()
+===================================== */
+function renderBookCard(item, book) {
+
+  const id = book.id || book.ID || book["Book ID"];
+  if (!id) return;
+
+  const normalized = {
+    id,
+    title: book.title || book["Book Title"] || "Untitled",
+    img: book.image || book.Link || book.img || "",
+    price: Number(book.price || book["Price"] || 0),
+    SetQtty: book.qtty || book["No. of Books"] || 0,
+    video: book["Youtube ID"] || book.video || null
+  };
+
+  const isSetBook = normalized.SetQtty > 1;
+  const priceLabel = isSetBook ? "/set" : "/book";
+
+  if (book._source === "tag") {
+    item.classList.add("tagged-book");
+  }
+
+  item.innerHTML = `
+    <div class="skeleton"></div>
+    <div class="book-bg" data-bg="${normalized.img}"></div>
+    <img
+      src="${normalized.img}"
+      class="grid-book-img popup-trigger"
+      loading="lazy"
+      data-book-id="${normalized.id}"
+      decoding="async"
+      fetchpriority="high"
+    >
+    <div class="price-box"
+      data-book-id="${normalized.id}"
+      data-title="${normalized.title}"
+      data-price="${Number(normalized.price).toFixed(2)}"
+      data-setqtty="${normalized.SetQtty || 1}"
+    >
+      &nbsp&nbspRM${Number(normalized.price).toFixed(2)}${priceLabel}
+      <img data-book-id="${normalized.id}" src="${CART_ICON}" class="cart-icon">
+    </div>
+  `;
+
+  progressiveImageLoad(item);
+}
+
 
 /* =====================================
    LOAD BOOKS
@@ -101,63 +154,22 @@ Object.keys(ALL_BOOKS).forEach(cat => {
   const grid = document.createElement("div");
   grid.className = "image-grid";
 
-  combinedBooks.forEach(book => {
-    const id = book.id || book.ID || book["Book ID"];
-    if (!id) return;
+  container.innerHTML = "";
 
-    const normalized = {
-      id,
-      title: book.title || book["Book Title"] || "Untitled",
-      img: book.image || book.Link || book.img || "",
-      price: Number(book.price || book["Price"] || 0),
-      SetQtty: book.qtty || book["No. of Books"] || 0,
-      video: book["Youtube ID"] || book.video || null
-    };
+const grid = document.createElement("div");
+grid.className = "image-grid";
 
-    
-    const item = document.createElement("div");
-    item.className = "book-thumb";
+container.appendChild(grid);
 
-    // optional visual hint for tagged books
-    if (book._source === "tag") {
-      item.classList.add("tagged-book");
-    }
+// 🔥 LAZY RENDER INSTEAD OF INSTANT RENDER
+lazyRender(grid, combinedBooks);
 
-const isSetBook = normalized.SetQtty > 1;
-const priceLabel = isSetBook ? "/set" : "/book";
+// 🔥 INIT SEE MORE AFTER RENDER
+applySeeMore(grid);
 
-item.innerHTML = `
-  <div class="skeleton"></div>
+container.scrollTop = 0;
+window.scrollTo({ top: 0, behavior: "instant" });
 
-<div class="book-bg" data-bg="${normalized.img}"></div>
-
-<img
-  src="${normalized.img}"
-  class="grid-book-img popup-trigger"
-  loading="lazy"
-  data-book-id="${normalized.id}"
-  decoding="async"
-  fetchpriority="high"
->
-
-
-  <!-- 🔥 HOVER PRICE BOX -->
-  <div class="price-box"
-    data-book-id="${normalized.id}"
-    data-title="${normalized.title}"
-    data-price="${Number(normalized.price).toFixed(2)}"
-    data-setqtty="${normalized.SetQtty || 1}"
-  >
-    &nbsp&nbspRM${Number(normalized.price).toFixed(2)}${priceLabel}
-    <img data-book-id="${normalized.id}" src="${CART_ICON}" class="cart-icon">
-  </div>
-`;
-
-
-    grid.appendChild(item);
-    progressiveImageLoad(item);
-
-  });
 
 container.appendChild(grid);
 
