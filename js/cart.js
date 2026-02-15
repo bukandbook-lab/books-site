@@ -792,26 +792,35 @@ function renderInvoice() {
 /* =====================================
    PAYMENT POPUP 
 ===================================== */
-document.getElementById("clickToPay").addEventListener("click", () => {
-  renderInvoice();
-  const paymentPopup = document.getElementById("paymentPopup");
-  if (!paymentPopup || paymentPopup.style.display !== "flex") return;
+document.addEventListener("DOMContentLoaded", function () {
 
-  // ❌ Close when X is clicked
-if (paymentPopup) {
+  const clickBtn = document.getElementById("clickToPay");
+  const paymentPopup = document.getElementById("paymentPopup");
+
+  if (!clickBtn || !paymentPopup) return;
+
+  clickBtn.addEventListener("click", function (e) {
+    renderInvoice();
+    paymentPopup.style.display = "flex";
+  });
+
+  // Close button
   const closeBtn = paymentPopup.querySelector(".close-popup");
   if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
+    closeBtn.addEventListener("click", function () {
       paymentPopup.style.display = "none";
     });
   }
-}
 
-  // ❌ Close when clicking outside content
-  if (e.target === paymentPopup) {
-    paymentPopup.style.display = "none";
-  }
+  // Click outside to close
+  paymentPopup.addEventListener("click", function (e) {
+    if (e.target === paymentPopup) {
+      paymentPopup.style.display = "none";
+    }
+  });
+
 });
+
 
 /* =====================================
    Submit Invoice to Google Script
