@@ -154,11 +154,6 @@ Object.keys(ALL_BOOKS).forEach(cat => {
   const grid = document.createElement("div");
   grid.className = "image-grid";
 
-  container.innerHTML = "";
-
-const grid = document.createElement("div");
-grid.className = "image-grid";
-
 container.appendChild(grid);
 
 // 🔥 LAZY RENDER INSTEAD OF INSTANT RENDER
@@ -167,19 +162,9 @@ lazyRender(grid, combinedBooks);
 // 🔥 INIT SEE MORE AFTER RENDER
 applySeeMore(grid);
 
+// 🔥 RESET SCROLL
 container.scrollTop = 0;
 window.scrollTo({ top: 0, behavior: "instant" });
-
-
-container.appendChild(grid);
-
-// 🔥 INIT SEE MORE AFTER RENDER
-applySeeMore(grid);
-
-// 🔥 RESET SCROLL SO FIRST BOOKS ARE VISIBLE
-container.scrollTop = 0;
-window.scrollTo({ top: 0, behavior: "instant" });
-
 
 }
 
