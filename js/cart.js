@@ -420,34 +420,6 @@ const deliveryField = document.getElementById("deliveryDetails");
   if (cart.delivery === "courier") total += 17;
   if (hidden) hidden.value = titles.join(" | ");
 
-    // 1️⃣ Send Telegram automatically
-  sendOrderToTelegram ();
-   
-  const payText = document.getElementById("payText");
-if (!payText) {
-  console.error("payText element not found");
-  return;
-}
-
-payText.innerHTML = `
-  Please bank in <b>RM${total.toFixed(2)}</b> to:<br><br>
-  <b>Account Number:</b><br>
-  1234567890 (Maybank)<br><br>
-
-  Once payment is made, choose how you want to submit your order below 👇
-`;
-
-
-// 🔓 OPEN PAYMENT POPUP
-const paymentPopup = document.getElementById("paymentPopup");
-
-if (paymentPopup) {
-  paymentPopup.style.display = "flex"; // 🔑 REQUIRED
-  requestAnimationFrame(() => {
-    paymentPopup.classList.add("show"); // animation
-  });
-}
-
 
 });
 
@@ -820,7 +792,8 @@ function renderInvoice() {
 /* =====================================
    PAYMENT POPUP 
 ===================================== */
-document.addEventListener("click", e => {
+document.getElementById("clickToPayBtn").addEventListener("click", () => {
+  renderInvoice();
   const paymentPopup = document.getElementById("paymentPopup");
   if (!paymentPopup || paymentPopup.style.display !== "flex") return;
 
@@ -840,7 +813,32 @@ if (paymentPopup) {
   }
 });
 
+/* =====================================
+   Submit Invoice to Google Script
+===================================== */
+document.getElementById("submitInvoiceOrder").addEventListener("click", async () => {
 
+  const orderData = {
+    orderId: window.currentOrderId,
+    date: new Date().toISOString(),
+    books: cart,
+    totals: calculateTotals()
+  };
+
+  await fetch("YOUR_GAS_URL", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(orderData)
+  });
+
+  alert("Order submitted successfully!");
+
+  cart = [];
+  renderCart();
+  document.getElementById("paymentPopup").style.display = "none";
+});
 
 /* =====================================
    THANK YOU POPUP (DELIVERY-AWARE)
