@@ -152,24 +152,20 @@ Secondly, word of mouth is important for every book, so if you can recommend boo
 <!-- PAYMENT POPUP -->
 <div id="paymentPopup" class="popup">
   <div class="popup-content">
-    <img
-       src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhOugfd_uN6o5SctZFNuRIj_BzoQL5wV-kJwedlMszlIJtG8f3kIsmjpUzzEGITOJCaxuHZ_s4NHzKJBGVhQZz6o6YtwyO63V8W7iZINYEg9LljwmRpL3DQLFIOWHFwUFsBLn9dIqdf-4AXa69Heo9EoZN1OnivF9o4NywvTmQ84hfd4Vz-aiRe-uqgqePe/s320/cross.png"
-       class="close-popup"
-       alt="Close"
-    >
-      <p id="payText"></p>
-	   <div class="submit-options" style="margin-top:16px; text-align:center;">
-  		<button id="submitGoogleForm" style="cursor:pointer;text-align:center;">SUBMIT ORDER VIA GOOGLE FORM</button>
-		</div>
-	    <div class="submit-Whatsapp">
-			<button id="submitWhatsapp" onclick="openWhatsAppOrder()" style="cursor:pointer;">SUBMIT ORDER VIA WHATSAPP</button>
-		        <img
-    				src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUhNlQdGbG0-uvrDrJmMrforsQT7WwfxNOotS02BNczodK1gvVQB86wafY3OPLsOn4wCQJ2kQGNNGzQ_HSgwtaT8Y6W3uRSOEnO7Kwi970G-tZz5ZwOGYchAfmP9LUueDq5EPWYtQZRHT8xUPk1vinzuuGP11DHbxt-tWnrG_aF63Dw2HkXAZU7N5qO1Ql/s320/WhatsApp.jpg"
-    				width="36"				
-  				>     
-	 </div>
+    <h2>Invoice</h2>
+    <div id="invoiceContent"></div>
+
+    <div style="margin-top:15px;">
+      <label>Upload Payment Proof:</label><br>
+      <input type="file" id="paymentProof" accept="image/*,.pdf">
+    </div>
+
+    <button id="submitInvoiceOrder" style="margin-top:15px;">
+      SUBMIT ORDER
+    </button>
   </div>
 </div>
+
 
 <!-- THANK YOU POPUP -->
 <div id="thankYou" class="popup">
