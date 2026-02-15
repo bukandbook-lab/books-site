@@ -1,11 +1,21 @@
-
 /* =====================================
-   GLOBAL BOOK DATA LOADER (RUN ONCE)
+   GLOBAL BOOK DATA
 ===================================== */
 
 window.ALL_BOOKS = {};
 window.BOOK_REGISTRY = {};
 window.ORDERED_BOOKS_BY_CATEGORY = {};
+window.CATEGORY_LOADED = {};
+
+/* =====================================
+   CONFIG
+===================================== */
+
+const GAS_ENDPOINT =
+  "https://script.google.com/macros/s/AKfycbx3xyGHNOdTK7RiYhRVqpMglL7g3iCGEirAlU7hl_LH9qqlBKOn2RQbW73WmVf2a1P81Q/exec";
+
+const SECRET_KEY = "larilarilaju4578kali";
+
 
 /* ==============================
    extract YouTube ID
@@ -43,36 +53,34 @@ function extractYouTubeID(input) {
   return null;
 }
 
-/* =========================================================
-   LOAD ALL BOOK DATA FROM STATIC JSON (FAST)
-========================================================= */
+/* =====================================
+   LOAD SINGLE CATEGORY
+===================================== */
 
-const STATIC_JSON_URL =
-  "https://script.google.com/macros/s/AKfycbwuwFd406eeq9xS_qC_WJ1WENmRdvZ2LjJp7mqF4Dtif8pnw5raPaqR8OIp8BzmYSM_Yw/exec";
+function loadCategory(category, index) {
 
-window.CATEGORY_ORDER = [];
+  if (CATEGORY_LOADED[category]) {
+    return Promise.resolve();
+  }
 
-window.BOOKS_READY = fetch(STATIC_JSON_URL)
-  .then(res => res.json())
-  .then(allData => {
+  return fetch(
+    `${GAS_ENDPOINT}?key=${SECRET_KEY}&category=${category}`
+  )
+    .then(res => res.json())
+    .then(data => {
 
-    Object.keys(allData).forEach((category, index) => {
+      ALL_BOOKS[category] = data;
+      ORDERED_BOOKS_BY_CATEGORY[category] = [];
+      CATEGORY_LOADED[category] = true;
 
-      const data = allData[category];
-      const categoryIndex = index + 1;
+      data.forEach(book => {
 
-        CATEGORY_ORDER.push(category);
-        ALL_BOOKS[category] = data;
-        ORDERED_BOOKS_BY_CATEGORY[category] = [];
+        const id = book.id || book.ID || book["Book ID"];
+        if (!id) return;
 
-        data.forEach(book => {
+        ORDERED_BOOKS_BY_CATEGORY[category].push(id);
 
-          const id = book.id || book.ID || book["Book ID"];
-          if (!id) return;
-
-          ORDERED_BOOKS_BY_CATEGORY[category].push(id);
-
-          const videoID =
+            const videoID =
             extractYouTubeID(book["YT Link"]) ||
             extractYouTubeID(book["Youtube ID"]);
 
@@ -108,8 +116,14 @@ window.BOOKS_READY = fetch(STATIC_JSON_URL)
                 : []
         };
 
+
       });
 
     });
+}
 
-  });
+/* =====================================
+   LOAD FIRST CATEGORY ONLY
+===================================== */
+
+window.BOOKS_READY = loadCategory("BeginningReader", 0);
