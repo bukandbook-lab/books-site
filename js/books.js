@@ -4,6 +4,46 @@ function prettyCategory(text = "") {
   return text.replace(/([a-z])([A-Z])/g, "$1 $2");
 }
 
+/* =====================================
+   LAZY RENDER (SCROLL OPTIMIZED)
+===================================== */
+
+function lazyRender(container, books) {
+
+  const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const bookId = el.dataset.id;
+        renderBook(bookId, el);
+        observer.unobserve(el);
+      }
+
+    });
+
+  }, {
+    rootMargin: "200px" // preload slightly before visible
+  });
+
+  books.forEach(bookId => {
+
+    const placeholder = document.createElement("div");
+    placeholder.className = "book-placeholder";
+    placeholder.dataset.id = bookId;
+
+    container.appendChild(placeholder);
+    observer.observe(placeholder);
+
+  });
+
+}
+
+/* =====================================
+   LOAD BOOKS
+===================================== */
+
 function loadBooks(tabId) {
 
   // ✅ NON-BOOK TAB → DO NOTHING
