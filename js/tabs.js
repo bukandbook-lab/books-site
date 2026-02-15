@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function openTab(tabId, btn) {
   hideAll();
   deactivateTabs();
+  hideSeeMore();
 
   // ⛔ EXIT SEARCH MODE
   const searchGrid = document.getElementById("searchResults");
