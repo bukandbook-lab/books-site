@@ -90,7 +90,7 @@ function loadCategory(category, index) {
           BOOK_REGISTRY[id] = {
             id,
             category,
-            categoryIndex,
+            categoryIndex: index + 1,
 
             title: book.title || book["Book Title"] || "Untitled",
             img: book.image || book["Image"] || book["Link"] || "",
