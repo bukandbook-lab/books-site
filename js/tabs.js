@@ -32,8 +32,13 @@ function openTab(tabId, btn) {
   panel.style.display = "block";
   btn?.classList.add("active");
 
-  // render books from data source
-  BOOKS_READY.then(() => loadBooks(tabId));
+  // 🔥 LOAD CATEGORY ONLY WHEN CLICKED
+  const categoryIndex = [...tabs].findIndex(t => t.dataset.tab === tabId);
+
+  loadCategory(tabId, categoryIndex)
+    .then(() => {
+      loadBooks(tabId); // your existing renderer
+    });
 }
 
 
