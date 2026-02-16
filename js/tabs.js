@@ -56,3 +56,36 @@ function openTab(tabId, btn) {
 
   defaultBtn && openTab(defaultBtn.dataset.tab, defaultBtn);
 });
+
+/* =====================================
+  AUTO SHOW/HIDE ARROWS
+===================================== */
+const tabs = document.getElementById("tabsContainer");
+const arrowLeft = document.getElementById("tabArrowLeft");
+const arrowRight = document.getElementById("tabArrowRight");
+
+/* Update arrow visibility */
+function updateTabArrows() {
+  const maxScrollLeft = tabs.scrollWidth - tabs.clientWidth;
+
+  arrowLeft.style.display = tabs.scrollLeft > 5 ? "block" : "none";
+  arrowRight.style.display = tabs.scrollLeft < maxScrollLeft - 5 ? "block" : "none";
+}
+
+/* Arrow click scroll */
+arrowLeft.addEventListener("click", () => {
+  tabs.scrollBy({ left: -120, behavior: "smooth" });
+});
+
+arrowRight.addEventListener("click", () => {
+  tabs.scrollBy({ left: 120, behavior: "smooth" });
+});
+
+/* Listen to scroll */
+tabs.addEventListener("scroll", updateTabArrows);
+
+/* Initial check */
+window.addEventListener("load", updateTabArrows);
+window.addEventListener("resize", updateTabArrows);
+
+
