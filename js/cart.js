@@ -773,6 +773,7 @@ function renderInvoice() {
   });
 
   const invoiceHTML = `
+    <span class="close-popup" alt="Close">X</span><br/>
     <div style="text-align:left;">
 
       <p><strong>Order ID:</strong> ${cart.orderId}</p>
@@ -813,7 +814,7 @@ function renderInvoice() {
 
       <div>
         <label><b>Upload Payment Proof:</b></label><br>
-        Please bank in to account number 121312144555355 (Boost).
+        Please bank in to account number 121312144555355 (Boost).<br>
         <input type="file" id="paymentProof" accept="image/*,.pdf">
       </div>
 
@@ -836,7 +837,7 @@ document.addEventListener("click", function(e){
 
   if (e.target.id === "backToCart") {
     document.getElementById("paymentPopup").style.display = "none";
-     document.getElementById("Cart").style.display = "block";
+    document.getElementById("Cart").style.display = "block";
   }
 
 });
@@ -896,11 +897,20 @@ document.getElementById("submitInvoiceOrder").addEventListener("click", async ()
   const orderData = buildOrderData();
   orderData.paymentProof = cart.paymentProofUrl;
 
-  const res = await fetch("YOUR_GAS_ORDER_URL", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(orderData)
-  });
+  const res = await fetch("https://script.google.com/macros/s/AKfycbwg4dcb5Py6DDOLhh4_xl49mL0jnidPWjLwLn5KYg_HF0QrUWgreDgIBikAIYwaB-jv-A/exec", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    source: "website",
+    orderId: cart.orderId,
+    booksText: buildOrderData().booksText,
+    totalAmount: calculateTotals().grandTotal,
+    deliveryMethod: cart.delivery.toUpperCase(),
+    deliveryDetails: cart.deliveryDetails,
+    paymentProofUrl: cart.paymentProofUrl
+  })
+});
+
 
   showThankYou();
 });
