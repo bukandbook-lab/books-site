@@ -420,6 +420,19 @@ const deliveryField = document.getElementById("deliveryDetails");
   if (cart.delivery === "courier") total += 17;
   if (hidden) hidden.value = titles.join(" | ");
 
+renderInvoice();
+   
+// 🔓 OPEN PAYMENT POPUP
+const paymentPopup = document.getElementById("paymentPopup");
+
+if (paymentPopup) {
+  paymentPopup.style.display = "flex"; // 🔑 REQUIRED
+  requestAnimationFrame(() => {
+    paymentPopup.classList.add("show"); // animation
+  });
+}
+
+
 
 });
 
@@ -792,34 +805,18 @@ function renderInvoice() {
 /* =====================================
    PAYMENT POPUP 
 ===================================== */
-document.addEventListener("DOMContentLoaded", function () {
+const paymentPopup = document.getElementById("paymentPopup");
 
-  const clickBtn = document.getElementById("clickToPay");
-  const paymentPopup = document.getElementById("paymentPopup");
+if (paymentPopup) {
+  const content = paymentPopup.querySelector(".popup-content");
 
-  if (!clickBtn || !paymentPopup) return;
-
-  clickBtn.addEventListener("click", function (e) {
-    renderInvoice();
-    paymentPopup.style.display = "flex";
-  });
-
-  // Close button
-  const closeBtn = paymentPopup.querySelector(".close-popup");
-  if (closeBtn) {
-    closeBtn.addEventListener("click", function () {
-      paymentPopup.style.display = "none";
+  if (content) {
+    content.addEventListener("click", e => {
+      e.stopPropagation(); // ✅ keep popup open when clicking inside
     });
   }
+}
 
-  // Click outside to close
-  paymentPopup.addEventListener("click", function (e) {
-    if (e.target === paymentPopup) {
-      paymentPopup.style.display = "none";
-    }
-  });
-
-});
 
 
 /* =====================================
