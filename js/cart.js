@@ -756,32 +756,35 @@ document.addEventListener("change", async (e) => {
 /* =====================================
    Submit Invoice to Google Script
 ===================================== */
-document.getElementById("submitInvoiceOrder").addEventListener("click", async () => {
+document.addEventListener("click", async (e) => {
+  if (e.target.id !== "submitInvoiceOrder") return;
+
   if (!cart.paymentProofUrl) {
     alert("Please upload payment proof before submitting order.");
     return;
   }
 
-  const orderData = buildOrderData();
-  orderData.paymentProof = cart.paymentProofUrl;
+  const totals = calculateTotals();
 
-  const res = await fetch("https://script.google.com/macros/s/AKfycbwg4dcb5Py6DDOLhh4_xl49mL0jnidPWjLwLn5KYg_HF0QrUWgreDgIBikAIYwaB-jv-A/exec", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
+  const payload = {
     source: "website",
     orderId: cart.orderId,
     booksText: buildOrderData().booksText,
-    totalAmount: calculateTotals().grandTotal,
+    totalAmount: totals.grandTotal,
     deliveryMethod: cart.delivery.toUpperCase(),
     deliveryDetails: cart.deliveryDetails,
     paymentProofUrl: cart.paymentProofUrl
-  })
-});
+  };
 
+  await fetch("https://script.google.com/macros/s/AKfycbwg4dcb5Py6DDOLhh4_xl49mL0jnidPWjLwLn5KYg_HF0QrUWgreDgIBikAIYwaB-jv-A/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
 
   showThankYou();
 });
+
 
 /* =====================================
    THANK YOU POPUP (DELIVERY-AWARE)
