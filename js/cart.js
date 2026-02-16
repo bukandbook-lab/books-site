@@ -813,6 +813,7 @@ function renderInvoice() {
 
       <div>
         <label><b>Upload Payment Proof:</b></label><br>
+        Please bank in to account number 121312144555355 (Boost).
         <input type="file" id="paymentProof" accept="image/*,.pdf">
       </div>
 
@@ -835,7 +836,7 @@ document.addEventListener("click", function(e){
 
   if (e.target.id === "backToCart") {
     document.getElementById("paymentPopup").style.display = "none";
-     document.getElementById("Cart").style.display = "flex";
+     document.getElementById("Cart").style.display = "block";
   }
 
 });
@@ -855,33 +856,53 @@ if (paymentPopup) {
   }
 }
 
+/* =====================================
+   Frontend JS to save in Google Drive
+===================================== */
+document.getElementById("paymentProof").addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = async () => {
+    const base64 = reader.result.split(",")[1]; // remove data: prefix
+    const res = await fetch("https://script.google.com/macros/s/AKfycbxajfd8CLr0fmmJhCEd21h-NwObB31NRzOPGkR6pjrNPGGZU-vp96IGR2_rL1elo1Q3xA/exec", {
+      method: "POST",
+      body: JSON.stringify({
+        fileBase64: base64,
+        fileName: file.name,
+        fileType: file.type
+      }),
+      headers: { "Content-Type": "application/json" }
+    });
+    const data = await res.json();
+    alert("Payment proof uploaded successfully! ✅");
+    cart.paymentProofUrl = data.fileUrl;
+  };
+  reader.readAsDataURL(file);
+});
+
 
 
 /* =====================================
    Submit Invoice to Google Script
 ===================================== */
 document.getElementById("submitInvoiceOrder").addEventListener("click", async () => {
+  if (!cart.paymentProofUrl) {
+    alert("Please upload payment proof before submitting order.");
+    return;
+  }
 
-  const orderData = {
-    orderId: window.currentOrderId,
-    date: new Date().toISOString(),
-    books: cart,
-    totals: calculateTotals()
-  };
+  const orderData = buildOrderData();
+  orderData.paymentProof = cart.paymentProofUrl;
 
-  await fetch("YOUR_GAS_URL", {
+  const res = await fetch("YOUR_GAS_ORDER_URL", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(orderData)
   });
 
-  alert("Order submitted successfully!");
-
-  cart = [];
-  renderCart();
-  document.getElementById("paymentPopup").style.display = "none";
+  showThankYou();
 });
 
 /* =====================================
