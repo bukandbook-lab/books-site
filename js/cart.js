@@ -14,18 +14,6 @@ const cart = {
 const SHIPPING_FEE = 10;
 const THUMB_DRIVE_FEE = 7;
 
-
-/* =====================================
-   DEFINE FOR GOOGLE FORM INPUT
-===================================== */
-const FORM = {
-  orderId: "entry.2127120340",
-  books:   "entry.1876655214",
-  total:   "entry.621883004",
-  method:  "entry.189390956",
-  delivery:"entry.553879654",
-};
-
 /* =====================================
    ADD TO CART (GRID + POPUP) 
 ===================================== */
@@ -456,57 +444,16 @@ function buildOrderData() {
     i++;
   });
 
-  return {
-    orderId: cart.orderId,
-    booksText: bookLines.join("\n"),
-    delivery: cart.delivery.toUpperCase(),
-    deliveryDetails: cart.deliveryDetails || "Not provided",
-    totals
-  };
+return {
+  orderId: cart.orderId,
+  booksText: bookLines.join("\n"),
+  delivery: cart.delivery.toUpperCase(),
+  deliveryDetails: cart.deliveryDetails || "Not provided",
+  paymentProofUrl: cart.paymentProofUrl || "",
+  totals
+};
+
 }
-
-/* =====================================
-   WHATSAPP MESSAGE
-===================================== */
-function openWhatsAppOrder() {
-  if (!cart.orderId) cart.orderId = generateOrderId();
-
-  // Auto-send Telegram
-  sendOrderToTelegram();
-
-  showThankYou();
-
-  const url =
-    "https://wa.me/601113127911?text=" +
-    encodeURIComponent(buildWhatsAppMessage());
-
-  window.open(url, "_blank");
-}
-
-function buildWhatsAppMessage() {
-  const data = buildOrderData();
-  const t = data.totals;
-
-  let msg = `🛒 *NEW ORDER*\n\n`;
-  msg += `📦 *Order ID:* ${data.orderId}\n\n`;
-  msg += `📚 *List of Books:*\n${data.booksText}\n\n`;
-
-  msg += `💵 *Payment Breakdown*\n`;
-  msg += `📚 Subtotal: RM${t.booksSubtotal.toFixed(2)}\n`;
-
-  if (cart.delivery === "courier") {
-    msg += `🚚 Shipping: RM${t.shippingFee.toFixed(2)}\n`;
-    msg += `💾 Thumb Drive: RM${t.thumbFee.toFixed(2)}\n`;
-  }
-
-  msg += `\n💰 *TOTAL: RM${t.grandTotal.toFixed(2)}*\n\n`;
-  msg += `🚚 *Delivery Method:* ${data.delivery}\n`;
-  msg += `📝 *Delivery Details:*\n${data.deliveryDetails}\n\n`;
-  msg += `📸 *Payment Screenshot:* (attach below)`;
-
-  return msg;
-}
-
 
 /* =====================================
    INPUT DELIVERY CHANGED ACCORDINGLY
@@ -536,53 +483,6 @@ document.addEventListener("input", e => {
     cart.deliveryDetails = e.target.value.trim();
   }
 });
-
-
-/* =====================================
-   GOOGLE FORM
-===================================== */
-function buildGoogleFormURL() {
-  const data = buildOrderData();
-  const t = data.totals;
-
-  const base =
-    "https://docs.google.com/forms/d/e/1FAIpQLSd6LUWZbLaj4qtmSLT1tKeKL5kqFeVuuvf6lk3uq2sy6aChmA/viewform?usp=pp_url&";
-
-  const params = new URLSearchParams({
-    [FORM.orderId]: data.orderId,
-    [FORM.books]:
-      data.booksText,
-    [FORM.total]:
-`Subtotal: RM${t.booksSubtotal.toFixed(2)}
-Shipping: RM${t.shippingFee.toFixed(2)}
-Thumb Drive: RM${t.thumbFee.toFixed(2)}
------------------
-TOTAL: RM${t.grandTotal.toFixed(2)}`,
-    [FORM.method]: cart.delivery,
-    [FORM.delivery]: data.deliveryDetails
-  });
-
-  return base + params.toString();
-}
-
-/* =====================================
-   GOOGLE FORM BUTTON HANDLER
-===================================== */
-const submitGoogleBtn = document.getElementById("submitGoogleForm");
-
-if (submitGoogleBtn) {
-  submitGoogleBtn.addEventListener("click", () => {
-    showThankYou();
-
-    if (!cart.orderId) {
-      cart.orderId = generateOrderId();
-    }
-
-    const url = buildGoogleFormURL();
-    window.open(url, "_blank");
-  });
-}
-
 
 /* =====================================
    AUTO-GENERATE ORDER ID
@@ -616,52 +516,6 @@ function calculateTotals() {
     thumbFee,
     grandTotal: booksSubtotal + shippingFee + thumbFee
   };
-}
-
-
-/* =====================================
-  SEND TELEGRAM MESSAGE
-===================================== */
-
-function sendOrderToTelegram() {
-  if (cart.items.size === 0) return;
-
-  if (!cart.orderId) cart.orderId = generateOrderId();
-
-  const GAS_URL =
-    "https://script.google.com/macros/s/bAKfycbx0QMl6W6c4dIFSEUNUSPzK6k66mce5SQnfYPIrCMuekdgb-YNkDZzB61vvxO6gPj1d/exec";
-
-  fetch(GAS_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      text: buildTelegramMessage()
-    })
-  });
-}
-
-function buildTelegramMessage() {
-  const data = buildOrderData();
-  const t = data.totals;
-
-  let msg = `🛒 *NEW ORDER*\n\n`;
-  msg += `🆔 *Order ID:* ${data.orderId}\n\n`;
-  msg += `📚 *List of Books:*\n${data.booksText}\n\n`;
-
-  msg += `💵 *Payment Breakdown*\n`;
-  msg += `📚 Subtotal: RM${t.booksSubtotal.toFixed(2)}\n`;
-
-  if (cart.delivery === "courier") {
-    msg += `🚚 Shipping: RM${t.shippingFee.toFixed(2)}\n`;
-    msg += `💾 Thumb Drive: RM${t.thumbFee.toFixed(2)}\n`;
-  }
-
-  msg += `\n💰 *TOTAL: RM${t.grandTotal.toFixed(2)}*\n\n`;
-  msg += `📦 *Delivery Method:* ${data.delivery}\n`;
-  msg += `📝 *Delivery Details:*\n${data.deliveryDetails}`;
-
-  return msg;
 }
 
 
@@ -835,10 +689,11 @@ function renderInvoice() {
 ===================================== */
 document.addEventListener("click", function(e){
 
-  if (e.target.id === "backToCart") {
-    document.getElementById("paymentPopup").style.display = "none";
-    document.getElementById("Cart").style.display = "block";
-  }
+if (e.target.id === "backToCart") {
+  document.getElementById("paymentPopup").style.display = "none";
+  openCart(); // reopen properly
+}
+
 
 });
 
@@ -857,32 +712,45 @@ if (paymentPopup) {
   }
 }
 
+document.addEventListener("click", (e) => {
+  if (e.target.closest("#paymentPopup .close-popup")) {
+    document.getElementById("paymentPopup").style.display = "none";
+  }
+});
+
 /* =====================================
    Frontend JS to save in Google Drive
 ===================================== */
-document.getElementById("paymentProof").addEventListener("change", async (e) => {
+document.addEventListener("change", async (e) => {
+  if (e.target.id !== "paymentProof") return;
+
   const file = e.target.files[0];
   if (!file) return;
 
   const reader = new FileReader();
+
   reader.onload = async () => {
-    const base64 = reader.result.split(",")[1]; // remove data: prefix
+    const base64 = reader.result.split(",")[1];
+
     const res = await fetch("https://script.google.com/macros/s/AKfycbxajfd8CLr0fmmJhCEd21h-NwObB31NRzOPGkR6pjrNPGGZU-vp96IGR2_rL1elo1Q3xA/exec", {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         fileBase64: base64,
         fileName: file.name,
         fileType: file.type
-      }),
-      headers: { "Content-Type": "application/json" }
+      })
     });
+
     const data = await res.json();
-    alert("Payment proof uploaded successfully! ✅");
+
     cart.paymentProofUrl = data.fileUrl;
+
+    alert("Payment proof uploaded successfully ✅");
   };
+
   reader.readAsDataURL(file);
 });
-
 
 
 /* =====================================
