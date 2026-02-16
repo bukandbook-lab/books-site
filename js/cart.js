@@ -828,6 +828,17 @@ function renderInvoice() {
 
   document.getElementById("invoiceContent").innerHTML = invoiceHTML;
 }
+/* =====================================
+   Make BACK Button Work 
+===================================== */
+document.addEventListener("click", function(e){
+
+  if (e.target.id === "backToCart") {
+    document.getElementById("paymentPopup").style.display = "none";
+     document.getElementById("Cart").style.display = "flex";
+  }
+
+});
 
 /* =====================================
    PAYMENT POPUP 
