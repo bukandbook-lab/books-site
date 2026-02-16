@@ -745,51 +745,45 @@ document.addEventListener("click", e => {
 ===================================== */
 function renderInvoice() {
 
-  if (!Array.isArray(cart)) {
-    console.error("Cart is not array:", cart);
-    cart = [];
-  }
-   
-  if (cart.length === 0) {
+  if (cart.items.size === 0) {
     alert("Cart is empty!");
     return;
   }
 
-  const orderId = generateOrderId();
-  window.currentOrderId = orderId;
+  const totals = calculateTotals();
 
   let booksHtml = "";
-  let subtotal = 0;
+  let index = 1;
 
-  cart.forEach(item => {
-    const total = item.price * item.quantity;
-    subtotal += total;
+  cart.items.forEach((item, id) => {
 
     booksHtml += `
       <tr>
-        <td>${item.title}</td>
-        <td>${item.quantity}</td>
+        <td>${index}. ${item.title}</td>
+        <td>
+          ${item.setQtty > 0 && item.price !== 1
+            ? `${item.setQtty} ${item.setQtty === 1 ? "book" : "books"}`
+            : "-"}
+        </td>
         <td>RM${item.price.toFixed(2)}</td>
-        <td>RM${total.toFixed(2)}</td>
       </tr>
     `;
-  });
 
-  const shippingFee = 0; // adjust if needed
-  const grandTotal = subtotal + shippingFee;
+    index++;
+  });
 
   const invoiceHTML = `
     <div style="text-align:left;">
-      <p><strong>Order ID:</strong> ${orderId}</p>
+
+      <p><strong>Order ID:</strong> ${cart.orderId}</p>
       <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
 
-      <table border="1" width="100%" cellpadding="5" cellspacing="0">
+      <table border="1" width="100%" cellpadding="6" cellspacing="0">
         <thead>
           <tr>
             <th>Book</th>
             <th>Qty</th>
             <th>Price</th>
-            <th>Total</th>
           </tr>
         </thead>
         <tbody>
@@ -797,11 +791,38 @@ function renderInvoice() {
         </tbody>
       </table>
 
-      <p style="margin-top:10px;">
-        <strong>Subtotal:</strong> RM${subtotal.toFixed(2)}<br>
-        <strong>Shipping:</strong> RM${shippingFee.toFixed(2)}<br>
-        <strong>Grand Total:</strong> RM${grandTotal.toFixed(2)}
-      </p>
+      <br>
+
+      <div>
+        <strong>Delivery Method:</strong> ${cart.delivery.toUpperCase()}<br>
+        <strong>Delivery Details:</strong> ${cart.deliveryDetails}
+      </div>
+
+      <br>
+
+      <div>
+        <strong>SUBTOTAL:</strong> RM${totals.booksSubtotal.toFixed(2)}<br>
+        ${cart.delivery === "courier" ? `
+          Shipping: RM${totals.shippingFee.toFixed(2)}<br>
+          Thumb Drive: RM${totals.thumbFee.toFixed(2)}<br>
+        ` : ""}
+        <strong>GRAND TOTAL:</strong> RM${totals.grandTotal.toFixed(2)}
+      </div>
+
+      <br>
+
+      <div>
+        <label><b>Upload Payment Proof:</b></label><br>
+        <input type="file" id="paymentProof" accept="image/*,.pdf">
+      </div>
+
+      <br>
+
+      <div style="display:flex; gap:10px;">
+        <button id="backToCart">BACK</button>
+        <button id="submitInvoiceOrder">SUBMIT ORDER</button>
+      </div>
+
     </div>
   `;
 
