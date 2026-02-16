@@ -520,34 +520,6 @@ function calculateTotals() {
 
 
 /* =====================================
-  AUTO SHOW/HIDE ARROWS
-===================================== */
-const tabs = document.getElementById("tabsContainer");
-const arrowLeft = document.getElementById("tabArrowLeft");
-const arrowRight = document.getElementById("tabArrowRight");
-
-if (tabs && arrowLeft && arrowRight) {
-
-  function updateTabArrows() {
-    const maxScrollLeft = tabs.scrollWidth - tabs.clientWidth;
-    arrowLeft.style.display = tabs.scrollLeft > 5 ? "block" : "none";
-    arrowRight.style.display = tabs.scrollLeft < maxScrollLeft - 5 ? "block" : "none";
-  }
-
-  arrowLeft.addEventListener("click", () => {
-    tabs.scrollBy({ left: -120, behavior: "smooth" });
-  });
-
-  arrowRight.addEventListener("click", () => {
-    tabs.scrollBy({ left: 120, behavior: "smooth" });
-  });
-
-  tabs.addEventListener("scroll", updateTabArrows);
-  window.addEventListener("load", updateTabArrows);
-  window.addEventListener("resize", updateTabArrows);
-}
-
-/* =====================================
   CART ICON TO CHECK MARK
 ===================================== */
 function syncCartIcons() {
