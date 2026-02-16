@@ -904,18 +904,3 @@ document.addEventListener("click", e => {
   }
 });
 
-
-/* =====================================
-   FOR PAYMENT POPUP
-===================================== */
-const paymentPopup = document.getElementById("paymentPopup");
-
-if (paymentPopup) {
-  const content = paymentPopup.querySelector(".popup-content");
-
-  if (content) {
-    content.addEventListener("click", e => {
-      e.stopPropagation(); // ✅ keep popup open when clicking inside
-    });
-  }
-}
