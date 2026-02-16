@@ -643,11 +643,6 @@ function renderInvoice() {
 
       <br>
 
-      <div style="display:flex; gap:10px;">
-        <button id="backToCart">BACK</button>
-        <button id="submitInvoiceOrder">SUBMIT ORDER</button>
-      </div>
-
     </div>
   `;
 
