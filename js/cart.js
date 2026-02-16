@@ -711,9 +711,11 @@ document.addEventListener("click", async e => {
   };
 
   await fetch("https://script.google.com/macros/s/AKfycbxR3YEqukpCkzUFGX_dADpjQ8xVxQWjQF7hwuvxeDsULekI7DzwFug21jJBZOba-YdJuw/exec", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
+  method: "POST",
+  body: JSON.stringify(payload),
+  mode: "no-cors"
+});
+
   });
 
   showThankYou();
