@@ -716,7 +716,7 @@ document.addEventListener("click", async e => {
   mode: "no-cors"
 });
 
-  });
+
 
   showThankYou();
     return;
