@@ -743,7 +743,7 @@ document.addEventListener("click", async (e) => {
     fileType: cart.fileType
   };
 
-  await fetch("YOUR_SINGLE_GAS_URL", {
+  await fetch("https://script.google.com/macros/s/AKfycbyqaSsC16YybnTmqwcwGUpIFMrucCOum6bhextyZqzdlFH61SsEUzcW8BmBi5lcLGj7nA/exec", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
