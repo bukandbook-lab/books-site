@@ -652,8 +652,33 @@ function renderInvoice() {
   document.getElementById("invoiceContent").innerHTML = invoiceHTML;
 }
 
+/* =====================================
+   mark paymentProofUrl = "ready"
+===================================== */
 
+document.addEventListener("change", function(e) {
+  if (e.target.id !== "paymentProof") return;
 
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(event) {
+    const base64 = event.target.result.split(",")[1];
+
+    cart.fileBase64 = base64;
+    cart.fileName = file.name;
+    cart.fileType = file.type;
+
+    // ✅ Mark as uploaded
+    cart.paymentProofUrl = "ready";
+
+    console.log("Payment proof stored.");
+  };
+
+  reader.readAsDataURL(file);
+});
 
 
 /* =====================================
