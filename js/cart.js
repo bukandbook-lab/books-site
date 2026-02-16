@@ -719,64 +719,31 @@ document.addEventListener("click", (e) => {
 });
 
 /* =====================================
-   Frontend JS to save in Google Drive
-===================================== */
-document.addEventListener("change", async (e) => {
-  if (e.target.id !== "paymentProof") return;
-
-  const file = e.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-
-  reader.onload = async () => {
-    const base64 = reader.result.split(",")[1];
-
-    const res = await fetch("https://script.google.com/macros/s/AKfycbxajfd8CLr0fmmJhCEd21h-NwObB31NRzOPGkR6pjrNPGGZU-vp96IGR2_rL1elo1Q3xA/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        fileBase64: base64,
-        fileName: file.name,
-        fileType: file.type
-      })
-    });
-
-    const data = await res.json();
-
-    cart.paymentProofUrl = data.fileUrl;
-
-    alert("Payment proof uploaded successfully ✅");
-  };
-
-  reader.readAsDataURL(file);
-});
-
-
-/* =====================================
    Submit Invoice to Google Script
 ===================================== */
 document.addEventListener("click", async (e) => {
   if (e.target.id !== "submitInvoiceOrder") return;
 
   if (!cart.paymentProofUrl) {
-    alert("Please upload payment proof before submitting order.");
+    alert("Please upload payment proof.");
     return;
   }
 
   const totals = calculateTotals();
 
   const payload = {
-    source: "website",
+    action: "submitOrder",
     orderId: cart.orderId,
     booksText: buildOrderData().booksText,
     totalAmount: totals.grandTotal,
     deliveryMethod: cart.delivery.toUpperCase(),
     deliveryDetails: cart.deliveryDetails,
-    paymentProofUrl: cart.paymentProofUrl
+    fileBase64: cart.fileBase64,   // store this during upload
+    fileName: cart.fileName,
+    fileType: cart.fileType
   };
 
-  await fetch("https://script.google.com/macros/s/AKfycbwg4dcb5Py6DDOLhh4_xl49mL0jnidPWjLwLn5KYg_HF0QrUWgreDgIBikAIYwaB-jv-A/exec", {
+  await fetch("YOUR_SINGLE_GAS_URL", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
@@ -784,7 +751,6 @@ document.addEventListener("click", async (e) => {
 
   showThankYou();
 });
-
 
 /* =====================================
    THANK YOU POPUP (DELIVERY-AWARE)
