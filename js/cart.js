@@ -714,6 +714,7 @@ document.addEventListener("click", async e => {
   method: "POST",
   body: JSON.stringify(payload),
   mode: "no-cors"
+
 });
 
 
