@@ -642,56 +642,34 @@ function renderInvoice() {
       </div>
 
       <br>
-
+      <div style="display:flex; gap:10px;">
+        <button id="backToCart">BACK</button>
+        <button id="submitInvoiceOrder">SUBMIT ORDER</button>
+      </div>
     </div>
   `;
 
   document.getElementById("invoiceContent").innerHTML = invoiceHTML;
 }
-/* =====================================
-   Make BACK Button Work 
-===================================== */
-document.addEventListener("click", function(e){
-
-if (e.target.id === "backToCart") {
-  document.getElementById("paymentPopup").style.display = "none";
-  openCart(); // reopen properly
-}
 
 
-});
 
-/* =====================================
-   PAYMENT POPUP 
-===================================== */
-const paymentPopup = document.getElementById("paymentPopup");
 
-if (paymentPopup) {
-  const content = paymentPopup.querySelector(".popup-content");
-
-  if (content) {
-    content.addEventListener("click", e => {
-      e.stopPropagation(); // ✅ keep popup open when clicking inside
-    });
-  }
-}
-
-document.addEventListener("click", (e) => {
-  if (e.target.closest("#paymentPopup .close-popup")) {
-    document.getElementById("paymentPopup").style.display = "none";
-  }
-});
 
 /* =====================================
    Submit Invoice to Google Script
 ===================================== */
-document.addEventListener("click", async (e) => {
-  if (e.target.id !== "submitInvoiceOrder") return;
+document.addEventListener("click", async e => {
+  const target = e.target;
 
-  if (!cart.paymentProofUrl) {
-    alert("Please upload payment proof.");
-    return;
-  }
+  // Submit order
+  if (target.id === "submitInvoiceOrder") {
+    e.preventDefault();
+    console.log("Submit clicked"); // test
+    if (!cart.paymentProofUrl) {
+      alert("Please upload payment proof.");
+      return;
+    }
 
   const totals = calculateTotals();
 
@@ -714,6 +692,31 @@ document.addEventListener("click", async (e) => {
   });
 
   showThankYou();
+    return;
+  }
+
+  // Back button
+  if (target.id === "backToCart") {
+    e.preventDefault();
+    document.getElementById("paymentPopup").style.display = "none";
+    openCart();
+    return;
+  }
+
+  // Close icon inside popup
+  if (target.closest("#paymentPopup .close-popup")) {
+    e.preventDefault();
+    document.getElementById("paymentPopup").style.display = "none";
+    return;
+  }
+
+  // Close thank you popup
+  const thankYou = document.getElementById("thankYou");
+  if (thankYou?.classList.contains("show") &&
+      (target.closest("#thankYou .close-popup") || !target.closest("#thankYou .popup-content"))) {
+    thankYou.classList.remove("show");
+    setTimeout(() => { thankYou.style.display = "none"; }, 250);
+  }
 });
 
 /* =====================================
@@ -756,21 +759,4 @@ function showThankYou() {
   }, 300);
 }
 
-/* =====================================
-   THANK YOU POPUP – MASTER CLOSE HANDLER
-===================================== */
-document.addEventListener("click", e => {
-  const thankYou = document.getElementById("thankYou");
-  if (!thankYou || !thankYou.classList.contains("show")) return;
-
-  if (
-    e.target.closest("#thankYou .close-popup") ||
-    !e.target.closest("#thankYou .popup-content")
-  ) {
-    thankYou.classList.remove("show");
-    setTimeout(() => {
-      thankYou.style.display = "none";
-    }, 250);
-  }
-});
 
