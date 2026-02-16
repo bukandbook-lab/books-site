@@ -744,6 +744,12 @@ document.addEventListener("click", e => {
     INVOICE IN PAYMENT POPUP 
 ===================================== */
 function renderInvoice() {
+
+  if (!Array.isArray(cart)) {
+    console.error("Cart is not array:", cart);
+    cart = [];
+  }
+   
   if (cart.length === 0) {
     alert("Cart is empty!");
     return;
