@@ -767,8 +767,8 @@ function showThankYou() {
     document.querySelector("input[name='delivery']:checked")?.value;
 
   const msg =
-    "Thank you for your order. Please ensure payment proof has been submitted too.<br><br>Your order will be delivered within <b>" +
-    (delivery === "email" ? "18 hours" : "3 days") +
+    "Thank you for your order. Once payment is verified, your order will be delivered " +
+    (delivery === "email" ? "shortly." : "within 3 days.") +
     "</b>.";
 
   if (thankYouMsg) {
