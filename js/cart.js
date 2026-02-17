@@ -447,7 +447,7 @@ function buildOrderData() {
 return {
   orderId: cart.orderId,
   booksText: bookLines.join("\n"),
-  delivery: cart.delivery.toUpperCase(),
+  delivery: cart.delivery,
   deliveryDetails: cart.deliveryDetails || "Not provided",
   paymentProofUrl: cart.paymentProofUrl || "",
   totals
@@ -696,6 +696,8 @@ document.addEventListener("click", async e => {
       return;
     }
 
+  showThankYou();
+
   const totals = calculateTotals();
 
   const payload = {
@@ -703,7 +705,7 @@ document.addEventListener("click", async e => {
     orderId: cart.orderId,
     booksText: buildOrderData().booksText,
     totalAmount: totals.grandTotal,
-    deliveryMethod: cart.delivery.toUpperCase(),
+    deliveryMethod: cart.deliver,
     deliveryDetails: cart.deliveryDetails,
     fileBase64: cart.fileBase64,   // store this during upload
     fileName: cart.fileName,
@@ -717,9 +719,6 @@ document.addEventListener("click", async e => {
 
 });
 
-
-
-  showThankYou();
     return;
   }
 
@@ -767,9 +766,9 @@ function showThankYou() {
     document.querySelector("input[name='delivery']:checked")?.value;
 
   const msg =
-    "Thank you for your order. Once payment is verified, your order will be delivered " +
-    (delivery === "email" ? "shortly." : "within 3 days.") +
-    "</b>.";
+    "Thank you for your order - " + ${cart.orderId} + ". Once payment is verified, your order will be delivered " +
+    (delivery === "email" ? "shortly." : "within 3 days.") + " Please keep this order ID - " + ${cart.orderId} + "as your reference."
+    ;
 
   if (thankYouMsg) {
     thankYouMsg.innerHTML = msg;
