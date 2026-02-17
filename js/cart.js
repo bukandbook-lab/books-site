@@ -605,8 +605,8 @@ function renderInvoice() {
       <table border="1" width="100%" cellpadding="6" cellspacing="0">
         <thead>
           <tr>
-            <th>Book</th>
-            <th>Qty</th>
+            <th>Title of Book/ Series</th>
+            <th>Quantity</th>
             <th>Price</th>
           </tr>
         </thead>
@@ -618,7 +618,7 @@ function renderInvoice() {
       <br>
 
       <div>
-        <strong>Delivery Method:</strong> ${cart.delivery.toUpperCase()}<br>
+        <strong>Delivery Method:</strong> ${cart.delivery}<br>
         <strong>Delivery Details:</strong> ${cart.deliveryDetails}
       </div>
 
