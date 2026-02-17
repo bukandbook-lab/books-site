@@ -766,8 +766,8 @@ function showThankYou() {
     document.querySelector("input[name='delivery']:checked")?.value;
 
   const msg =
-    "Thank you for your order - " + ${cart.orderId} + ". Once payment is verified, your order will be delivered " +
-    (delivery === "email" ? "shortly." : "within 3 days.") + " Please keep this order ID - " + ${cart.orderId} + "as your reference."
+    "Thank you for your order - " + orderId + ". Once payment is verified, your order will be delivered " +
+    (delivery === "email" ? "shortly." : "within 3 days.") + " Please keep this order ID - " + orderId + "as your reference."
     ;
 
   if (thankYouMsg) {
