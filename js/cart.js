@@ -764,6 +764,7 @@ function showThankYou() {
 
   const delivery =
     document.querySelector("input[name='delivery']:checked")?.value;
+    const orderId = cart.orderId;
 
   const msg =
     "Thank you for your order - " + orderId + ". Once payment is verified, your order will be delivered " +
