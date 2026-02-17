@@ -705,7 +705,7 @@ document.addEventListener("click", async e => {
     orderId: cart.orderId,
     booksText: buildOrderData().booksText,
     totalAmount: totals.grandTotal,
-    deliveryMethod: cart.deliver,
+    deliveryMethod: cart.delivery,
     deliveryDetails: cart.deliveryDetails,
     fileBase64: cart.fileBase64,   // store this during upload
     fileName: cart.fileName,
@@ -768,7 +768,7 @@ function showThankYou() {
 
   const msg =
     "Thank you for your order - " + orderId + ". Once payment is verified, your order will be delivered " +
-    (delivery === "email" ? "shortly." : "within 3 days.") + " Please keep this order ID - " + orderId + "as your reference."
+    (delivery === "email" ? "shortly." : "within 3 days.") + " Please keep this order ID - " + orderId + " as your reference."
     ;
 
   if (thankYouMsg) {
