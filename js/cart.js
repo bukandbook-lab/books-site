@@ -712,7 +712,7 @@ document.addEventListener("click", async e => {
     fileType: cart.fileType
   };
 
-  await fetch("https://script.google.com/macros/s/AKfycbyxCqZepJ2AbxZafUQw_HuMUIb0wuDfsW7xqsPOGBv45-kmFCal7LFHixDV6XGG-kU/exec", {
+  await fetch("https://script.google.com/macros/s/AKfycbwcTMumhq3s-2diCKbl_WHZ8wPUpqADAsVIeLbRliO2jIj3WbKx9XdixNIRM3Sv-3I0/exec", {
   method: "POST",
   body: JSON.stringify(payload),
   mode: "no-cors"
@@ -767,8 +767,8 @@ function showThankYou() {
     const orderId = cart.orderId;
 
   const msg =
-    "Thank you for your order - " + orderId + ". Once payment is verified, your order will be delivered within " +
-    (delivery === "email" ? "1 hour." : "4 days.") + " Please keep this order ID " + orderId + " as your reference."
+    "Thank you for your order " + orderId + ". Once payment is verified, your order will be delivered within " +
+    (delivery === "email" ? "6 hours." : "4 days.") + " Please keep this order ID " + orderId + " as your reference."
     ;
 
   if (thankYouMsg) {
