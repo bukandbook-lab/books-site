@@ -712,7 +712,7 @@ document.addEventListener("click", async e => {
     fileType: cart.fileType
   };
 
-  await fetch("https://script.google.com/macros/s/AKfycbxgaX8s1beBES3kBPpTGiYy6JCF5kYBD59192nvTYHmgenX6O-1O-CA0EkzX51owvdN/exec", {
+  await fetch("https://script.google.com/macros/s/AKfycbzOx7-F8hDFpPlzpvKHCbq_L-W9XcPH-iqlsNyetdBEWj6Bs6MqyeZpjjlL1oUjXj2H/exec", {
   method: "POST",
   body: JSON.stringify(payload),
   mode: "no-cors"
