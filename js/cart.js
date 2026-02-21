@@ -596,7 +596,7 @@ function renderInvoice() {
   });
 
   const invoiceHTML = `
-    <span class="close-popup" alt="Close">X</span><br/>
+    <img src="${CLOSE_ICON}" class="close-popup" alt="Close"><br/>
     <div style="text-align:left;">
 
       <p><strong>Order ID:</strong> ${cart.orderId}</p>
@@ -712,7 +712,7 @@ document.addEventListener("click", async e => {
     fileType: cart.fileType
   };
 
-  await fetch("https://script.google.com/macros/s/AKfycbwPl32UbUCjZne0slt4tSuHzQtXP9PM84rFf0uJ7EI3qzQ0DKF4qXFyvbD6zMfvGxrr/exec", {
+  await fetch("https://script.google.com/macros/s/AKfycbyov8pRiiLPoyuKu12ulwg8q1yhMMj7BTumO7io8pUz1_EOnyC1r4uVYwoXC0ihvAgu/exec", {
   method: "POST",
   body: JSON.stringify(payload),
   mode: "no-cors"
@@ -768,7 +768,7 @@ function showThankYou() {
 
   const msg =
     "Thank you for your order " + orderId + ". Once payment is verified, your order will be delivered within " +
-    (delivery === "email" ? "6 hours." : "4 days.") + " Please keep this order ID " + orderId + " as your reference."
+    (delivery === "email" ? "6 hours." : "4 days.") + "\n\nPlease keep this order ID " + orderId + " as your reference."
     ;
 
   if (thankYouMsg) {
