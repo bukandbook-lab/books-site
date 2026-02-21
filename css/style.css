@@ -417,13 +417,14 @@ html, body {
   justify-content: center;
   align-items: center;
   z-index: 10001;
-  width:350px;
 }
 
 #paymentPopup .popup-content {
   background: #ffffff;
   position: relative;
   padding: 15px;
+  width:380px;
+  font-size:11px;  
 }
 
 #paymentPopup .close-popup {
