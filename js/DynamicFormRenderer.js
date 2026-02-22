@@ -83,6 +83,7 @@ function updateBookInputs(count) {
     const row = document.createElement("div");
     row.className = "req-book-row";
     row.dataset.bookId = id;
+    row.dataset.requestType = "book"; // initialize default
 
     row.innerHTML = `
       <br/>
@@ -123,6 +124,12 @@ function updateBookInputs(count) {
     `;
 
     wrap.appendChild(row);
+     
+      const checked = row.querySelector('input[type="radio"]:checked');
+      
+      if (checked) {
+        row.dataset.requestType = checked.value;
+      }
   }
 
   while (wrap.children.length > count) {
