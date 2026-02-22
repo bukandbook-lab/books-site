@@ -60,7 +60,28 @@ function openTab(tabId, btn) {
 
   defaultBtn && openTab(defaultBtn.dataset.tab, defaultBtn);
 });
+/* =====================================
+  Sequential Loading
+===================================== */
+window.BOOKS_READY.then(async () => {
 
+  console.log("BeginningReader loaded. Sequential preload...");
+
+  for (const cat of CATEGORY_ORDER) {
+
+    if (cat === "BeginningReader") continue;
+    if (CATEGORY_LOADED[cat]) continue;
+
+    try {
+      await loadCategory(cat);
+      console.log(cat, "preloaded");
+    } catch (err) {
+      console.warn("Failed loading", cat);
+    }
+
+  }
+
+});
 /* =====================================
   AUTO SHOW/HIDE ARROWS
 ===================================== */
