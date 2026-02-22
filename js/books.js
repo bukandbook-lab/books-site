@@ -142,6 +142,10 @@ Object.keys(ALL_BOOKS).forEach(cat => {
     ...taggedBooks.map(b => ({ ...b, _source: "tag" }))
   ];
 
+  window.CURRENT_GRID_BOOK_IDS = combinedBooks.map(b =>
+  b.id || b.ID || b["Book ID"]
+  );
+  
   // guard
   if (!Array.isArray(combinedBooks) || combinedBooks.length === 0) {
     container.innerHTML = `<p style="padding:16px">No books found.</p>`;
