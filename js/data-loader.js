@@ -12,7 +12,7 @@ window.CATEGORY_LOADED = {};
 ===================================== */
 
 const GAS_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbyhVSEHfIUan3gTjJqTCL_gwbix9uHOjSYwMHPDB2ymZmRj5d5SbCOVWqcTvcSnN9GdPw/exec";
+  "https://script.google.com/macros/s/AKfycbyZgPSMjXdb3o032i-_my6FoQljFq6pSUOm9cdahBrGWUdrP1QVLzMzTeMBSlx62GzzuA/exec";
 
 const SECRET_KEY = "larilarilaju4578kali";
 
