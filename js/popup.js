@@ -200,7 +200,7 @@ function navigatePopup(step) {
      books = rawBooks.map(b => b.id || b.ID || b["Book ID"]);
      ORDERED_BOOKS_BY_CATEGORY[category] = books;
    }
-  let index = books.indexOf(bookId);
+  let index = books.findIndex(id => String(id) === String(bookId));
 
   if (index === -1) index = 0;
   index += step;
