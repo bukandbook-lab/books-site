@@ -191,13 +191,15 @@ function navigatePopup(step) {
   let bookId = popup.dataset.bookId;
 
   let catIndex = CATEGORY_ORDER.indexOf(category);
-  let books = ORDERED_BOOKS_BY_CATEGORY[category];
-
-   if (!books || books.length === 0) {
-     console.warn("Category not loaded yet:", category);
-     return;
-   }
+   let books = ORDERED_BOOKS_BY_CATEGORY[category];
    
+   if (!books) {
+     const rawBooks = ALL_BOOKS[category];
+     if (!rawBooks) return;
+   
+     books = rawBooks.map(b => b.id || b.ID || b["Book ID"]);
+     ORDERED_BOOKS_BY_CATEGORY[category] = books;
+   }
   let index = books.indexOf(bookId);
 
   if (index === -1) index = 0;
