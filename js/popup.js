@@ -192,6 +192,12 @@ function navigatePopup(step) {
 
   let catIndex = CATEGORY_ORDER.indexOf(category);
   let books = ORDERED_BOOKS_BY_CATEGORY[category];
+
+   if (!books || books.length === 0) {
+     console.warn("Category not loaded yet:", category);
+     return;
+   }
+   
   let index = books.indexOf(bookId);
 
   if (index === -1) index = 0;
