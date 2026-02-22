@@ -186,49 +186,27 @@ function navigatePopup(step) {
   const popup = document.getElementById("BookPopup");
   if (!popup) return;
 
-  let category = popup.dataset.category;
-  let bookId = popup.dataset.bookId;
+  const bookId = popup.dataset.bookId;
+  if (!bookId) return;
 
-  if (!category || !bookId) return;
-
-  let catIndex = CATEGORY_ORDER.indexOf(category);
-  if (catIndex === -1) return;
-
-  let books = ORDERED_BOOKS_BY_CATEGORY[category];
-
-  // 🔥 auto-build if missing
-  if (!books) {
-    const rawBooks = ALL_BOOKS[category];
-    if (!rawBooks) return;
-
-    books = rawBooks.map(b => b.id || b.ID || b["Book ID"]);
-    ORDERED_BOOKS_BY_CATEGORY[category] = books;
-  }
-
-  if (!books.length) return;
+  const books = window.CURRENT_GRID_BOOK_IDS;
+  if (!books || !books.length) return;
 
   let index = books.findIndex(id => String(id) === String(bookId));
-  if (index === -1) index = 0;
+  if (index === -1) return;
 
   index += step;
 
-  if (index >= books.length) {
-    catIndex = (catIndex + 1) % CATEGORY_ORDER.length;
-    books = ORDERED_BOOKS_BY_CATEGORY[CATEGORY_ORDER[catIndex]];
-    index = 0;
-  }
+  // Loop within current grid only
+  if (index >= books.length) index = 0;
+  if (index < 0) index = books.length - 1;
 
-  if (index < 0) {
-    catIndex = (catIndex - 1 + CATEGORY_ORDER.length) % CATEGORY_ORDER.length;
-    books = ORDERED_BOOKS_BY_CATEGORY[CATEGORY_ORDER[catIndex]];
-    index = books.length - 1;
-  }
+  const nextId = String(books[index]);
 
-  popup.dataset.bookId = String(books[index]);
-  popup.dataset.category = CATEGORY_ORDER[catIndex];
+  popup.dataset.bookId = nextId;
 
   resetVideo();
-  renderPopup(books[index]);
+  renderPopup(nextId);
 }
  /* =====================
      ONE master handler
