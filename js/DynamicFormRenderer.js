@@ -224,19 +224,19 @@ function ensurePriceBox(row) {
    radio handler
 ================================ */
 document.addEventListener("change", e => {
-  if (!e.target.matches('input[type="radio"][name^="requestType-"]')) return;
+  if (e.target.value !== "yesproceed") return;
 
   const row = e.target.closest(".req-book-row");
   if (!row) return;
 
-  // 🔑 STORE USER CHOICE ON THE ROW
-  row.dataset.requestType = e.target.value;
+  const requestType = row.dataset.requestType || "book";
 
-  // Optional: update price box immediately
-  const priceBox = row.querySelector(".request-price-box");
-  if (priceBox) {
-    setRequestType(priceBox, row.dataset.bookId, e.target.value);
-  }
+  const priceBox = ensurePriceBox(row);
+  priceBox.classList.remove("hidden");
+
+  setRequestType(priceBox, row.dataset.bookId, requestType);
+
+  row.querySelector(".inline-search-grid")?.classList.add("hidden");
 });
 
 /* ==============================
