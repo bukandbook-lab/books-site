@@ -63,9 +63,15 @@ function loadCategory(category, index) {
     return Promise.resolve();
   }
 
-  return fetch(
-    `${GAS_ENDPOINT}?key=${SECRET_KEY}&category=${category}`
-  )
+return fetch(
+  `${GAS_ENDPOINT}?key=${SECRET_KEY}&category=${category}`,
+  {
+    method: "GET",
+    credentials: "omit",
+    redirect: "follow",
+    cache: "no-store"
+  }
+)
     .then(res => res.json())
     .then(response => {
 
