@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  window.CATEGORY_ORDER = [...document.querySelectorAll(".tab-btn")]
+  .map(btn => btn.dataset.tab)
+  .filter(tab => !["ReadMeFirst", "RequestBook"].includes(tab));
+
   const tabs = document.querySelectorAll(".tab-btn");
   const contents = document.querySelectorAll(".tabcontent");
 
