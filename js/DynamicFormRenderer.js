@@ -125,11 +125,7 @@ function updateBookInputs(count) {
 
     wrap.appendChild(row);
      
-      const checked = row.querySelector('input[type="radio"]:checked');
-      
-      if (checked) {
-        row.dataset.requestType = checked.value;
-      }
+
   }
 
   while (wrap.children.length > count) {
