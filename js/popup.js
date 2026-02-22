@@ -183,26 +183,33 @@ document.addEventListener("click", e => {
 });
 
 function navigatePopup(step) {
-  if (!window.CATEGORY_ORDER) return;
-   
   const popup = document.getElementById("BookPopup");
+  if (!popup) return;
 
   let category = popup.dataset.category;
   let bookId = popup.dataset.bookId;
 
-  let catIndex = CATEGORY_ORDER.indexOf(category);
-   let books = ORDERED_BOOKS_BY_CATEGORY[category];
-   
-   if (!books) {
-     const rawBooks = ALL_BOOKS[category];
-     if (!rawBooks) return;
-   
-     books = rawBooks.map(b => b.id || b.ID || b["Book ID"]);
-     ORDERED_BOOKS_BY_CATEGORY[category] = books;
-   }
-  let index = books.findIndex(id => String(id) === String(bookId));
+  if (!category || !bookId) return;
 
+  let catIndex = CATEGORY_ORDER.indexOf(category);
+  if (catIndex === -1) return;
+
+  let books = ORDERED_BOOKS_BY_CATEGORY[category];
+
+  // 🔥 auto-build if missing
+  if (!books) {
+    const rawBooks = ALL_BOOKS[category];
+    if (!rawBooks) return;
+
+    books = rawBooks.map(b => b.id || b.ID || b["Book ID"]);
+    ORDERED_BOOKS_BY_CATEGORY[category] = books;
+  }
+
+  if (!books.length) return;
+
+  let index = books.findIndex(id => String(id) === String(bookId));
   if (index === -1) index = 0;
+
   index += step;
 
   if (index >= books.length) {
@@ -217,7 +224,7 @@ function navigatePopup(step) {
     index = books.length - 1;
   }
 
-  popup.dataset.bookId = books[index];
+  popup.dataset.bookId = String(books[index]);
   popup.dataset.category = CATEGORY_ORDER[catIndex];
 
   resetVideo();
