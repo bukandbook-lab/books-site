@@ -183,6 +183,8 @@ document.addEventListener("click", e => {
 });
 
 function navigatePopup(step) {
+  if (!window.CATEGORY_ORDER) return;
+   
   const popup = document.getElementById("BookPopup");
 
   let category = popup.dataset.category;
