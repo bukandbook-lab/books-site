@@ -595,6 +595,11 @@ function renderInvoice() {
     return;
   }
 
+  const invoiceLabel =
+  cart.delivery === "email"
+    ? "Email"
+    : "Delivery Details";
+   
   const totals = calculateTotals();
 
   let booksHtml = "";
@@ -664,8 +669,8 @@ function renderInvoice() {
       <br>
 
       <div>
-        <strong>Delivery Method:</strong> ${cart.delivery}<br>
-        <strong>Delivery Details:</strong> ${cart.deliveryDetails}
+         <strong>Delivery Method:</strong> ${cart.delivery}<br>
+         <strong>${invoiceLabel}:</strong> ${cart.deliveryDetails}
       </div>
 
       <br>
