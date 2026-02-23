@@ -825,7 +825,7 @@ body.cart-open {
 }
 
 #invoicecloseTerms{
-  position: relative;
+  position: absolute;
   top: 5px;
   right: 5px;
   background: none;
