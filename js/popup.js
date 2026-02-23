@@ -265,8 +265,7 @@ if (
     popup.dataset.source = "category";
   }
 
-  popup.dataset.bookId = trigger.dataset.bookId;
-  renderPopup(trigger.dataset.bookId);
+   openBookPopup(trigger.dataset.bookId);
 });
 
 
