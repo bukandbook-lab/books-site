@@ -878,26 +878,47 @@ body.cart-open {
   white-space: nowrap;
 }
 
-/* Default inactive button */
-#paymentPopup button {
-  background-color: #E0E0E0;
+#submitInvoiceOrder {
+  background: #E0E0E0;
   color: #737373;
   border: none;
+  margin: 2px;
   border-radius: 18px;
+  flex: 0 0 auto;
   padding: 6px 10px;
   font-size: 12px;
   cursor: not-allowed;
-  margin: 2px;
   transition: all 0.2s ease;
 }
 
-/* Active / clickable button */
-#paymentPopup button.active {
+#submitInvoiceOrder.active  {
+  background: #eee;
   background-color: #FF1493;
+  border-color: #ffdbe1;
   color: white;
+  margin: 2px;
   cursor: pointer;
+  border-radius: 18px;
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  font-size: 12px;
+  pointer-events: auto;
 }
-   
+
+#backToCart {
+  background: #eee;
+  background-color: #FF1493;
+  border-color: #ffdbe1;
+  color: white;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 18px;
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
 /* =========================
    CART ROW + REMOVE ICON IN CART
 ========================= */
