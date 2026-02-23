@@ -709,8 +709,26 @@ function renderInvoice() {
   `;
 
   document.getElementById("invoiceContent").innerHTML = invoiceHTML;
+  updateInvoiceButtons();
 }
+/* =====================================
+  active state for submit order in invoice
+===================================== */
+function updateInvoiceButtons() {
+  const submitBtn = document.getElementById("submitInvoiceOrder");
 
+  if (!submitBtn) return;
+
+  // Conditions for being active
+  const hasItems = cart.items.size > 0;
+  const agreed = cart.agreed; // checkbox checked
+  const deliveryDetails = cart.deliveryDetails && cart.deliveryDetails.trim() !== "";
+  const paymentReady = cart.paymentProofUrl === "ready";
+
+  const isActive = hasItems && agreed && deliveryDetails && paymentReady;
+
+  submitBtn.classList.toggle("active", isActive);
+}
 /* =====================================
    mark paymentProofUrl = "ready"
 ===================================== */
@@ -732,7 +750,7 @@ document.addEventListener("change", function(e) {
 
     // ✅ Mark as uploaded
     cart.paymentProofUrl = "ready";
-
+    updateInvoiceButtons();
     console.log("Payment proof stored.");
   };
 
