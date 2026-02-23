@@ -214,6 +214,11 @@ function renderCart() {
   const box = document.getElementById("Cart");
   if (!box) return;
 
+   const deliveryLabel =
+  cart.delivery === "email"
+    ? "Email"
+    : "Delivery Details";
+   
   let total = 0;
   let index = 1;
   let itemsHTML = "";
@@ -278,15 +283,19 @@ function renderCart() {
     </div><br>
 
          <div class="delivery-details">
-     <b>Delivery Details</b><br>
-        <textarea
-          id="deliveryDetails"
-          rows="2"
-          required
-          placeholder="Enter email address"
-          style="width:100%; margin-top:6px;"
-        ></textarea>
-   </div>
+           <b>${deliveryLabel}</b><br>
+           <textarea
+             id="deliveryDetails"
+             rows="2"
+             required
+             placeholder="${
+               cart.delivery === "email"
+                 ? "Enter email address"
+                 : "Enter name, full address & phone number"
+             }"
+             style="width:100%; margin-top:6px;"
+           ></textarea>
+         </div>
    
 ${cart.delivery === "courier" ? `
   <br><div class="cart-fee">
