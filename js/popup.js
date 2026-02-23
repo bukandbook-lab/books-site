@@ -250,9 +250,25 @@ if (
      OPEN POPUP
   ===================== */
   const trigger = e.target.closest(".popup-trigger");
-  if (trigger) {
-    openBookPopup(trigger.dataset.bookId);
+
+  if (!trigger) return;
+
+  const popup = document.getElementById("BookPopup");
+
+  const grid = trigger.closest(".image-grid, .inline-search-grid");
+
+  if (grid) {
+    const visibleIds = [...grid.querySelectorAll(".popup-trigger")]
+      .map(img => String(img.dataset.bookId));
+
+    popup.dataset.source = "grid";
+    popup.dataset.visibleIds = JSON.stringify(visibleIds);
+  } else {
+    popup.dataset.source = "category";
   }
+
+  popup.dataset.bookId = trigger.dataset.bookId;
+  renderPopup(trigger.dataset.bookId);
 });
 
 
