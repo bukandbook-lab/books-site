@@ -862,6 +862,7 @@ body.cart-open {
   padding: 6px 10px;
   font-size: 12px;
   pointer-events: auto;
+  white-space: nowrap
 }
 
 #continueShopping {
@@ -903,6 +904,7 @@ body.cart-open {
   padding: 6px 10px;
   font-size: 12px;
   pointer-events: auto;
+  white-space: nowrap
 }
 
 #backToCart {
