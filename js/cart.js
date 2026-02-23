@@ -693,8 +693,10 @@ function renderInvoice() {
         </label>
     
         <div id="invoiceTermsBox" class="invoice-terms-box hidden" style="margin-top:10px;">
-        <button type="button" class="terms-close" id="invoicecloseTerms">✕</button>
-             <b>TERMS AND CONDITIONS</b>
+              <div class="invoice-terms-header">
+                <b>TERMS AND CONDITIONS</b>
+                <button type="button" id="invoicecloseTerms">✕</button>
+              </div>
           
              <p>
                • No physical book and ONLY digital copy will be delivered.<br>
