@@ -605,13 +605,37 @@ function renderInvoice() {
       <table border="1" width="100%" cellpadding="6" cellspacing="0">
         <thead>
           <tr>
-            <th>Title of Book/ Series</th>
+            <th>Title of Book / Series</th>
             <th>Quantity</th>
-            <th>Price</th>
+            <th>Price (RM)</th>
           </tr>
         </thead>
         <tbody>
           ${booksHtml}
+      
+          <!-- SUBTOTAL -->
+          <tr>
+            <td colspan="2" style="text-align:right;"><strong>Subtotal</strong></td>
+            <td><strong>${totals.booksSubtotal.toFixed(2)}</strong></td>
+          </tr>
+      
+          ${cart.delivery === "courier" ? `
+            <tr>
+              <td colspan="2" style="text-align:right;">Shipping Fee</td>
+              <td>${totals.shippingFee.toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td colspan="2" style="text-align:right;">Thumb Drive Charge</td>
+              <td>${totals.thumbFee.toFixed(2)}</td>
+            </tr>
+          ` : ""}
+      
+          <!-- GRAND TOTAL -->
+          <tr>
+            <td colspan="2" style="text-align:right;"><strong>Grand Total</strong></td>
+            <td><strong>${totals.grandTotal.toFixed(2)}</strong></td>
+          </tr>
+      
         </tbody>
       </table>
 
@@ -623,30 +647,52 @@ function renderInvoice() {
       </div>
 
       <br>
-
-      <div>
-        <strong>SUBTOTAL:</strong> RM${totals.booksSubtotal.toFixed(2)}<br>
-        ${cart.delivery === "courier" ? `
-          Shipping: RM${totals.shippingFee.toFixed(2)}<br>
-          Thumb Drive: RM${totals.thumbFee.toFixed(2)}<br>
-        ` : ""}
-        <strong>GRAND TOTAL:</strong> RM${totals.grandTotal.toFixed(2)}
-      </div>
-
-      <br>
-
       <div>
         <label><b>Upload Payment Proof:</b></label><br>
         Please bank in to account number 121312144555355 (Boost).<br>
         <input type="file" id="paymentProof" accept="image/*,.pdf">
       </div>
-
+      
       <br>
+      
+      <!-- TERMS SECTION -->
+      <div class="invoice-terms">
+        <label>
+          <input type="checkbox" id="invoiceAgreeTerms" checked>
+          I have read and agreed with the 
+          <span id="invoiceOpenTerms" style="color:blue; cursor:pointer;">
+            Terms and Conditions
+          </span>.
+        </label>
+      
+        <div id="invoiceTermsBox" style="margin-top:10px;">
+          <div style="max-height:150px; overflow:auto; border:1px solid #ccc; padding:10px;">
+             <p>
+               • No physical book and ONLY digital copy will be delivered.<br>
+               • <b>Payment is for our cataloging and delivery service.</b> Only proceed to ‘Click to Pay’ if you accept it.<br>
+               • Digital copy might be in .pdf, .epub or other file type.<br>
+               • Buyer might need to install E-book Reader first.<br>
+               • There is no guarantee the condition of the e-books is perfect. But all e-books are readable.<br>
+               • Book images and videos are for illustration purposes only; actual book condition and content may vary by edition or print.<br>
+               • Order will ONLY be processed with payment proof and complete delivery details.<br>
+               • Delivery timelines may vary.<br>
+               • No guarantee for specific outcomes, results, or satisfaction.<br>
+               • No refund. Pay at your own risk. You can try buy 1 book first.<br>
+               • Special requests may take longer to process.<br>
+               • Additional terms apply.<br>
+               • More explanation about Terms and Conditions can be found in MAIN section.<br>
+             </p>
+          </div>
+        </div>
+      </div>
+      
+      <br>
+      
       <div style="display:flex; gap:10px;">
         <button id="backToCart">BACK</button>
         <button id="submitInvoiceOrder">SUBMIT ORDER</button>
       </div>
-    </div>
+
   `;
 
   document.getElementById("invoiceContent").innerHTML = invoiceHTML;
@@ -691,6 +737,14 @@ document.addEventListener("click", async e => {
   if (target.id === "submitInvoiceOrder") {
     e.preventDefault();
     console.log("Submit clicked"); // test
+
+   const invoiceAgree = document.getElementById("invoiceAgreeTerms");
+     
+      if (!invoiceAgree || !invoiceAgree.checked) {
+        alert("Please agree to the Terms and Conditions.");
+        return;
+      }
+     
     if (!cart.paymentProofUrl) {
       alert("Please upload payment proof.");
       return;
@@ -768,7 +822,7 @@ function showThankYou() {
 
   const msg =
     "Thank you for your order " + orderId + ". Once payment is verified, your order will be delivered within " +
-    (delivery === "email" ? "6 hours." : "4 days.") + "\n\nPlease keep this order ID " + orderId + " as your reference."
+    (delivery === "email" ? "6 hours." : "4 days.") + "Please keep this order ID " + orderId + " as your reference."
     ;
 
   if (thankYouMsg) {
