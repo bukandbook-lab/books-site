@@ -249,22 +249,20 @@ if (
   /* =====================
      OPEN POPUP
   ===================== */
-  const trigger = e.target.closest(".popup-trigger");
-
-  if (!trigger) return;
-
-  const grid = trigger.closest(".image-grid, .inline-search-grid");
-
-  if (grid) {
-    const visibleIds = [...grid.querySelectorAll(".popup-trigger")]
-      .map(img => String(img.dataset.bookId));
-
-    popup.dataset.source = "grid";
-    popup.dataset.visibleIds = JSON.stringify(visibleIds);
-  } else {
-    popup.dataset.source = "category";
-  }
-
+   const trigger = e.target.closest(".popup-trigger");
+   if (!trigger) return;
+   
+   const grid = trigger.closest(".image-grid, .inline-search-grid");
+   
+   if (grid) {
+     const visibleIds = [...grid.querySelectorAll(".popup-trigger")]
+       .map(img => String(img.dataset.bookId));
+   
+     window.CURRENT_GRID_BOOK_IDS = visibleIds;
+   } else {
+     window.CURRENT_GRID_BOOK_IDS = [];
+   }
+   
    openBookPopup(trigger.dataset.bookId);
 });
 
