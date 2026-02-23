@@ -824,6 +824,15 @@ body.cart-open {
   cursor: pointer;
 }
 
+#invoicecloseTerms{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
 /* =========================
    CART AND PAYMENT BUTTONS
 ========================= */
