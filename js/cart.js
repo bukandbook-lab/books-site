@@ -692,8 +692,8 @@ function renderInvoice() {
           </span>.
         </label>
     
-        <button type="button" class="terms-close" id="invoicecloseTerms">✕</button>
         <div id="invoiceTermsBox" class="invoice-terms-box hidden" style="margin-top:10px;">
+        <button type="button" class="terms-close" id="invoicecloseTerms">✕</button>
              <b>TERMS AND CONDITIONS</b>
           
              <p>
