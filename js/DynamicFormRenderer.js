@@ -83,7 +83,7 @@ function updateBookInputs(count) {
     const row = document.createElement("div");
     row.className = "req-book-row";
     row.dataset.bookId = id;
-    row.dataset.requestType = "book"; // initialize default
+    
 
     row.innerHTML = `
       <br/>
@@ -135,7 +135,7 @@ function updateBookInputs(count) {
 
 
 /* ==============================
-   set Request Type
+   SET REQUEST TYPE
 ================================ */
 function setRequestType(priceBox, id, type) {
   if (!priceBox) return;
@@ -189,7 +189,7 @@ document.addEventListener("click", e => {
 });
 
 /* ==============================
-   helper to ensure grid exists
+   HELPER TO ENSURE GRID EXISTS
 ================================ */
 function ensureInlineGrid(row) {
   let grid = row.querySelector(".inline-search-grid");
@@ -202,7 +202,7 @@ function ensureInlineGrid(row) {
 }
 
 /* ==============================
-   helper to ensure price-box exists
+   HELPER TO ENSURE PRICE-BOX EXISTS
 ================================ */
 function ensurePriceBox(row) {
   let priceBox = row.querySelector(".request-price-box");
@@ -224,7 +224,7 @@ function ensurePriceBox(row) {
 }
 
 /* ==============================
-   radio handler
+   RADIO HANDLER
 ================================ */
 document.addEventListener("change", e => {
   if (e.target.value !== "yesproceed") return;
@@ -232,7 +232,7 @@ document.addEventListener("change", e => {
   const row = e.target.closest(".req-book-row");
   if (!row) return;
 
-  const requestType = row.dataset.requestType || "book";
+  const requestType = getRequestType(row);
 
   const priceBox = ensurePriceBox(row);
   priceBox.classList.remove("hidden");
@@ -241,7 +241,6 @@ document.addEventListener("change", e => {
 
   row.querySelector(".inline-search-grid")?.classList.add("hidden");
 });
-
 /* ==============================
    LIVE SEARCH ON BOOK TITLE AUTHOR AND SERIS
 ================================ */
@@ -258,7 +257,7 @@ document.addEventListener("input", e => {
   }
 });
 /* ==============================
-   search helpers
+   SEARCH HELPERS
 ================================ */
 function searchBooksByAuthor(author) {
   if (!author || !window.BOOK_REGISTRY) return [];
@@ -295,7 +294,7 @@ function searchBooksBySeries(series) {
   });
 }
   /* ==============================
-     add filter helper
+     ADD FILTER HELPER
   ================================= */
 function filterByAuthor(list, author) {
   const words = normalizeWords(author);
@@ -326,20 +325,15 @@ function filterBySeries(list, series) {
   });
 }
 /* ==============================
-   handler for Yes, proceed with request
+   HELPER FUNCTION FOR REQUEST TYPE
 ================================ */
-document.addEventListener("change", e => {
-  if (e.target.value !== "yesproceed") return;
-
-  const row = e.target.closest(".req-book-row");
-  if (!row) return;
-
-  const priceBox = ensurePriceBox(row);
-  priceBox.classList.remove("hidden");
-  setRequestType(priceBox, row.dataset.bookId, requestType);
-
-  row.querySelector(".inline-search-grid")?.classList.add("hidden");
-});
+function getRequestType(row) {
+  return row.querySelector(
+    'input[type="radio"][value="series"]:checked'
+  )
+    ? "series"
+    : "book";
+}
 
 /* ==============================
    REINDEX FUNCTION
@@ -388,14 +382,16 @@ function reindexRequestRows() {
 ================================ */
 function LiveSearch(row) {
   
- const requestType = row.dataset.requestType || "book";
+ 
    
   const titleInput = row.querySelector(".req-book-title");
   const authorInput = row.querySelector(".req-book-author");
   const specificInput = row.querySelector(".req-book-specific");
 
+const requestType = getRequestType(row);
   const priceBox = ensurePriceBox(row);            // request-level
   const grid = ensureInlineGrid(row);
+
 
   const title = titleInput.value.trim();
   const author = authorInput.value.trim();
