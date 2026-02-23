@@ -567,12 +567,12 @@ document.addEventListener("click", e => {
   INVOICE TERMS AND CONDITIONS
 ===================================== */
 document.addEventListener("click", e => {
-  if (e.target.id === "invoiceopenTerms") {
-    document.getElementById("invoicetermsBox")?.classList.remove("hidden");
+  if (e.target.id === "invoiceOpenTerms") {
+    document.getElementById("invoiceTermsBox")?.classList.remove("hidden");
   }
 
   if (e.target.id === "invoicecloseTerms") {
-    document.getElementById("invoicetermsBox")?.classList.add("hidden");
+    document.getElementById("invoiceTermsBox")?.classList.add("hidden");
   }
 });
 
@@ -620,7 +620,7 @@ function renderInvoice() {
           <tr>
             <th>Title of Book / Series</th>
             <th>Quantity</th>
-            <th>Price (RM)</th>
+            <th>Price</th>
           </tr>
         </thead>
         <tbody>
@@ -629,24 +629,24 @@ function renderInvoice() {
           <!-- SUBTOTAL -->
           <tr>
             <td colspan="2" style="text-align:right;"><strong>Subtotal</strong></td>
-            <td><strong>${totals.booksSubtotal.toFixed(2)}</strong></td>
+            <td style="text-align:right;"><strong>RM${totals.booksSubtotal.toFixed(2)}</strong></td>
           </tr>
       
           ${cart.delivery === "courier" ? `
             <tr>
               <td colspan="2" style="text-align:right;">Shipping Fee</td>
-              <td>${totals.shippingFee.toFixed(2)}</td>
+              <td style="text-align:right;">RM${totals.shippingFee.toFixed(2)}</td>
             </tr>
             <tr>
               <td colspan="2" style="text-align:right;">Thumb Drive Charge</td>
-              <td>${totals.thumbFee.toFixed(2)}</td>
+              <td style="text-align:right;">RM${totals.thumbFee.toFixed(2)}</td>
             </tr>
           ` : ""}
       
           <!-- GRAND TOTAL -->
           <tr>
             <td colspan="2" style="text-align:right;"><strong>Grand Total</strong></td>
-            <td><strong>${totals.grandTotal.toFixed(2)}</strong></td>
+            <td style="text-align:right;"><strong>RM${totals.grandTotal.toFixed(2)}</strong></td>
           </tr>
       
         </tbody>
