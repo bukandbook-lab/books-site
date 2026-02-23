@@ -377,6 +377,31 @@ function reindexRequestRows() {
   // keep counter in sync
   document.getElementById("bookCount").value = rows.length;
 }
+
+/* ==============================
+   BOOK SERIES radio change listener
+================================ */
+document.addEventListener("change", e => {
+
+  if (
+    !e.target.matches(
+      'input[type="radio"][name^="requestType-"][value="book"], input[type="radio"][name^="requestType-"][value="series"]'
+    )
+  ) return;
+
+  const row = e.target.closest(".req-book-row");
+  if (!row) return;
+
+  const priceBox = row.querySelector(".request-price-box");
+
+  // Only update if price-box is currently visible
+  if (!priceBox || priceBox.classList.contains("hidden")) return;
+
+  const requestType = getRequestType(row);
+
+  setRequestType(priceBox, row.dataset.bookId, requestType);
+
+});
 /* ==============================
    FUNCTION LIVE SEARCH
 ================================ */
