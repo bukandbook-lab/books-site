@@ -824,15 +824,30 @@ body.cart-open {
   cursor: pointer;
 }
 
-#invoicecloseTerms{
+/* Make container positioning context */
+#invoiceTermsBox {
   position: relative;
-  top: 5px;
-  right: 5px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  background: #fff;
+}
+
+/* Stick close button to top right */
+#invoicecloseTerms {
+  position: absolute;
+  top: 6px;
+  right: 8px;
   background: none;
   border: none;
   font-size: 14px;
   cursor: pointer;
-  text-align: right;
+}
+
+.invoice-terms-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 /* =========================
    CART AND PAYMENT BUTTONS
