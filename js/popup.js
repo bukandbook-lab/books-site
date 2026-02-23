@@ -253,8 +253,6 @@ if (
 
   if (!trigger) return;
 
-  const popup = document.getElementById("BookPopup");
-
   const grid = trigger.closest(".image-grid, .inline-search-grid");
 
   if (grid) {
