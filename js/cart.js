@@ -66,12 +66,12 @@ if (!book && sourceEl) {
 
 // 🔑 READ USER CHOICE HERE
 const row = sourceEl.closest(".req-book-row");
-const requestType = row?.dataset.requestType;
+if (!row) return;
 
-if (!requestType) {
-  alert("Please choose Book or Series first 😊");
-  return;
-}
+const requestType =
+  row.querySelector('input[type="radio"][value="series"]:checked')
+    ? "series"
+    : "book";
 
 const label =
   requestType === "series"
