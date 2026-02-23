@@ -564,6 +564,19 @@ document.addEventListener("click", e => {
 });
 
 /* =====================================
+  INVOICE TERMS AND CONDITIONS
+===================================== */
+document.addEventListener("click", e => {
+  if (e.target.id === "invoiceopenTerms") {
+    document.getElementById("invoicetermsBox")?.classList.remove("hidden");
+  }
+
+  if (e.target.id === "invoicecloseTerms") {
+    document.getElementById("invoicetermsBox")?.classList.add("hidden");
+  }
+});
+
+/* =====================================
     INVOICE IN PAYMENT POPUP 
 ===================================== */
 function renderInvoice() {
@@ -664,9 +677,10 @@ function renderInvoice() {
             Terms and Conditions
           </span>.
         </label>
-      
-        <div id="invoiceTermsBox" style="margin-top:10px;">
-          <div style="max-height:150px; overflow:auto; border:1px solid #ccc; padding:10px;">
+    
+        <div id="invoiceTermsBox" class="invoice-terms-box hidden" style="margin-top:10px;">
+          <b>TERMS AND CONDITIONS</b>
+          <button type="button" class="terms-close" id="invoicecloseTerms">✕</button>
              <p>
                • No physical book and ONLY digital copy will be delivered.<br>
                • <b>Payment is for our cataloging and delivery service.</b> Only proceed to ‘Click to Pay’ if you accept it.<br>
@@ -682,7 +696,6 @@ function renderInvoice() {
                • Additional terms apply.<br>
                • More explanation about Terms and Conditions can be found in MAIN section.<br>
              </p>
-          </div>
         </div>
       </div>
       
