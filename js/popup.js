@@ -83,7 +83,7 @@ if (isSetBook) {
       <div class="popup-nav right">›</div>
 
       <div class="book-title">${book.title}</div>
-          
+<div class="book-details">    
 ${book.Author ? `
   <div>
     <b>Author:</b>
@@ -126,7 +126,7 @@ ${book.Series ? `
   </div>
 ` : ""}
 
-
+</div>
 
    <br/><div class="price-box"
         data-book-id="${id}"
