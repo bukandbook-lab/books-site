@@ -467,6 +467,10 @@ html, body {
   text-transform: uppercase;
 }
 
+.book-details{
+  font-size: 12px;
+}
+
 /* Price Box */
 .price-box {
   background-color: #FF1493;
