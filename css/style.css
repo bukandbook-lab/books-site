@@ -275,7 +275,7 @@ html, body {
 
 .book-bg.loaded {
   opacity: 1;
-  filter: blur(12px) brightness(0.95);
+  filter: blur(14px) brightness(1.2) saturate(1.1) contrast(0.95);
   transform: scale(1.1); /* prevents edge blur gap */
 }
 
