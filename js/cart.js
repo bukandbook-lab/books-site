@@ -95,6 +95,7 @@ cart.items.set(id, {
   title: book.title,
   price: Number(book.price),
   setQtty: Number(book.SetQtty || 1),
+  series: book.Series || "",
 });
 
 
@@ -229,7 +230,7 @@ function renderCart() {
     itemsHTML += `
       <div class="cart-row">
         <span>
-           ${index}. ${item.title}
+           ${index}. ${item.series ? `${item.series} - ` : ""}${item.title}
            ${item.setQtty > 0 && item.price !== 1
              ? ` (${item.setQtty} ${item.setQtty === 1 ? "book" : "books"})`
              : ``}
