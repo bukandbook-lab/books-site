@@ -284,22 +284,37 @@ document.addEventListener("click", e => {
 /* =====================================
    CLICK HANDLER FOR CATEGORY IN POPUP
 ===================================== */
+
 document.addEventListener("click", e => {
   const cat = e.target.closest(".popup-category");
   if (!cat) return;
 
-  const category = cat.dataset.category;
-  if (!category) return;
+  const value = cat.dataset.category;
+  if (!value) return;
 
   // 🔥 close popup with animation
   closeBookPopup();
 
   // 🔁 open tab AFTER popup animation
   setTimeout(() => {
+
+    // 🔍 If tab exists → open tab
     const btn = document.querySelector(
-      `.tab-btn[data-tab="${category}"]`
+      `.tab-btn[data-tab="${value}"]`
     );
-    btn?.click();
+
+    if (btn) {
+      btn.click();
+      return;
+    }
+
+    // 🔎 If no tab → fallback to search
+    const searchInput = document.getElementById("bookSearch");
+    if (!searchInput) return;
+
+    searchInput.value = value;
+    searchInput.dispatchEvent(new Event("input"));
+
   }, 250);
 });
 /* =====================================
