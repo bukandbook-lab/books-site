@@ -318,7 +318,7 @@ document.addEventListener("click", e => {
     if (!taggedBooks.length) return;
 
     // Create temporary container
-    const container = document.getElementById("SearchResults");
+    const container = document.getElementById("searchResults");
     if (!container) return;
 
     container.innerHTML = "";
