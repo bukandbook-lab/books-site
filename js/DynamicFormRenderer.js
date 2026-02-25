@@ -57,7 +57,7 @@ function renderBookTitleForm() {
       <button type="button" id="resetBooks">Reset</button>
     </div><br/><br/>
 
-   IMPORTANT: This request is for English book only. It is also non-refundable even there might be no EPUB/PDF can be delivered due to unavailability of the requested book. Hence, please ensure the correct book title and author's name and the book has been published for at least 6 months.  `);
+   IMPORTANT: This request is for English book only. It is also non-refundable even there might be no EPUB/PDF can be delivered due to unavailability of the requested book. Hence, please ensure correct book title and author's name and minimum publishing period of 6 months.  `);
 
   updateBookInputs(1);
 
@@ -116,7 +116,7 @@ function updateBookInputs(count) {
         <img src="${CLOSE_ICON}" class="remove-request" data-book-id="${id}">
       `}
       <br/>
-      <input class="req-book-author" data-book-id="${id}" placeholder="Author's name (optional)">
+      <input class="req-book-author" data-book-id="${id}" placeholder="Enter author's name">
       <input class="req-book-specific" data-book-id="${id}" placeholder="Specific book title for Series(if any)">
 
 
