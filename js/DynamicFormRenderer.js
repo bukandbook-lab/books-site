@@ -55,8 +55,9 @@ function renderBookTitleForm() {
       <label>Number of request</label>
       <input type="text" id="bookCount" inputmode="numeric" pattern="[0-9]*" value="1" />
       <button type="button" id="resetBooks">Reset</button>
-    </div>
-  `);
+    </div><br/><br/>
+
+   IMPORTANT: This request is for English book only. It is also non-refundable even there might be no EPUB/PDF can be delivered due to unavailability of the requested book. Hence, please ensure the correct book title and author's name and the book has been published for at least 6 months.  `);
 
   updateBookInputs(1);
 
