@@ -286,10 +286,10 @@ document.addEventListener("click", e => {
 ===================================== */
 
 document.addEventListener("click", e => {
-  const cat = e.target.closest(".popup-category");
-  if (!cat) return;
+  const el = e.target.closest(".popup-category");
+  if (!el) return;
 
-  const value = cat.dataset.category;
+  const value = el.dataset.category;
   if (!value) return;
 
   // 🔥 close popup with animation
@@ -299,21 +299,39 @@ document.addEventListener("click", e => {
   setTimeout(() => {
 
     // 🔍 If tab exists → open tab
-    const btn = document.querySelector(
+   const tabBtn = document.querySelector(
       `.tab-btn[data-tab="${value}"]`
     );
 
-    if (btn) {
-      btn.click();
+    if (tabBtn) {
+      tabBtn.click();
       return;
     }
 
-    // 🔎 If no tab → fallback to search
-    const searchInput = document.getElementById("bookSearch");
-    if (!searchInput) return;
+    // 🔥 PURE TAG FILTER 
+    const taggedBooks = Object.values(BOOK_REGISTRY)
+      .filter(book =>
+        Array.isArray(book.tags) &&
+        book.tags.includes(value)
+      );
 
-    searchInput.value = value;
-    searchInput.dispatchEvent(new Event("input"));
+    if (!taggedBooks.length) return;
+
+    // Create temporary container
+    const container = document.getElementById("SearchResults");
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    const grid = document.createElement("div");
+    grid.className = "image-grid";
+    container.appendChild(grid);
+
+    lazyRender(grid, taggedBooks);
+
+    applySeeMore(grid);
+
+    window.CURRENT_GRID_BOOK_IDS = taggedBooks.map(b => b.id);
 
   }, 250);
 });
