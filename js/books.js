@@ -292,14 +292,12 @@ document.addEventListener("click", e => {
   const value = el.dataset.category;
   if (!value) return;
 
-  // 🔥 close popup with animation
   closeBookPopup();
 
-  // 🔁 open tab AFTER popup animation
   setTimeout(() => {
 
-    // 🔍 If tab exists → open tab
-   const tabBtn = document.querySelector(
+    // 🔍 If real tab exists → use normal tab
+    const tabBtn = document.querySelector(
       `.tab-btn[data-tab="${value}"]`
     );
 
@@ -308,30 +306,88 @@ document.addEventListener("click", e => {
       return;
     }
 
-    // 🔥 PURE TAG FILTER 
-    const taggedBooks = Object.values(BOOK_REGISTRY)
-      .filter(book =>
-        Array.isArray(book.tags) &&
-        book.tags.includes(value)
-      );
+    // 🔥 TAG FILTER USING SEARCH SYSTEM
 
-    if (!taggedBooks.length) return;
+    // remove active tab styling
+    document.querySelectorAll(".tab-btn")
+      .forEach(btn => btn.classList.remove("active"));
 
-    // Create temporary container
-    const container = document.getElementById("searchResults");
-    if (!container) return;
+    hideTabs();
+    hideSeeMore();
 
-    container.innerHTML = "";
+    let hasResult = false;
 
-    const grid = document.createElement("div");
-    grid.className = "image-grid";
-    container.appendChild(grid);
+    // reuse existing search grid creator
+    const grid = document.getElementById("searchResults") ||
+                 (function() {
+                   const g = document.createElement("div");
+                   g.id = "searchResults";
+                   g.className = "image-grid";
+                   document.body.appendChild(g);
+                   return g;
+                 })();
 
-    lazyRender(grid, taggedBooks);
+    grid.innerHTML = "";
 
-    applySeeMore(grid);
+    Object.values(BOOK_REGISTRY).forEach(book => {
 
-    window.CURRENT_GRID_BOOK_IDS = taggedBooks.map(b => b.id);
+      if (!Array.isArray(book.tags)) return;
+      if (!book.tags.includes(value)) return;
+
+      hasResult = true;
+
+      const div = document.createElement("div");
+      div.className = "book-thumb";
+
+      const isSetBook = Number(book.SetQtty) > 1;
+      const priceLabel = isSetBook ? "/set" : "/book";
+
+      div.innerHTML = `
+        <div class="skeleton"></div>
+        <div class="book-bg" data-bg="${book.img}"></div>
+        <img
+          src="${book.img}"
+          class="grid-book-img popup-trigger"
+          loading="lazy"
+          data-book-id="${book.id}"
+        >
+        <div class="price-box"
+          data-book-id="${book.id}"
+          data-title="${book.title}"
+          data-price="${Number(book.price).toFixed(2)}"
+          data-setqtty="${book.SetQtty || 1}"
+        >
+          &nbsp&nbspRM${Number(book.price).toFixed(2)}${priceLabel}
+          <img
+            data-book-id="${book.id}"
+            src="${CART_ICON}"
+            class="cart-icon"
+          >
+        </div>
+      `;
+
+      grid.appendChild(div);
+      progressiveImageLoad(div);
+    });
+
+    const box = getNoSearchResultBox();
+
+    if (!hasResult) {
+      box.classList.remove("hidden");
+      grid.classList.add("hidden");
+    } else {
+      box.classList.add("hidden");
+      grid.classList.remove("hidden");
+    }
+
+    if (typeof applySeeMore === "function") {
+      applySeeMore(grid);
+      moveSeeMoreAfter(grid);
+    }
+
+    if (typeof syncCartIcons === "function") {
+      syncCartIcons();
+    }
 
   }, 250);
 });
