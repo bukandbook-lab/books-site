@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  updateCartBadge(); 
+  
   window.CATEGORY_ORDER = [...document.querySelectorAll(".tab-btn")]
   .map(btn => btn.dataset.tab)
   .filter(tab => !["ReadMeFirst", "RequestBook"].includes(tab));
