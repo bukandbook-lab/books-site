@@ -991,7 +991,7 @@ document.addEventListener("click", async e => {
     action: "submitOrder",
     orderId: cart.orderId,
     booksText: buildOrderData().booksText,
-    booksRaw: orderData.booksRaw,
+    booksRaw: [...cart.items.values()], // FULL DATA WITH SERIES
     totalAmount: totals.grandTotal,
     deliveryMethod: cart.delivery,
     deliveryDetails: cart.deliveryDetails,
