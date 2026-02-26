@@ -862,22 +862,13 @@ function renderInvoice() {
 
       <br>
       <div>
-        <label><b>Upload Payment Proof:</b></label><br>
+        <label><b><u>STEP 2 >> Upload Payment Proof:</u></b></label><br>
         Please bank in <b>RM${totals.grandTotal.toFixed(2)}</b> to account number 121312144555355 (Boost).<br>
         <input type="file" id="paymentProof" accept="image/*,.pdf">
       </div>
       
       <br>
-
-      <div>
-        <label>
-          <input type="checkbox" id="emailOrderCopy" checked>
-          Please email me a copy of order.
-        </label>
-      </div>
-      
-      <br>
-      
+     
       <!-- TERMS SECTION -->
       <div class="invoice-terms">
         <label>
