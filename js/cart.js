@@ -174,8 +174,6 @@ function updateCartBadge() {
   if (!badge) return;
 
   const count = cart.items.size;
-
-  let count = 0;
   
   if (count === 0) {
     badge.textContent = "";
