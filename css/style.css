@@ -831,6 +831,19 @@ body.cart-open {
   margin-bottom: 8px;
 
 }
+.clear-cart-btn {
+  background: #ddd;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 18px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.clear-cart-btn:hover {
+  background: #ccc;
+}
 
 #Cart .close-popup {
   color: #FF1493;
