@@ -723,27 +723,68 @@ function renderInvoice() {
     : "Delivery Details";
    
   const totals = calculateTotals();
+   
+  const hasSeries = [...cart.items.values()].some(item => item.series);
+  const hasQty = [...cart.items.values()].some(
+  item => item.setQtty && item.setQtty > 1
+  );
 
-  let booksHtml = "";
-  let index = 1;
+   let booksHtml = "";
+   let index = 1;
+   
+   cart.items.forEach((item) => {
+   
+     booksHtml += `<tr>`;
+   
+     // Index
+     booksHtml += `<td style="text-align:center;">${index}</td>`;
+   
+     // Title
+     booksHtml += `<td>${item.title}</td>`;
+   
+     // Series column (only if exists)
+     if (hasSeries) {
+       booksHtml += `<td>${item.series ? item.series : ""}</td>`;
+     }
+   
+     // Quantity column (only if needed)
+     if (hasQty) {
+       booksHtml += `<td style="text-align:center;">
+         ${item.setQtty && item.setQtty > 1 ? item.setQtty : ""}
+       </td>`;
+     }
+   
+     // Price
+     booksHtml += `
+       <td style="text-align:right;">
+         RM${item.price.toFixed(2)}
+       </td>
+     `;
+   
+     booksHtml += `</tr>`;
+   
+     index++;
+   });
 
-  cart.items.forEach((item, id) => {
-
-    booksHtml += `
+         let headerHtml = `
       <tr>
-        <td>${index}. ${item.series ? `${item.series} - ` : ""}${item.title}</td>
-        <td>
-          ${item.setQtty > 0 && item.price !== 1
-            ? `${item.setQtty} ${item.setQtty === 1 ? "book" : "books"}`
-            : "-"}
-        </td>
-        <td>RM${item.price.toFixed(2)}</td>
+        <th style="width:5%">No.</th>
+        <th style="width:35%">Book Title</th>
+      `;
+      
+      if (hasSeries) {
+        headerHtml += `<th style="width:25%">Series</th>`;
+      }
+      
+      if (hasQty) {
+        headerHtml += `<th style="width:10%">Qty</th>`;
+      }
+      
+      headerHtml += `
+        <th style="width:15%">Price</th>
       </tr>
-    `;
-
-    index++;
-  });
-
+      `; 
+   
   const invoiceHTML = `
     <img src="${CLOSE_ICON}" class="close-popup" alt="Close"><br/>
     <div style="text-align:left;">
@@ -752,13 +793,7 @@ function renderInvoice() {
       <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
 
       <table border="1" width="100%" cellpadding="6" cellspacing="0">
-        <thead>
-          <tr>
-            <th>Title of Book / Series</th>
-            <th>Quantity</th>
-            <th>Price</th>
-          </tr>
-        </thead>
+        ${headerHtml}
         <tbody>
           ${booksHtml}
       
@@ -781,7 +816,7 @@ function renderInvoice() {
       
           <!-- GRAND TOTAL -->
           <tr>
-            <td colspan="2" style="text-align:right;"><strong>Grand Total</strong></td>
+            <td colspan="2" style="text-align:right;"><strong>GRAND TOTAL</strong></td>
             <td style="text-align:right;"><strong>RM${totals.grandTotal.toFixed(2)}</strong></td>
           </tr>
       
