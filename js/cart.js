@@ -150,15 +150,44 @@ document.addEventListener("click", e => {
   if (e.target.closest("#Cart")) return;
 
   // ❌ clicked on cart-trigger → ignore
-  if (
-    e.target.closest(".price-box") ||
-    e.target.closest(".cart-icon")
-  ) return;
+   if (
+     e.target.closest(".price-box") ||
+     e.target.closest(".cart-icon") ||
+     e.target.closest("#headerCartBtn")
+   ) return;
 
   // ✅ clicked outside → close cart
   closeCart();
 });
+/* =====================================
+   FUNCTION TO UPDATE CART BADGE
+===================================== */
+function updateCartBadge() {
+  const badge = document.getElementById("cartCount");
+  if (!badge) return;
 
+  const count = cart.items.size;
+
+  badge.textContent = count;
+
+  if (count === 0) {
+    badge.classList.add("hidden");
+  } else {
+    badge.classList.remove("hidden");
+  }
+
+  badge.classList.add("bump");
+  setTimeout(() => badge.classList.remove("bump"), 200);
+}
+/* =====================================
+   OPEN CART ONLY FROM HEADER ICON
+===================================== */
+document.addEventListener("click", e => {
+  const btn = e.target.closest("#headerCartBtn");
+  if (!btn) return;
+
+  openCart();
+});
 /* =====================================
    REMOVE ITEM (KEEP CART OPEN)
 ===================================== */
