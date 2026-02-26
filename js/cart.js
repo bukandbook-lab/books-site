@@ -794,7 +794,49 @@ function renderInvoice() {
       </tr>
       `; 
 
-
+      // ADD TOTAL ROWS AFTER LOOP
+      booksHtml += `
+      <tr>
+        <td colspan="${mergeColumns}" style="text-align:right; font-weight:bold;">
+          Subtotal
+        </td>
+        <td style="text-align:right; font-weight:bold;">
+          RM${totals.booksSubtotal.toFixed(2)}
+        </td>
+      </tr>
+      `;
+      
+      if (cart.delivery === "courier") {
+        booksHtml += `
+        <tr>
+          <td colspan="${mergeColumns}" style="text-align:right;">
+            Shipping Fee
+          </td>
+          <td style="text-align:right;">
+            RM${totals.shippingFee.toFixed(2)}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="${mergeColumns}" style="text-align:right;">
+            Thumb Drive Charge
+          </td>
+          <td style="text-align:right;">
+            RM${totals.thumbFee.toFixed(2)}
+          </td>
+        </tr>
+        `;
+      }
+      
+      booksHtml += `
+      <tr>
+        <td colspan="${mergeColumns}" style="text-align:right; font-size:16px; font-weight:bold;">
+          Grand Total
+        </td>
+        <td style="text-align:right; font-size:16px; font-weight:bold;">
+          RM${totals.grandTotal.toFixed(2)}
+        </td>
+      </tr>
+      `;
     
     const invoiceHTML = `
     <img src="${CLOSE_ICON}" class="close-popup" alt="Close"><br/>
@@ -803,45 +845,14 @@ function renderInvoice() {
       <p><strong>Order ID:</strong> ${cart.orderId}</p>
       <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
 
-      <table border="1" width="100%" cellpadding="6" cellspacing="0">
-        ${headerHtml}
+     <table border="1" width="100%" cellpadding="6" cellspacing="0">
+        <thead>
+          ${headerHtml}
+        </thead>
         <tbody>
           ${booksHtml}
-
-                booksHtml += `
-         <tr>
-           <td colspan="${mergeColumns}" style="text-align:right; font-weight:bold;">
-             Subtotal
-           </td>
-           <td style="text-align:right; font-weight:bold;">
-             RM${totals.booksSubtotal.toFixed(2)}
-           </td>
-         </tr>
-                  ${cart.delivery === "courier" ? `
-            <tr>
-              <td colspan="2" style="text-align:right;">Shipping Fee</td>
-              <td style="text-align:right;">RM${totals.shippingFee.toFixed(2)}</td>
-            </tr>
-            <tr>
-              <td colspan="2" style="text-align:right;">Thumb Drive Charge</td>
-              <td style="text-align:right;">RM${totals.thumbFee.toFixed(2)}</td>
-            </tr>
-          ` : ""}
-      
-          <!-- GRAND TOTAL -->
-         
-         <tr>
-           <td colspan="${mergeColumns}" style="text-align:right; font-size:16px; font-weight:bold;">
-             Grand Total
-           </td>
-           <td style="text-align:right; font-size:16px; font-weight:bold;">
-             RM${totals.grandTotal.toFixed(2)}
-           </td>
-         </tr>
-         `;    
         </tbody>
       </table>
-
       <br>
 
       <div>
@@ -852,8 +863,17 @@ function renderInvoice() {
       <br>
       <div>
         <label><b>Upload Payment Proof:</b></label><br>
-        Please bank in to account number 121312144555355 (Boost).<br>
+        Please bank in <b>RM${totals.grandTotal.toFixed(2)}</b> to account number 121312144555355 (Boost).<br>
         <input type="file" id="paymentProof" accept="image/*,.pdf">
+      </div>
+      
+      <br>
+
+      <div>
+        <label>
+          <input type="checkbox" id="emailOrderCopy" checked>
+          Please email me a copy of order.
+        </label>
       </div>
       
       <br>
