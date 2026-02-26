@@ -377,8 +377,8 @@ function renderCart() {
   box.innerHTML = `
    <span class="close-popup" alt="Close">X</span><br/>
    <img width="310px" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizaRTKOl-aY1N1Yow8inrZ3ckmIY8829lxqWEXWWW82MhQazqWvSMg3Q7zvWvciJva0TsROrTv-J7UaGClKaCI3AIw22hMDkQzjyU0HK4GoK3dVvjJ74YT6NY7JK9DXvGQXsdZgKMtmED9PRyFzPLkB3tI-dAlkPeczh2Oxx7J4qFCOLVdY5CKF27N_eQW/s1600/Header%203.jpg"/>
-   <br/><span class="CartTitle">CART</span>
-   <button id="clearCartBtn" class="clear-cart-btn">CLEAR CART</button>
+   <br/><span class="CartTitle">CART<button id="clearCartBtn" class="clear-cart-btn">CLEAR CART</button></span>
+   
     ${itemsHTML || "<p>No items selected</p>"}
 
     
@@ -841,9 +841,6 @@ function renderInvoice() {
     const invoiceHTML = `
     <img src="${CLOSE_ICON}" class="close-popup" alt="Close"><br/>
     <div style="text-align:left;">
-
-      <p><strong>Order ID:</strong> ${cart.orderId}</p>
-      <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
 
      <table border="1" width="100%" cellpadding="6" cellspacing="0">
         <thead>
