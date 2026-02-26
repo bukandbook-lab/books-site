@@ -566,7 +566,7 @@ function buildOrderData() {
   let i = 1;
 
   cart.items.forEach(item => {
-    let line = `${i}. ${item.series ? `${item.series} - ` : ""}${item.title}`;
+    let line = `${i}. ${item.title}`;
     if (item.setQtty > 0 && item.price !== 1) {
       line += ` (${item.setQtty} books)`;
     }
@@ -577,7 +577,8 @@ function buildOrderData() {
 
 return {
   orderId: cart.orderId,
-  booksText: bookLines.join("\n"),
+  booksText: bookLines.join("\n"),   // Telegram-friendly
+  booksRaw: [...cart.items.values()], // FULL DATA WITH SERIES
   delivery: cart.delivery,
   deliveryDetails: cart.deliveryDetails || "Not provided",
   paymentProofUrl: cart.paymentProofUrl || "",
