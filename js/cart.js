@@ -175,11 +175,13 @@ function updateCartBadge() {
 
   const count = cart.items.size;
 
-  badge.textContent = count;
-
+  let count = 0;
+  
   if (count === 0) {
+    badge.textContent = "";
     badge.classList.add("hidden");
   } else {
+    badge.textContent = count;
     badge.classList.remove("hidden");
   }
 
@@ -526,7 +528,7 @@ function buildOrderData() {
   let i = 1;
 
   cart.items.forEach(item => {
-    let line = `${i}. ${item.title}`;
+    let line = `${i}. ${item.series ? `${item.series} - ` : ""}${item.title}`;
     if (item.setQtty > 0 && item.price !== 1) {
       line += ` (${item.setQtty} books)`;
     }
@@ -691,7 +693,7 @@ function renderInvoice() {
 
     booksHtml += `
       <tr>
-        <td>${index}. ${item.title}</td>
+        <td>${index}. ${item.series ? `${item.series} - ` : ""}${item.title}</td>
         <td>
           ${item.setQtty > 0 && item.price !== 1
             ? `${item.setQtty} ${item.setQtty === 1 ? "book" : "books"}`
