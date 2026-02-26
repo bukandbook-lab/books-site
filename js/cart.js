@@ -254,10 +254,28 @@ function showToast(message) {
   toast.textContent = message;
   toast.classList.add("show");
 
-  setTimeout(() => {
+  clearTimeout(toast._timer);
+
+  toast._timer = setTimeout(() => {
     toast.classList.remove("show");
   }, 1800);
 }
+/* =====================================
+   CLICK HANDLER TO SHOW CART CLEARED
+===================================== */
+document.addEventListener("click", e => {
+  if (e.target.id !== "clearCartBtn") return;
+
+  if (cart.items.size === 0) return;
+
+  cart.items.clear();
+   
+  renderCart();
+  updateCartBadge();
+  syncCartIcons?.();
+
+  showToast("Cart cleared 🗑️");
+});
 /* =====================================
    REMOVE ITEM (KEEP CART OPEN)
 ===================================== */
@@ -267,8 +285,11 @@ document.addEventListener("click", e => {
 
   e.stopPropagation();
   cart.items.delete(btn.dataset.bookId);
-  renderCart();
-  syncCartIcons();
+   renderCart();
+   updateCartBadge();
+   syncCartIcons?.();
+   showToast("Removed from cart ❌");
+
 });
 
 /* =====================================
