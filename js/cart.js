@@ -109,6 +109,7 @@ cart.items.set(id, {
    renderCart();
    syncCartIcons();
    updateCartBadge();
+   showToast("Added to Cart ✓");
 
 }
 
@@ -224,21 +225,37 @@ function flyToCart(imgElement) {
   clone.style.top = imgRect.top + "px";
   clone.style.width = imgRect.width + "px";
   clone.style.height = imgRect.height + "px";
-  clone.style.transition = "all 0.7s cubic-bezier(.4,-0.3,.3,1.4)";
+  clone.style.transition =
+    "all 0.8s cubic-bezier(.2,1.2,.4,1)";
   clone.style.zIndex = "9999";
   clone.style.pointerEvents = "none";
 
   document.body.appendChild(clone);
 
   requestAnimationFrame(() => {
-    clone.style.left = cartRect.left + "px";
-    clone.style.top = cartRect.top + "px";
-    clone.style.width = "20px";
-    clone.style.height = "20px";
-    clone.style.opacity = "0.5";
+    clone.style.left = cartRect.left + 10 + "px";
+    clone.style.top = cartRect.top + 10 + "px";
+    clone.style.width = "18px";
+    clone.style.height = "18px";
+    clone.style.opacity = "0.6";
+    clone.style.transform = "scale(0.6)";
   });
 
-  setTimeout(() => clone.remove(), 700);
+  setTimeout(() => clone.remove(), 800);
+}
+/* =====================================
+   FUNCTION FOR ADDED TO CART SHOW TOAST
+===================================== */
+function showToast(message) {
+  const toast = document.getElementById("cartToast");
+  if (!toast) return;
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 1800);
 }
 /* =====================================
    REMOVE ITEM (KEEP CART OPEN)
