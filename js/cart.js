@@ -991,6 +991,7 @@ document.addEventListener("click", async e => {
     action: "submitOrder",
     orderId: cart.orderId,
     booksText: buildOrderData().booksText,
+    booksRaw: orderData.booksRaw,
     totalAmount: totals.grandTotal,
     deliveryMethod: cart.delivery,
     deliveryDetails: cart.deliveryDetails,
@@ -999,7 +1000,7 @@ document.addEventListener("click", async e => {
     fileType: cart.fileType
   };
 
-  await fetch("https://script.google.com/macros/s/AKfycbzVpUoS8skdYg_eMzQEImXL01pptZuVJVgJZVXqHeFy8_kDX-9FCDTrhHlPt7rNkGKy/exec", {
+  await fetch("https://script.google.com/macros/s/AKfycbzfoSMILCTzl6_rsscoh6I9YzBMUmiVdXSz2v2xVEjADSxgmbhpMbHEFR9Sp52v3Ezx/exec", {
   method: "POST",
   body: JSON.stringify(payload),
   mode: "no-cors"
