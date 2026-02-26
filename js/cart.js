@@ -357,7 +357,8 @@ function renderCart() {
    <span class="close-popup" alt="Close">X</span><br/>
    <img width="310px" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizaRTKOl-aY1N1Yow8inrZ3ckmIY8829lxqWEXWWW82MhQazqWvSMg3Q7zvWvciJva0TsROrTv-J7UaGClKaCI3AIw22hMDkQzjyU0HK4GoK3dVvjJ74YT6NY7JK9DXvGQXsdZgKMtmED9PRyFzPLkB3tI-dAlkPeczh2Oxx7J4qFCOLVdY5CKF27N_eQW/s1600/Header%203.jpg"/>
    <br/><span class="CartTitle">CART</span>
-    ${itemsHTML || "<p>No item selected</p>"}
+   <button id="clearCartBtn" class="clear-cart-btn">CLEAR CART</button>
+    ${itemsHTML || "<p>No items selected</p>"}
 
     
     <div class="cart-fee">
