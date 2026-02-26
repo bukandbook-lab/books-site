@@ -709,7 +709,34 @@ html, body {
   border-width: 12px 0 12px 18px;
   border-color: transparent transparent transparent white;
 }
+/* =========================
+   Cart Badge 
+========================= */
+.header-cart {
+  position: relative;
+  display: inline-block;
+}
 
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -6px;
+  background: #FF1493;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-badge.hidden {
+  display: none;
+}
 /* =========================
    CART SLIDE PANEL (RIGHT)
 ========================= */
