@@ -176,8 +176,15 @@ function updateCartBadge() {
     badge.classList.remove("hidden");
   }
 
+// 🔥 shake + bump animation trigger
   badge.classList.add("bump");
-  setTimeout(() => badge.classList.remove("bump"), 200);
+  const headerIcon = document.getElementById("headerCartBtn");
+  headerIcon?.classList.add("shake");
+
+  setTimeout(() => {
+    badge.classList.remove("bump");
+    headerIcon?.classList.remove("shake");
+  }, 400);
 }
 /* =====================================
    OPEN CART ONLY FROM HEADER ICON
