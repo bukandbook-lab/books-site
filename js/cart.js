@@ -830,8 +830,8 @@ function renderInvoice() {
       
       booksHtml += `
       <tr>
-        <td colspan="${mergeColumns}" style="text-align:right; font-size:16px; font-weight:bold;">
-          Grand Total
+        <td colspan="${mergeColumns}" style="text-align:right; font-size:14px; font-weight:bold;">
+          GRAND TOTAL
         </td>
         <td style="text-align:right; font-size:16px; font-weight:bold;">
           RM${totals.grandTotal.toFixed(2)}
@@ -860,7 +860,7 @@ function renderInvoice() {
 
       <br>
       <div>
-        <label><b><u>STEP 2 >> Upload Payment Proof:</u></b></label><br>
+        <label style="font-size:14px;"><b><u>STEP 2 >> Upload Payment Proof:</u></b></label><br>
         Please bank in <b>RM${totals.grandTotal.toFixed(2)}</b> to account number 121312144555355 (Boost).<br>
         <input type="file" id="paymentProof" accept="image/*,.pdf">
       </div>
