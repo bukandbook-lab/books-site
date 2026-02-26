@@ -200,9 +200,13 @@ document.addEventListener("click", e => {
   const btn = e.target.closest("#headerCartBtn");
   if (!btn) return;
 
+  if (cart.items.size === 0) {
+    showToast("Your cart is empty 😊");
+    return;
+  }
+
   openCart();
 });
-
 /* =====================================
    Flying To Cart Animation
 ===================================== */
