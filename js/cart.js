@@ -175,14 +175,15 @@ function updateCartBadge() {
   if (!badge) return;
 
   const count = cart.items.size;
-  
-  if (count === 0) {
+
+  if (!count) {
     badge.textContent = "";
-    badge.classList.add("hidden");
-  } else {
-    badge.textContent = count;
-    badge.classList.remove("hidden");
+    badge.style.display = "none";   // 🔥 force hide
+    return;
   }
+
+  badge.textContent = count;
+  badge.style.display = "flex";     // 🔥 force show
 
 // 🔥 shake + bump animation trigger
   badge.classList.add("bump");
