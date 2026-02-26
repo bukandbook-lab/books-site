@@ -19,7 +19,7 @@ html, body {
 .site-header {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2px;
+  padding: 0;
 }
 
 .site-header img {
@@ -40,7 +40,6 @@ html, body {
   background: #ffecf2;
   z-index: 1000;
   padding: 0;
-  border-bottom: 2px solid #f0f0f0;
   width: 100%;
   flex-direction: column;
    
@@ -89,12 +88,12 @@ html, body {
 .social-icons img {
   width: 22px;
   height: auto;
-  margin: 2px 0 0;
+  margin: 2px;
 }
 .header-cart img {
   width: 25px;
   height: auto;
-  margin: 2px 0 0;
+  margin: 2px;
 }
 /* =========================
   MENU ARROWS STYLING + FLIP LEFT ARROW
@@ -104,6 +103,7 @@ html, body {
   position: relative;
   display: flex;
   align-items: center;
+  margin: 2px;
 }
 
 /* Arrow base */
@@ -188,7 +188,7 @@ html, body {
 .search-bar {
   position: relative;
   flex: 1;
-  max-width: 350px;
+  max-width: 400px;
 }
 
 #bookSearch {
