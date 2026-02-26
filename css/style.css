@@ -163,12 +163,20 @@ html, body {
 /* =========================
    SEARCH BAR
 ========================= */
+/*  HEADER ROW (All in one line) */
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px;
+}
 
+/* Make top-bar not stretch full width */
 .top-bar {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px;
 }
 
 /* Search shrinks to available space */
