@@ -676,6 +676,7 @@ function resetCart() {
 
   renderCart();
   syncCartIcons();
+  updateCartBadge();
 
   // Close cart UI if open
   document.getElementById("Cart")?.classList.remove("open");
@@ -729,6 +730,14 @@ function renderInvoice() {
   item => item.setQtty && item.setQtty > 1
   );
 
+  const totalColumns =
+  2 +                 // Index + Title
+  (hasSeries ? 1 : 0) +
+  (hasQty ? 1 : 0) +
+  1;                  // Price
+
+   // Columns before price column
+   const mergeColumns = totalColumns - 1;
    let booksHtml = "";
    let index = 1;
    
@@ -784,8 +793,10 @@ function renderInvoice() {
         <th style="width:15%">Price</th>
       </tr>
       `; 
-   
-  const invoiceHTML = `
+
+
+    
+    const invoiceHTML = `
     <img src="${CLOSE_ICON}" class="close-popup" alt="Close"><br/>
     <div style="text-align:left;">
 
@@ -796,14 +807,17 @@ function renderInvoice() {
         ${headerHtml}
         <tbody>
           ${booksHtml}
-      
-          <!-- SUBTOTAL -->
-          <tr>
-            <td colspan="2" style="text-align:right;"><strong>Subtotal</strong></td>
-            <td style="text-align:right;"><strong>RM${totals.booksSubtotal.toFixed(2)}</strong></td>
-          </tr>
-      
-          ${cart.delivery === "courier" ? `
+
+                booksHtml += `
+         <tr>
+           <td colspan="${mergeColumns}" style="text-align:right; font-weight:bold;">
+             Subtotal
+           </td>
+           <td style="text-align:right; font-weight:bold;">
+             RM${totals.booksSubtotal.toFixed(2)}
+           </td>
+         </tr>
+                  ${cart.delivery === "courier" ? `
             <tr>
               <td colspan="2" style="text-align:right;">Shipping Fee</td>
               <td style="text-align:right;">RM${totals.shippingFee.toFixed(2)}</td>
@@ -815,11 +829,16 @@ function renderInvoice() {
           ` : ""}
       
           <!-- GRAND TOTAL -->
-          <tr>
-            <td colspan="2" style="text-align:right;"><strong>GRAND TOTAL</strong></td>
-            <td style="text-align:right;"><strong>RM${totals.grandTotal.toFixed(2)}</strong></td>
-          </tr>
-      
+         
+         <tr>
+           <td colspan="${mergeColumns}" style="text-align:right; font-size:16px; font-weight:bold;">
+             Grand Total
+           </td>
+           <td style="text-align:right; font-size:16px; font-weight:bold;">
+             RM${totals.grandTotal.toFixed(2)}
+           </td>
+         </tr>
+         `;    
         </tbody>
       </table>
 
