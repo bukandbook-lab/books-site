@@ -90,7 +90,11 @@ html, body {
   height: auto;
   margin: 2px 0 0;
 }
-
+.header-cart img {
+  width: 22px;
+  height: auto;
+  margin: 2px 0 0;
+}
 /* =========================
   MENU ARROWS STYLING + FLIP LEFT ARROW
 ========================= */
