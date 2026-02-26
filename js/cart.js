@@ -779,7 +779,7 @@ function renderInvoice() {
          let headerHtml = `
       <tr>
         <th style="width:5%">No.</th>
-        <th style="width:35%">Book Title</th>
+        <th style="width:35%">Title of Book/Series</th>
       `;
       
       if (hasSeries) {
@@ -1000,7 +1000,7 @@ document.addEventListener("click", async e => {
     fileType: cart.fileType
   };
 
-  await fetch("https://script.google.com/macros/s/AKfycbzfoSMILCTzl6_rsscoh6I9YzBMUmiVdXSz2v2xVEjADSxgmbhpMbHEFR9Sp52v3Ezx/exec", {
+  await fetch("https://script.google.com/macros/s/AKfycbyu0U9iciGVjjB-LYx773eOq0OkNdZNpCULWJUwUVrISyPENpwsyaAXp3mNkwHCB8xo/exec", {
   method: "POST",
   body: JSON.stringify(payload),
   mode: "no-cors"
