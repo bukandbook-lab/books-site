@@ -44,8 +44,15 @@ document.addEventListener("click", e => {
   e.preventDefault();
   e.stopPropagation();
 
-  const bookId = normalBox.dataset.bookId;
-  addToCart(bookId);
+   const bookId = normalBox.dataset.bookId;
+   
+   const img = normalBox
+     .closest(".book-thumb")
+     ?.querySelector(".grid-book-img");
+   
+   if (img) flyToCart(img);
+   
+   addToCart(bookId);
 });
 
 /* ===================================
@@ -195,6 +202,40 @@ document.addEventListener("click", e => {
 
   openCart();
 });
+
+/* =====================================
+   Flying To Cart Animation
+===================================== */
+function flyToCart(imgElement) {
+  const cartIcon = document.getElementById("headerCartBtn");
+  if (!imgElement || !cartIcon) return;
+
+  const imgRect = imgElement.getBoundingClientRect();
+  const cartRect = cartIcon.getBoundingClientRect();
+
+  const clone = imgElement.cloneNode(true);
+
+  clone.style.position = "fixed";
+  clone.style.left = imgRect.left + "px";
+  clone.style.top = imgRect.top + "px";
+  clone.style.width = imgRect.width + "px";
+  clone.style.height = imgRect.height + "px";
+  clone.style.transition = "all 0.7s cubic-bezier(.4,-0.3,.3,1.4)";
+  clone.style.zIndex = "9999";
+  clone.style.pointerEvents = "none";
+
+  document.body.appendChild(clone);
+
+  requestAnimationFrame(() => {
+    clone.style.left = cartRect.left + "px";
+    clone.style.top = cartRect.top + "px";
+    clone.style.width = "20px";
+    clone.style.height = "20px";
+    clone.style.opacity = "0.5";
+  });
+
+  setTimeout(() => clone.remove(), 700);
+}
 /* =====================================
    REMOVE ITEM (KEEP CART OPEN)
 ===================================== */
