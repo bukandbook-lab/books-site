@@ -99,9 +99,9 @@ cart.items.set(id, {
 });
 
 
-  renderCart();
-  syncCartIcons();
-  openCart?.();
+   renderCart();
+   syncCartIcons();
+   updateCartBadge();
 
 }
 
