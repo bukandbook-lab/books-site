@@ -19,7 +19,7 @@ html, body {
 .site-header {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0;
+  padding: 3px;
 }
 
 .site-header img {
@@ -88,12 +88,12 @@ html, body {
 .social-icons img {
   width: 22px;
   height: auto;
-  margin: 2px;
+  margin: 1px;
 }
 .header-cart img {
-  width: 25px;
+  width: 24px;
   height: auto;
-  margin: 2px;
+  margin: 3px;
 }
 /* =========================
   MENU ARROWS STYLING + FLIP LEFT ARROW
@@ -103,7 +103,7 @@ html, body {
   position: relative;
   display: flex;
   align-items: center;
-  margin: 2px;
+  margin: 3px;
 }
 
 /* Arrow base */
