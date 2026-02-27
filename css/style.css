@@ -19,7 +19,7 @@ html, body {
 .site-header {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3px;
+  padding: 0;
 }
 
 .site-header img {
@@ -64,7 +64,7 @@ html, body {
   background-color: #FF1493;
   border-color: #ffdbe1;
   color: white;
-  margin: 1px;
+  margin: 0;
   cursor: pointer;
   border-radius: 18px;
   flex: 0 0 auto;
@@ -88,12 +88,12 @@ html, body {
 .social-icons img {
   width: 22px;
   height: auto;
-  margin: 1px;
+  margin: 0;
 }
 .header-cart img {
   width: 24px;
   height: auto;
-  margin: 3px;
+  margin: 4px;
 }
 /* =========================
   MENU ARROWS STYLING + FLIP LEFT ARROW
@@ -732,8 +732,8 @@ html, body {
 
 .cart-badge {
   position: absolute;
-  top: -5px;
-  right: -6px;
+  top: -6px;
+  right: -7px;
   background: #FF1493;
   color: white;
   font-size: 11px;
