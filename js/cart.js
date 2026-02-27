@@ -779,7 +779,7 @@ function renderInvoice() {
          let headerHtml = `
       <tr>
         <th style="width:5%">No.</th>
-        <th style="width:35%">Title of Book/Series</th>
+        <th style="width:35%">Title</th>
       `;
       
       if (hasSeries) {
@@ -830,10 +830,10 @@ function renderInvoice() {
       
       booksHtml += `
       <tr>
-        <td colspan="${mergeColumns}" style="text-align:right; font-size:14px; font-weight:bold;">
+        <td colspan="${mergeColumns}" style="text-align:right; font-weight:bold;">
           GRAND TOTAL
         </td>
-        <td style="text-align:right; font-size:16px; font-weight:bold;">
+        <td style="text-align:right; font-weight:bold;">
           RM${totals.grandTotal.toFixed(2)}
         </td>
       </tr>
@@ -860,7 +860,7 @@ function renderInvoice() {
 
       <br>
       <div>
-        <label style="font-size:14px;"><b><u>STEP 2 >> Upload Payment Proof:</u></b></label><br>
+        <label style="font-size:14px;"><b><u>STEP 2 >> Upload Payment Proof</u></b></label><br>
         Please bank in <b>RM${totals.grandTotal.toFixed(2)}</b> to account number 121312144555355 (Boost).<br>
         <input type="file" id="paymentProof" accept="image/*,.pdf">
       </div>
