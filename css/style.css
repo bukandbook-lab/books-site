@@ -94,6 +94,7 @@ html, body {
   width: 24px;
   height: auto;
   margin: 4px;
+  cursor: pointer;
 }
 /* =========================
   MENU ARROWS STYLING + FLIP LEFT ARROW
