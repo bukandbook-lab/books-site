@@ -337,7 +337,7 @@ function renderCart() {
 
    const deliveryLabel =
   cart.delivery === "email"
-    ? "Email"
+    ? "Gmail"
     : "Delivery Details";
    
   let total = 0;
@@ -394,7 +394,7 @@ function renderCart() {
       <label>
         <input type="radio" name="delivery" value="email"
           ${cart.delivery === "email" ? "checked" : ""}>
-        Email
+        Gmail
       </label><br>
 
       <label>
@@ -412,8 +412,8 @@ function renderCart() {
              required
              placeholder="${
                cart.delivery === "email"
-                 ? "Enter email address"
-                 : "Enter name, full address & phone number"
+                 ? "Enter your gmail"
+                 : "Enter your name, full address & phone number"
              }"
              style="width:100%; margin-top:6px;"
            ></textarea>
