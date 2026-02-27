@@ -91,9 +91,8 @@ html, body {
   margin: 0;
 }
 .header-cart img {
-  width: 24px;
+  width: 23px;
   height: auto;
-  margin: 6px;
   cursor: pointer;
 }
 /* =========================
