@@ -782,6 +782,8 @@ html, body {
   opacity: 0;
   transition: all 0.3s ease;
   z-index: 9999;
+
+  pointer-events: none;   /* 🔥 prevents blocking */
 }
 
 .cart-toast.show {
