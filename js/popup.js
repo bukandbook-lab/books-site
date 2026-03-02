@@ -143,13 +143,6 @@ ${book.FileSize ? `
     </span>
   </div>
 ` : ""}
-
-${book.fileWarning ? `
-  <div style="color:red; font-weight:bold;">
-    ${book.fileWarning}
-  </div>
-` : ""}
-
 </div>
 
    <br/><div class="price-box"
