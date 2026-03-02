@@ -128,7 +128,7 @@ ${book.Series ? `
 
 ${book.FileType ? `
   <div>
-    <b>${book.FileType === "Folder" ? "Type:" : "File Type:"}</b>
+    <b>File Type:</b>
     <span class="popup-file-type">
       ${book.FileType === "Folder" ? "Folder" : book.FileType}
     </span>
