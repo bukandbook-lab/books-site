@@ -126,6 +126,30 @@ ${book.Series ? `
   </div>
 ` : ""}
 
+${book.FileType ? `
+  <div>
+    <b>${book.FileType === "Folder" ? "Type:" : "File Type:"}</b>
+    <span class="popup-file-type">
+      ${book.FileType === "Folder" ? "Folder" : book.FileType}
+    </span>
+  </div>
+` : ""}
+
+${book.FileSize ? `
+  <div>
+    <b>File Size:</b>
+    <span class="popup-file-size">
+      ${book.FileSize}
+    </span>
+  </div>
+` : ""}
+
+${book.fileWarning ? `
+  <div style="color:red; font-weight:bold;">
+    ${book.fileWarning}
+  </div>
+` : ""}
+
 </div>
 
    <br/><div class="price-box"
