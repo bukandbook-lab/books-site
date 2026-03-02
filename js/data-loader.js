@@ -12,7 +12,7 @@ window.CATEGORY_LOADED = {};
 ===================================== */
 
 const GAS_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbyZgPSMjXdb3o032i-_my6FoQljFq6pSUOm9cdahBrGWUdrP1QVLzMzTeMBSlx62GzzuA/exec";
+  "https://script.google.com/macros/s/AKfycbwk4z7lYazF6b2MDNRZN__TMw4zF8Q0FY05cRLIZK9cyb9ue2mK1qPB16_FtsD7Cgjv/exec";
 
 const SECRET_KEY = "larilarilaju4578kali";
 
@@ -124,6 +124,8 @@ return fetch(
             Status: book["Status"] || "",
             MissingTitle: book["Missing Title"] || "",
             Series: book["Series"] || "",
+            FileType: book["File Type"] || "",
+            FileSize: book["File Size"] || "",
 
             tags: typeof book["Tag"] === "string"
               ? book["Tag"]
