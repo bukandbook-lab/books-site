@@ -8,6 +8,15 @@ window.ORDERED_BOOKS_BY_CATEGORY = {};
 window.CATEGORY_LOADED = {};
 
 /* =====================================
+   LOAD SKELETON GRID IMMEDIATELY FIRST
+===================================== */
+window.addEventListener("load", () => {
+  const firstTab = document.querySelector(".image-grid");
+  if (firstTab) {
+    showSkeletonGrid(firstTab, 50);
+  }
+});
+/* =====================================
    CONFIG
 ===================================== */
 
