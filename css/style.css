@@ -293,26 +293,30 @@ html, body {
 }
 
 /* ===============================
-   SKELETON STYLES (GLOBAL CSS)
+   SKELETON STYLES (MATCHES BOOK GRID)
 ================================ */
-/* Skeleton container */
+
+/* Make sure book card keeps correct layout */
 .book-thumb {
   position: relative;
 }
 
-/* Skeleton box */
+/* Skeleton overlay (fills entire card) */
 .skeleton {
+  position: absolute;
+  inset: 0;              /* fill whole card */
   width: 100%;
-  aspect-ratio: 3 / 4;
+  height: 100%;
   background: linear-gradient(
     90deg,
-    #eee 25%,
+    #eeeeee 25%,
     #f5f5f5 37%,
-    #eee 63%
+    #eeeeee 63%
   );
   background-size: 400% 100%;
   animation: skeleton-shimmer 1.2s infinite;
-  border-radius: 6px;
+  border-radius: 0;      /* match your card */
+  z-index: 2;
 }
 
 /* Shimmer animation */
@@ -325,20 +329,24 @@ html, body {
   }
 }
 
-/* Hide image until loaded */
+/* Image fade in */
 .grid-book-img {
   opacity: 0;
   transition: opacity 0.3s ease;
+  position: relative;
+  z-index: 3;
 }
 
-/* Show image when ready */
+/* Show image when loaded */
 .grid-book-img.loaded {
   opacity: 1;
 }
 
-/* Remove skeleton when image loads */
+/* Hide skeleton when image is ready */
 .book-thumb.loaded .skeleton {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 }
 /* ===============================
    SKELETON STYLES FOR POPUP
