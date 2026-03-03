@@ -5,6 +5,24 @@ function prettyCategory(text = "") {
 }
 
 /* =====================================
+   LOAD SKELETON GRID IMMEDIATELY FIRST
+===================================== */
+function showSkeletonGrid(container, count = 50) {
+  container.innerHTML = "";
+
+  for (let i = 0; i < count; i++) {
+    const div = document.createElement("div");
+    div.className = "book-thumb skeleton-thumb";
+
+    div.innerHTML = `
+      <div class="skeleton skeleton-img"></div>
+      <div class="skeleton skeleton-price"></div>
+    `;
+
+    container.appendChild(div);
+  }
+}
+/* =====================================
    LAZY RENDER (SCROLL OPTIMIZED)
 ===================================== */
 
