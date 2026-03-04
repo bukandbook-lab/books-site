@@ -464,14 +464,17 @@ function progressiveImageLoad(container) {
     }
   }
 
-  // 1️⃣ Front image
-  img.addEventListener("load", () => {
-    img.classList.add("loaded");
+  // If image already cached
+  if (img.complete) {
     imageReady = true;
-    tryFinish();
-  });
+  } else {
+    img.addEventListener("load", () => {
+      imageReady = true;
+      img.classList.add("loaded");
+      tryFinish();
+    });
+  }
 
-  // 2️⃣ Background image preload
   const bgUrl = bg.dataset.bg;
   if (bgUrl) {
     const preload = new Image();
@@ -486,5 +489,6 @@ function progressiveImageLoad(container) {
   } else {
     bgReady = true;
   }
-}
 
+  tryFinish();
+}
