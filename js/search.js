@@ -201,9 +201,9 @@ Object.values(BOOK_REGISTRY).forEach(book => {
 
       div.innerHTML = `
   
-
-<div class="book-bg" data-bg="${book.img}"></div>
-
+        <div class="skeleton"></div>
+        <div class="book-bg" data-bg="${book.img}"></div>
+        <div class="image-protection"></div>
   <img
     src="${book.img}"
     class="grid-book-img popup-trigger"
