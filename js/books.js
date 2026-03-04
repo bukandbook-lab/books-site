@@ -327,7 +327,8 @@ document.addEventListener("click", e => {
                    return g;
                  })();
 
-    grid.innerHTML = "";
+    const skeletons = grid.querySelectorAll(".skeleton-thumb");
+    skeletons.forEach(el => el.remove());
 
     Object.values(BOOK_REGISTRY).forEach(book => {
 
@@ -343,7 +344,6 @@ document.addEventListener("click", e => {
       const priceLabel = isSetBook ? "/set" : "/book";
 
       div.innerHTML = `
-        <div class="skeleton"></div>
         <div class="book-bg" data-bg="${book.img}"></div>
         <img
           src="${book.img}"
