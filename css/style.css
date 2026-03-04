@@ -340,7 +340,7 @@ html, body {
   opacity: 0;
   transition: opacity 0.3s ease;
   position: relative;
-  z-index: 3;
+
 }
 
 /* Show image when loaded */
