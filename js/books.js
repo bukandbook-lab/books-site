@@ -447,20 +447,20 @@ document.addEventListener("click", e => {
 /* =====================================
    load background AFTER image loads
 ===================================== */
-
 function progressiveImageLoad(container) {
   const img = container.querySelector(".grid-book-img");
   const bg = container.querySelector(".book-bg");
 
   if (!img || !bg) return;
 
-  // when front image is ready
   img.addEventListener("load", () => {
     const bgUrl = bg.dataset.bg;
     if (!bgUrl) return;
 
-    div.classList.add("loaded");
-    
+    // ✅ mark card as loaded (hides skeleton)
+    container.classList.add("loaded");
+
+    // preload background image
     const preload = new Image();
     preload.src = bgUrl;
 
