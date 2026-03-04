@@ -355,7 +355,10 @@ document.addEventListener("click", e => {
           class="grid-book-img popup-trigger"
           loading="lazy"
           data-book-id="${book.id}"
+          draggable="false"
+          ondragstart="return false;"
         >
+
         <div class="price-box"
           data-book-id="${book.id}"
           data-title="${book.title}"
