@@ -349,6 +349,7 @@ document.addEventListener("click", e => {
       div.innerHTML = `
         <div class="skeleton"></div>
         <div class="book-bg" data-bg="${book.img}"></div>
+        <div class="image-protection"></div>
         <img
           src="${book.img}"
           class="grid-book-img popup-trigger"
