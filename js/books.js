@@ -68,7 +68,6 @@ function renderBookCard(item, book) {
   }
 
   item.innerHTML = `
-    <div class="skeleton"></div>
     <div class="book-bg" data-bg="${normalized.img}"></div>
     <img
       src="${normalized.img}"
@@ -460,6 +459,8 @@ function progressiveImageLoad(container) {
     const bgUrl = bg.dataset.bg;
     if (!bgUrl) return;
 
+    div.classList.add("loaded");
+    
     const preload = new Image();
     preload.src = bgUrl;
 
