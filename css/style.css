@@ -349,11 +349,10 @@ html, body {
   opacity: 1;
 }
 
-/* Hide skeleton only when BOTH are ready */
+/* Fade Skeleton Only When Ready */
 .book-thumb.loaded .skeleton {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.35s ease;
 }
 /* ===============================
    SKELETON STYLES FOR POPUP
