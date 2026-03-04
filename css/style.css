@@ -301,6 +301,7 @@ html, body {
 /* Make sure book card keeps correct layout */
 .book-thumb {
   position: relative;
+  overflow: hidden;
 }
 
 /* Skeleton overlay (fills entire card) */
@@ -319,6 +320,7 @@ html, body {
   animation: skeleton-shimmer 1.2s infinite;
   border-radius: 0;      /* match your card */
   z-index: 3;
+  transition: opacity 0.35s ease;
 }
 
 /* Shimmer animation */
