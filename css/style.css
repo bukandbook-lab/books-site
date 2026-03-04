@@ -356,6 +356,7 @@ html, body {
 .grid-book-img.loaded {
   opacity: 1;
   z-index: 3;
+  filter: brightness(1.08) contrast(1.05);
 }
 
 /* Fade Skeleton Only When Ready */
