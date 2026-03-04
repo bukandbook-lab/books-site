@@ -171,7 +171,9 @@ if (!keyword) {
     hideTabs();
 
     const grid = getSearchGrid();
-    grid.innerHTML = "";
+    
+    const skeletons = grid.querySelectorAll(".skeleton-thumb");
+    skeletons.forEach(el => el.remove());
 
     
 
@@ -198,7 +200,7 @@ Object.values(BOOK_REGISTRY).forEach(book => {
       const priceLabel = isSetBook ? "/set" : "/book";
 
       div.innerHTML = `
-  <div class="skeleton"></div>
+  
 
 <div class="book-bg" data-bg="${book.img}"></div>
 
