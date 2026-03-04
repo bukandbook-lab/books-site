@@ -274,6 +274,7 @@ html, body {
   object-fit: contain;          /* or "cover" (see below) */
   display: block;
   position: relative;
+  z-index: 2;
   
 }
 
@@ -284,6 +285,7 @@ html, body {
   transition: opacity 0.4s ease;
   background-size: cover;
   background-position: center;
+  z-index: 1;
 }
 
 .book-bg.loaded {
@@ -316,7 +318,7 @@ html, body {
   background-size: 400% 100%;
   animation: skeleton-shimmer 1.2s infinite;
   border-radius: 0;      /* match your card */
-  z-index: 2;
+  z-index: 3;
 }
 
 /* Shimmer animation */
