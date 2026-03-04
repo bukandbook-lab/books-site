@@ -89,7 +89,7 @@ function renderBookCard(item, book) {
     </div>
   `;
 
-  progressiveImageLoad(item);
+  progressiveImageLoad(div);
 }
 
 
