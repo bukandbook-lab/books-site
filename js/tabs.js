@@ -39,6 +39,8 @@ function openTab(tabId, btn) {
   panel.style.display = "block";
   btn?.classList.add("active");
 
+  showSkeletonGrid(tabId, 50);
+
   // 🔥 LOAD CATEGORY ONLY WHEN CLICKED
   const categoryIndex = [...tabs].findIndex(t => t.dataset.tab === tabId);
 
