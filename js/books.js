@@ -453,21 +453,36 @@ function progressiveImageLoad(container) {
 
   if (!img || !bg) return;
 
+  let imageReady = false;
+  let bgReady = false;
+
+  function tryFinish() {
+    if (imageReady && bgReady) {
+      container.classList.add("loaded");
+    }
+  }
+
+  // 1️⃣ Front image
   img.addEventListener("load", () => {
-    const bgUrl = bg.dataset.bg;
-    if (!bgUrl) return;
+    img.classList.add("loaded");
+    imageReady = true;
+    tryFinish();
+  });
 
-    // ✅ mark card as loaded (hides skeleton)
-    container.classList.add("loaded");
-
-    // preload background image
+  // 2️⃣ Background image preload
+  const bgUrl = bg.dataset.bg;
+  if (bgUrl) {
     const preload = new Image();
     preload.src = bgUrl;
 
     preload.onload = () => {
       bg.style.backgroundImage = `url('${bgUrl}')`;
       bg.classList.add("loaded");
+      bgReady = true;
+      tryFinish();
     };
-  });
+  } else {
+    bgReady = true;
+  }
 }
 
