@@ -10,29 +10,31 @@ window.CATEGORY_LOADED = {};
 /* =====================================
    LOAD SKELETON GRID IMMEDIATELY FIRST
 ===================================== */
-window.addEventListener("load", () => {
-  const firstTab = document.querySelector(".image-grid");
-  if (firstTab) {
-    showSkeletonGrid(firstTab, 50);
-  }
+window.addEventListener("DOMContentLoaded", () => {
+  showSkeletonGrid("BeginningReader", 50);
 });
 
 /* =====================================
   SKELETON GRID  GENERATOR
 ===================================== */
-function showSkeletonGrid(container, count = 50) {
-  container.innerHTML = "";
+function showSkeletonGrid(tabId, count = 50) {
+  const tab = document.getElementById(tabId);
+  if (!tab) return;
+
+  const grid = tab.querySelector(".image-grid");
+  if (!grid) return;
+
+  grid.innerHTML = "";
 
   for (let i = 0; i < count; i++) {
     const div = document.createElement("div");
-    div.className = "book-thumb skeleton-thumb";
+    div.className = "book-thumb";
 
     div.innerHTML = `
-      <div class="skeleton skeleton-img"></div>
-      <div class="skeleton skeleton-price"></div>
+      <div class="skeleton"></div>
     `;
 
-    container.appendChild(div);
+    grid.appendChild(div);
   }
 }
 /* =====================================
