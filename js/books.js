@@ -77,6 +77,8 @@ function renderBookCard(item, book) {
       data-book-id="${normalized.id}"
       decoding="async"
       fetchpriority="high"
+      draggable="false"
+      ondragstart="return false;"
     >
     <div class="price-box"
       data-book-id="${normalized.id}"
@@ -500,3 +502,11 @@ function progressiveImageLoad(container) {
     tryFinish();
   }
 }
+/* =====================================
+   Disable Right Click
+===================================== */
+document.addEventListener("contextmenu", e => {
+  if (e.target.classList.contains("grid-book-img")) {
+    e.preventDefault();
+  }
+});
