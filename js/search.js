@@ -204,14 +204,16 @@ Object.values(BOOK_REGISTRY).forEach(book => {
         <div class="skeleton"></div>
         <div class="book-bg" data-bg="${book.img}"></div>
         <div class="image-protection"></div>
-  <img
-    src="${book.img}"
-    class="grid-book-img popup-trigger"
-    loading="lazy"
-    data-book-id="${book.id}"
-    decoding="async"
-    fetchpriority="high"
-  >
+              <img
+                src="${book.img}"
+                class="grid-book-img popup-trigger"
+                loading="lazy"
+                data-book-id="${book.id}"
+                decoding="async"
+                fetchpriority="high"
+                 draggable="false"
+                 ondragstart="return false;"
+             >
 
   <!-- 🔥 HOVER PRICE BOX -->
   <div class="price-box"
