@@ -70,6 +70,7 @@ function renderBookCard(item, book) {
   item.innerHTML = `
     <div class="skeleton"></div>
     <div class="book-bg" data-bg="${normalized.img}"></div>
+    <div class="image-protection"></div>
     <img
       src="${normalized.img}"
       class="grid-book-img popup-trigger"
