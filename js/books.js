@@ -89,7 +89,7 @@ function renderBookCard(item, book) {
     </div>
   `;
 
-  progressiveImageLoad(div);
+  progressiveImageLoad(item);
 }
 
 
@@ -368,7 +368,7 @@ document.addEventListener("click", e => {
       `;
 
       grid.appendChild(div);
-      progressiveImageLoad(item);
+      progressiveImageLoad(div);
     });
 
     const box = getNoSearchResultBox();
