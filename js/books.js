@@ -68,6 +68,7 @@ function renderBookCard(item, book) {
   }
 
   item.innerHTML = `
+    <div class="skeleton"></div>
     <div class="book-bg" data-bg="${normalized.img}"></div>
     <img
       src="${normalized.img}"
@@ -343,6 +344,7 @@ document.addEventListener("click", e => {
       const priceLabel = isSetBook ? "/set" : "/book";
 
       div.innerHTML = `
+        <div class="skeleton"></div>
         <div class="book-bg" data-bg="${book.img}"></div>
         <img
           src="${book.img}"
