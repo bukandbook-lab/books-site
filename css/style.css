@@ -276,9 +276,9 @@ html, body {
   position: relative;
   opacity: 0;
   transition: opacity 0.3s ease;
+  z-index: 2;
 }
   
-}
 
 .book-bg {
   position: absolute;
@@ -346,6 +346,7 @@ html, body {
 /* Show image when loaded */
 .grid-book-img.loaded {
   opacity: 1;
+  z-index: 3;
 }
 
 /* Fade Skeleton Only When Ready */
