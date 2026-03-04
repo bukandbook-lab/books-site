@@ -299,6 +299,12 @@ html, body {
   transform: scale(1.1); /* prevents edge blur gap */
 }
 
+.image-protection {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: transparent;
+}
 /* ===============================
    SKELETON STYLES (MATCHES BOOK GRID)
 ================================ */
@@ -644,7 +650,7 @@ html, body {
 ========================= */
 
 .cart-icon {
-  z-index: 2;
+  z-index: 1000;
   pointer-events: auto;
   cursor: pointer;
 }
