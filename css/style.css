@@ -509,6 +509,7 @@ html, body {
   align-items: center;
   gap: 4px;
   cursor: pointer;
+  z-index: 1000;
 }
 
 /* Watch Video Button */
