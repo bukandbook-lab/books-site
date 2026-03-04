@@ -277,6 +277,9 @@ html, body {
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 2;
+  user-drag: none;
+  -webkit-user-drag: none;
+
 }
   
 
