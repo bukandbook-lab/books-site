@@ -464,31 +464,39 @@ function progressiveImageLoad(container) {
     }
   }
 
-  // If image already cached
-  if (img.complete) {
+  // FRONT IMAGE
+  function handleImageLoad() {
+    img.classList.add("loaded");
     imageReady = true;
-  } else {
-    img.addEventListener("load", () => {
-      imageReady = true;
-      img.classList.add("loaded");
-      tryFinish();
-    });
+    tryFinish();
   }
 
-  const bgUrl = bg.dataset.bg;
+  if (img.complete) {
+    handleImageLoad();
+  } else {
+    img.addEventListener("load", handleImageLoad);
+  }
+
+  // BACKGROUND IMAGE
+  const bgUrl = bg.getAttribute("data-bg"); // safer than dataset
+
   if (bgUrl) {
     const preload = new Image();
     preload.src = bgUrl;
 
     preload.onload = () => {
-      bg.style.backgroundImage = `url('${bgUrl}')`;
+      bg.style.backgroundImage = `url("${bgUrl}")`;
       bg.classList.add("loaded");
+      bgReady = true;
+      tryFinish();
+    };
+
+    preload.onerror = () => {
       bgReady = true;
       tryFinish();
     };
   } else {
     bgReady = true;
+    tryFinish();
   }
-
-  tryFinish();
 }
