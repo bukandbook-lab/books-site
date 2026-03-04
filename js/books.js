@@ -368,7 +368,7 @@ document.addEventListener("click", e => {
       `;
 
       grid.appendChild(div);
-      progressiveImageLoad(div);
+      progressiveImageLoad(item);
     });
 
     const box = getNoSearchResultBox();
