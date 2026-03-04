@@ -490,16 +490,19 @@ grid.appendChild(msg);
 
     div.innerHTML = `
       <div class="book-bg" data-bg="${book.img}"></div>
+         <div class="img-skeleton"></div>
+        <div class="image-protection"></div>
       <img
-    src="${book.img}"
-    class="grid-book-img popup-trigger"
-    loading="lazy"
-    data-book-id="${book.id}"
-    decoding="async"
-    fetchpriority="high"
+             src="${book.img}"
+             class="grid-book-img popup-trigger"
+             loading="lazy"
+             data-book-id="${book.id}"
+             decoding="async"
+             fetchpriority="high"
+             draggable="false"
+             ondragstart="return false;"
       >
-
-
+      
       <div class="price-box result-price-box"
         data-book-id="${book.id}"
         data-title="${book.title}"
