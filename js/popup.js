@@ -73,10 +73,14 @@ if (isSetBook) {
 
       <div class="popup-img-wrapper">
         <div class="img-skeleton"></div>
+        <div class="image-protection"></div>
         <img src="${book.img}"
              class="popup-img"
              data-book-id="${id}"
-             loading="eager">
+             loading="eager"
+             draggable="false"
+             ondragstart="return false;"
+      >
       </div>
 
 
