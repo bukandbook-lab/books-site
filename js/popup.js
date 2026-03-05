@@ -46,6 +46,8 @@ function renderPopup(bookId) {
    const hasStatus = book.Status && book.Status.trim() !== "";
    const hasMissingTitle =
       book.MissingTitle && book.MissingTitle.trim() !== "";
+   const hasAvailableTitle=
+      book.AvailableTitle && book.AvailableTitle.trim() !== "";
 
   const priceLabel = isSetBook ? "/set" : "/book";
 
@@ -57,6 +59,7 @@ if (isSetBook) {
       <b>No. of Books:</b>
       ${book.SetQtty}${hasSetTotal ? ` out of ${book.SetTotal}` : ""} books per set
       ${hasStatus ? `<br><b>Status:</b> ${book.Status} set` : ""}
+      ${hasAvailableTitle ? `<br><b>Available Title:</b> ${book.AvailableTitle}` : ""}
       ${hasMissingTitle ? `<br><b>Missing Title:</b> ${book.MissingTitle}` : ""}
     </div>
   `;
