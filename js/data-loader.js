@@ -42,7 +42,7 @@ function showSkeletonGrid(tabId, count = 50) {
 ===================================== */
 
 const GAS_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbwk4z7lYazF6b2MDNRZN__TMw4zF8Q0FY05cRLIZK9cyb9ue2mK1qPB16_FtsD7Cgjv/exec";
+  "https://script.google.com/macros/s/AKfycbzWLFzBC1yIdkc_oxIcccFokvORK9_8BNTLAexo_QfVjI4TMrUxwQb_ql8yE93cmWhY7w/exec";
 
 const SECRET_KEY = "larilarilaju4578kali";
 
