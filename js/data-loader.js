@@ -152,6 +152,7 @@ return fetch(
 
             Author: book["Author"] || "",
             Status: book["Status"] || "",
+            AvailableTitle: book["Available Title"] || "",
             MissingTitle: book["Missing Title"] || "",
             Series: book["Series"] || "",
             FileType: book["File Type"] || "",
