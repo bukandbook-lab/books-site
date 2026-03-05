@@ -302,7 +302,7 @@ html, body {
 .image-protection {
   position: absolute;
   inset: 0;
-  z-index: 5;
+  z-index: 10000;
   background: transparent;
   pointer-events: none;
 }
@@ -651,7 +651,7 @@ html, body {
 ========================= */
 
 .cart-icon {
-  z-index: 1001;
+  z-index: 9999;
   pointer-events: auto;
   cursor: pointer;
 }
