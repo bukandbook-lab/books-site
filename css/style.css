@@ -302,7 +302,7 @@ html, body {
 .image-protection {
   position: absolute;
   inset: 0;
-  z-index: 10000;
+  z-index: 10001;
   background: transparent;
   pointer-events: none;
 }
@@ -505,6 +505,8 @@ html, body {
   max-width: 100%;
   display: block;
   margin: auto;
+  user-drag: none;
+  -webkit-user-drag: none;
 }
 
 .book-title {
@@ -651,7 +653,7 @@ html, body {
 ========================= */
 
 .cart-icon {
-  z-index: 9999;
+  z-index: 10000;
   pointer-events: auto;
   cursor: pointer;
 }
