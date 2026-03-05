@@ -408,4 +408,11 @@ function closeBookPopup() {
     popup.style.display = "none";
   }, 250);
 }
-
+/* =====================================
+   DISABLE RIGHT CLICK FOR IMG POPUP
+===================================== */
+document.addEventListener("contextmenu", e => {
+  if (e.target.closest(".popup-img-wrapper")) {
+    e.preventDefault();
+  }
+});
