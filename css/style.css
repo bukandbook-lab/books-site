@@ -532,18 +532,7 @@ html, body {
   cursor: pointer;
   z-index: 1000;
 }
-.popup-box .price-box {
-  background-color: #FF1493;
-  color: white;
-  border-radius: 18px;
-  padding: 3px 3px;
-  font-size:  12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  z-index: 1000;
-}
+
 
 .popup-box img.cart-icon {
   width: 22px;
@@ -676,7 +665,14 @@ html, body {
 ========================= */
 
 /* Cart icon hidden by default */
-.book-thumb .price-box {
+.book-thumb .price-box{
+  background-color: #FF1493;
+  color: white;
+  border-radius: 18px;
+  padding: 3px 3px;
+  font-size:  12px;
+  display: inline-flex;
+  align-items: center;
   position: absolute;
   right: 4px;
   bottom: 4px;
@@ -688,16 +684,16 @@ html, body {
   z-index: 10;
 }
 
+
 /* Show on hover */
 .book-thumb:hover .price-box {
   opacity: 1;
   pointer-events: auto;
 }
 
-.book-thumb img.cart-icon {
+.book-thumb .cart-icon {
   width: 22px;
   cursor: pointer;
-  text-align:right;
   z-index: 11;
   pointer-events: auto;
 
