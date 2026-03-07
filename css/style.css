@@ -685,11 +685,10 @@ html, body {
 }
 
 .book-thumb:hover .price-box,
-.book-thumb:active .price-box {
+.book-thumb *:hover ~ .price-box {
   opacity: 1;
   pointer-events: auto;
 }
-
 
 .book-thumb .cart-icon {
   position: relative 
