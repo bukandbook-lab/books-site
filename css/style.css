@@ -301,7 +301,7 @@ html, body {
 .image-protection {
   position: absolute;
   inset: 0;
-  z-index: 4;
+  z-index: 1;
   background: transparent;
   pointer-events: none;
 }
@@ -684,14 +684,15 @@ html, body {
   z-index: 10;
 }
 
-
-/* Show on hover */
-.book-thumb:hover .price-box {
+.book-thumb:hover .price-box,
+.book-thumb:active .price-box {
   opacity: 1;
   pointer-events: auto;
 }
 
+
 .book-thumb .cart-icon {
+  position: relative 
   width: 22px;
   cursor: pointer;
   z-index: 11;
