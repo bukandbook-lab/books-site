@@ -281,12 +281,6 @@ html, body {
   -webkit-user-drag: none;
 
 }
-.book-thumb .price-box {
-    z-index: 10;
-}
-.book-thumb .cart-icon {
-    z-index: 11;
-}
 
 .book-bg {
   position: absolute;
@@ -526,7 +520,7 @@ html, body {
 }
 
 /* Price Box */
-.price-box {
+.popup-box .price-box {
   background-color: #FF1493;
   color: white;
   border-radius: 18px;
@@ -537,6 +531,30 @@ html, body {
   gap: 4px;
   cursor: pointer;
   z-index: 1000;
+}
+.popup-box .price-box {
+  background-color: #FF1493;
+  color: white;
+  border-radius: 18px;
+  padding: 3px 3px;
+  font-size:  12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.popup-box img.cart-icon {
+  width: 22px;
+  cursor: pointer;
+  text-align:right;
+  z-index: 11;
+  pointer-events: auto;
+
+}
+.popup-box img.cart-icon:hover {
+  transform: scale(1.1);
 }
 
 /* Watch Video Button */
@@ -657,12 +675,6 @@ html, body {
    CART-ICON
 ========================= */
 
-.cart-icon {
-  z-index: 1001;
-  pointer-events: auto;
-  cursor: pointer;
-}
-
 /* Cart icon hidden by default */
 .book-thumb .price-box {
   position: absolute;
@@ -673,6 +685,7 @@ html, body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
+  z-index: 10;
 }
 
 /* Show on hover */
@@ -681,16 +694,15 @@ html, body {
   pointer-events: auto;
 }
 
-.cart-icon:hover {
-  transform: scale(1.1);
-}
-
-.price-box img.cart-icon {
+.book-thumb img.cart-icon {
   width: 22px;
   cursor: pointer;
   text-align:right;
+  z-index: 11;
+  pointer-events: auto;
+
 }
-.price-box img.cart-icon:hover {
+.book-thumb img.cart-icon:hover {
   transform: scale(1.1);
 }
 
