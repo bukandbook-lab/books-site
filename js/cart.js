@@ -728,16 +728,14 @@ function renderInvoice() {
    
   const totals = calculateTotals();
    
-  const hasSeries = [...cart.items.values()].some(item => item.series);
   const hasQty = [...cart.items.values()].some(
   item => item.setQtty && item.setQtty > 1
   );
 
   const totalColumns =
-  2 +                 // Index + Title
-  (hasSeries ? 1 : 0) +
+  2 +           // Index + Title (Series merged here)
   (hasQty ? 1 : 0) +
-  1;                  // Price
+  1;            // Price
 
    // Columns before price column
    const mergeColumns = totalColumns - 1;
@@ -751,13 +749,12 @@ function renderInvoice() {
      // Index
      booksHtml += `<td style="text-align:center;">${index}</td>`;
    
-     // Title
-     booksHtml += `<td>${item.title}</td>`;
-   
-     // Series column (only if exists)
-     if (hasSeries) {
-       booksHtml += `<td>${item.series ? item.series : ""}</td>`;
-     }
+      // Title (Series merged)
+      const titleText = item.series
+        ? `<b>${item.series}</b> - ${item.title}`
+        : item.title;
+      
+      booksHtml += `<td>${titleText}</td>`;
    
      // Quantity column (only if needed)
      if (hasQty) {
@@ -783,11 +780,7 @@ function renderInvoice() {
         <th style="width:5%">No.</th>
         <th style="width:35%">Title</th>
       `;
-      
-      if (hasSeries) {
-        headerHtml += `<th style="width:25%">Series</th>`;
-      }
-      
+           
       if (hasQty) {
         headerHtml += `<th style="width:10%">Qty</th>`;
       }
