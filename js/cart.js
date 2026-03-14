@@ -777,16 +777,16 @@ function renderInvoice() {
 
          let headerHtml = `
       <tr>
-        <th style="width:5%">No.</th>
-        <th style="width:35%">Title</th>
+        <th style="width:3%">No.</th>
+        <th style="width:82%">Title</th>
       `;
            
       if (hasQty) {
-        headerHtml += `<th style="width:10%">Qty</th>`;
+        headerHtml += `<th style="width:5%">Qtty</th>`;
       }
       
       headerHtml += `
-        <th style="width:15%">Price</th>
+        <th style="width:10%">Price</th>
       </tr>
       `; 
 
