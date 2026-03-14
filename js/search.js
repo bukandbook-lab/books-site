@@ -171,6 +171,7 @@ if (!keyword) {
     hideTabs();
 
     const grid = getSearchGrid();
+    grid.innerHTML = "";
     
     const skeletons = grid.querySelectorAll(".skeleton-thumb");
     skeletons.forEach(el => el.remove());
@@ -200,9 +201,15 @@ Object.values(BOOK_REGISTRY).forEach(book => {
 
 // keep category order
 results.sort((a, b) => {
+
   const aCat = CATEGORY_ORDER.indexOf(a.Category);
   const bCat = CATEGORY_ORDER.indexOf(b.Category);
-  return aCat - bCat;
+
+  const safeA = aCat === -1 ? 999 : aCat;
+  const safeB = bCat === -1 ? 999 : bCat;
+
+  return safeA - safeB;
+
 });
 
 results.forEach(book => {
@@ -244,7 +251,8 @@ results.forEach(book => {
       src="${CART_ICON}"
       class="cart-icon"
     >
-      `;
+     </div>
+     `;
 
       grid.appendChild(div);
       progressiveImageLoad(div);
