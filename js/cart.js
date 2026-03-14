@@ -376,11 +376,10 @@ function renderCart() {
   
   box.innerHTML = `
    <span class="close-popup" alt="Close">X</span><br/>
-   <br/><span class="CartTitle">CART</span>
+   <br/><span class="CartTitle">CART</span>  
+    ${itemsHTML || "<p>No items selected</p>"}
    <div style="text-align:right;">
    <button id="clearCartBtn" class="clear-cart-btn">CLEAR CART</button></div>
-   
-    ${itemsHTML || "<p>No items selected</p>"}
 
     
     <div class="cart-fee">
