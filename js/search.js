@@ -177,11 +177,15 @@ if (!keyword) {
 
     
 
+const results = [];
+
 Object.values(BOOK_REGISTRY).forEach(book => {
+
   const searchableText = [
     book.title,
     book.Author,
-    book.Series
+    book.Series,
+    ...(Array.isArray(book.tags) ? book.tags : [])
   ].filter(Boolean).join(" ");
 
   const words = normalizeWords(searchableText);
@@ -190,6 +194,18 @@ Object.values(BOOK_REGISTRY).forEach(book => {
   if (!keywordWords.every(kw =>
     words.some(w => w.includes(kw))
   )) return;
+
+  results.push(book);
+});
+
+// keep category order
+results.sort((a, b) => {
+  const aCat = CATEGORY_ORDER.indexOf(a.Category);
+  const bCat = CATEGORY_ORDER.indexOf(b.Category);
+  return aCat - bCat;
+});
+
+results.forEach(book => {
 
   hasResult = true;
 
