@@ -663,6 +663,11 @@ html, body {
 /* =========================
    CART-ICON
 ========================= */
+.cart-icon {
+  z-index: 2;
+  pointer-events: auto;
+  cursor: pointer;
+}
 
 /* Cart icon hidden by default */
 .book-thumb .price-box{
