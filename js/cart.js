@@ -412,7 +412,7 @@ function renderCart() {
              required
              placeholder="${
                cart.delivery === "email"
-                 ? "Enter your gmail"
+                 ? "Enter your Gmail (example@gmail.com)"
                  : "Enter your name, full address & phone number"
              }"
              style="width:100%; margin-top:6px;"
