@@ -723,7 +723,7 @@ function renderInvoice() {
 
   const invoiceLabel =
   cart.delivery === "email"
-    ? "Email"
+    ? "Gmail"
     : "Delivery Details";
    
   const totals = calculateTotals();
@@ -856,7 +856,6 @@ function renderInvoice() {
       <br>
 
       <div>
-         <strong>Delivery Method:</strong> ${cart.delivery}<br>
          <strong>${invoiceLabel}:</strong> ${cart.deliveryDetails}
       </div>
 
@@ -906,7 +905,7 @@ function renderInvoice() {
       <br>
       
       <div style="display:flex; gap:10px;">
-        <button id="backToCart">BACK</button>
+        <button id="backToCart">BACK TO EDIT</button>
         <button id="submitInvoiceOrder">SUBMIT ORDER</button>
       </div>
 
