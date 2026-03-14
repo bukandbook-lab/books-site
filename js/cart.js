@@ -498,13 +498,14 @@ const deliveryField = document.getElementById("deliveryDetails");
     return;
   }
 
-  if (cart.delivery === "email") {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(deliveryField.value.trim())) {
-      alert("Please enter a valid email address.");
-      return;
-    }
+if (cart.delivery === "email") {
+  const email = deliveryField.value.trim().toLowerCase();
+  const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+  if (!gmailRegex.test(email)) {
+    alert("Only Gmail is accepted for Google Drive access. Please enter a valid Gmail address (example@gmail.com).");
+    return;
   }
+}
 
   // ✅ NOW SAFE TO PROCEED
 
