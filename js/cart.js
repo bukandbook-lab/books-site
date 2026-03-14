@@ -502,7 +502,7 @@ if (cart.delivery === "email") {
   const email = deliveryField.value.trim().toLowerCase();
   const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
   if (!gmailRegex.test(email)) {
-    alert("Only Gmail is accepted for Google Drive access. Please enter a valid Gmail address (example@gmail.com).");
+    alert("Only Gmail is accepted. Please enter a valid Gmail address.");
     return;
   }
 }
