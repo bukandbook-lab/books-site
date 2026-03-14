@@ -201,9 +201,15 @@ Object.values(BOOK_REGISTRY).forEach(book => {
 
 // keep category order
 results.sort((a, b) => {
+
   const aCat = CATEGORY_ORDER.indexOf(a.Category);
   const bCat = CATEGORY_ORDER.indexOf(b.Category);
-  return aCat - bCat;
+
+  const safeA = aCat === -1 ? 999 : aCat;
+  const safeB = bCat === -1 ? 999 : bCat;
+
+  return safeA - safeB;
+
 });
 
 results.forEach(book => {
