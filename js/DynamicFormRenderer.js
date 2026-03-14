@@ -51,13 +51,13 @@ function renderBookTitleForm() {
   if (!bookWrap) return;
 
   bookWrap.insertAdjacentHTML("beforebegin", `
-    <div class="request-row">
+   IMPORTANT: This request is for English book only. It is also non-refundable even there might be no EPUB/PDF can be delivered due to unavailability of the requested book. Hence, please ensure correct book title and author's name and minimum publishing period of 6 months.  
+    <br/><div class="request-row">
       <label>Number of request</label>
       <input type="text" id="bookCount" inputmode="numeric" pattern="[0-9]*" value="1" />
       <button type="button" id="resetBooks">Reset</button>
-    </div><br/><br/>
-
-   IMPORTANT: This request is for English book only. It is also non-refundable even there might be no EPUB/PDF can be delivered due to unavailability of the requested book. Hence, please ensure correct book title and author's name and minimum publishing period of 6 months.  `);
+    </div><br/>
+   `);
 
   updateBookInputs(1);
 
