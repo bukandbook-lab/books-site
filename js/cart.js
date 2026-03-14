@@ -598,9 +598,10 @@ function updateDeliveryField() {
   if (!field) return;
 
   field.value = cart.deliveryDetails || ""; // ✅ keep value
+ field.value = field.value.trim().toLowerCase();
 
   if (delivery === "email") {
-    field.placeholder = "Enter email address";
+    field.placeholder = "Enter your Gmail (example@gmail.com)";
     field.setAttribute("type", "email");
   } else {
     field.placeholder = "Enter name, full address & phone number";
