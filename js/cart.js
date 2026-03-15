@@ -1094,10 +1094,6 @@ document.addEventListener("click", e => {
     renderInvoicePrint();
   }
 
-  if (e.target.id === "downloadInvoicePDF") {
-    downloadInvoicePDF();
-  }
-
 });
 /* =====================================
    renderInvoicePrint() Function
