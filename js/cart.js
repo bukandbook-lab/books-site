@@ -1056,7 +1056,7 @@ Once payment is verified, your order will be ${
     ? "emailed within 1 hour.<br>Please check <b>SPAM</b> folder if no email received."
     : "delivered within 4 days."
 }.<br><br>
-Please keep this order ID <b>${orderId}</b> as your reference.`;
+Please keep this <b>Order ID: ${orderId}</b> as your reference.`;
 
 if (thankYouMsg) {
   thankYouMsg.innerHTML = `
@@ -1088,14 +1088,17 @@ if (thankYouMsg) {
 /* =====================================
    Print Icon Click Handler
 ===================================== */
-document.addEventListener("click", async e => {
+document.addEventListener("click", e => {
 
-  if (e.target.closest("#thankYouPrint")) {
+  if (e.target.id === "printInvoiceBtn") {
     renderInvoicePrint();
   }
 
-});
+  if (e.target.id === "downloadInvoicePDF") {
+    downloadInvoicePDF();
+  }
 
+});
 /* =====================================
    renderInvoicePrint() Function
 ===================================== */
@@ -1130,7 +1133,10 @@ async function renderInvoicePrint() {
   const html = `
   <html>
   <head>
-    <title>Order</title>
+    <title>ORDER</title>
+
+   <br><br><b style="font-size:18px">Order ID: ${orderId}</b><br><br>
+
 
     <style>
       body{
