@@ -905,6 +905,8 @@ function renderInvoice() {
   `;
 
   document.getElementById("invoiceContent").innerHTML = invoiceHTML;
+  window.lastInvoiceHTML = invoiceHTML;
+
   updateInvoiceButtons();
 }
 /* =====================================
@@ -1047,14 +1049,30 @@ function showThankYou() {
     document.querySelector("input[name='delivery']:checked")?.value;
     const orderId = cart.orderId;
 
-  const msg =
-    "Thank you for your order " + orderId + ". Once payment is verified, your order will be " +
-    (delivery === "email" ? "emailed within 1 hour. Please check 'SPAM' folder if no email received. " : "delivered within 4 days. ") + "Please keep this order ID " + orderId + " as your reference."
-    ;
+const msg =
+`Thank you for your order <b>${orderId}</b>.<br><br>
+Once payment is verified, your order will be ${
+  delivery === "email"
+    ? "emailed within 1 hour.<br>Please check <b>SPAM</b> folder if no email received."
+    : "delivered within 4 days."
+}.<br><br>
+Please keep this order ID <b>${orderId}</b> as your reference.`;
 
-  if (thankYouMsg) {
-    thankYouMsg.innerHTML = msg;
-  }
+if (thankYouMsg) {
+  thankYouMsg.innerHTML = `
+    ${msg}
+
+    <div style="margin-top:16px;">
+      <button id="printInvoiceBtn" style="margin-right:8px;">
+        🖨 Print Invoice
+      </button>
+
+      <button id="downloadInvoicePDF">
+        ⬇ Download Invoice PDF
+      </button>
+    </div>
+  `;
+}
 
   // 🔥 SHOW THANK YOU POPUP PROPERLY
   thankYou.style.display = "flex";
@@ -1067,5 +1085,155 @@ function showThankYou() {
     resetCart();
   }, 300);
 }
+/* =====================================
+   Print Icon Click Handler
+===================================== */
+document.addEventListener("click", async e => {
+
+  if (e.target.closest("#thankYouPrint")) {
+    renderInvoicePrint();
+  }
+
+});
+
+/* =====================================
+   renderInvoicePrint() Function
+===================================== */
+async function renderInvoicePrint() {
+
+  let proofHTML = "";
+
+  if (paymentProofBlob) {
+
+    const url = URL.createObjectURL(paymentProofBlob);
+
+    if (paymentProofBlob.type.includes("image")) {
+
+      proofHTML = `
+      <br><br>
+      <b>Payment Proof</b><br>
+      <img src="${url}" style="max-width:100%; margin-top:10px;">
+      `;
+
+    } else if (paymentProofBlob.type.includes("pdf")) {
+
+      proofHTML = `
+      <br><br>
+      <b>Payment Proof</b><br>
+      <iframe src="${url}" style="width:100%; height:600px;"></iframe>
+      `;
+
+    }
+
+  }
+
+  const html = `
+  <html>
+  <head>
+    <title>Order</title>
+
+    <style>
+      body{
+        font-family: Arial;
+        padding:20px;
+      }
+
+      table{
+        border-collapse: collapse;
+      }
+
+      table, th, td{
+        border:1px solid #000;
+      }
+
+      th, td{
+        padding:6px;
+      }
+
+      @media print{
+        button{
+          display:none;
+        }
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+  ${window.lastInvoiceHTML || ""}
+
+  ${proofHTML}
+
+  <script>
+    window.onload = function(){
+      window.print();
+    }
+  <\/script>
+
+  </body>
+  </html>
+  `;
+
+  const win = window.open("", "_blank");
+  win.document.write(html);
+  win.document.close();
+}
 
 
+/* =====================================
+   PDF Download Script
+===================================== */
+document.addEventListener("click", async e => {
+
+  if (e.target.id !== "downloadInvoicePDF") return;
+
+  let proofHTML = "";
+
+  if (paymentProofBlob) {
+
+    const url = URL.createObjectURL(paymentProofBlob);
+
+    if (paymentProofBlob.type.includes("image")) {
+
+      proofHTML = `
+      <div style="margin-top:20px">
+        <b>Payment Proof</b><br>
+        <img src="${url}" style="max-width:100%">
+      </div>
+      `;
+
+    }
+
+    if (paymentProofBlob.type.includes("pdf")) {
+
+      proofHTML = `
+      <div style="margin-top:20px">
+        <b>Payment Proof</b><br>
+        <p>Payment proof attached (PDF).</p>
+      </div>
+      `;
+
+    }
+  }
+
+  const container = document.createElement("div");
+
+  container.innerHTML = `
+  <div style="font-family:Arial; padding:20px;">
+    ${window.lastInvoiceHTML || ""}
+    ${proofHTML}
+  </div>
+  `;
+
+  const opt = {
+    margin: 0.5,
+    filename: "invoice.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
+  };
+
+  html2pdf().set(opt).from(container).save();
+
+});
