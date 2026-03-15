@@ -1131,7 +1131,7 @@ async function renderInvoicePrint() {
   <head>
     <title>ORDER</title>
 
-   <br><br><b style="font-size:18px">Order ID: ${orderId}</b><br><br>
+   <br><br><b>Order ID: ${cart.orderId}</b><br><br>
 
 
     <style>
@@ -1230,7 +1230,7 @@ document.addEventListener("click", async e => {
 
   const opt = {
     margin: 0.5,
-    filename: "invoice.pdf",
+    filename: `Order-${cart.orderId}.pdf`,
     image: { type: "jpeg", quality: 0.98 },
     html2canvas: { scale: 2 },
     jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
