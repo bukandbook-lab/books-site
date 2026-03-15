@@ -11,6 +11,8 @@ const cart = {
   orderId: ""
 };
 
+let paymentProofBlob = null;
+
 const SHIPPING_FEE = 10;
 const THUMB_DRIVE_FEE = 7;
 
@@ -677,6 +679,8 @@ function resetCart() {
   cart.agreed = false;
   cart.orderId = "";
 
+  paymentProofBlob = null;
+
   renderCart();
   syncCartIcons();
   updateCartBadge();
@@ -936,6 +940,8 @@ document.addEventListener("change", function(e) {
 
   const file = e.target.files[0];
   if (!file) return;
+
+  paymentProofBlob = file;   // ⭐ STORE FILE HERE
 
   const reader = new FileReader();
 
