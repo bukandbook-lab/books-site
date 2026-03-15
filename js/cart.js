@@ -1050,7 +1050,7 @@ function showThankYou() {
     const orderId = cart.orderId;
 
 const msg =
-`Thank you for your order <b>${orderId}</b>.<br><br>
+`Thank you for your order - <b style="font-size:18px">Order ID: ${orderId}</b>.<br><br>
 Once payment is verified, your order will be ${
   delivery === "email"
     ? "emailed within 1 hour.<br>Please check <b>SPAM</b> folder if no email received."
