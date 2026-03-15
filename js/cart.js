@@ -1070,11 +1070,11 @@ if (thankYouMsg) {
 
     <div style="margin-top:16px;">
       <button id="printInvoiceBtn" style="margin-right:8px;">
-        🖨 Print Invoice
+        🖨 Print
       </button>
 
       <button id="downloadInvoicePDF">
-        ⬇ Download Invoice PDF
+        ⬇ Download PDF
       </button>
     </div>
   `;
