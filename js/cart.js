@@ -1168,7 +1168,7 @@ async function renderInvoicePrint() {
   const html = `
   <html>
   <head>
-  <title>Invoice</title>
+  <title>ORDER</title>
   <style>
 
   body{
