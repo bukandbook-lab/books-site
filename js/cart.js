@@ -1106,77 +1106,117 @@ document.addEventListener("click", e => {
 ===================================== */
 async function renderInvoicePrint() {
 
+  const totals = calculateTotals();
+
+  let rows = "";
+  let i = 1;
+
+  cart.items.forEach(item => {
+
+    rows += `
+    <tr>
+      <td>${i}</td>
+      <td>${item.series ? item.series + " - " : ""}${item.title}</td>
+      <td style="text-align:right;">RM${item.price.toFixed(2)}</td>
+    </tr>
+    `;
+
+    i++;
+
+  });
+
+  rows += `
+  <tr>
+    <td colspan="2" style="text-align:right;"><b>Subtotal</b></td>
+    <td style="text-align:right;"><b>RM${totals.booksSubtotal.toFixed(2)}</b></td>
+  </tr>
+  `;
+
+  if (cart.delivery === "courier") {
+    rows += `
+    <tr>
+      <td colspan="2" style="text-align:right;">Shipping</td>
+      <td style="text-align:right;">RM${totals.shippingFee.toFixed(2)}</td>
+    </tr>
+    <tr>
+      <td colspan="2" style="text-align:right;">Thumb Drive</td>
+      <td style="text-align:right;">RM${totals.thumbFee.toFixed(2)}</td>
+    </tr>
+    `;
+  }
+
+  rows += `
+  <tr>
+    <td colspan="2" style="text-align:right;"><b>Grand Total</b></td>
+    <td style="text-align:right;"><b>RM${totals.grandTotal.toFixed(2)}</b></td>
+  </tr>
+  `;
+
   let proofHTML = "";
 
-  if (paymentProofBlob) {
+  if (paymentProofBlob && paymentProofBlob.type.includes("image")) {
 
     const url = URL.createObjectURL(paymentProofBlob);
 
-    if (paymentProofBlob.type.includes("image")) {
-
-      proofHTML = `
-      <br><br>
-      <b>Payment Proof</b><br>
-      <img src="${url}" style="max-width:100%; margin-top:10px;">
-      `;
-
-    } else if (paymentProofBlob.type.includes("pdf")) {
-
-      proofHTML = `
-      <br><br>
-      <b>Payment Proof</b><br>
-      <iframe src="${url}" style="width:100%; height:600px;"></iframe>
-      `;
-
-    }
-
+    proofHTML = `
+    <br><br>
+    <b>Payment Proof</b><br>
+    <img src="${url}" style="max-width:100%;">
+    `;
   }
 
   const html = `
   <html>
   <head>
-    <title>ORDER</title>
+  <title>Invoice</title>
+  <style>
 
-   <br><br><b>Order ID: ${cart.orderId}</b><br><br>
+  body{
+    font-family:Arial;
+    padding:20px;
+  }
 
+  table{
+    border-collapse:collapse;
+    width:100%;
+  }
 
-    <style>
-      body{
-        font-family: Arial;
-        padding:20px;
-      }
+  table,th,td{
+    border:1px solid #000;
+  }
 
-      table{
-        border-collapse: collapse;
-      }
+  th,td{
+    padding:6px;
+  }
 
-      table, th, td{
-        border:1px solid #000;
-      }
-
-      th, td{
-        padding:6px;
-      }
-
-      @media print{
-        button{
-          display:none;
-        }
-      }
-    </style>
-
+  </style>
   </head>
 
   <body>
 
-  ${window.lastInvoiceHTML || ""}
+  <h2>Order Invoice</h2>
+
+  <b>Order ID:</b> ${cart.orderId}<br>
+  <b>Delivery:</b> ${cart.delivery}<br>
+  <b>Details:</b> ${cart.deliveryDetails}<br><br>
+
+  <table>
+  <tr>
+    <th>No</th>
+    <th>Book</th>
+    <th>Price</th>
+  </tr>
+
+  ${rows}
+
+  </table>
 
   ${proofHTML}
 
   <script>
-    window.onload = function(){
-      window.print();
-    }
+  window.onload=function(){
+  window.print();
+  }
   <\/script>
 
   </body>
@@ -1186,60 +1226,35 @@ async function renderInvoicePrint() {
   const win = window.open("", "_blank");
   win.document.write(html);
   win.document.close();
+
 }
 
 
 /* =====================================
    PDF Download Script
 ===================================== */
-document.addEventListener("click", async e => {
+document.addEventListener("click", e => {
 
   if (e.target.id !== "downloadInvoicePDF") return;
-
-  let proofHTML = "";
-
-  if (paymentProofBlob) {
-
-    const url = URL.createObjectURL(paymentProofBlob);
-
-    if (paymentProofBlob.type.includes("image")) {
-
-      proofHTML = `
-      <div style="margin-top:20px">
-        <b>Payment Proof</b><br>
-        <img src="${url}" style="max-width:100%">
-      </div>
-      `;
-
-    }
-
-    if (paymentProofBlob.type.includes("pdf")) {
-
-      proofHTML = `
-      <div style="margin-top:20px">
-        <b>Payment Proof</b><br>
-        <p>Payment proof attached (PDF).</p>
-      </div>
-      `;
-
-    }
-  }
 
   const container = document.createElement("div");
 
   container.innerHTML = `
-  <div style="font-family:Arial; padding:20px;">
-    ${window.lastInvoiceHTML || ""}
-    ${proofHTML}
-  </div>
+  <h2><b><u>ORDER</u></b></h2>
+
+  <b>Order ID:</b> ${cart.orderId}<br>
+  <b>Delivery:</b> ${cart.delivery}<br>
+  <b>Details:</b> ${cart.deliveryDetails}<br><br>
+
+  ${document.querySelector("#invoiceContent table").outerHTML}
   `;
 
   const opt = {
-    margin: 0.5,
-    filename: `Order-${cart.orderId}.pdf`,
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
+    margin:0.5,
+    filename:`invoice-${cart.orderId}.pdf`,
+    image:{type:"jpeg",quality:0.98},
+    html2canvas:{scale:2},
+    jsPDF:{unit:"in",format:"a4",orientation:"portrait"}
   };
 
   html2pdf().set(opt).from(container).save();
