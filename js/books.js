@@ -81,16 +81,16 @@ function renderBookCard(item, book) {
       draggable="false"
       ondragstart="return false;"
     >
-    <div class="price-container"><div class="price-box"
+    <div class="price-box"
       data-book-id="${normalized.id}"
       data-title="${normalized.title}"
       data-price="${Number(normalized.price).toFixed(2)}"
       data-setqtty="${normalized.SetQtty || 1}"
     >
       &nbsp&nbspRM${Number(normalized.price).toFixed(2)}${priceLabel}
-    
+    <img data-book-id="${normalized.id}" src="${CART_ICON}" class="cart-icon">
 
-    </div><img data-book-id="${normalized.id}" src="${CART_ICON}" class="cart-icon"></div>
+    </div>
       
       
     
