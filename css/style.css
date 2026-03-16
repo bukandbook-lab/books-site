@@ -696,7 +696,7 @@ html, body {
 }
 
 .book-thumb .cart-icon {
-  position: relative 
+  position: relative; 
   width: 22px;
   cursor: pointer;
   pointer-events: auto;
@@ -825,7 +825,7 @@ html, body {
 
 .cart-toast {
   position: fixed;
-  bottom: 30px;
+  bottom: 100px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
   background: #FF1493;
