@@ -662,7 +662,7 @@ html, body {
    CART-ICON
 ========================= */
 .cart-icon {
-  position: absolute;
+  position: relative;
   top: 8px;
   right: 8px;
   width: 22px;
