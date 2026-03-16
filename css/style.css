@@ -663,14 +663,10 @@ html, body {
 /* =========================
    CART-ICON
 ========================= */
-/*.cart-icon {
-  z-index: 20000;
+.cart-icon {
+  width: 22px;
   pointer-events: auto;
   cursor: pointer;
-}*/
-
-.book-thumb .price-container{
-dispay:flex;
 }
 
 
@@ -700,8 +696,8 @@ dispay:flex;
 }
 
 .book-thumb .cart-icon {
-   z-index:20000;
-  width: 100px;
+  position: absolute;
+  width: 22px;
   cursor: pointer;
   pointer-events: auto;
 
