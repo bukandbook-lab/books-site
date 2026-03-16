@@ -12,6 +12,8 @@ const cart = {
 };
 
 let paymentProofBlob = null;
+let lastOrder = null;
+
 
 const SHIPPING_FEE = 10;
 const THUMB_DRIVE_FEE = 7;
@@ -1086,6 +1088,15 @@ if (thankYouMsg) {
     thankYou.classList.add("show");
   });
    
+lastOrder = {
+  orderId: cart.orderId,
+  items: [...cart.items.values()],
+  delivery: cart.delivery,
+  deliveryDetails: cart.deliveryDetails,
+  totals: calculateTotals(),
+  paymentProofBlob: paymentProofBlob
+};
+
   // 🔥 AUTO-CLEAR CART (DELAY = SAFE)
   setTimeout(() => {
     resetCart();
@@ -1111,7 +1122,7 @@ async function renderInvoicePrint() {
   let rows = "";
   let i = 1;
 
-  cart.items.forEach(item => {
+  lastOrder.items.forEach(item => {
 
     rows += `
     <tr>
@@ -1168,7 +1179,7 @@ async function renderInvoicePrint() {
   const html = `
   <html>
   <head>
-  <title>ORDER</title>
+  <title>RECEIPT</title>
   <style>
 
   body{
@@ -1194,11 +1205,11 @@ async function renderInvoicePrint() {
 
   <body>
 
-  <h2>Order Invoice</h2>
+  <h2>Order Receipt</h2>
 
-  <b>Order ID:</b> ${cart.orderId}<br>
-  <b>Delivery:</b> ${cart.delivery}<br>
-  <b>Details:</b> ${cart.deliveryDetails}<br><br>
+  <b>Order ID:</b> ${lastOrder.orderId}<br>
+  <b>Delivery:</b> ${lastOrder.delivery}<br>
+  <b>Details:</b> ${lastOrder.deliveryDetails}<br><br>
 
   <table>
   <tr>
@@ -1240,11 +1251,11 @@ document.addEventListener("click", e => {
   const container = document.createElement("div");
 
   container.innerHTML = `
-  <h2><b><u>ORDER</u></b></h2>
+  <h2><b><u>RECEIPT</u></b></h2>
 
-  <b>Order ID:</b> ${cart.orderId}<br>
-  <b>Delivery:</b> ${cart.delivery}<br>
-  <b>Details:</b> ${cart.deliveryDetails}<br><br>
+  <b>Order ID:</b> ${lastOrder.orderId}<br>
+  <b>Delivery:</b> ${lastOrder.delivery}<br>
+  <b>Details:</b> ${lastOrder.deliveryDetails}<br><br>
 
   ${document.querySelector("#invoiceContent table").outerHTML}
   `;
