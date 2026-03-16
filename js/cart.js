@@ -1214,7 +1214,7 @@ async function renderInvoicePrint() {
   <table>
   <tr>
     <th>No</th>
-    <th>Book</th>
+    <th>Title</th>
     <th>Price</th>
   </tr>
 
