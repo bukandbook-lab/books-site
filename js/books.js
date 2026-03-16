@@ -81,7 +81,7 @@ function renderBookCard(item, book) {
       draggable="false"
       ondragstart="return false;"
     >
-    <div><div class="price-box"
+    <div class="price-container"><div class="price-box"
       data-book-id="${normalized.id}"
       data-title="${normalized.title}"
       data-price="${Number(normalized.price).toFixed(2)}"
