@@ -88,9 +88,10 @@ function renderBookCard(item, book) {
       data-setqtty="${normalized.SetQtty || 1}"
     >
       &nbsp&nbspRM${Number(normalized.price).toFixed(2)}${priceLabel}
+    </div>
       <img data-book-id="${normalized.id}" src="${CART_ICON}" class="cart-icon">
       
-    </div>
+    
   `;
 
   progressiveImageLoad(item);
@@ -367,13 +368,13 @@ document.addEventListener("click", e => {
           data-setqtty="${book.SetQtty || 1}"
         >
           &nbsp&nbspRM${Number(book.price).toFixed(2)}${priceLabel}
-
-        </div>
           <img
             data-book-id="${book.id}"
             src="${CART_ICON}"
             class="cart-icon"
           >
+        </div>
+
 
       `;
 
