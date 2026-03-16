@@ -87,7 +87,7 @@ function renderBookCard(item, book) {
       data-price="${Number(normalized.price).toFixed(2)}"
       data-setqtty="${normalized.SetQtty || 1}"
     >
-      &nbsp&nbspRM${Number(normalized.price).toFixed(2)}${priceLabel}
+      &nbsp&nbspRM${Number(normalized.price).toFixed(2)}${priceLabel}&nbsp
     <img data-book-id="${normalized.id}" src="${CART_ICON}" class="cart-icon">
 
     </div>
