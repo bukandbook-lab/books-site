@@ -681,7 +681,7 @@ html, body {
   position: absolute;
   right: 4px;
   bottom: 4px;
-  width: 100px;
+  width: 60px;
   height: 24px;
   opacity: 0;
   pointer-events: none;
@@ -696,7 +696,7 @@ html, body {
 }
 
 .book-thumb .cart-icon {
-  position: relative; 
+   
   width: 22px;
   cursor: pointer;
   pointer-events: auto;
