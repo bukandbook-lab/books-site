@@ -664,9 +664,18 @@ html, body {
    CART-ICON
 ========================= */
 .cart-icon {
-  width: 22px;
-  pointer-events: auto;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  z-index: 10;        /* above book image & price-box */
   cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.cart-icon:hover {
+  transform: scale(1.2);
 }
 
 
@@ -701,7 +710,7 @@ html, body {
   cursor: pointer;
   pointer-events: auto;
 
-}*/
+}
 .book-thumb img.cart-icon:hover {
   transform: scale(1.1);
 }
@@ -709,7 +718,7 @@ html, body {
 .cart-icon.in-cart {
   transform: scale(1.1);
   transition: transform 0.15s ease;
-}
+}*/
 
 /* =========================
   YOUTUBE VIDEO
