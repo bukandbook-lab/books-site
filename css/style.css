@@ -669,7 +669,11 @@ html, body {
   cursor: pointer;
 }*/
 
-/* Cart icon hidden by default */
+.book-thumb .price-container{
+dispay:flex;
+}
+
+
 .book-thumb .price-box{
   background-color: #FF1493;
   color: white;
@@ -681,7 +685,7 @@ html, body {
   position: absolute;
   right: 4px;
   bottom: 4px;
-  width: 150px;
+  width: 80px;
   height: 24px;
   opacity: 0;
   pointer-events: none;
