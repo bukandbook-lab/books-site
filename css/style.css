@@ -663,11 +663,11 @@ html, body {
 /* =========================
    CART-ICON
 ========================= */
-.cart-icon {
+/*.cart-icon {
   z-index: 20000;
   pointer-events: auto;
   cursor: pointer;
-}
+}*/
 
 /* Cart icon hidden by default */
 .book-thumb .price-box{
@@ -681,7 +681,7 @@ html, body {
   position: absolute;
   right: 4px;
   bottom: 4px;
-  width: 60px;
+  width: 80px;
   height: 24px;
   opacity: 0;
   pointer-events: none;
@@ -696,7 +696,7 @@ html, body {
 }
 
 .book-thumb .cart-icon {
-   
+   z-index:20000;
   width: 22px;
   cursor: pointer;
   pointer-events: auto;
