@@ -695,13 +695,13 @@ html, body {
   pointer-events: auto;
 }
 
-.book-thumb .cart-icon {
+/*.book-thumb .cart-icon {
   position: absolute;
   width: 22px;
   cursor: pointer;
   pointer-events: auto;
 
-}
+}*/
 .book-thumb img.cart-icon:hover {
   transform: scale(1.1);
 }
