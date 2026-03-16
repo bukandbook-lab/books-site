@@ -701,7 +701,7 @@ dispay:flex;
 
 .book-thumb .cart-icon {
    z-index:20000;
-  width: 22px;
+  width: 100px;
   cursor: pointer;
   pointer-events: auto;
 
