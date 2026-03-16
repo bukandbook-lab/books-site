@@ -1248,21 +1248,28 @@ document.addEventListener("click", e => {
 
   if (e.target.id !== "downloadInvoicePDF") return;
 
+  const invoiceLabel =
+  lastOrder.delivery === "email"
+    ? "Gmail"
+    : "Delivery Details";
+
+  const date = new Date();
+ 
   const container = document.createElement("div");
 
   container.innerHTML = `
   <h2><b><u>RECEIPT</u></b></h2>
 
+  <b>Date:</b> ${date}<br>
   <b>Order ID:</b> ${lastOrder.orderId}<br>
-  <b>Delivery:</b> ${lastOrder.delivery}<br>
-  <b>Details:</b> ${lastOrder.deliveryDetails}<br><br>
+  <b>${lastOrder.delivery}:</b> ${lastOrder.deliveryDetails}<br><br>
 
   ${document.querySelector("#invoiceContent table").outerHTML}
   `;
 
   const opt = {
     margin:0.5,
-    filename:`invoice-${cart.orderId}.pdf`,
+    filename:`Receipt-${lastOrder.orderId}.pdf`,
     image:{type:"jpeg",quality:0.98},
     html2canvas:{scale:2},
     jsPDF:{unit:"in",format:"a4",orientation:"portrait"}
