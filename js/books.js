@@ -367,12 +367,14 @@ document.addEventListener("click", e => {
           data-setqtty="${book.SetQtty || 1}"
         >
           &nbsp&nbspRM${Number(book.price).toFixed(2)}${priceLabel}
+
+        </div>
           <img
             data-book-id="${book.id}"
             src="${CART_ICON}"
             class="cart-icon"
           >
-        </div>
+
       `;
 
       grid.appendChild(div);
