@@ -1064,13 +1064,13 @@ Once payment is verified, your order will be ${
     ? "emailed within 1 hour.<br>Please check <b>SPAM</b> folder if no email received"
     : "delivered within 4 days"
 }.<br><br>
-Please print or download this <b>Order ID: ${orderId}</b> for your future reference.`;
+Please print or download the receipt for your future reference.`;
 
 if (thankYouMsg) {
   thankYouMsg.innerHTML = `
     ${msg}
 
-    <div style="margin-top:16px;">
+    <div style="margin-top:16px;text-align:center;">
       <button id="printInvoiceBtn" style="margin-right:8px;">
         🖨 Print
       </button>
