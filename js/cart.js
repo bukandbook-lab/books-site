@@ -1176,6 +1176,8 @@ async function renderInvoicePrint() {
     `;
   }
 
+  const date = new Date();
+
   const html = `
   <html>
   <head>
@@ -1207,6 +1209,7 @@ async function renderInvoicePrint() {
 
   <h2>Order Receipt</h2>
 
+  <b>Date:</b> ${date}<br>
   <b>Order ID:</b> ${lastOrder.orderId}<br>
   <b>Delivery:</b> ${lastOrder.delivery}<br>
   <b>Details:</b> ${lastOrder.deliveryDetails}<br><br>
