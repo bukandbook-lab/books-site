@@ -1093,6 +1093,35 @@ body.cart-open {
   white-space: nowrap;
 }
 
+#printInvoiceBtn {
+  background: #eee;
+  background-color: #FF1493;
+  border-color: #ffdbe1;
+  color: white;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 18px;
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+
+#downloadInvoicePDF {
+  background: #eee;
+  background-color: #FF1493;
+  border-color: #ffdbe1;
+  color: white;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 18px;
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
 /* =========================
    CART ROW + REMOVE ICON IN CART
 ========================= */
