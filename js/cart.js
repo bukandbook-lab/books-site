@@ -784,15 +784,15 @@ function renderInvoice() {
          let headerHtml = `
       <tr>
         <th style="width:3%">No.</th>
-        <th style="width:82%">Title</th>
+        <th style="width:80%">Title</th>
       `;
            
       if (hasQty) {
-        headerHtml += `<th style="width:5%">Qtty</th>`;
+        headerHtml += `<th style="width:5%">No. of Books/Set</th>`;
       }
       
       headerHtml += `
-        <th style="width:10%">Price</th>
+        <th>Price</th>
       </tr>
       `; 
 
@@ -1076,7 +1076,7 @@ if (thankYouMsg) {
       </button>
 
       <button id="downloadInvoicePDF">
-        ⬇ Download PDF
+        Download PDF
       </button>
     </div>
   `;
@@ -1128,12 +1128,12 @@ async function renderInvoicePrint() {
 
    let header = `
 <tr>
-  <th>No</th>
+  <th>No.</th>
   <th>Title</th>
 `;
 
 if (hasQty) {
-  header += `<th>Qtty</th>`;
+  header += `<th>No. of Books/Set</th>`;
 }
 
 header += `<th>Price</th></tr>`;
@@ -1160,7 +1160,7 @@ header += `<th>Price</th></tr>`;
 
   rows += `
   <tr>
-    <td colspan="2" style="text-align:right;"><b>Subtotal</b></td>
+    <td colspan="3" style="text-align:right;"><b>Subtotal</b></td>
     <td style="text-align:right;"><b>RM${totals.booksSubtotal.toFixed(2)}</b></td>
   </tr>
   `;
@@ -1168,11 +1168,11 @@ header += `<th>Price</th></tr>`;
   if (cart.delivery === "courier") {
     rows += `
     <tr>
-      <td colspan="2" style="text-align:right;">Shipping</td>
+      <td colspan="3" style="text-align:right;">Shipping</td>
       <td style="text-align:right;">RM${totals.shippingFee.toFixed(2)}</td>
     </tr>
     <tr>
-      <td colspan="2" style="text-align:right;">Thumb Drive</td>
+      <td colspan="3" style="text-align:right;">Thumb Drive</td>
       <td style="text-align:right;">RM${totals.thumbFee.toFixed(2)}</td>
     </tr>
     `;
@@ -1180,7 +1180,7 @@ header += `<th>Price</th></tr>`;
 
   rows += `
   <tr>
-    <td colspan="2" style="text-align:right;"><b>Grand Total</b></td>
+    <td colspan="3" style="text-align:right;"><b>Grand Total</b></td>
     <td style="text-align:right;"><b>RM${totals.grandTotal.toFixed(2)}</b></td>
   </tr>
   `;
@@ -1275,7 +1275,20 @@ document.addEventListener("click", e => {
     : "Delivery Details";
 
   const date = new Date();
- 
+  
+   let proofHTML = "";
+
+  if (lastOrder.paymentProofBlob && lastOrder.paymentProofBlob.type.includes("image")) {
+
+    const url = URL.createObjectURL(lastOrder.paymentProofBlob);
+
+    proofHTML = `
+    <br><br>
+    <b>Payment Proof</b><br>
+    <img src="${url}" style="max-width:100%;">
+    `;
+   }
+   
   const container = document.createElement("div");
 
   container.innerHTML = `
@@ -1286,6 +1299,8 @@ document.addEventListener("click", e => {
   <b>${lastOrder.delivery}:</b> ${lastOrder.deliveryDetails}<br><br>
 
   ${document.querySelector("#invoiceContent table").outerHTML}
+  
+  ${proofHTML}
   `;
 
   const opt = {
