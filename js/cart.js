@@ -1117,20 +1117,42 @@ document.addEventListener("click", e => {
 ===================================== */
 async function renderInvoicePrint() {
 
-  const totals = calculateTotals();
+  const totals = lastOrder.totals;
 
   let rows = "";
   let i = 1;
 
+  const hasQty = lastOrder.items.some(
+  item => item.setQtty && item.setQtty > 1
+  );
+
+   let header = `
+<tr>
+  <th>No</th>
+  <th>Title</th>
+`;
+
+if (hasQty) {
+  header += `<th>Qtty</th>`;
+}
+
+header += `<th>Price</th></tr>`;
+   
   lastOrder.items.forEach(item => {
 
-    rows += `
-    <tr>
-      <td>${i}</td>
-      <td>${item.series ? item.series + " - " : ""}${item.title}</td>
-      <td style="text-align:right;">RM${item.price.toFixed(2)}</td>
-    </tr>
-    `;
+   rows += `<tr>
+     <td>${i}</td>
+     <td>${item.series ? item.series + " - " : ""}${item.title}</td>
+   `;
+   
+   if (hasQty) {
+     rows += `<td style="text-align:center;">
+       ${item.setQtty > 1 ? item.setQtty : ""}
+     </td>`;
+   }
+   
+   rows += `<td style="text-align:right;">RM${item.price.toFixed(2)}</td>
+   </tr>`;
 
     i++;
 
@@ -1165,9 +1187,9 @@ async function renderInvoicePrint() {
 
   let proofHTML = "";
 
-  if (paymentProofBlob && paymentProofBlob.type.includes("image")) {
+  if (lastOrder.paymentProofBlob && lastOrder.paymentProofBlob.type.includes("image")) {
 
-    const url = URL.createObjectURL(paymentProofBlob);
+    const url = URL.createObjectURL(lastOrder.paymentProofBlob);
 
     proofHTML = `
     <br><br>
@@ -1215,11 +1237,7 @@ async function renderInvoicePrint() {
   <b>Details:</b> ${lastOrder.deliveryDetails}<br><br>
 
   <table>
-  <tr>
-    <th>No</th>
-    <th>Title</th>
-    <th>Price</th>
-  </tr>
+  ${header}
 
   ${rows}
 
