@@ -1072,7 +1072,7 @@ if (thankYouMsg) {
 
     <div style="margin-top:16px;text-align:center;">
       <button id="printInvoiceBtn" style="margin-right:8px;">
-        🖨 Print
+        🖨️ Print
       </button>
 
       <button id="downloadInvoicePDF">
@@ -1192,7 +1192,7 @@ header += `<th>Price</th></tr>`;
     const url = URL.createObjectURL(lastOrder.paymentProofBlob);
 
     proofHTML = `
-    <br><br>
+    <br>
     <b>Payment Proof</b><br>
     <img src="${url}" style="max-width:100%;">
     `;
@@ -1283,7 +1283,7 @@ document.addEventListener("click", e => {
     const url = URL.createObjectURL(lastOrder.paymentProofBlob);
 
     proofHTML = `
-    <br><br>
+    <br>
     <b>Payment Proof</b><br>
     <img src="${url}" style="max-width:100%;">
     `;
