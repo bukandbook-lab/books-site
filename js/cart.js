@@ -73,13 +73,18 @@ const rawTitle = sourceEl.dataset.title?.trim();
 const row = sourceEl.closest(".req-book-row");
 if (!row) return;
 
+const titleInput = row.querySelector(".req-book-title");
 const authorInput = row.querySelector(".req-book-author");
+
 const rawAuthor = authorInput?.value.trim();
 
 if (!rawTitle) {
-  alert("Please enter a book title first 😊");
+  titleInput.setCustomValidity("Please enter book title");
+  titleInput.reportValidity();
   return;
 }
+
+titleInput.setCustomValidity("");
 
 if (!rawAuthor) {
   authorInput.setCustomValidity("Please enter author's name");
