@@ -459,7 +459,7 @@ ${cart.delivery === "courier" ? `
       • There is no guarantee the condition of the e-books is perfect. But all e-books are readable.<br>
       • Book images and videos are for illustration purposes only; actual book condition and content may vary by edition or print.<br>
       • Order will ONLY be processed with payment proof and complete delivery details.<br>
-      • Delivery timelines may vary.<br>
+      • Estimated delivery is within 3 hours for Gmail and 4 days for courier.<br>
       • No guarantee for specific outcomes, results, or satisfaction.<br>
       • No refund. Pay at your own risk. You can try buy 1 book first.<br>
       • Special requests may take longer to process.<br>
@@ -891,7 +891,7 @@ function renderInvoice() {
                • There is no guarantee the condition of the e-books is perfect. But all e-books are readable.<br>
                • Book images and videos are for illustration purposes only; actual book condition and content may vary by edition or print.<br>
                • Order will ONLY be processed with payment proof and complete delivery details.<br>
-               • Delivery timelines may vary.<br>
+               • Estimated delivery is within 3 hours for Gmail and 4 days for courier.<br>
                • No guarantee for specific outcomes, results, or satisfaction.<br>
                • No refund. Pay at your own risk. You can try buy 1 book first.<br>
                • Special requests may take longer to process.<br>
@@ -1061,7 +1061,7 @@ const msg =
 `Thank you for your order - <b>Order ID: ${orderId}</b>.<br><br>
 Once payment is verified, your order will be ${
   delivery === "email"
-    ? "emailed within 1 hour.<br>Please check <b>SPAM</b> folder if no email received"
+    ? "emailed within 1 hour.<br>Please check <b>SPAM</b> folder if no email is received"
     : "delivered within 4 days"
 }.<br><br>
 Please print or download the receipt for your future reference.`;
