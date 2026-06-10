@@ -88,7 +88,7 @@ if (!rawAuthor) {
 }
 
 authorInput.setCustomValidity("");
-}
+
    
 // 🔑 READ USER CHOICE HERE
 // const row = sourceEl.closest(".req-book-row");
