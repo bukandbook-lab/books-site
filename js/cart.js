@@ -68,16 +68,30 @@ function addToCart(bookId, sourceEl = null) {
 
 // 🔥 CUSTOM REQUEST BOOK / SERIES (based on user radio)
 if (!book && sourceEl) {
-  const rawTitle = sourceEl.dataset.title?.trim();
+const rawTitle = sourceEl.dataset.title?.trim();
 
-  if (!rawTitle) {
-    alert("Please enter a book title first 😊");
-    return;
-  }
-
-// 🔑 READ USER CHOICE HERE
 const row = sourceEl.closest(".req-book-row");
 if (!row) return;
+
+const authorInput = row.querySelector(".req-book-author");
+const rawAuthor = authorInput?.value.trim();
+
+if (!rawTitle) {
+  alert("Please enter a book title first 😊");
+  return;
+}
+
+if (!rawAuthor) {
+  authorInput.setCustomValidity("Please enter author's name");
+  authorInput.reportValidity();
+  return;
+}
+
+authorInput.setCustomValidity("");
+
+// 🔑 READ USER CHOICE HERE
+// const row = sourceEl.closest(".req-book-row");
+// if (!row) return;
 
 const requestType =
   row.querySelector('input[type="radio"][value="series"]:checked')
@@ -861,7 +875,7 @@ function renderInvoice() {
       <br>
       <div>
         <label style="font-size:14px;"><b><u>STEP 2 >> Upload Payment Proof</u></b></label><br>
-        Please bank in <b>RM${totals.grandTotal.toFixed(2)}</b> to account number 121312144555355 (Boost).<br>
+        Please bank in <b>RM${totals.grandTotal.toFixed(2)}</b> to account number <b>100301506423(FAIZAH)(Boost)<b/> and upload payment proof below.<br>
         <input type="file" id="paymentProof" accept="image/*,.pdf">
       </div>
       
