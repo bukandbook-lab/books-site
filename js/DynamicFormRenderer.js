@@ -118,6 +118,9 @@ function updateBookInputs(count) {
       `}
       <br/>
       <input class="req-book-author" data-book-id="${id}" placeholder="Enter author's name">
+      <div class="author-error" style="display:none;color:red;font-size:12px;">
+        Please enter author's name
+      </div>
       <input class="req-book-specific" data-book-id="${id}" placeholder="Specific book title for Series(if any)">
 
 
@@ -423,6 +426,14 @@ const requestType = getRequestType(row);
   const title = titleInput.value.trim();
   const author = authorInput.value.trim();
   const specific = specificInput.value.trim();
+
+   const authorError = row.querySelector(".author-error");
+
+if (!author) {
+  authorError.style.display = "block";
+} else {
+  authorError.style.display = "none";
+}
 
   // Always hide request price-box by default
   priceBox.classList.add("hidden");
