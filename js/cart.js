@@ -462,7 +462,7 @@ ${cart.delivery === "courier" ? `
 
     <label class="terms">
       <input type="checkbox" id="agreeTerms" ${cart.agreed ? "checked" : ""}>
-      By clicking to pay, I have read and agreed to the <span id="openTerms" class="terms-link">Terms and Conditions.</span>
+      By clicking to pay, I have read and agreed to the <span id="openTerms" class="terms-link">Terms and Conditions</span>.
     </label><br>
     
 <div id="termsBox" class="terms-box hidden">
