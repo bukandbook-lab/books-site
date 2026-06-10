@@ -247,6 +247,15 @@ document.addEventListener("change", e => {
    LIVE SEARCH ON BOOK TITLE AUTHOR AND SERIS
 ================================ */
 document.addEventListener("input", e => {
+
+  if (e.target.matches(".req-book-title")) {
+    e.target.setCustomValidity("");
+  }
+
+  if (e.target.matches(".req-book-author")) {
+    e.target.setCustomValidity("");
+  }
+
   const row = e.target.closest(".req-book-row");
   if (!row) return;
 
