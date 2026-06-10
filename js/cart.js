@@ -879,8 +879,8 @@ function renderInvoice() {
 
       <br>
       <div>
-        <label style="font-size:14px;"><b><u>STEP 2 >> Upload Payment Proof</u></b></label><br>
-        Please bank in <b>RM${totals.grandTotal.toFixed(2)}</b> to account number <b>100301506423(FAIZAH)(Boost)<b/> and upload payment proof below.<br>
+        <label style="font-size:14px;"><b><u>STEP 2 >> Complete Payment and Upload Proof</u></b></label><br>
+        i. Please bank in <b>RM${totals.grandTotal.toFixed(2)}</b> to account number:<br> <b>100301506423(FAIZAH)(Boost)</b><br><br>ii.  Upload payment proof below:<br>
         <input type="file" id="paymentProof" accept="image/*,.pdf">
       </div>
       
