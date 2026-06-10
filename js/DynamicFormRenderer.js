@@ -437,7 +437,8 @@ const requestType = getRequestType(row);
   grid.classList.add("hidden");
 
    if (!title && !author && !specific) {
-     priceBox.classList.add("hidden");
+     setRequestType(priceBox, row.dataset.bookId, requestType);
+     priceBox.classList.remove("hidden");
      return;
    }
 
@@ -519,24 +520,10 @@ grid.appendChild(msg);
   });
         
 } else {
-
-  // Require author before showing request cart
-  if (!author) {
-
-    authorInput.setCustomValidity("Please enter author's name");
-    authorInput.reportValidity();
-
-    priceBox.classList.add("hidden");
-    return;
-  }
-
-  authorInput.setCustomValidity("");
-
   // No results → show request price-box
   priceBox.classList.remove("hidden");
   setRequestType(priceBox, row.dataset.bookId, requestType);
 }
-
 
 
   if (typeof syncCartIcons === "function") {
