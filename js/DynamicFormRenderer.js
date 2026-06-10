@@ -447,12 +447,10 @@ if (!author) {
   grid.innerHTML = "";
   grid.classList.add("hidden");
 
-  if (!title && !author && !specific) {
-    // No input at all → show default request price
-    setRequestType(priceBox, row.dataset.bookId, requestType);
-    priceBox.classList.remove("hidden");
-    return;
-  }
+   if (!title && !author && !specific) {
+     priceBox.classList.add("hidden");
+     return;
+   }
 
   // Start with full dataset
   let results = Object.values(BOOK_REGISTRY);
@@ -532,11 +530,22 @@ grid.appendChild(msg);
   });
         
 } else {
+
+  // Require author before showing request cart
+  if (!author) {
+
+    authorInput.setCustomValidity("Please enter author's name");
+    authorInput.reportValidity();
+
+    priceBox.classList.add("hidden");
+    return;
+  }
+
+  authorInput.setCustomValidity("");
+
   // No results → show request price-box
   priceBox.classList.remove("hidden");
   setRequestType(priceBox, row.dataset.bookId, requestType);
- 
-
 }
 
 
