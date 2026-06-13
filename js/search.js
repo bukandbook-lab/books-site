@@ -51,33 +51,63 @@ window.getNoSearchResultBox = function () {
        LISTENER FOR YES NO PROCEED TO REQUEST
     ============================ */
 document.addEventListener("click", e => {
+
   // YES → go to RequestBook
   if (e.target.id === "reqYes") {
+
+    // save typed search text first
+    const searchInput = document.getElementById("bookSearch");
+    const requestedTitle = searchInput ? searchInput.value.trim() : "";
+
+    // clear search bar
+    if (searchInput) {
+      searchInput.value = "";
+    }
+
     hideTabs();
 
-const reqTab = document.getElementById("RequestBook");
-if (reqTab) {
-  reqTab.style.display = "block";
-}
-
+    const reqTab = document.getElementById("RequestBook");
+    if (reqTab) {
+      reqTab.style.display = "block";
+    }
 
     document.querySelectorAll(".tab-btn")
       .forEach(btn => btn.classList.remove("active"));
+
+
+    // put search text into request title input
+    const reqTitle = document.querySelector(".req-book-title");
+
+    if (reqTitle && requestedTitle) {
+      reqTitle.value = requestedTitle;
+    }
+
 
     getNoSearchResultBox().classList.add("hidden");
     hideSeeMore();
   }
 
+
   // NO → return to last tab
   if (e.target.id === "reqNo") {
+
+    // clear search bar
+    const searchInput = document.getElementById("bookSearch");
+
+    if (searchInput) {
+      searchInput.value = "";
+    }
+
+
     hideTabs();
 
     const panel = document.getElementById(window.lastTab);
-    
+
     if (panel) {
       panel.style.display = "block";
     }
-    
+
+
     document.querySelectorAll(".tab-btn")
       .forEach(btn =>
         btn.classList.toggle(
@@ -86,16 +116,19 @@ if (reqTab) {
         )
       );
 
+
     const grid = panel?.querySelector(".image-grid");
+
     if (grid && typeof applySeeMore === "function") {
       applySeeMore(grid);
       bindSeeMoreToGrid(grid);
     }
 
+
     getNoSearchResultBox().classList.add("hidden");
   }
-});
 
+});
  /* ============================
        SEARCH.JS
     ============================ */
