@@ -735,14 +735,73 @@ function resetCart() {
 
   paymentProofBlob = null;
 
+
+  // 🔓 Unlock all request forms
+  document
+    .querySelectorAll(".req-book-row")
+    .forEach(row => {
+      unlockRequestRow(row);
+    });
+
+
+  // Reset request counter back to 1
+  const bookCount = document.getElementById("bookCount");
+  if (bookCount) {
+    bookCount.value = 1;
+  }
+
+
+  // Reset request rows
+  const wrap = document.getElementById("bookTitleInputs");
+
+  if (wrap) {
+
+    // remove extra request rows
+    [...wrap.children]
+      .slice(1)
+      .forEach(r => r.remove());
+
+
+    // clear first request row
+    const firstRow = wrap.querySelector(".req-book-row");
+
+    if (firstRow) {
+
+      firstRow.querySelectorAll("input")
+        .forEach(input => {
+
+          input.disabled = false;
+
+          if (input.type === "text") {
+            input.value = "";
+          }
+
+          if (input.type === "radio") {
+            input.checked = input.value === "book";
+          }
+
+        });
+
+
+      firstRow.querySelector(".request-price-box")
+        ?.classList.add("hidden");
+
+
+      firstRow.querySelector(".inline-search-grid")
+        ?.classList.add("hidden");
+
+    }
+  }
+
+
   renderCart();
   syncCartIcons();
   updateCartBadge();
 
+
   // Close cart UI if open
   document.getElementById("Cart")?.classList.remove("open");
 }
-
 /* =====================================
   CART TERMS AND CONDITIONS
 ===================================== */
@@ -1017,7 +1076,7 @@ document.addEventListener("change", function(e) {
 
 
 /* =====================================
-   Submit Invoice to Google Script
+   Submit Order to Google Script
 ===================================== */
 document.addEventListener("click", async e => {
   const target = e.target;
