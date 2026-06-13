@@ -893,6 +893,7 @@ body.cart-open {
 }
 .CartTitle {
   color: #FF1493;
+ font-weight: bold;
   font-size: 20px;
   display: flex;
 }
@@ -1348,7 +1349,6 @@ body.cart-open {
   text-align: center;
   margin: 24px 0;
 }
-
 
 
 
