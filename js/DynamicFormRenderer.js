@@ -18,6 +18,25 @@ function lockRequestRow(row) {
 
    row.classList.add("request-locked");
 
+  if (!row.querySelector(".request-action-area")) {
+
+    const action = document.createElement("div");
+
+    action.className = "request-action-area";
+
+    action.innerHTML = `
+      <button 
+        type="button"
+        class="edit-request-btn"
+        data-book-id="${row.querySelector(".request-price-box")?.dataset.bookId}"
+      >
+        Edit
+      </button>
+    `;
+
+    row.appendChild(action);
+  }
+
 }
 
 
@@ -30,7 +49,40 @@ function unlockRequestRow(row) {
 
 row.classList.remove("request-locked");
    
+     row.querySelector(".request-action-area")
+    ?.remove();
+   
 }
+/* ==============================
+   click handler for Edit button
+================================ */
+document.addEventListener("click", e => {
+
+  const editBtn = e.target.closest(".edit-request-btn");
+
+  if (!editBtn) return;
+
+
+  const bookId = editBtn.dataset.bookId;
+
+
+  // remove from cart
+  cart.items.delete(bookId);
+
+
+  // unlock matching request row
+  const row = editBtn.closest(".req-book-row");
+
+  if (row) {
+    unlockRequestRow(row);
+  }
+
+
+  renderCart();
+  updateCartBadge();
+  syncCartIcons?.();
+
+});
 /* ==============================
    GLOBAL STATE
 ================================ */
