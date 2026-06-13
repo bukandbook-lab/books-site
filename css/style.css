@@ -175,8 +175,8 @@ html, body {
   justify-content: space-between;
   gap: 2px;
   padding: 2px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 4px;
+  margin-right: 7px;
 }
 
 /* Make top-bar not stretch full width */
