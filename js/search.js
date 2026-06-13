@@ -28,9 +28,10 @@ window.getNoSearchResultBox = function () {
   box.innerHTML = `
     <div style="margin-left: 5px;margin-bottom:6px">
       No search result found. Do you want to make a special request instead?
-    </div>
+    <br>
     <button id="reqYes">Yes</button>
     <button id="reqNo">No</button>
+    </div>
   `;
 
   // ✅ Insert AFTER search results container
