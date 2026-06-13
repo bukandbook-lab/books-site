@@ -1278,6 +1278,7 @@ body.cart-open {
   align-items: center;
   gap: 4px;
   cursor: pointer;
+  opacity: 1.0;
 }
 /* =========================
    SEARCH RESULT IN REQUEST
