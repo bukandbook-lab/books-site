@@ -1257,6 +1257,7 @@ body.cart-open {
 }
 
 .request-locked input,
+.request-locked .request-price-box,
 .request-locked .book-thumb,
 .request-locked .inline-search-grid {
   opacity: 0.5;
