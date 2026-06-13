@@ -16,15 +16,6 @@ function lockRequestRow(row) {
     input.disabled = true;
   });
 
-  row.classList.add("request-locked");
-
-  const label = document.createElement("div");
-  label.className = "request-added-label";
-  label.innerHTML = "✓ Added to cart";
-
-  if (!row.querySelector(".request-added-label")) {
-    row.appendChild(label);
-  }
 }
 
 
@@ -35,9 +26,7 @@ function unlockRequestRow(row) {
     input.disabled = false;
   });
 
-  row.classList.remove("request-locked");
 
-  row.querySelector(".request-added-label")?.remove();
 }
 /* ==============================
    GLOBAL STATE
