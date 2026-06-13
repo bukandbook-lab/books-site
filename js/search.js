@@ -1,14 +1,20 @@
-    /* ============================
-       HIDE TAB
-    ============================ */
+/* ============================
+       make lastTab global
+============================ */
+// 🧠 remember last active tab globally
+window.lastTab = "BeginningReader";
+
+/* ============================
+      HIDE TAB
+============================ */
 function hideTabs() {
   document.querySelectorAll(".tabcontent")
     .forEach(t => t.style.display = "none");
 }
 
-    /* ============================
-       getNoSearchResultBox
-    ============================ */
+/* ============================
+    getNoSearchResultBox
+============================ */
 window.getNoSearchResultBox = function () {
   let box = document.getElementById("noSearchResultBox");
   if (box) return box;
@@ -20,7 +26,7 @@ window.getNoSearchResultBox = function () {
   box.style.fontWeight = "500";
 
   box.innerHTML = `
-    <div style="margin-bottom:6px">
+    <div style="margin-left: 5px;margin-bottom:6px">
       No search result found. Do you want to make a special request instead?
     </div>
     <button id="reqYes">Yes</button>
@@ -66,11 +72,17 @@ if (reqTab) {
     hideTabs();
 
     const panel = document.getElementById(window.lastTab);
-    if (panel) panel.style.display = "block";
-
+    
+    if (panel) {
+      panel.style.display = "block";
+    }
+    
     document.querySelectorAll(".tab-btn")
       .forEach(btn =>
-        btn.classList.toggle("active", btn.dataset.tab === window.lastTab)
+        btn.classList.toggle(
+          "active",
+          btn.dataset.tab === window.lastTab
+        )
       );
 
     const grid = panel?.querySelector(".image-grid");
@@ -93,8 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   if (!searchInput) return;
-
-  let lastTab = "BeginningReader"; // 🧠 default fallback
 
   function normalizeWords(text = "") {
     return text
@@ -126,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 🧠 remember last active tab BEFORE search starts
     const active = getActiveTab();
-    if (active) lastTab = active;
+    if (active) window.lastTab = active;
 
     /* ============================
        🔙 SEARCH CLEARED
