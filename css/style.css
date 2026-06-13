@@ -1260,6 +1260,25 @@ body.cart-open {
   opacity: 0.6;
 }
 
+.request-action-area {
+  margin-top:8px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+
+.edit-request-btn {
+  background-color: #FF1493;
+  color: white;
+  border-radius: 18px;
+  padding: 3px 6px;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
 /* =========================
    SEARCH RESULT IN REQUEST
 ========================= */
