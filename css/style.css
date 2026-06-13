@@ -1258,11 +1258,6 @@ body.cart-open {
   opacity: 0.6;
 }
 
-.request-added-label {
-  color: #FF1493;
-  font-weight: bold;
-  margin-top: 8px;
-}
 /* =========================
    SEARCH RESULT IN REQUEST
 ========================= */
