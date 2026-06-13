@@ -16,6 +16,8 @@ function lockRequestRow(row) {
     input.disabled = true;
   });
 
+   row.classList.add("request-locked");
+
 }
 
 
@@ -26,7 +28,8 @@ function unlockRequestRow(row) {
     input.disabled = false;
   });
 
-
+row.classList.remove("request-locked");
+   
 }
 /* ==============================
    GLOBAL STATE
