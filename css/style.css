@@ -1256,8 +1256,10 @@ body.cart-open {
   cursor: pointer;
 }
 
-.request-locked {
-  opacity: 0.6;
+.request-locked input,
+.request-locked .book-thumb,
+.request-locked .inline-search-grid {
+  opacity: 0.5;
 }
 
 .request-action-area {
@@ -1278,7 +1280,7 @@ body.cart-open {
   align-items: center;
   gap: 4px;
   cursor: pointer;
-  opacity: 1.0;
+  opacity: 1;
 }
 /* =========================
    SEARCH RESULT IN REQUEST
