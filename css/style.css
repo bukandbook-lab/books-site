@@ -1258,7 +1258,7 @@ body.cart-open {
 }
 
 .request-added-label {
-  color: green;
+  color: #FF1493;
   font-weight: bold;
   margin-top: 8px;
 }
