@@ -215,14 +215,53 @@ reindexRequestRows();
    RESET
 ================================ */
 document.addEventListener("click", e => {
-  if (e.target.id === "resetBooks") {
-    e.preventDefault();
-    const wrap = document.getElementById("bookTitleInputs");
-    document.getElementById("bookCount").value = 1;
-    [...wrap.children].slice(1).forEach(r => r.remove());
-  }
-});
+  if (e.target.id !== "resetBooks") return;
 
+  e.preventDefault();
+
+  const wrap = document.getElementById("bookTitleInputs");
+
+  // unlock all existing request rows first
+  document
+    .querySelectorAll(".req-book-row")
+    .forEach(row => {
+      unlockRequestRow(row);
+    });
+
+  // reset number
+  document.getElementById("bookCount").value = 1;
+
+  // remove extra rows
+  [...wrap.children]
+    .slice(1)
+    .forEach(r => r.remove());
+
+  // reset first row fields
+  const firstRow = wrap.querySelector(".req-book-row");
+
+  if (firstRow) {
+    firstRow.querySelectorAll("input").forEach(input => {
+
+      input.disabled = false;
+
+      if (input.type === "text") {
+        input.value = "";
+      }
+
+      if (input.type === "radio") {
+        input.checked = input.value === "book";
+      }
+
+    });
+
+    firstRow.querySelector(".request-price-box")
+      ?.classList.add("hidden");
+
+    firstRow.querySelector(".inline-search-grid")
+      ?.classList.add("hidden");
+  }
+
+});
 /* ==============================
    HELPER TO ENSURE GRID EXISTS
 ================================ */
