@@ -1317,52 +1317,83 @@ header += `<th>Price</th></tr>`;
 /* =====================================
    PDF Download Script
 ===================================== */
-document.addEventListener("click", e => {
+document.addEventListener("click", async e => {
 
   if (e.target.id !== "downloadInvoicePDF") return;
 
   const invoiceLabel =
-  lastOrder.delivery === "email"
-    ? "Gmail"
-    : "Delivery Details";
+    lastOrder.delivery === "email"
+      ? "Gmail"
+      : "Delivery Details";
 
   const date = new Date();
-  
-   let proofHTML = "";
+
+  let proofHTML = "";
+  let proofImg = null;
 
   if (lastOrder.paymentProofBlob && lastOrder.paymentProofBlob.type.includes("image")) {
 
     const url = URL.createObjectURL(lastOrder.paymentProofBlob);
 
     proofHTML = `
-    <br>
-    <b>Payment Proof</b><br>
-    <img src="${url}" style="max-width:100%;">
+      <br>
+      <b>Payment Proof</b><br>
+      <img id="paymentProofPDF" src="${url}" style="max-width:100%;">
     `;
-   }
-   
+  }
+
   const container = document.createElement("div");
 
   container.innerHTML = `
-  <h2><b><u>RECEIPT</u></b></h2>
+    <h2><b><u>RECEIPT</u></b></h2>
 
-  <b>Date:</b> ${date}<br>
-  <b>Order ID:</b> ${lastOrder.orderId}<br>
-  <b>${lastOrder.delivery}:</b> ${lastOrder.deliveryDetails}<br><br>
+    <b>Date:</b> ${date}<br>
+    <b>Order ID:</b> ${lastOrder.orderId}<br>
+    <b>${lastOrder.delivery}:</b> ${lastOrder.deliveryDetails}<br><br>
 
-  ${document.querySelector("#invoiceContent table").outerHTML}
-  
-  ${proofHTML}
+    ${document.querySelector("#invoiceContent table").outerHTML}
+
+    ${proofHTML}
   `;
+
+  document.body.appendChild(container);
+
+
+  // wait until payment image fully loads
+  const img = container.querySelector("#paymentProofPDF");
+
+  if (img) {
+    await new Promise(resolve => {
+      if (img.complete) {
+        resolve();
+      } else {
+        img.onload = resolve;
+      }
+    });
+  }
+
 
   const opt = {
     margin:0.5,
     filename:`Receipt-${lastOrder.orderId}.pdf`,
     image:{type:"jpeg",quality:0.98},
-    html2canvas:{scale:2},
-    jsPDF:{unit:"in",format:"a4",orientation:"portrait"}
+    html2canvas:{
+      scale:2,
+      useCORS:true
+    },
+    jsPDF:{
+      unit:"in",
+      format:"a4",
+      orientation:"portrait"
+    }
   };
 
-  html2pdf().set(opt).from(container).save();
+  html2pdf()
+    .set(opt)
+    .from(container)
+    .save()
+    .then(() => {
+      container.remove();
+    });
 
 });
