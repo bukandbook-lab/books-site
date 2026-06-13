@@ -7,6 +7,39 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ==============================
+  LOCK AND UNLOCK REQUEST FORM FUNCTION
+================================ */
+function lockRequestRow(row) {
+  if (!row) return;
+
+  row.querySelectorAll("input").forEach(input => {
+    input.disabled = true;
+  });
+
+  row.classList.add("request-locked");
+
+  const label = document.createElement("div");
+  label.className = "request-added-label";
+  label.innerHTML = "✓ Added to cart";
+
+  if (!row.querySelector(".request-added-label")) {
+    row.appendChild(label);
+  }
+}
+
+
+function unlockRequestRow(row) {
+  if (!row) return;
+
+  row.querySelectorAll("input").forEach(input => {
+    input.disabled = false;
+  });
+
+  row.classList.remove("request-locked");
+
+  row.querySelector(".request-added-label")?.remove();
+}
+/* ==============================
    GLOBAL STATE
 ================================ */
 let requestCounter = 1;
