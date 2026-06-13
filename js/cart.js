@@ -134,6 +134,11 @@ cart.items.set(id, {
    updateCartBadge();
    showToast("Added to Cart ✓");
 
+   if (sourceEl) {
+  const row = sourceEl.closest(".req-book-row");
+  lockRequestRow(row);
+   }
+
 }
 
 
@@ -293,6 +298,12 @@ document.addEventListener("click", e => {
 
   cart.items.clear();
    
+   document
+  .querySelectorAll(".req-book-row")
+  .forEach(row => {
+    unlockRequestRow(row);
+  });
+   
   renderCart();
   updateCartBadge();
   syncCartIcons?.();
@@ -307,10 +318,32 @@ document.addEventListener("click", e => {
   if (!btn) return;
 
   e.stopPropagation();
-  cart.items.delete(btn.dataset.bookId);
-   renderCart();
-   updateCartBadge();
-   syncCartIcons?.();
+   
+const removedId = btn.dataset.bookId;
+
+cart.items.delete(removedId);
+
+
+// unlock related request row
+document
+  .querySelectorAll(".req-book-row")
+  .forEach(row => {
+
+    const priceBox = row.querySelector(".request-price-box");
+
+    if (
+      priceBox &&
+      priceBox.dataset.bookId === removedId
+    ) {
+      unlockRequestRow(row);
+    }
+
+  });
+
+
+renderCart();
+updateCartBadge();
+syncCartIcons?.();
    showToast("Removed from cart ❌");
 
 });
