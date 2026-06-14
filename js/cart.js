@@ -5,7 +5,7 @@ let lastScrollY = 0;
 
 const cart = {
   items: new Map(),
-  delivery: "email",
+  delivery: "Gmail",
   deliveryDetails: "",
   agreed: false,
   orderId: ""
@@ -392,7 +392,7 @@ function renderCart() {
   if (!box) return;
 
    const deliveryLabel =
-  cart.delivery === "email"
+  cart.delivery === "Gmail"
     ? "Gmail"
     : "Delivery Details";
    
@@ -448,8 +448,8 @@ function renderCart() {
     <div class="delivery">
       <b>Delivery Method</b><br>
       <label>
-        <input type="radio" name="delivery" value="email"
-          ${cart.delivery === "email" ? "checked" : ""}>
+        <input type="radio" name="delivery" value="Gmail"
+          ${cart.delivery === "Gmail" ? "checked" : ""}>
         Gmail
       </label><br>
 
@@ -467,8 +467,8 @@ function renderCart() {
              rows="2"
              required
              placeholder="${
-               cart.delivery === "email"
-                 ? "Enter your Gmail (example@gmail.com)"
+               cart.delivery === "Gmail"
+                 ? "Enter your Gmail (example@gmail.com). Only Gmail is accepted"
                  : "Enter your name, full address & phone number"
              }"
              style="width:100%; margin-top:6px;"
@@ -554,8 +554,8 @@ const deliveryField = document.getElementById("deliveryDetails");
     return;
   }
 
-if (cart.delivery === "email") {
-  const email = deliveryField.value.trim().toLowerCase();
+if (cart.delivery === "Gmail") {
+  const Gmail = deliveryField.value.trim().toLowerCase();
   const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
   if (!gmailRegex.test(email)) {
     alert("Only Gmail is accepted. Please enter a valid Gmail address.");
@@ -656,9 +656,9 @@ function updateDeliveryField() {
   field.value = cart.deliveryDetails || ""; // ✅ keep value
  field.value = field.value.trim().toLowerCase();
 
-  if (delivery === "email") {
-    field.placeholder = "Enter your Gmail (example@gmail.com)";
-    field.setAttribute("type", "email");
+  if (delivery === "Gmail") {
+    field.placeholder = "Enter your Gmail (example@gmail.com). Only Gmail is accepted";
+    field.setAttribute("type", "Gmail");
   } else {
     field.placeholder = "Enter name, full address & phone number";
     field.removeAttribute("type");
@@ -728,7 +728,7 @@ function syncCartIcons() {
 
 function resetCart() {
   cart.items.clear();
-  cart.delivery = "email";
+  cart.delivery = "Gmail";
   cart.deliveryDetails = "";
   cart.agreed = false;
   cart.orderId = "";
@@ -839,7 +839,7 @@ function renderInvoice() {
   }
 
   const invoiceLabel =
-  cart.delivery === "email"
+  cart.delivery === "Gmail"
     ? "Gmail"
     : "Delivery Details";
    
@@ -1114,7 +1114,7 @@ document.addEventListener("click", async e => {
     fileType: cart.fileType
   };
 
-  await fetch("https://script.google.com/macros/s/AKfycbwN2HJu2fCgB0rvX8WFr9aZURXbzeLgJn43I5B1JxmDVxG6PCXBK6YdDaXl8yB009F9/exec", {
+  await fetch("https://script.google.com/macros/s/AKfycbwZakmzMYr6wuHyS5tigcyWk2gnIzPXepuhb776Ndg8s9u48JQpLakSF0U1jetxSQD4/exec", {
   method: "POST",
   body: JSON.stringify(payload),
   mode: "no-cors"
@@ -1171,7 +1171,7 @@ function showThankYou() {
 const msg =
 `Thank you for your order - <b>Order ID: ${orderId}</b>.<br><br>
 Once payment is verified, your order will be ${
-  delivery === "email"
+  delivery === "Gmail"
     ? "emailed within 1 hour.<br>Please check <b>SPAM</b> folder if no email is received"
     : "delivered within 4 days"
 }.<br><br>
@@ -1381,7 +1381,7 @@ document.addEventListener("click", async e => {
   if (e.target.id !== "downloadInvoicePDF") return;
 
   const invoiceLabel =
-    lastOrder.delivery === "email"
+    lastOrder.delivery === "Gmail"
       ? "Gmail"
       : "Delivery Details";
 
