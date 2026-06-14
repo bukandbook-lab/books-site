@@ -1,4 +1,9 @@
 /* ==============================
+   GLOBAL STATE
+================================ */
+let requestCounter = 1;
+
+/* ==============================
    DynamicFormRenderer.js — LIVE SEARCH ENABLED
 ================================ */
 
@@ -83,10 +88,7 @@ document.addEventListener("click", e => {
   syncCartIcons?.();
 
 });
-/* ==============================
-   GLOBAL STATE
-================================ */
-let requestCounter = 1;
+
 
 /* ==============================
    SEARCH UTIL (shared logic)
@@ -262,6 +264,13 @@ document.addEventListener("click", e => {
   if (e.target.id !== "resetBooks") return;
 
   e.preventDefault();
+
+  // 🗑️ Clear cart when request form reset
+  cart.items.clear();
+
+  renderCart();
+  updateCartBadge();
+  syncCartIcons?.();
 
   const wrap = document.getElementById("bookTitleInputs");
 
