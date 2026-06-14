@@ -1187,6 +1187,20 @@ body.cart-open {
 /* =========================
    REQUEST BOOK SECTION
 ========================= */
+#resetBooks{
+  background: #eee;
+  background-color: #FF1493;
+  border-color: #ffdbe1;
+  color: white;
+  border-radius: 18px;
+  padding: 3px 6px;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
 
 #requestFormContainer {
   padding-top: 0;
@@ -1198,7 +1212,9 @@ body.cart-open {
 
 /* Request-level price box (user can click cart for custom request) */
 .request-price-box {
+  background: #eee;
   background-color: #FF1493;
+  border-color: #ffdbe1;
   color: white;
   border-radius: 18px;
   padding: 3px 6px;
@@ -1207,6 +1223,7 @@ body.cart-open {
   align-items: center;
   gap: 4px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 /* Grid search result boxes */
