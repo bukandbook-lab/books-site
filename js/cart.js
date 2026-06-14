@@ -542,7 +542,14 @@ document.addEventListener("click", e => {
     alert("Your cart is empty.");
     return;
   }
-
+   
+  if (cart.items.size > 150) {
+    alert(
+      "Your cart can only process up to 150 items at a time. Please complete this order with 150 items first, then add the remaining items in another cart."
+    );
+    return;
+  }
+   
   if (!cart.agreed) {
     alert("Please agree to the terms and conditions.");
     return;
