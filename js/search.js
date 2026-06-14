@@ -58,10 +58,13 @@ document.addEventListener("click", e => {
     // save typed search text first
     const searchInput = document.getElementById("bookSearch");
     const requestedTitle = searchInput ? searchInput.value.trim() : "";
+    const clearBtn = document.getElementById("clearSearch");
+      
 
     // clear search bar
     if (searchInput) {
       searchInput.value = "";
+      clearBtn.style.display = "none";
     }
 
     hideTabs();
@@ -93,9 +96,12 @@ document.addEventListener("click", e => {
 
     // clear search bar
     const searchInput = document.getElementById("bookSearch");
+    const clearBtn = document.getElementById("clearSearch");
+
 
     if (searchInput) {
       searchInput.value = "";
+      clearBtn.style.display = "none";
     }
 
 
