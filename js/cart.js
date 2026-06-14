@@ -536,8 +536,10 @@ ${cart.delivery === "courier" ? `
 /* =====================================
    CLICK TO PAY
 ===================================== */
-document.addEventListener("click", e => {
+document.addEventListener("click", async e => {
+
   if (e.target.id !== "clickToPay") return;
+   
   if (cart.items.size === 0) {
     alert("Your cart is empty.");
     return;
@@ -549,6 +551,37 @@ document.addEventListener("click", e => {
     );
     return;
   }
+
+   const duplicates =
+  await checkDuplicateBooksBeforePay();
+
+
+if (duplicates.length) {
+
+  let msg =
+    "Some books were already requested before:\n\n";
+
+
+  duplicates.forEach(d => {
+
+    msg +=
+`📚 ${d.title}
+Order ID: ${d.orderId}
+Ordered: ${d.timestamp}
+
+`;
+
+  });
+
+
+  msg +=
+    "Please check your previous order before continuing.";
+
+
+  alert(msg);
+
+  return;
+}
    
   if (!cart.agreed) {
     alert("Please agree to the terms and conditions.");
@@ -618,7 +651,37 @@ if (paymentPopup) {
 
 
 });
+/* =====================================
+   CHECK BOOKS FIRST IN PREVIOUS ORDER
+===================================== */
+async function checkDuplicateBooksBeforePay() {
 
+  const email = cart.deliveryDetails.trim();
+
+  const books =
+    [...cart.items.values()]
+    .map(item => item.title);
+
+
+  const response = await fetch(
+    "https://script.google.com/macros/s/AKfycbw-ziizMGQDJkLhCdljh5m7mA8VBwb1sr9MR8V7O3xd0gC6FciGkYROHK8Pq7YWX18r_Q/exec",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        action: "checkPreviousOrderBooks",
+        email: email,
+        books: books
+      }),
+      headers: {
+        "Content-Type": "text/plain"
+      }
+    }
+  );
+
+
+  return await response.json();
+
+}
 
 /* =====================================
    STANDARDIZED ORDER DATA
