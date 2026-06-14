@@ -664,17 +664,14 @@ async function checkDuplicateBooksBeforePay() {
 
 
   const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbw-ziizMGQDJkLhCdljh5m7mA8VBwb1sr9MR8V7O3xd0gC6FciGkYROHK8Pq7YWX18r_Q/exec",
+    "https://script.google.com/macros/s/AKfycbwUGfo3CzovbQZirEJaVkPKV_syNFg1x1HRX4o_Tg6Nx9yUusZ6bjZobQ8K4Bom9H1FmA/exec",
     {
       method: "POST",
       body: JSON.stringify({
         action: "checkPreviousOrderBooks",
         email: email,
         books: books
-      }),
-      headers: {
-        "Content-Type": "text/plain"
-      }
+      })
     }
   );
 
@@ -682,7 +679,6 @@ async function checkDuplicateBooksBeforePay() {
   return await response.json();
 
 }
-
 /* =====================================
    STANDARDIZED ORDER DATA
 ===================================== */
