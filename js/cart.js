@@ -344,7 +344,7 @@ document
 renderCart();
 updateCartBadge();
 syncCartIcons?.();
-   showToast("Removed from cart ❌");
+   showToast("Item removed from cart ❌");
 
 });
 
