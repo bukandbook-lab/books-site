@@ -1273,7 +1273,9 @@ body.cart-open {
 
 
 .edit-request-btn {
+  background: #eee;
   background-color: #FF1493;
+  border-color: #ffdbe1;
   color: white;
   border-radius: 18px;
   padding: 3px 6px;
@@ -1283,7 +1285,9 @@ body.cart-open {
   gap: 4px;
   cursor: pointer;
   opacity: 1;
+  white-space: nowrap;
 }
+
 /* =========================
    SEARCH RESULT IN REQUEST
 ========================= */
