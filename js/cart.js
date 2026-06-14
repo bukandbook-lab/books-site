@@ -557,7 +557,7 @@ const deliveryField = document.getElementById("deliveryDetails");
 if (cart.delivery === "Gmail") {
   const Gmail = deliveryField.value.trim().toLowerCase();
   const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-  if (!gmailRegex.test(email)) {
+  if (!gmailRegex.test(Gmail)) {
     alert("Only Gmail is accepted. Please enter a valid Gmail address.");
     return;
   }
