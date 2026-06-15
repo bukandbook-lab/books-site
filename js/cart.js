@@ -710,6 +710,8 @@ function showPaySpinner(btn){
 
   btn.dataset.originalText = btn.innerHTML;
 
+  btn.classList.add("loading");
+
   btn.innerHTML = `
     <span class="pay-spinner"></span>
   `;
@@ -719,6 +721,8 @@ function showPaySpinner(btn){
 
 
 function hidePaySpinner(btn){
+
+  btn.classList.remove("loading");
 
   btn.innerHTML = btn.dataset.originalText || "Click to Pay";
 
