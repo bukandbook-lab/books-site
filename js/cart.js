@@ -562,16 +562,28 @@ if (duplicates.length) {
     "Some books were already requested before:\n\n";
 
 
-  duplicates.forEach(d => {
+duplicates.forEach(d => {
 
-    msg +=
+  const formattedTime = new Date(d.timestamp)
+    .toLocaleString("en-US", {
+      month: "numeric",
+      day: "numeric",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false
+    });
+
+
+  msg +=
 `📚 ${d.title}
 Order ID: ${d.orderId}
-Ordered: ${d.timestamp}
+Ordered on: ${formattedTime}
 
 `;
 
-  });
+});
 
 
   msg +=
