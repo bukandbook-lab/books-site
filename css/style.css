@@ -1057,9 +1057,13 @@ body.cart-open {
   align-items: center;
   justify-content: center;
 
+  flex: 0 0 auto;   /* keep same position */
+  white-space: nowrap;
+
   cursor: wait;
   pointer-events: none;
 }
+
 #continueShopping {
   background: #eee;
   background-color: #FF1493;
