@@ -610,19 +610,39 @@ Ordered on: ${formattedTime}
   }
 
 const deliveryField = document.getElementById("deliveryDetails");
-  if (!deliveryField || !deliveryField.value.trim()) {
-    alert("Please enter delivery details.");
+
+if (!deliveryField || !deliveryField.value.trim()) {
+
+  deliveryField.setCustomValidity("Please enter delivery details.");
+  deliveryField.reportValidity();
+
+  return;
+}
+
+deliveryField.setCustomValidity("");
+
+
+if (cart.delivery === "Gmail") {
+
+  const Gmail = deliveryField.value.trim().toLowerCase();
+
+  const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+
+  if (!gmailRegex.test(Gmail)) {
+
+    deliveryField.setCustomValidity(
+      "Only Gmail is accepted. Please enter a valid Gmail address."
+    );
+
+    deliveryField.reportValidity();
+
     return;
   }
 
-if (cart.delivery === "Gmail") {
-  hidePaySpinner(payBtn);
-  const Gmail = deliveryField.value.trim().toLowerCase();
-  const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-  if (!gmailRegex.test(Gmail)) {
-    alert("Only Gmail is accepted. Please enter a valid Gmail address.");
-    return;
-  }
+
+  deliveryField.setCustomValidity("");
+
 }
 
   // ✅ NOW SAFE TO PROCEED
@@ -702,7 +722,16 @@ async function checkDuplicateBooksBeforePay() {
   return await response.json();
 
 }
+/* =====================================
+   clear the Validation message immediately when user edits the delivery field
+===================================== */
+document
+  .getElementById("deliveryDetails")
+  ?.addEventListener("input", e => {
 
+    e.target.setCustomValidity("");
+
+});
 /* =====================================
    CLICK-TO-PAY BUTTON TRANSFORM INTO SPINNER WHILE PROCESSING
 ===================================== */
