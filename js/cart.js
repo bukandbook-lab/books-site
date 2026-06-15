@@ -542,21 +542,13 @@ document.addEventListener("click", async e => {
 
   const payBtn = e.target;
 
-  showPaySpinner(payBtn);
-   
+     
   if (cart.items.size === 0) {
     hidePaySpinner(payBtn);
     alert("Your cart is empty.");
     return;
   }
    
-  if (cart.items.size > 150) {
-    hidePaySpinner(payBtn);
-    alert(
-      "Your cart can only process up to 150 items at a time. Please complete this order with 150 items first, then add the remaining items in another cart."
-    );
-    return;
-  }
 
 const deliveryField = document.getElementById("deliveryDetails");
 
@@ -600,6 +592,16 @@ if (cart.delivery === "Gmail") {
     return;
   }
 
+     if (cart.items.size > 150) {
+    hidePaySpinner(payBtn);
+    alert(
+      "Your cart can only process up to 150 items at a time. Please complete this order with 150 items first, then add the remaining items in another cart."
+    );
+    return;
+  }
+
+   showPaySpinner(payBtn);
+   
       const duplicates =
   await checkDuplicateBooksBeforePay();
 
@@ -728,9 +730,10 @@ async function checkDuplicateBooksBeforePay() {
 document
   .getElementById("deliveryDetails")
   ?.addEventListener("input", e => {
-
+    
+    hidePaySpinner(payBtn); 
     e.target.setCustomValidity("");
-     hidePaySpinner(payBtn); 
+     
 
 });
 /* =====================================
