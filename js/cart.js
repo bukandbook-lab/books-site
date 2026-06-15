@@ -676,7 +676,7 @@ async function checkDuplicateBooksBeforePay() {
 
 
   const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbwUGfo3CzovbQZirEJaVkPKV_syNFg1x1HRX4o_Tg6Nx9yUusZ6bjZobQ8K4Bom9H1FmA/exec",
+    "https://script.google.com/macros/s/AKfycbzRoHRI7C7XfhPE-lvOhCUQjvcqCZEtEcB5DNri21FHfZID2EGKj7z1cBwcXqlu-0Vw5A/exec",
     {
       method: "POST",
       body: JSON.stringify({
@@ -1192,7 +1192,7 @@ document.addEventListener("click", async e => {
     fileType: cart.fileType
   };
 
-  await fetch("https://script.google.com/macros/s/AKfycbz_tEXNqyoY6hKfuHrMKiN2dNK1O04-j11h0u33puixQoHetqPO8CXRfVtoreCx68-P/exec", {
+  await fetch("https://script.google.com/macros/s/AKfycbx882T6OFZ16scn6hpkD9-xtgazh5DAaA_Ewh4b3ouHA_rYLUdtaXeTXslmkDE7T417/exec", {
   method: "POST",
   body: JSON.stringify(payload),
   mode: "no-cors"
