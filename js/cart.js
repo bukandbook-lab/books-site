@@ -539,13 +539,19 @@ ${cart.delivery === "courier" ? `
 document.addEventListener("click", async e => {
 
   if (e.target.id !== "clickToPay") return;
+
+  const payBtn = e.target;
+
+  showPaySpinner(payBtn);
    
   if (cart.items.size === 0) {
+    hidePaySpinner(payBtn);
     alert("Your cart is empty.");
     return;
   }
    
   if (cart.items.size > 150) {
+    hidePaySpinner(payBtn);
     alert(
       "Your cart can only process up to 150 items at a time. Please complete this order with 150 items first, then add the remaining items in another cart."
     );
@@ -557,6 +563,8 @@ document.addEventListener("click", async e => {
 
 
 if (duplicates.length) {
+
+   hidePaySpinner(payBtn);
 
   let msg =
     "Some books were already requested before:\n\n";
@@ -596,6 +604,7 @@ Ordered on: ${formattedTime}
 }
    
   if (!cart.agreed) {
+    hidePaySpinner(payBtn);
     alert("Please agree to the terms and conditions.");
     return;
   }
@@ -607,6 +616,7 @@ const deliveryField = document.getElementById("deliveryDetails");
   }
 
 if (cart.delivery === "Gmail") {
+  hidePaySpinner(payBtn);
   const Gmail = deliveryField.value.trim().toLowerCase();
   const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
   if (!gmailRegex.test(Gmail)) {
@@ -654,6 +664,7 @@ renderInvoice();
 const paymentPopup = document.getElementById("paymentPopup");
 
 if (paymentPopup) {
+  hidePaySpinner(payBtn); 
   paymentPopup.style.display = "flex"; // 🔑 REQUIRED
   requestAnimationFrame(() => {
     paymentPopup.classList.add("show"); // animation
@@ -690,6 +701,28 @@ async function checkDuplicateBooksBeforePay() {
 
   return await response.json();
 
+}
+
+/* =====================================
+   CLICK-TO-PAY BUTTON TRANSFORM INTO SPINNER WHILE PROCESSING
+===================================== */
+function showPaySpinner(btn){
+
+  btn.dataset.originalText = btn.innerHTML;
+
+  btn.innerHTML = `
+    <span class="pay-spinner"></span>
+  `;
+
+  btn.disabled = true;
+}
+
+
+function hidePaySpinner(btn){
+
+  btn.innerHTML = btn.dataset.originalText || "Click to Pay";
+
+  btn.disabled = false;
 }
 /* =====================================
    STANDARDIZED ORDER DATA
@@ -1192,7 +1225,7 @@ document.addEventListener("click", async e => {
     fileType: cart.fileType
   };
 
-  await fetch("https://script.google.com/macros/s/AKfycbyLe2E0FVjXWMOQUIztIyRvCA3rtXwgHku7lovElHIgw8qfm64Im3-gJwMiUDDtJ9Re/exec", {
+  await fetch("https://script.google.com/macros/s/AKfycbyEFWg5kAlXKneMtSxFTIEUNEqnBPi8BMlrVycPh6ZegoRUv6fqDpPDwWeLu_ZwQG2r/exec", {
   method: "POST",
   body: JSON.stringify(payload),
   mode: "no-cors"
