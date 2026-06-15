@@ -1012,6 +1012,13 @@ body.cart-open {
    CART AND PAYMENT BUTTONS
 ========================= */
 
+.cart-actions {
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+}
+
 #clickToPay {
   background: #E0E0E0;
   color: #737373;
