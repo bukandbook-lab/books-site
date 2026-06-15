@@ -1185,6 +1185,27 @@ body.cart-open {
 }
 
 /* =========================
+   Click to Pay button transform into a spinner
+========================= */
+.pay-spinner {
+  width:22px;
+  height:22px;
+  border:3px solid #ddd;
+  border-top:3px solid currentColor;
+  border-radius:50%;
+  animation:paySpin 0.8s linear infinite;
+  display:inline-block;
+}
+
+@keyframes paySpin {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+  }
+}
+/* =========================
    REQUEST BOOK SECTION
 ========================= */
 #resetBooks{
