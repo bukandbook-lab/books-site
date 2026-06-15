@@ -507,16 +507,16 @@ ${cart.delivery === "courier" ? `
       1. No physical book and ONLY digital copy will be delivered.<br>
       2. <b>Payment is for our cataloging and delivery service.</b> By proceeding to “Click to Pay”, you confirm that you understand and accept the terms and conditions.<br>
       3. Digital copy might be in .pdf, .epub or other file type.<br>
-      4. Buyer might need to install E-book Reader first. Please view recommended reader in MAIN section<br>
+      4. Buyer might need to install E-book Reader first. Please view recommended readers in MAIN section<br>
       5. The digital books may vary in condition and format depending on the source material. Some files may appear clearer, while others may have minor visual imperfections due to scanning quality, older source material, lighting, or the original condition of the physical copy. Possible variations include greyish/shadow areas, yellowish pages, minor marks, stains, missing covers, characteristics from the original physical book, or slight formatting differences in some ePub files. All files provided are readable.<br>
       6. Book images and videos are for illustration purposes only; actual book condition and content may vary by edition or print.<br>
-      7. Order will ONLY be processed with payment proof and complete delivery details.<br>
-      • Estimated delivery is within 3 hours for Gmail and 4 days for courier.<br>
-      • No guarantee for specific outcomes, results, or satisfaction.<br>
-      • No refund. Pay at your own risk. You can try buy 1 book first.<br>
-      • Special requests may take longer to process.<br>
-      • Additional terms apply.<br>
-      • More explanation about Terms and Conditions can be found in MAIN section.<br>
+      7. Orders will only be processed after payment proof and complete delivery details have been received.<br>
+      8. Estimated delivery time: within 3 hours for Gmail delivery and up to 4 days for courier delivery.<br>
+      9. Results, outcomes, or user experience may vary depending on individual usage.<br>
+      10. Individual book condition details are not provided for this low-cost digital offer. Please review the terms before purchase, as files may vary in appearance, format, and quality. Buyers are encouraged to try a sample/single item first before placing a larger order.<br>
+      11. Special requests may require additional processing time.<br>
+      12. Additional terms and conditions may apply.<br>
+      13. More explanation about Terms and Conditions can be found in MAIN section.<br>
     </p>
   </div>
 </div>
@@ -1073,19 +1073,19 @@ function renderInvoice() {
               </div>
           
              <p>
-               • No physical book and ONLY digital copy will be delivered.<br>
-               • <b>Payment is for our cataloging and delivery service.</b> Only proceed to ‘Submit Order’ if you accept it.<br>
-               • Digital copy might be in .pdf, .epub or other file type.<br>
-               • Buyer might need to install E-book Reader first.<br>
-               • There is no guarantee the condition of the e-books is perfect. But all e-books are readable.<br>
-               • Book images and videos are for illustration purposes only; actual book condition and content may vary by edition or print.<br>
-               • Order will ONLY be processed with payment proof and complete delivery details.<br>
-               • Estimated delivery is within 3 hours for Gmail and 4 days for courier.<br>
-               • No guarantee for specific outcomes, results, or satisfaction.<br>
-               • No refund. Pay at your own risk. You can try buy 1 book first.<br>
-               • Special requests may take longer to process.<br>
-               • Additional terms apply.<br>
-               • More explanation about Terms and Conditions can be found in MAIN section.<br>
+      1. No physical book and ONLY digital copy will be delivered.<br>
+      2. <b>Payment is for our cataloging and delivery service.</b> By proceeding to “Submit Order”, you confirm that you understand and accept the terms and conditions.<br>
+      3. Digital copy might be in .pdf, .epub or other file type.<br>
+      4. Buyer might need to install E-book Reader first. Please view recommended readers in MAIN section<br>
+      5. The digital books may vary in condition and format depending on the source material. Some files may appear clearer, while others may have minor visual imperfections due to scanning quality, older source material, lighting, or the original condition of the physical copy. Possible variations include greyish/shadow areas, yellowish pages, minor marks, stains, missing covers, characteristics from the original physical book, or slight formatting differences in some ePub files. All files provided are readable.<br>
+      6. Book images and videos are for illustration purposes only; actual book condition and content may vary by edition or print.<br>
+      7. Orders will only be processed after payment proof and complete delivery details have been received.<br>
+      8. Estimated delivery time: within 3 hours for Gmail delivery and up to 4 days for courier delivery.<br>
+      9. Results, outcomes, or user experience may vary depending on individual usage.<br>
+      10. Individual book condition details are not provided for this low-cost digital offer. Please review the terms before purchase, as files may vary in appearance, format, and quality. Buyers are encouraged to try a sample/single item first before placing a larger order.<br>
+      11. Special requests may require additional processing time.<br>
+      12. Additional terms and conditions may apply.<br>
+      13. More explanation about Terms and Conditions can be found in MAIN section.<br>
              </p>
         </div>
       </div>
