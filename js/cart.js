@@ -676,7 +676,7 @@ async function checkDuplicateBooksBeforePay() {
 
 
   const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbzRoHRI7C7XfhPE-lvOhCUQjvcqCZEtEcB5DNri21FHfZID2EGKj7z1cBwcXqlu-0Vw5A/exec",
+    "https://script.google.com/macros/s/AKfycbzRoHRI7C7XfhPE-lvOhCUQjvcqCZEtEcB5DNri21FHfZID2EGKj7z1cBwcXqlu-0Vw5A/exec", 
     {
       method: "POST",
       body: JSON.stringify({
