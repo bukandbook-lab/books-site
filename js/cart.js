@@ -558,7 +558,49 @@ document.addEventListener("click", async e => {
     return;
   }
 
-   const duplicates =
+const deliveryField = document.getElementById("deliveryDetails");
+
+if (!deliveryField || !deliveryField.value.trim()) {
+
+  deliveryField.setCustomValidity("Please enter delivery details.");
+  deliveryField.reportValidity();
+
+  return;
+}
+
+deliveryField.setCustomValidity("");
+
+
+if (cart.delivery === "Gmail") {
+
+  const Gmail = deliveryField.value.trim().toLowerCase();
+
+  const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+
+  if (!gmailRegex.test(Gmail)) {
+
+    deliveryField.setCustomValidity(
+      "Only Gmail is accepted. Please enter a valid Gmail address."
+    );
+
+    deliveryField.reportValidity();
+
+    return;
+  }
+
+
+  deliveryField.setCustomValidity("");
+
+}
+   
+  if (!cart.agreed) {
+    hidePaySpinner(payBtn);
+    alert("Please agree to the terms and conditions.");
+    return;
+  }
+
+      const duplicates =
   await checkDuplicateBooksBeforePay();
 
 
@@ -601,48 +643,6 @@ Ordered on: ${formattedTime}
   alert(msg);
 
   return;
-}
-   
-  if (!cart.agreed) {
-    hidePaySpinner(payBtn);
-    alert("Please agree to the terms and conditions.");
-    return;
-  }
-
-const deliveryField = document.getElementById("deliveryDetails");
-
-if (!deliveryField || !deliveryField.value.trim()) {
-
-  deliveryField.setCustomValidity("Please enter delivery details.");
-  deliveryField.reportValidity();
-
-  return;
-}
-
-deliveryField.setCustomValidity("");
-
-
-if (cart.delivery === "Gmail") {
-
-  const Gmail = deliveryField.value.trim().toLowerCase();
-
-  const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-
-
-  if (!gmailRegex.test(Gmail)) {
-
-    deliveryField.setCustomValidity(
-      "Only Gmail is accepted. Please enter a valid Gmail address."
-    );
-
-    deliveryField.reportValidity();
-
-    return;
-  }
-
-
-  deliveryField.setCustomValidity("");
-
 }
 
   // ✅ NOW SAFE TO PROCEED
@@ -730,6 +730,7 @@ document
   ?.addEventListener("input", e => {
 
     e.target.setCustomValidity("");
+     hidePaySpinner(payBtn); 
 
 });
 /* =====================================
