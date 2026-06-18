@@ -406,22 +406,30 @@ function renderCart() {
 
     itemsHTML += `
       <div class="cart-row">
-        <span>
-           ${index}. 
-          <img
-          src="${item.img}"
-          class="grid-book-img popup-trigger cart-thumb"
-          loading="lazy"
-          data-book-id="${item.id}"
-          decoding="async"
-          draggable="false"
-          ondragstart="return false;"
-       >
-       ${item.series ? `${item.series} - ` : ""}${item.title}
-           ${item.setQtty > 0 && item.price !== 1
-             ? ` (${item.setQtty} ${item.setQtty === 1 ? "book" : "books"})`
-             : ``}
-        </span>
+
+  
+  <div class="cart-number">
+    ${index}.
+  </div>
+
+  <img
+    src="${item.img}"
+    class="grid-book-img popup-trigger cart-thumb"
+    loading="lazy"
+    data-book-id="${item.id}"
+    decoding="async"
+    draggable="false"
+    ondragstart="return false;"
+  >
+
+  <div class="cart-title">
+    ${item.series ? `${item.series} - ` : ""}${item.title}
+    ${item.setQtty > 0 && item.price !== 1
+      ? ` (${item.setQtty} ${item.setQtty === 1 ? "book" : "books"})`
+      : ``}
+  </div>
+
+
 
 
         <span class="price-right">
