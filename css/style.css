@@ -718,6 +718,14 @@ html, body {
   transition: transform 0.15s ease;
 }*/
 
+.cart-thumb {
+  width: 45px;
+  height: 60px;
+  object-fit: cover;
+  vertical-align: middle;
+  margin: 0 8px;
+  border-radius: 4px;
+}
 /* =========================
   YOUTUBE VIDEO
 ========================= */
