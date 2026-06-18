@@ -423,7 +423,7 @@ function renderCart() {
   >
 
   <div class="cart-title">
-    ${item.series ? `${item.series} - ` : ""}${item.title}
+    ${item.series ? `${item.series} - ` : ""}${item.title}<br/>
     ${item.setQtty > 0 && item.price !== 1
       ? ` (${item.setQtty} ${item.setQtty === 1 ? "book" : "books"})`
       : ``}
@@ -611,10 +611,10 @@ if (cart.delivery === "Gmail") {
     return;
   }
 
-     if (cart.items.size > 150) {
+     if (cart.items.size > 100) {
     hidePaySpinner(payBtn);
     alert(
-      "Your cart can only process up to 150 items at a time. Please complete this order with 150 items first, then add the remaining items in another cart."
+      "Your cart can only process up to 100 items at a time. Please complete this order with 100 items first, then add the remaining items in another cart."
     );
     return;
   }
@@ -1269,18 +1269,21 @@ document.addEventListener("click", async e => {
 
   const totals = calculateTotals();
 
-  const payload = {
-    action: "submitOrder",
-    orderId: cart.orderId,
-    booksText: buildOrderData().booksText,
-    booksQtty : cart.items.size,
-    totalAmount: totals.grandTotal,
-    deliveryMethod: cart.delivery,
-    deliveryDetails: cart.deliveryDetails,
-    fileBase64: cart.fileBase64,   // store this during upload
-    fileName: cart.fileName,
-    fileType: cart.fileType
-  };
+   const payload = {
+     action:"submitOrder",
+     orderId: cart.orderId,
+     booksText: buildOrderData().booksText,
+     booksQtty: cart.items.size,
+     totalAmount: totals.grandTotal,
+     deliveryMethod: cart.delivery,
+     deliveryDetails: cart.deliveryDetails,
+   
+     booksRaw: buildOrderData().booksRaw,
+   
+     fileBase64: cart.fileBase64,
+     fileName: cart.fileName,
+     fileType: cart.fileType
+   };
 
   await fetch("https://script.google.com/macros/s/AKfycbyd0b58NoW43UHVXFnHciCWb3PtI2bwO6t4RJa76SU1edFLtotJYHT_wFGTblbyS7Cf/exec", {
   method: "POST",
