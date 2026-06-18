@@ -718,14 +718,33 @@ html, body {
   transition: transform 0.15s ease;
 }*/
 
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.cart-number {
+  width: 25px;
+  flex-shrink: 0;
+}
+
 .cart-thumb {
   width: 45px;
   height: 60px;
   object-fit: cover;
-  vertical-align: middle;
-  margin: 0 8px;
+  flex-shrink: 0;
   border-radius: 4px;
 }
+
+.cart-title {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}
+
+
 /* =========================
   YOUTUBE VIDEO
 ========================= */
