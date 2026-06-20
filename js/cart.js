@@ -793,7 +793,7 @@ function buildOrderData() {
   let i = 1;
 
   cart.items.forEach(item => {
-    let line = `${i}. ${item.title}`;
+    let line = `${i}. ${item.id} - ${item.title}`;
     if (item.setQtty > 0 && item.price !== 1) {
       line += ` (${item.setQtty} books)`;
     }
