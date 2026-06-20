@@ -724,7 +724,10 @@ async function checkDuplicateBooksBeforePay() {
 
   const books =
     [...cart.items.values()]
-    .map(item => item.title);
+    .map(item => ({
+      id: item.id,
+      title: item.title
+    }));
 
 
   const response = await fetch(
