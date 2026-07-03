@@ -1288,7 +1288,7 @@ document.addEventListener("click", async e => {
      fileType: cart.fileType
    };
 
-  await fetch("https://script.google.com/macros/s/AKfycbwPASe9SvMqubnGtvKh8lbGsCUYKYQId1c4_IldWc8Ra-VccgjES2yEdKLLOn3lBc0z/exec", {
+  await fetch("https://script.google.com/macros/s/AKfycbzWVtGftE80YjxVM28r8YUs-LuAZgF2YXxE6RbFuT13QbpEsg7eHpg5WYWn6RgXEH4J/exec", {
   method: "POST",
   body: JSON.stringify(payload),
   mode: "no-cors"
