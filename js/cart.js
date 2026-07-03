@@ -120,6 +120,8 @@ book = {
 
   if (!book) return;
 
+   console.log(book);
+
 cart.items.set(id, {
   id: book.id,
   title: book.title,
