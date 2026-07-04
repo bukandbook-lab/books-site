@@ -731,7 +731,12 @@ async function checkDuplicateBooksBeforePay() {
       title: item.title
     }));
 
-
+console.log("Sending:", {
+  action: "checkPreviousOrderBooks",
+  email: email,
+  books: books
+});
+   
   const response = await fetch(
     "https://script.google.com/macros/s/AKfycbyYihCNPDS4z9AFotWlFzYBIL-xK7zAtiKl_B31R1d1nV4xPZRCyd7b3tgZDL1cugp2bQ/exec", 
     {
@@ -743,9 +748,13 @@ async function checkDuplicateBooksBeforePay() {
       })
     }
   );
+  console.log("HTTP Status:", response.status);
 
+const result = await response.json();
 
-  return await response.json();
+console.log(result);
+
+return result;
 
 }
 /* =====================================
