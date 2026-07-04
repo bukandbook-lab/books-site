@@ -738,7 +738,7 @@ console.log("Sending:", {
 });
    
   const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbyYihCNPDS4z9AFotWlFzYBIL-xK7zAtiKl_B31R1d1nV4xPZRCyd7b3tgZDL1cugp2bQ/exec", 
+    "https://script.google.com/macros/s/AKfycbwRorkvks4e70LR_lnvD3NuYbuoVj7xTNQhxTJ9NdMJrcBQyVknzk1GYsXucdWGGReb4A/exec", 
     {
       method: "POST",
       body: JSON.stringify({
