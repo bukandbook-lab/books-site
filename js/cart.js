@@ -740,7 +740,7 @@ console.log("Sending:", {
 try {
 
   const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbwRorkvks4e70LR_lnvD3NuYbuoVj7xTNQhxTJ9NdMJrcBQyVknzk1GYsXucdWGGReb4A/exec",
+    "https://script.google.com/macros/s/AKfycbxxtM1Cp7kWX85VnABEDvRuuzhC1H1DiFgrq1hnb2zo5PAf6gH9HXeZabtkKw2KyFVrkg/exec",
     {
       method: "POST",
       headers: {
@@ -757,11 +757,12 @@ try {
 
   console.log(response.status);
 
-  const result = await response.json();
+ const text = await response.text();
 
-  console.log(result);
+console.log(text);
 
-  return result;
+return text;
+
 
 } catch (err) {
 
