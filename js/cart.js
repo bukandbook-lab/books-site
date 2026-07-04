@@ -740,7 +740,7 @@ console.log("Sending:", {
 try {
 
   const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbxxtM1Cp7kWX85VnABEDvRuuzhC1H1DiFgrq1hnb2zo5PAf6gH9HXeZabtkKw2KyFVrkg/exec",
+    "https://script.google.com/macros/s/AKfycbze2HdRCavkT_xVHVi2CF8k3Q1gwxaK2lgE3sCvWfl68M2-rGAjQ5nzelJf4kGm60fOog/exec",
     {
       method: "POST",
       headers: {
