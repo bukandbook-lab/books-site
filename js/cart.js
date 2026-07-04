@@ -737,24 +737,39 @@ console.log("Sending:", {
   books: books
 });
    
+try {
+
   const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbwRorkvks4e70LR_lnvD3NuYbuoVj7xTNQhxTJ9NdMJrcBQyVknzk1GYsXucdWGGReb4A/exec", 
+    "https://script.google.com/macros/s/AKfycbwRorkvks4e70LR_lnvD3NuYbuoVj7xTNQhxTJ9NdMJrcBQyVknzk1GYsXucdWGGReb4A/exec",
     {
       method: "POST",
+      headers: {
+        "Content-Type": "text/plain"
+      },
       body: JSON.stringify({
         action: "checkPreviousOrderBooks",
-        email: email,
-        books: books
-      })
+        email,
+        books
+      }),
+      redirect: "follow"
     }
   );
-  console.log("HTTP Status:", response.status);
 
-const result = await response.json();
+  console.log(response.status);
 
-console.log(result);
+  const result = await response.json();
 
-return result;
+  console.log(result);
+
+  return result;
+
+} catch (err) {
+
+  console.error(err);
+
+  alert(err.message);
+
+}
 
 }
 /* =====================================
