@@ -622,51 +622,7 @@ if (cart.delivery === "Gmail") {
   }
 
    showPaySpinner(payBtn);
-   
-      const duplicates =
-  await checkDuplicateBooksBeforePay();
 
-
-if (duplicates.length) {
-
-   hidePaySpinner(payBtn);
-
-  let msg =
-    "Some books were already requested before:\n\n";
-
-
-duplicates.forEach(d => {
-
-  const formattedTime = new Date(d.timestamp)
-    .toLocaleString("en-US", {
-      month: "numeric",
-      day: "numeric",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false
-    });
-
-
-  msg +=
-`📚 ${d.title}
-Order ID: ${d.orderId}
-Ordered on: ${formattedTime}
-
-`;
-
-});
-
-
-  msg +=
-    "Please check your previous order before continuing.";
-
-
-  alert(msg);
-
-  return;
-}
 
   // ✅ NOW SAFE TO PROCEED
 
@@ -717,62 +673,7 @@ if (paymentPopup) {
 
 
 });
-/* =====================================
-   CHECK BOOKS FIRST IN PREVIOUS ORDER
-===================================== */
-async function checkDuplicateBooksBeforePay() {
 
-  const email = cart.deliveryDetails.trim();
-
-  const books =
-    [...cart.items.values()]
-    .map(item => ({
-      id: item.id,
-      title: item.title
-    }));
-
-console.log("Sending:", {
-  action: "checkPreviousOrderBooks",
-  email: email,
-  books: books
-});
-   
-try {
-
-  const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbw-eGifCqjx0klhnACb1kqhpIMMVCM9pucRoHDtjhi1EKrQ-o7Rk9tgSll0L7UbSldUBw/exec",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain"
-      },
-      body: JSON.stringify({
-        action: "checkPreviousOrderBooks",
-        email,
-        books
-      }),
-      redirect: "follow"
-    }
-  );
-
-  console.log(response.status);
-
- const text = await response.text();
-
-console.log(text);
-
-return text;
-
-
-} catch (err) {
-
-  console.error(err);
-
-  alert(err.message);
-
-}
-
-}
 /* =====================================
    clear the Validation message immediately when user edits the delivery field
 ===================================== */
