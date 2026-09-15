@@ -2,6 +2,8 @@
    GLOBAL BOOK DATA
 ===================================== */
 
+let PRELOADING_FINISHED = false;
+
 window.ALL_BOOKS = {};
 window.BOOK_REGISTRY = {};
 window.ORDERED_BOOKS_BY_CATEGORY = {};
@@ -178,4 +180,14 @@ return fetch(
    LOAD FIRST CATEGORY ONLY
 ===================================== */
 
-window.BOOKS_READY = loadCategory("BeginningReader", 0);
+window.BOOKS_READY = Promise.all(
+  CATEGORIES.map((category, index) =>
+    loadCategory(category, index)
+  )
+).then(() => {
+
+  PRELOADING_FINISHED = true;
+
+  console.log("✅ All books preloaded.");
+
+});
