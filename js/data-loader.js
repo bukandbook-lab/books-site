@@ -180,8 +180,12 @@ return fetch(
    LOAD FIRST CATEGORY ONLY
 ===================================== */
 
+/* =====================================
+   PRELOAD ALL CATEGORIES
+===================================== */
+
 window.BOOKS_READY = Promise.all(
-  CATEGORIES.map((category, index) =>
+  CATEGORY_ORDER.map((category, index) =>
     loadCategory(category, index)
   )
 ).then(() => {
@@ -194,5 +198,9 @@ window.BOOKS_READY = Promise.all(
   if (typeof keyword !== "undefined" && keyword.trim()) {
     performSearch(keyword);
   }
+
+}).catch(error => {
+
+  console.error("❌ Error while preloading books:", error);
 
 });
