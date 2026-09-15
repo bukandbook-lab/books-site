@@ -10,6 +10,20 @@ window.ORDERED_BOOKS_BY_CATEGORY = {};
 window.CATEGORY_LOADED = {};
 
 /* =====================================
+   CATEGORY ORDER
+===================================== */
+
+const CATEGORY_ORDER = [
+  "BeginningReader",
+  "ChapterBook",
+  "PictureBook",
+  "Novel",
+  "Islamic",
+  "Melayu",
+  "Jawi",
+  "Comic"
+];
+/* =====================================
    LOAD SKELETON GRID IMMEDIATELY FIRST
 ===================================== */
 window.addEventListener("DOMContentLoaded", () => {
@@ -177,10 +191,6 @@ return fetch(
 }
 
 /* =====================================
-   LOAD FIRST CATEGORY ONLY
-===================================== */
-
-/* =====================================
    PRELOAD ALL CATEGORIES
 ===================================== */
 
@@ -204,3 +214,4 @@ window.BOOKS_READY = Promise.all(
   console.error("❌ Error while preloading books:", error);
 
 });
+
