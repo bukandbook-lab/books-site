@@ -190,4 +190,9 @@ window.BOOKS_READY = Promise.all(
 
   console.log("✅ All books preloaded.");
 
+  // Refresh current search automatically
+  if (typeof keyword !== "undefined" && keyword.trim()) {
+    performSearch(keyword);
+  }
+
 });
