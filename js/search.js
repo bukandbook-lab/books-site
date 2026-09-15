@@ -249,6 +249,46 @@ Object.values(BOOK_REGISTRY).forEach(book => {
   results.push(book);
 });
 
+         if (!PRELOADING_FINISHED) {
+
+  if (results.length === 0) {
+
+    grid.innerHTML = `
+      <div style="
+        width:100%;
+        text-align:center;
+        padding:40px 20px;
+        font-size:16px;
+        color:#666;
+      ">
+        ⏳ <b>Still preloading books...</b><br>
+        Your search may be incomplete.<br>
+        Please wait until preloading finishes.
+      </div>
+    `;
+
+    return;
+
+  }
+
+  grid.insertAdjacentHTML("afterbegin", `
+    <div style="
+      width:100%;
+      text-align:center;
+      padding:12px;
+      margin-bottom:15px;
+      background:#fff8e1;
+      border-radius:8px;
+      font-size:14px;
+      color:#795548;
+    ">
+      ⏳ <b>Books are still being preloaded.</b>
+      Some search results may not be available yet.
+    </div>
+  `);
+
+}
+         
 // keep category order
 results.sort((a, b) => {
 
