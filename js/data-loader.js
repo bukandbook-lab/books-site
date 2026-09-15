@@ -191,27 +191,60 @@ return fetch(
 }
 
 /* =====================================
-   PRELOAD ALL CATEGORIES
+   BACKGROUND PRELOAD
 ===================================== */
 
-window.BOOKS_READY = Promise.all(
-  CATEGORY_ORDER.map((category, index) =>
-    loadCategory(category, index)
-  )
-).then(() => {
+async function preloadRemainingCategories() {
+
+  for (let index = 0; index < CATEGORY_ORDER.length; index++) {
+
+    const category = CATEGORY_ORDER[index];
+
+    if (category === "BeginningReader") {
+      continue;
+    }
+
+    await loadCategory(category, index);
+
+    // Small breathing space for browser
+    await new Promise(resolve =>
+      setTimeout(resolve, 100)
+    );
+
+  }
 
   PRELOADING_FINISHED = true;
 
   console.log("✅ All books preloaded.");
 
-  // Refresh current search automatically
-  if (typeof keyword !== "undefined" && keyword.trim()) {
-    performSearch(keyword);
-  }
+}
 
-}).catch(error => {
+/* =====================================
+   LOAD FIRST CATEGORY FAST
+===================================== */
 
-  console.error("❌ Error while preloading books:", error);
+window.FIRST_CATEGORY_READY =
+  loadCategory("BeginningReader", 0);
 
-});
 
+/* =====================================
+   START BACKGROUND PRELOAD
+===================================== */
+
+window.BOOKS_READY =
+  window.FIRST_CATEGORY_READY
+    .then(() => {
+
+      // BeginningReader can display now
+
+      return preloadRemainingCategories();
+
+    })
+    .catch(error => {
+
+      console.error(
+        "❌ Preload error:",
+        error
+      );
+
+    });
