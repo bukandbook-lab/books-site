@@ -613,13 +613,13 @@ if (cart.delivery === "Gmail") {
     return;
   }
 
-     if (cart.items.size > 100) {
-    hidePaySpinner(payBtn);
-    alert(
-      "Your cart can only process up to 100 items at a time. Please complete this order with 100 items first, then add the remaining items in another cart."
-    );
-    return;
-  }
+      //if (cart.items.size > 100) {
+    // hidePaySpinner(payBtn);
+    // alert(
+       //"Your cart can only process up to 100 items at a time. Please complete this order with 100 items first, then add the remaining items in another cart."
+     //);
+    // return;
+   //}
 
    showPaySpinner(payBtn);
 
